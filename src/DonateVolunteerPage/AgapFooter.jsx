@@ -10,7 +10,9 @@ import AGAPFooterlogo from "../assets/AGAPFooterlogo.png";
 export default function AgapFooter() {
   return (
     <>
+      {/*footer container start*/}
       <div className="Agap-FooterCont">
+        {/*footer logo start*/}
         <div className="Agap-FooterLogo">
           <img
             src={AGAPFooterlogo}
@@ -25,7 +27,9 @@ export default function AgapFooter() {
             }}
           />
         </div>
+        {/*footer logo end*/}
 
+        {/*footer about us start*/}
         <div className="Agap-FooterAboutUs">
           <div className="Agap-FooterAboutUsTop">
             <img
@@ -59,7 +63,9 @@ export default function AgapFooter() {
             </p>
           </div>
         </div>
+        {/*footer about us end*/}
 
+        {/*footer contact us start*/}
         <div className="Agap-FooterContacts">
           <div className="Agap-FooterContactUs">
             <img src={Phone} style={{ width: "20px", height: "20px" }} />
@@ -89,7 +95,9 @@ export default function AgapFooter() {
             </p>
           </div>
         </div>
+        {/*footer contact us end*/}
       </div>
+      {/*footer container end*/}
     </>
   );
 }

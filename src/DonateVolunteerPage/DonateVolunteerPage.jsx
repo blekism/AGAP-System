@@ -14,11 +14,20 @@ export default function DonateVolunteerPage() {
 
   return (
     <>
+      {/*nav start*/}
       <div className="DonateVolunteerPage-navbarCont"></div>
+      {/*nav end*/}
 
+      {/*parent cont start*/}
       <div className="DonateVolunteerPage-parentCont">
-        <div className="DonateVolunteerPage-headerCont"></div>
+        {/*header cont start*/}
+        <div className="DonateVolunteerPage-headerCont">
+          {/*container palang to para dun sa header na wala pa mahanap*/}
+        </div>
+
+        {/*body cont start*/}
         <div className="DonateVolunteerPage-bodyCont">
+          {/*top cont start*/}
           <div className="DonateVolunteerPage-topCont">
             <img
               src={CallforDonation}
@@ -54,6 +63,8 @@ export default function DonateVolunteerPage() {
             Do you want to help other people by donating and be a <br />{" "}
             volunteer to NU-D Community Extension?
           </p>
+
+          {/*button cont start*/}
           <div className="DonateVolunteerPage-buttonContainer">
             <button
               className="DonateVolunteerPage-button"
@@ -62,6 +73,8 @@ export default function DonateVolunteerPage() {
               Sign In
             </button>
           </div>
+          {/*button cont start*/}
+
           <p
             style={{
               fontSize: "20px",
@@ -69,7 +82,11 @@ export default function DonateVolunteerPage() {
           >
             Sign in to donate or apply as a ComEx volunteer.
           </p>
+          {/*top cont end*/}
+
           <hr className="border DonateVolunteerPage-custom-border border-2 opacity-100" />
+
+          {/*bottom cont start*/}
           <div className="DonateVolunteerPage-bottomCont">
             <img
               src={Donate}
@@ -90,9 +107,13 @@ export default function DonateVolunteerPage() {
               }}
             />
           </div>
+          {/*bottom cont end*/}
         </div>
+        {/*body cont end*/}
+
         <AgapFooter />
       </div>
+      {/*parent cont end*/}
     </>
   );
 }

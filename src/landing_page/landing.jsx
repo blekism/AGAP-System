@@ -1,27 +1,23 @@
-import { useState } from 'react';
-import './landing.css';
-import NavBarLan from './nav_bar_lan'; 
-import head from '../image/head.png'; 
-import photo from '../image/photo.jpg'; // Ensure this path is correct
+import { useState } from "react";
+import "./landing.css";
+import NavBar from "../Page/LanNavBar.jsx";
+import Footer from "../Page/AgapFooter.jsx";
+import head from "../assets/images/head.png";
+import photo from "../assets/images/photo.jpg"; // Ensure this path is correct
 
 function Landing() {
-  const [count, setCount] = useState(0);
-
   return (
     <div>
-      <NavBarLan /> 
+      <NavBar />
 
-      <div className='head'>
-        <img src={head} alt="Landing Head" className="head-img" /> 
-      </div>  
-
-      <div className='head'>
-        <div>
-            
-        </div>
+      <div className="headerImg">
+        <img src={head} alt="Landing Head" className="head-img" />
       </div>
 
-
+      <div className="headerContent">
+        <div></div>
+      </div>
+      <Footer />
     </div>
   );
 }

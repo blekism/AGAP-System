@@ -1,11 +1,11 @@
 import React from "react";
 import "./AgapFooter.css";
-import Phone from "../assets/phone.png";
-import Mail from "../assets/Mail.png";
-import Location from "../assets/Location.png";
-import Schedule from "../assets/Schedule.png";
-import Info from "../assets/Info.png";
-import AGAPFooterlogo from "../assets/AGAPFooterlogo.png";
+import Phone from "../assets/images/phone.png";
+import Mail from "../assets/images/Mail.png";
+import Location from "../assets/images/Location.png";
+import Schedule from "../assets/images/Schedule.png";
+import Info from "../assets/images/Info.png";
+import AGAPFooterlogo from "../assets/images/AGAPFooterlogo.png";
 
 export default function AgapFooter() {
   return (

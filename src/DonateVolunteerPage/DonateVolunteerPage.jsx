@@ -2,8 +2,9 @@ import React from "react";
 import "./DonateVolunteerPage.css";
 import CallforDonation from "../assets/CallforDonation.png";
 import Donate from "../assets/Donate.png";
-import AgapFooter from "./AgapFooter";
+import AgapFooter from "../Page/AgapFooter.jsx";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../Page/NavBar.jsx";
 
 export default function DonateVolunteerPage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export default function DonateVolunteerPage() {
   return (
     <>
       {/*nav start*/}
-      <div className="DonateVolunteerPage-navbarCont"></div>
+      <NavBar />
       {/*nav end*/}
 
       {/*parent cont start*/}

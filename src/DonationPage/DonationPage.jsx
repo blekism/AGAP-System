@@ -3,6 +3,7 @@ import "./DonationPage.css";
 import DonationStatus from "./DonationStatusContainer.jsx";
 import DonateContainer from "./DonateContainer.jsx";
 import Navbar from "../Page/NavBar.jsx";
+import Footer from "../Page/AgapFooter.jsx";
 
 export default function DonationPage() {
   return (
@@ -11,6 +12,8 @@ export default function DonationPage() {
 
       <DonationStatus />
       <DonateContainer />
+
+      <Footer />
     </div>
   );
 }

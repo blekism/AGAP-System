@@ -6,7 +6,7 @@ import VolunteerSignUp from "./Login_Signup/VolunteerSignUp.jsx";
 
 function App() {
   return (
-    <div>
+    <>
       <Router>
         <Routes>
           {/* <Route path="/" element={<Home />} /> */}
@@ -17,7 +17,7 @@ function App() {
           {/* <Route path="/Profile" element={<Profile />} /> */}
         </Routes>
       </Router>
-    </div>
+    </>
   );
 }
 

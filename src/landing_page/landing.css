@@ -1,14 +1,213 @@
-/* General body styling */
 body {
   font-family: 'Poppins', sans-serif;
-  margin: 0; /* Remove default margin */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 .head-img {
   width: 100%;
-  height: 100%; 
-  left: 0;
-  top: 0;
+  height: auto; 
 }
 
+.comEx-info {
+  height: 600px; 
+  width: 100%;
+  color: black;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  background: linear-gradient(to bottom, #354290, #FFFFFF);
+}
+
+.comex-info-box {
+  width: 50%;
+  height: 100%;
+  margin-bottom: 2rem; 
+}
+
+.com-ex-header .comex-img {
+  width: 100%;
+  max-width: 500px; 
+  margin: 0 auto; 
+  display: flex; 
+  justify-content: center; 
+  padding: 1rem; 
+}
+
+.comex-img img {
+  width: 100%; 
+  height: 40vh; 
+  object-fit: cover; 
+  border-radius: 5%; 
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.9); 
+}
+
+.comex-title {
+  color: #354290;
+  font-size: 2rem;
+  margin-left: 5%;
+}
+
+.comex-data {
+  width: 600px;
+  height: 249.332px;
+  color: #000;
+  text-align: justify;
+  font-family: "Nunito Sans";
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 27px;
+  margin-top: 2%;
+  margin-left: 5%;
+}
+
+@media (max-width: 768px) {
+  .comEx-info {
+    max-width: 90%;
+    height: auto; 
+  }
+
+  .comex-info-box {
+    width: 100%; 
+  }
+
+  .comex-img img {
+    height: 30vh; 
+  }
+
+  .comex-title {
+    font-size: 1.5rem; 
+    margin-left: 0; 
+    text-align: center; 
+  }
+
+  .comex-data {
+    width: 100%; 
+    font-size: 13px; 
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .comEx-info {
+    margin-top: 2%;
+    margin-bottom: 2%;
+    max-width: 100%;
+    padding: 0 1rem; 
+  }
+
+  .comex-info-box {
+    width: 100%;
+  }
+
+  .comex-img img {
+    height: 25vh; 
+  }
+
+  .comex-title {
+    font-size: 1.2rem; 
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .comex-data {
+    font-size: 12px; 
+    line-height: 22px;
+  }
+}
+
+.paragraph {
+  width: 100%;
+  height: 770px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  justify-content: center; /* Vertically center the elements */
+  align-items: center; /* Horizontally center the elements */
+  padding: 3%;
+}
+
+/* First and second containers */
+.first, .second {
+  width: 70%;
+  height: 300px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between; /* Ensure even spacing between box and info */
+}
+
+/* Add margin only to the second box for spacing */
+.second {
+  margin-top: 3%;
+}
+
+/* Box elements */
+.first-box, .second-box {
+  width: 273px;
+  height: 273px;
+  flex-shrink: 0;
+  background-color: black;
+  border-radius: 10px;
+}
+
+/* Info containers */
+.first-info, .second-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 5%; /* Padding to give space between text and boxes */
+}
+
+/* Text alignment */
+.first-para, .second-para {
+  text-align: justify;
+}
+
+/* Media query for tablets and smaller screens */
+@media (max-width: 768px) {
+  .first, .second {
+    flex-direction: column; /* Stack the box and text vertically */
+    align-items: center; /* Center align the contents */
+    height: auto; /* Adjust height to fit the content */
+  }
+
+  .first-box, .second-box {
+    width: 100%;
+    height: auto;
+    max-width: 273px; /* Maintain max width for the boxes */
+    margin-bottom: 20px; /* Add space between box and text */
+  }
+
+  .first-info, .second-info {
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .paragraph {
+    height: auto; /* Let the height grow based on content */
+  }
+}
+
+/* Media query for mobile screens */
+@media (max-width: 480px) {
+  .first, .second {
+    width: 100%; /* Use full width on smaller screens */
+    margin-top: 5%;
+  }
+
+  .first-box, .second-box {
+    max-width: 100%;
+    width: 100%; /* Ensure boxes take full width */
+  }
+
+  .first-info, .second-info {
+    padding: 0;
+  }
+}

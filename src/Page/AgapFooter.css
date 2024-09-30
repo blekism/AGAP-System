@@ -29,6 +29,10 @@
     display: flex;
 }
 
+.Agap-FooterCont .Agap-FooterAboutUs .Agap-FooterAboutUsTop p{
+  margin-top: 10px;
+}
+
 .Agap-FooterContacts {
     width: 40%;
     display: block;

@@ -34,7 +34,7 @@ export default function NavBar() {
                 }}
               >
                 <Link
-                  to="/"
+                  to="/Home"
                   className="nav-link"
                   style={{ color: "#354290", textdecoration: "none" }}
                 >

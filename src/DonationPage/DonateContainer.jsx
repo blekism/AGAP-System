@@ -31,7 +31,7 @@ export default function DonateContainer() {
     console.log(items);
     const userInput = {
       recipient_id: items[0].recipient,
-      account_id: "DONOR - 2024-12d6fd4", // Assuming all items have the same recipient
+      account_id: "DONOR - 2024-12d6fd4",
       items: items.map((item) => ({
         item: item.item,
         item_category_id: item.category,

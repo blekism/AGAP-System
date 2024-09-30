@@ -4,7 +4,7 @@ import CallforDonation from "../assets/images/CallforDonation.png";
 import Donate from "../assets/images/Donate.png";
 import AgapFooter from "../Page/AgapFooter.jsx";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../Page/NavBar.jsx";
+import NavBar from "../Page/LanNavBar.jsx";
 
 export default function DonateVolunteerPage() {
   const navigate = useNavigate();

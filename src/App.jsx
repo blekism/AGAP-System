@@ -1,7 +1,20 @@
+import React from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import "./App.css";
+import DonationPage from "./DonationPage/DonationPage.jsx";
+
 function App() {
   return (
     <div>
-      <h1>helo</h1>
+      <Router>
+        <Routes>
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<DonationPage />} />
+          {/* <Route path="/Volunteer" element={<Volunteer />} /> */}
+          {/* <Route path="/YourDonations" element={<YourDonations />} /> */}
+          {/* <Route path="/Profile" element={<Profile />} /> */}
+        </Routes>
+      </Router>
     </div>
   );
 }

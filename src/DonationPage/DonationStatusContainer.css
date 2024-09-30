@@ -1,0 +1,66 @@
+.DonationStatusParent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    padding: 30px;
+    border-top: #000 1px solid;
+    
+}
+
+.DonationStatusParent .DonationStatusHeader h6 {
+    color: #354290;
+    font-family: Poppins;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+
+.DonationStatusParent .DonationStatusBody {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    column-gap: 120px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.DonationStatusParent .DonationStatusBody p{
+    margin-top: 10px;
+    color: #000;
+    font-family: "Poppins";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.DonationStatusParent .DonationStatusBody .Submitted {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.DonationStatusParent .DonationStatusBody .Recieved {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.DonationStatusParent .DonationStatusBody .Processed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.DonationStatusParent .DonationStatusBody .Turnover {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

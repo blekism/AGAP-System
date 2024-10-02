@@ -1,8 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
+import axios from "axios";
+import Cookies from "universal-cookie";
 
 function LogIn() {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  const navigate = useNavigate();
+  const cookies = new Cookies();
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setCredentials((values) => ({ ...values, [name]: value }));
+  };
+
+  const getJwtExpiry = (token) => {
+    const payload = JSON.parse(atob(token.split(".")[1])); // Decode the payload
+    return payload.exp ? new Date(payload.exp * 1000) : null; // Convert seconds to milliseconds
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(credentials);
+
+    axios
+      .post(
+        "http://localhost/agap-backend-main/api/phase_1/create/loginOrVerifyDonor.php",
+        credentials,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === 200) {
+          console.log("Login successful!");
+          cookies.set("donor_token", response.data.token, {
+            path: "/",
+            expires: getJwtExpiry(response.data.token),
+            secure: true,
+            sameSite: "strict",
+          });
+          navigate("/");
+        } else {
+          console.log("Login failed!");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <div
@@ -29,13 +85,16 @@ function LogIn() {
             >
               Sign In
             </h1>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <input
                   type="email"
                   className="form-control"
                   id="email"
                   placeholder="Email"
+                  name="email"
+                  value={credentials.email}
+                  onChange={handleChange}
                   style={{
                     background: "#EEE",
                     width: "364.514px",
@@ -50,6 +109,9 @@ function LogIn() {
                   className="form-control"
                   id="password"
                   placeholder="Password"
+                  name="password"
+                  value={credentials.password}
+                  onChange={handleChange}
                   style={{
                     background: "#EEE",
                     width: "364.514px",

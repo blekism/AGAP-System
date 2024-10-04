@@ -1,0 +1,77 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+
+.bePart {
+    width: 100%;
+    height: auto; 
+    flex-shrink: 0;
+    align-items: center; 
+    justify-content: center; 
+    margin: 0 auto;
+    
+}
+
+.bePart-title {
+    color: var(--Blue, #354290);
+    font-family: 'Poppins', sans-serif; 
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 150%; 
+    text-align: center; 
+    margin-bottom: 20px; 
+    margin-top: 5%;
+}
+
+.bePart-img {
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+}
+
+.bePart-donate,
+.bePart-volunteer {
+    text-align: center; 
+}
+
+.donate,
+.volunteer {
+    width: 100%; 
+    height: auto; 
+}
+
+.donate-title,
+.volunteer-title {
+    color: #354290;
+    font-size: 30px;
+    margin-top: 5%; 
+    font-weight: bold;
+}
+
+.donate-text,
+.volunteer-text {
+    color: #000;
+    font-size: 1.3rem;
+    margin-top: 5%; 
+}
+
+.donate-title,
+.volunteer-title,
+.donate-text,
+.volunteer-text {
+    color: white; /* Same color for the titles and text */
+    text-decoration: none; /* Remove underline by default */
+}
+
+.donate-title:hover,
+.volunteer-title:hover,
+.donate-text:hover,
+.volunteer-text:hover {
+    text-decoration: underline; /* Underline on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}

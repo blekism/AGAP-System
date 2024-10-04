@@ -49,7 +49,7 @@ function LogIn() {
             secure: true,
             sameSite: "strict",
           });
-          navigate("/");
+          navigate("/"); // gagawin tong redirect to donor dashboard kasi yun ang pinaka basic level of access for a user
         } else {
           console.log("Login failed!");
         }

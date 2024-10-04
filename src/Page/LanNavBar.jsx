@@ -53,7 +53,7 @@ export default function NavBar() {
                 }}
               >
                 <Link
-                  to="/Donate"
+                  to="/LogIn"
                   className="nav-link"
                   style={{ color: "#354290", textdecoration: "none" }}
                 >

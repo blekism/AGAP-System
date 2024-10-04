@@ -1,0 +1,45 @@
+.statistics-template{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    align-items: start;
+    background-color: #ffffff;
+    width: 450px;
+    border-radius: 10px;
+}
+
+.statistics-template .stats-title{
+    font-family: "Poppins", sans-serif;
+    font-size: 30px; /* Reduced by 10px */
+    font-weight: 600;
+    color: black;
+    margin-bottom: 5px;
+}
+
+.statistics-template .stats-current{
+    font-family: "Poppins", sans-serif;
+    font-size: 50px; /* Reduced by 10px */
+    font-weight: 600;
+    color: black;
+}
+
+.statistics-template .stats-new{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+}
+
+.statistics-template .stats-percent{
+    font-family: "Poppins", sans-serif;
+    font-size: 25px; /* Reduced by 10px */
+    font-weight: 600;
+    color: black;
+    margin-right: 20px;
+}
+
+.statistics-template .stats-increased{
+    font-family: "Poppins", sans-serif;
+    font-size: 25px; /* Reduced by 10px */
+    font-weight: 600;
+    color: black;
+}

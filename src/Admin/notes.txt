@@ -1,0 +1,16 @@
+gawing clickable yung donations para maview yung items using bootstrap modal
+gawan ng input yung events maybe popup using bootstrap modal 
+gawan ng way para makaupload ng events like yung pic ng ongoing event and description para aware yung donors and volunteers etc
+gawan ng function yung calendar: 
+    adding events  
+    deleting events
+    update events
+    gawan ng table sa db(di pa final to)
+    update ng table yung event para makatanggap ng photos
+gawin item management 
+
+
+
+
+use postimage.cc 
+gawan ng websocket connection yung system

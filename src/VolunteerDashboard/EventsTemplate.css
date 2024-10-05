@@ -1,0 +1,32 @@
+.EventsTemplate-events{
+    display: flex;
+    flex-direction: row;
+    background: white;
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: fit-content;
+}
+
+.EventsTemplate-events .EventsTemplate-eventsContent {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.EventsTemplate-events .EventsTemplate-eventsContent h1{
+    color: #35408E;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+.EventsTemplate-events .EventsTemplate-eventsContent P{
+    color: #35408E;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 475;
+    line-height: normal;
+}

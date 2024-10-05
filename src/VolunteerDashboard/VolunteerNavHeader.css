@@ -1,0 +1,30 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+  }
+  
+.VolunteerNavHeader-parentCont .VolunteerNavHeader-headerCont{
+    height: 8vh;
+    background-color: #354290;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    padding-left: 50px;
+    padding-right: 80px;
+}
+
+.VolunteerNavHeader-parentCont .VolunteerNavHeader-headerCont .VolunteerNavHeader-headerContDate{
+    border-left: 5px solid white;
+    padding-left: 30px;
+    height: 100%;
+}
+
+.VolunteerNavHeader-parentCont .VolunteerNavHeader-headerCont .VolunteerNavHeader-headerContDate p{
+    font-size: 20px;
+    display: flex;
+    margin: auto;
+}

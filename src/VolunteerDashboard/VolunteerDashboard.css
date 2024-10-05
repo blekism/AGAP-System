@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100%;
+  }
+
+.VolunteerDashboard-parentCont .VolunteerDashboard-bodyCont{
+ background-color: #f0f0f073;
+    display: flex;
+}
+
+.VolunteerDashboard-parentCont .VolunteerDashboard-bodyCont .VolunteerDashboard-leftCont{
+    width: 15%;
+    /* background-color: bisque; */
+}
+
+.VolunteerDashboard-parentCont .VolunteerDashboard-rightCont{
+    width: 85%;
+    background-color: #F0F0F0;
+}
+
+
+
+
+  

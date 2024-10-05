@@ -14,6 +14,8 @@ import Logout from "../assets/images/logout.png";
 import DonationContent from "./Donations/DonationContent.jsx";
 import VolunteerContent from "./Volunteers/Volunteers.jsx";
 import DonorContent from "./Donors/Donors.jsx";
+import EventContent from "./Events/Events.jsx";
+import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
 
 export default function AdminPage() {
@@ -251,7 +253,11 @@ export default function AdminPage() {
             aria-labelledby="pills-events-tab"
             tabIndex="0"
           >
-            events
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+
+            <EventContent />
             {/* event content here */}
           </div>
           <div
@@ -261,7 +267,12 @@ export default function AdminPage() {
             aria-labelledby="pills-calendar-tab"
             tabIndex="0"
           >
-            calendar
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+
+            <DashboardCalendar events={event} />
+
             {/* calendar content here */}
           </div>
           <div
@@ -271,7 +282,11 @@ export default function AdminPage() {
             aria-labelledby="pills-items-tab"
             tabIndex="0"
           >
-            items
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+            <ItemManagement />
+
             {/* item content here */}
           </div>
         </div>

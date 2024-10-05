@@ -9,6 +9,8 @@ gawan ng function yung calendar:
     update ng table yung event para makatanggap ng photos
 gawin item management 
 
+lagyan din modal for inputs yung events para updatable
+
 
 
 

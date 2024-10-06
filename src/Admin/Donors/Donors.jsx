@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function DonorContent({ donations }) {
+export default function DonorContent({ donors }) {
   return (
     <div style={{ paddingRight: "10px" }}>
-      <table class="table table-striped">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">Donor ID</th>
@@ -14,11 +14,25 @@ export default function DonorContent({ donations }) {
             <th scope="col">Email</th>
             <th scope="col">Contact</th>
             <th scope="col">Verified At</th>
-            <th scope="col">Status</th>
             <th scope="col">Total Donations</th>
           </tr>
         </thead>
-        <tbody>{/* mapping results from db goes here */}</tbody>
+        <tbody>
+          {/* mapping results from db goes here */}
+          {donors.map((donor, key) => (
+            <tr key={key}>
+              <td>{donor.account_id}</td>
+              <td>{donor.last_name}</td>
+              <td>{donor.section}</td>
+              <td>{donor.category_name}</td>
+              <td>{donor.designation_name}</td>
+              <td>{donor.email}</td>
+              <td>{donor.contact_info}</td>
+              <td>{donor.verified_at}</td>
+              <td>{donor.total_donations}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

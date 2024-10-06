@@ -11,8 +11,19 @@ gawin item management
 
 lagyan din modal for inputs yung events para updatable
 
+NEED GAWIN 
+- MGA MODAL PA FOR ALL PARTS NG ADMIN
+- DASHBOARD METRICS
+- DESIGN NG TABLES
+- EVERYTHING RELATED SA EVENTS AND FULLCALENDAR
+- UPLOAD NG IMAGE FOR ADD EVENT ANNOUNCEMENT
+- ADD EVENT FOR db
+
+
 
 
 
 use postimage.cc 
 gawan ng websocket connection yung system
+
+edit yung functions para naka levels of access na yung basehan ng read ng lists

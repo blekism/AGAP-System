@@ -38,13 +38,53 @@ export default function AdminPage() {
   const eventIncreased = 45254;
 
   const [event, setEvent] = useState([]);
+  const [donations, setDonations] = useState([]);
+  const [donors, setDonors] = useState([]);
+  const [volunteers, setVolunteers] = useState([]);
+  const [applicants, setApplicants] = useState([]);
 
   useEffect(() => {
     axios
       .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
       .then(function (response) {
-        console.log(response.data);
+        console.log(response.data); //read events
         setEvent(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readAllDonationsAdmin.php"
+      )
+      .then(function (response) {
+        console.log(response.data); //read donations
+        setDonations(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/read_donors_acc.php"
+      )
+      .then(function (response) {
+        console.log(response.data); //read donors account
+        setDonors(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase2&3/read/read_volunteer_acc.php"
+      )
+      .then(function (response) {
+        console.log(response.data); //read volunteer account
+        setVolunteers(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase2&3/read/read_applicant_volunteer.php"
+      )
+      .then(function (response) {
+        console.log(response.data); //read volunteer applicant account
+        setApplicants(response.data.data);
       });
   }, []);
 
@@ -218,7 +258,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
             {/* donation content here */}
-            <DonationContent />
+            <DonationContent donations={donations} />
           </div>
           <div
             className="tab-pane fade"
@@ -230,7 +270,10 @@ export default function AdminPage() {
             <div className="dashHeader">
               <Header username="Admin" />
             </div>
-            <VolunteerContent />
+            <VolunteerContent
+              volunteerMembers={volunteers}
+              volunteerApplicants={applicants}
+            />
             {/* volunteer content here */}
           </div>
           <div
@@ -243,7 +286,7 @@ export default function AdminPage() {
             <div className="dashHeader">
               <Header username="Admin" />
             </div>
-            <DonorContent />
+            <DonorContent donors={donors} />
             {/* donor content here */}
           </div>
           <div
@@ -257,7 +300,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
 
-            <EventContent />
+            <EventContent events={event} />
             {/* event content here */}
           </div>
           <div

@@ -1,11 +1,12 @@
 import React from "react";
 import "./VolunteerDashboardContent.css";
 import EventsPagination from "./EventsPagination";
+import VolunteerLogModal from "./VolunteerLogModal";
 
 export default function VolunteerDashboardContent({ logTable }) {
   const nuEvents = [
     {
-      title: "NU-D Sagip sa Pwet ni yngwie",
+      title: "NU-D NEW EVENTSSSS",
       content:
         "The IT Department is offering free coding workshops for students interested in learning programming languages such as JavaScript and HTML. These workshops are designed to prepare students for tech-driven careers.",
       date: "26 Aug 2024",
@@ -14,16 +15,6 @@ export default function VolunteerDashboardContent({ logTable }) {
       title: "NU Manila",
       content: "NU Manila is the best!",
       date: "09/26/2024",
-    },
-    {
-      title: "NU Laguna",
-      content: "NU Laguna is the best!",
-      date: "09/27/2024",
-    },
-    {
-      title: "NU Cavite",
-      content: "NU Cavite is the best!",
-      date: "09/28/2024",
     },
   ];
 
@@ -66,7 +57,7 @@ export default function VolunteerDashboardContent({ logTable }) {
             </p>
           </div>
           <div className="VolunteerDashboardContent-card3">
-            <p>TOTAL TIME:</p>
+            <p>TOTAL HOURS:</p>
             <p
               style={{
                 backgroundColor: "white",
@@ -82,6 +73,9 @@ export default function VolunteerDashboardContent({ logTable }) {
               6
             </p>
           </div>
+          <div className="VolunteerDashboardContent-card4">
+            <VolunteerLogModal />
+          </div>
         </div>
 
         <div className="VolunteerDashboardContent-bottomContent">
@@ -89,7 +83,7 @@ export default function VolunteerDashboardContent({ logTable }) {
             <EventsPagination events={nuEvents} />
           </div>
           <div className="VolunteerDashboardContent-bottomContent2">
-            <h1>Your Event/s List</h1>
+            <h1>YOUR EVENT'S LIST</h1>
             <table className="VolunteerLogTable">
               <thead className="VolunteerLogTable-thead">
                 <tr>

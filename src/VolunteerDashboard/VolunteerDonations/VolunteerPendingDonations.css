@@ -1,0 +1,39 @@
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-bodyCont{
+    background-color: #f0f0f073;
+    display: flex;
+}
+   
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-bodyCont .VolunteerPendingDonations-leftCont{
+    width: 15%;
+    /* background-color: bisque; */
+}
+   
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont{
+    width: 85%;
+    background-color: #F0F0F0;
+    padding: 40px;
+}
+
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont p{
+    font-weight: 600;
+    font-size: 25px;
+
+}
+
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .table thead {
+    text-align: center;
+}
+
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .table tbody {
+    text-align: center;
+}
+
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .ViewItemsModal-ParentCont .viewItemsBtn{
+    width: 100px;
+    border-radius: 10px;
+    background: #354290 !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+}

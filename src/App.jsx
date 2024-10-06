@@ -7,7 +7,8 @@ import DonateVolunteerPage from "./DonateVolunteerPage/DonateVolunteerPage";
 import Landing from "./landing_page/landing";
 import VolunteerPage from "./VolunteerPage/VolunteerPage";
 import VolunteerDashboard from "./VolunteerDashboard/VolunteerDashboard";
-import VolunteerPendingDonations from "./VolunteerDashboard/VolunteerPendingDonations/VolunteerPendingDonations";
+import VolunteerPendingDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerPendingDonations";
+import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerAcceptedDonations";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
           <Route
             path="/VolunteerPendingDonations"
             element={<VolunteerPendingDonations />}
+          />
+          <Route
+            path="/VolunteerAcceptedDonations"
+            element={<VolunteerAcceptedDonations />}
           />
           {/* <Route path="/Volunteer" element={<Volunteer />} /> */}
           {/* <Route path="/YourDonations" element={<YourDonations />} /> */}

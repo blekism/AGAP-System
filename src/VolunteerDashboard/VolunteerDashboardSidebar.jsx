@@ -26,20 +26,11 @@ export default function VolunteerDashboardSidebar() {
               >
                 Pending
               </Link>
-              <Link to="/Home" className="VolunteerDashboard-sidebarLink">
+              <Link
+                to="/VolunteerAcceptedDonations"
+                className="VolunteerDashboard-sidebarLink"
+              >
                 Accepted
-              </Link>
-            </div>
-          </div>
-
-          <div className="VolunteerDashboardYourRecords">
-            <p>Your Records</p>
-            <div className="VolunteerDashboardYourRecords-Sub">
-              <Link to="/Home" className="VolunteerDashboard-sidebarLink">
-                Attendance
-              </Link>
-              <Link to="/Home" className="VolunteerDashboard-sidebarLink">
-                Turnover
               </Link>
             </div>
           </div>

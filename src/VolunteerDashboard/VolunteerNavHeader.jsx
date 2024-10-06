@@ -7,13 +7,20 @@ export default function VolunteerPageTemplate() {
   const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-    setCurrentDate(formattedDate);
+    const updateDate = () => {
+      const today = new Date();
+      const formattedDate = today.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      setCurrentDate(formattedDate);
+    };
+
+    updateDate(); // Set the initial date
+    const intervalId = setInterval(updateDate, 24 * 60 * 60 * 1000); // Update every 24 hours
+
+    return () => clearInterval(intervalId); // Cleanup interval on unmount
   }, []);
 
   return (

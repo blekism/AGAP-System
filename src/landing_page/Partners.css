@@ -12,6 +12,7 @@
     font-weight: 700;
     line-height: 150%; /* 72px */
     margin-bottom: 3%; /* Space below title */
+    margin-top: 5%;
 }
 
 .partners-row {
@@ -60,4 +61,11 @@
     .partners-title {
         font-size: 32px; /* Smaller title font size */
     }
+}
+
+.divider-last{
+    background: #000;
+    width: 1342px;
+    height: 2px;
+    margin: auto;
 }

@@ -47,7 +47,7 @@ body {
 
 .donate-title,
 .volunteer-title {
-    color: #354290;
+    color: #354290 !important;
     font-size: 30px;
     margin-top: 5%; 
     font-weight: bold;
@@ -55,23 +55,16 @@ body {
 
 .donate-text,
 .volunteer-text {
-    color: #000;
+    color: #000 !important;
     font-size: 1.3rem;
     margin-top: 5%; 
-}
-
-.donate-title,
-.volunteer-title,
-.donate-text,
-.volunteer-text {
-    color: white; /* Same color for the titles and text */
-    text-decoration: none; /* Remove underline by default */
+    margin-bottom: 20%;
 }
 
 .donate-title:hover,
 .volunteer-title:hover,
 .donate-text:hover,
 .volunteer-text:hover {
-    text-decoration: underline; /* Underline on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: underline; 
+    cursor: pointer; 
 }

@@ -146,14 +146,27 @@ body {
   margin-top: 3%;
 }
 
-/* Box elements */
 .first-box, .second-box {
   width: 273px;
   height: 273px;
   flex-shrink: 0;
   background-color: black;
   border-radius: 10px;
+  overflow: hidden; /* Ensure no overflow if the image is larger */
+  position: relative; /* Position relative for absolute image positioning */
 }
+
+.box-image {
+  width: 100%; /* Set the width to 100% of the parent */
+  height: 100%; /* Set the height to 100% of the parent */
+  object-fit: cover; /* Cover the box without stretching */
+  border-radius: 10px; /* Optional: add rounding to the image corners */
+  position: absolute; /* Position absolutely to cover the box */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+}
+
+
 
 /* Info containers */
 .first-info, .second-info {

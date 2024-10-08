@@ -1,0 +1,77 @@
+.VolunteerDashboard-sidebarCont{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-between;
+    padding: 25px;
+    height: 79.5vh;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    background-color: white;     
+}
+
+.VolunteerDashboard-sidebarCont P{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop div{
+    margin-bottom: 10px;
+}
+
+.VolunteerDashboard-sidebarCont div .VolunteerDashboard-sidebarLink{
+    color: #000000;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations p{
+    margin-bottom: 5px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub .VolunteerDashboard-sidebarLink{
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardYourRecords p{
+    margin-bottom: 5px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardYourRecords .VolunteerDashboardYourRecords-Sub .VolunteerDashboard-sidebarLink{
+    font-weight: 400;
+    font-size: 18px;
+
+}
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardYourRecords .VolunteerDashboardYourRecords-Sub{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContBottom .VolunteerDashboardLogout-ButtonContainer {
+    text-align: center;
+  }
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContBottom .VolunteerDashboardLogout-ButtonContainer .VolunteerDashboardLogout-button {
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    color: red; /* Match the color of the links */
+    font-family: "Poppins", sans-serif; /* Match the font family */
+    font-size: 20px; /* Match the font size */
+    font-weight: 600; /* Match the font weight */
+    cursor: pointer; /* Show pointer cursor on hover */
+    padding: 0; /* Remove padding */
+    text-decoration: none; /* Remove underline */
+  }

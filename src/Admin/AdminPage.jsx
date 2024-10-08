@@ -12,7 +12,7 @@ import Event from "../assets/images/Event.png";
 import Member from "../assets/images/Member.png";
 import Logout from "../assets/images/logout.png";
 import DonationContent from "./Donations/DonationContent.jsx";
-import VolunteerContent from "./Volunteers/Volunteers.jsx";
+import VolunteerContent from "./Volunteers/VolunteersManagement.jsx";
 import DonorContent from "./Donors/Donors.jsx";
 import EventContent from "./Events/Events.jsx";
 import ItemManagement from "./ItemManagement/ItemManagement.jsx";
@@ -58,24 +58,6 @@ export default function AdminPage() {
       .then(function (response) {
         console.log(response.data); //read donors account
         setDonors(response.data.data);
-      });
-
-    axios
-      .get(
-        "http://localhost/agap-backend-main/api/phase2&3/read/read_volunteer_acc.php"
-      )
-      .then(function (response) {
-        console.log(response.data); //read volunteer account
-        setVolunteers(response.data.data);
-      });
-
-    axios
-      .get(
-        "http://localhost/agap-backend-main/api/phase2&3/read/read_applicant_volunteer.php"
-      )
-      .then(function (response) {
-        console.log(response.data); //read volunteer applicant account
-        setApplicants(response.data.data);
       });
   }, []);
 
@@ -266,8 +248,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
             <VolunteerContent
-              volunteerMembers={volunteers}
-              volunteerApplicants={applicants}
+            // lagay dito volunteer management jsx
             />
             {/* volunteer content here */}
           </div>

@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
-import Cookies from "universal-cookie";
+import { useCookies } from "react-cookie";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -11,7 +11,7 @@ function LogIn() {
     password: "",
   });
   const navigate = useNavigate();
-  const cookies = new Cookies();
+  const [cookies, setCookie, removeCookie] = useCookies(["donor_token"]);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -21,8 +21,8 @@ function LogIn() {
   };
 
   const getJwtExpiry = (token) => {
-    const payload = JSON.parse(atob(token.split(".")[1])); // Decode the payload
-    return payload.exp ? new Date(payload.exp * 1000) : null; // Convert seconds to milliseconds
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.exp ? new Date(payload.exp * 1000) : null;
   };
 
   const handleSubmit = (event) => {
@@ -43,13 +43,13 @@ function LogIn() {
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Login successful!");
-          cookies.set("donor_token", response.data.token, {
+          setCookie("donor_token", response.data.token, {
             path: "/",
             expires: getJwtExpiry(response.data.token),
             secure: true,
             sameSite: "strict",
           });
-          navigate("/"); // gagawin tong redirect to donor dashboard kasi yun ang pinaka basic level of access for a user
+          navigate("/LandingPage");
         } else {
           console.log("Login failed!");
         }
@@ -140,7 +140,6 @@ function LogIn() {
 
             <div className="text-center mt-3">
               <a href="#" className="text-asAdmin">
-                {/* gawing link to admin login page */}
                 Sign In as Admin.
               </a>
             </div>
@@ -153,6 +152,7 @@ function LogIn() {
             </p>
             <Link
               className="btn2"
+              to="/CreateAccount"
               style={{
                 background: "#354290",
                 border: "3.398px solid #FFF",
@@ -160,8 +160,8 @@ function LogIn() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                textDecoration: "none",
               }}
-              to="/CreateAccount"
             >
               SIGN UP
             </Link>

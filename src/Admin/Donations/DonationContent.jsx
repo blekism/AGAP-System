@@ -139,7 +139,12 @@ export default function DonationContent() {
             aria-labelledby="pills-submitted-tab"
             tabIndex="0"
           >
-            <DonationManagement donations={items} />
+            <DonationManagement
+              donations={items}
+              modalId="submittedItems"
+              modalTarget="#submittedItems"
+              footerModalId="submittedItems"
+            />
 
             {/* item1 */}
           </div>
@@ -150,7 +155,11 @@ export default function DonationContent() {
             aria-labelledby="pills-received-tab"
             tabIndex="0"
           >
-            <DonationManagement donations={items} />
+            <DonationManagement
+              donations={items}
+              modalId="receivedItems"
+              modalTarget="#receivedItems"
+            />
 
             {/* item2 */}
           </div>
@@ -161,7 +170,11 @@ export default function DonationContent() {
             aria-labelledby="pills-processed-tab"
             tabIndex="0"
           >
-            <DonationManagement donations={items} />
+            <DonationManagement
+              donations={items}
+              modalId="processedItems"
+              modalTarget="#processedItems"
+            />
 
             {/* item3 */}
           </div>
@@ -172,7 +185,11 @@ export default function DonationContent() {
             aria-labelledby="pills-turnover-tab"
             tabIndex="0"
           >
-            <DonationManagement donations={items} />
+            <DonationManagement
+              donations={items}
+              modalId="turnoverItems"
+              modalTarget="#turnoverItems"
+            />
 
             {/* item4 */}
           </div>

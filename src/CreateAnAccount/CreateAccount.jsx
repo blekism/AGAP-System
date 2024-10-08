@@ -39,8 +39,8 @@ function CreateAccount() {
               >
                 Already have an account?
                 <Link
-                  to={"/login"}
-                  style={{ color: "#111", textDecorationLine: "underline" }}
+                  to={"/"}
+                  style={{ color: "#111", textDecorationLine: "none" }}
                 >
                   Log in
                 </Link>

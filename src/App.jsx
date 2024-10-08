@@ -11,14 +11,15 @@ import VolunteerPendingDonations from "./VolunteerDashboard/VolunteerDonations/V
 import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerAcceptedDonations";
 import VolunteerSignUpPage from "./VolunteerSignUpPage/VolunteerSignUp";
 import AdminPage from "./Admin/AdminPage.jsx";
+import VerifyAccount from "./VolunteerSignUpPage/VerifyAccount.jsx";
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/LogIn" element={<LogIn />} />
+          <Route path="/" element={<LogIn />} />
+          <Route path="/LandingPage" element={<Landing />} />
           <Route path="/Donate" element={<DonationPage />} />
           <Route path="/Home" element={<DonateVolunteerPage />} />
           <Route path="/AdminPage" element={<AdminPage />} />
@@ -34,6 +35,7 @@ function App() {
           />
           <Route path="/CreateAccount" element={<CreateAnAccount />} />
           <Route path="/VolunteerSignUp" element={<VolunteerSignUpPage />} />
+          <Route path="/VerifyAccount" element={<VerifyAccount />} />
 
           {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />

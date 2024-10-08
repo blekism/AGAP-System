@@ -1,0 +1,11 @@
+.ahehe form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ahehe form .ItemManagementParent {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+}

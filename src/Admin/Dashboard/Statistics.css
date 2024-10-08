@@ -1,0 +1,7 @@
+.StatisticsParent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Create two equal columns */
+    gap: 20px; /* Adjust the gap between items as needed */
+    width: fit-content;
+    margin-right: 20px; /* Ensure it takes full width of the container */
+}

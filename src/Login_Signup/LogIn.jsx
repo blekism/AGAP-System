@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
-import { useCookies } from "react-cookie";
+import Cookies from "universal-cookie";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -11,7 +11,7 @@ function LogIn() {
     password: "",
   });
   const navigate = useNavigate();
-  const [cookies, setCookie, removeCookie] = useCookies(["donor_token"]);
+  const cookies = new Cookies();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -43,7 +43,7 @@ function LogIn() {
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Login successful!");
-          setCookie("donor_token", response.data.token, {
+          cookies.set("donor_token", response.data.token, {
             path: "/",
             expires: getJwtExpiry(response.data.token),
             secure: true,
@@ -140,6 +140,7 @@ function LogIn() {
 
             <div className="text-center mt-3">
               <a href="#" className="text-asAdmin">
+                {/* gawing link to admin login page */}
                 Sign In as Admin.
               </a>
             </div>
@@ -150,12 +151,20 @@ function LogIn() {
             <p>
               Register with your personal account <br /> to use this app
             </p>
-            <button
+            <Link
               className="btn2"
-              style={{ background: "#354290", border: "3.398px solid #FFF" }}
+              style={{
+                background: "#354290",
+                border: "3.398px solid #FFF",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              to="/CreateAccount"
             >
               SIGN UP
-            </button>
+            </Link>
           </div>
         </div>
       </div>

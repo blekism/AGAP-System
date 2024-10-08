@@ -1,7 +1,7 @@
 import React from "react";
 import "./VolunteerPage.css";
 import Footer from "../Page/AgapFooter.jsx";
-import NavBar from "../Page/LanNavBar.jsx";
+import NavBar from "../Page/NavBar.jsx";
 import VPageImage1 from "../assets/images/VPageImage1.png";
 import VPageImage2 from "../assets/images/VPageImage2.png";
 import VPageImage3 from "../assets/images/VPageImage3.png";
@@ -10,8 +10,9 @@ import { useNavigate } from "react-router-dom";
 export default function VolunteerPage() {
   const navigate = useNavigate();
 
+  // gawin tong conditional render based sa account status
   const handleSignInClick = () => {
-    navigate(""); // Replace '/SignInPage' with the actual path ng sign-in page
+    navigate("/VolunteerSignUp"); // Replace '/SignInPage' with the actual path ng sign-in page
   };
 
   return (

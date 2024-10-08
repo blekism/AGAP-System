@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { useCookies } from "react-cookie";
 
 function LogIn() {

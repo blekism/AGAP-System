@@ -53,15 +53,6 @@ export default function AdminPage() {
 
     axios
       .get(
-        "http://localhost/agap-backend-main/api/phase_1/read/readAllDonationsAdmin.php"
-      )
-      .then(function (response) {
-        console.log(response.data); //read donations
-        setDonations(response.data.data);
-      });
-
-    axios
-      .get(
         "http://localhost/agap-backend-main/api/phase_1/read/read_donors_acc.php"
       )
       .then(function (response) {
@@ -207,7 +198,11 @@ export default function AdminPage() {
               Manage Items & Stock
             </button>
           </li>
-          <li className="nav-item" role="presentation">
+          <li
+            className="nav-item"
+            role="presentation"
+            style={{ marginTop: "55%" }}
+          >
             <img src={Logout} alt="Logout Icon" />
             <button className="logout-button">Logout</button>
           </li>

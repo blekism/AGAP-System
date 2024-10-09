@@ -112,6 +112,7 @@ export default function VolunteersManagement() {
               volunteers={items}
               modalId="memberItems"
               modalTarget="#memberItems"
+              volunHeader="Members"
             />
 
             {/* item1 */}
@@ -127,6 +128,7 @@ export default function VolunteersManagement() {
               volunteers={items}
               modalId="applicantItems"
               modalTarget="#applicantItems"
+              volunHeader="Applicants"
             />
 
             {/* item2 */}

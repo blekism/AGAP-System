@@ -1,11 +1,85 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Volunteers.css";
+import axios from "axios";
+import InputTemplate from "../InputTemplateAdmin.jsx";
 
-export default function VolunteerContent({ volunteers, modalId, modalTarget }) {
+export default function VolunteerContent({
+  volunteers,
+  modalId,
+  modalTarget,
+  volunHeader,
+}) {
+  const [volunteerItem, setVolunteerItem] = useState({
+    account_id: "",
+    is_volunteer: "",
+    last_name: "",
+    first_name: "",
+    middle_name: "",
+    section: "",
+    dept_category_id: "",
+    designation_id: "",
+    email: "",
+    contact_info: "",
+    total_hours: 0,
+  });
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setVolunteerItem((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase2&3/Update/update_volunteer_acc.php",
+        volunteerItem,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === 200) {
+          console.log("Update successful!");
+        } else {
+          console.log("Update failed!");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleItemClick = async (id, level) => {
+    console.log("Item clicked: ", id);
+
+    try {
+      const response = await axios.post(
+        "http://localhost/agap-backend-main/api/phase2&3/read/singleRead_volunteer_acc.php",
+        { account_id: id, is_volunteer: level },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data.data);
+      setVolunteerItem(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="volunteertbl" style={{ paddingRight: "10px" }}>
       <div className="volunteerMembers" style={{ maxHeight: "750px" }}>
-        <p>Members</p>
+        <p className="volunheader">{volunHeader}</p>
         <table className="table table-striped">
           <thead>
             <tr>
@@ -52,6 +126,9 @@ export default function VolunteerContent({ volunteers, modalId, modalTarget }) {
                     className="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target={modalTarget}
+                    onClick={() =>
+                      handleItemClick(member.account_id, member.is_volunteer)
+                    }
                   >
                     View
                   </button>
@@ -82,19 +159,124 @@ export default function VolunteerContent({ volunteers, modalId, modalTarget }) {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">edit volunteer here</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
-                  Understood
-                </button>
-              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="modal-body">
+                  <div className="volunteersInputBody">
+                    <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">
+                        User ID
+                      </span>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Username"
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                        readOnly
+                        value={volunteerItem.account_id}
+                        name="account_id"
+                        onChange={handleChange}
+                      />
+                    </div>
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      name="is_volunteer"
+                      value={volunteerItem.is_volunteer}
+                      onChange={handleChange}
+                    >
+                      <option value="donor">Donor</option>
+                      <option value="volunteer_apply">
+                        Volunteer Applicant
+                      </option>
+                      <option value="volunteer">Volunteer</option>
+                    </select>
+                    <InputTemplate
+                      name="first_name"
+                      value={volunteerItem.first_name}
+                      onChange={handleChange}
+                    />
+                    <InputTemplate
+                      name="last_name"
+                      value={volunteerItem.last_name}
+                      onChange={handleChange}
+                    />
+                    <InputTemplate
+                      name="middle_name"
+                      value={volunteerItem.middle_name}
+                      onChange={handleChange}
+                    />
+
+                    <InputTemplate
+                      name="section"
+                      value={volunteerItem.section}
+                      onChange={handleChange}
+                    />
+                    {/* <InputTemplate
+                      name="dept_category_id"
+                      value={volunteerItem.category_name}
+                      onChange={handleChange}
+                    /> */}
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      name="dept_category_id"
+                      value={volunteerItem.dept_category_id}
+                      onChange={handleChange}
+                    >
+                      <option value="1">SECA</option>
+                      <option value="2">SASE</option>
+                      <option value="3">SBMA</option>
+                      <option value="4">SHS</option>
+                      <option value="5">OTHERS</option>
+                    </select>
+
+                    {/* <InputTemplate
+                      name="designation_id"
+                      value={volunteerItem.designation_name}
+                      onChange={handleChange}
+                    /> */}
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      name="designation_id"
+                      value={volunteerItem.designation_id}
+                      onChange={handleChange}
+                    >
+                      <option value="2000">STUDENT</option>
+                      <option value="2001">STAFF</option>
+                      <option value="2002">FACULTY</option>
+                    </select>
+                    <InputTemplate
+                      name="email"
+                      value={volunteerItem.email}
+                      onChange={handleChange}
+                    />
+                    <InputTemplate
+                      name="contact_info"
+                      value={volunteerItem.contact_info}
+                      onChange={handleChange}
+                    />
+                    <InputTemplate
+                      name="total_hours"
+                      value={volunteerItem.total_hours ?? 0}
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" className="btn btn-primary">
+                    Understood
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

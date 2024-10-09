@@ -121,16 +121,12 @@ export default function Events({
               ></button>
             </div>
             <div className="modal-body">
-              {/* // {eventItem.map((item, key) => ( */}
-              {/* //<div key={key}> */}
               <p>{eventItem.event_name}</p>
               <p>{eventItem.event_link}</p>
               <p>{eventItem.description}</p>
               <p>{eventItem.start_date}</p>
               <p>{eventItem.end_date}</p>
               <p>{eventItem.contrib_amount}</p>
-              {/* // </div>
-             // ))} */}
             </div>
             <div className="modal-footer">
               <button

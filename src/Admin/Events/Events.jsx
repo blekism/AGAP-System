@@ -1,7 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Events.css";
+import axios from "axios";
 
-export default function Events({ events }) {
+export default function Events({
+  events,
+  addEventsModalID,
+  addEventsModalTarget,
+  addEventAnnouncementModalID,
+  addEventAnnouncementModalTarget,
+  eventViewModalID,
+  eventViewModalTarget,
+}) {
+  const [eventItem, setEventItem] = useState([]);
+
+  const handleItemClick = async (id) => {
+    console.log({ event_id: id });
+
+    try {
+      const response = await axios.post(
+        "http://localhost/agap-backend-main/api/phase_1/read/singleRead_event.php",
+        { event_id: id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(response.data.data);
+      setEventItem(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    console.log("eto mga items mo zaddy");
+    console.log(eventItem);
+  }, [eventItem]);
+
   return (
     <div className="events" style={{ overflowY: "auto", maxHeight: "750px" }}>
       <div className="EventActions">
@@ -9,7 +45,7 @@ export default function Events({ events }) {
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#AddEventsModal"
+          data-bs-target={addEventsModalTarget}
         >
           Add Event
         </button>
@@ -17,7 +53,7 @@ export default function Events({ events }) {
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#AddEventsAnnouncementModal"
+          data-bs-target={addEventAnnouncementModalTarget}
         >
           Add Event Announcement
         </button>
@@ -51,7 +87,8 @@ export default function Events({ events }) {
                   type="button"
                   className="btn btn-primary"
                   data-bs-toggle="modal"
-                  data-bs-target="#EventsModal"
+                  data-bs-target={eventViewModalTarget}
+                  onClick={() => handleItemClick(event.evenet_id)}
                 >
                   Items
                 </button>
@@ -63,7 +100,7 @@ export default function Events({ events }) {
       {/* modal for editing events start */}
       <div
         className="modal fade"
-        id="EventsModal"
+        id={eventViewModalID}
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -83,7 +120,18 @@ export default function Events({ events }) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">edit event here</div>
+            <div className="modal-body">
+              {/* // {eventItem.map((item, key) => ( */}
+              {/* //<div key={key}> */}
+              <p>{eventItem.event_name}</p>
+              <p>{eventItem.event_link}</p>
+              <p>{eventItem.description}</p>
+              <p>{eventItem.start_date}</p>
+              <p>{eventItem.end_date}</p>
+              <p>{eventItem.contrib_amount}</p>
+              {/* // </div>
+             // ))} */}
+            </div>
             <div className="modal-footer">
               <button
                 type="button"
@@ -104,7 +152,7 @@ export default function Events({ events }) {
       {/* modal for adding event announcement start */}
       <div
         className="modal fade"
-        id="AddEventsAnnouncementModal"
+        id={addEventAnnouncementModalID}
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"
@@ -145,7 +193,7 @@ export default function Events({ events }) {
       {/* modal for adding events start */}
       <div
         className="modal fade"
-        id="AddEventsModal"
+        id={addEventsModalID}
         data-bs-backdrop="static"
         data-bs-keyboard="false"
         tabIndex="-1"

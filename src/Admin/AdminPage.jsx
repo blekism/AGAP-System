@@ -38,10 +38,7 @@ export default function AdminPage() {
   const eventIncreased = 45254;
 
   const [event, setEvent] = useState([]);
-  const [donations, setDonations] = useState([]);
   const [donors, setDonors] = useState([]);
-  const [volunteers, setVolunteers] = useState([]);
-  const [applicants, setApplicants] = useState([]);
 
   useEffect(() => {
     axios
@@ -235,7 +232,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
             {/* donation content here */}
-            <DonationContent donations={donations} />
+            <DonationContent />
           </div>
           <div
             className="tab-pane fade"
@@ -276,7 +273,15 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
 
-            <EventContent events={event} />
+            <EventContent
+              events={event}
+              addEventsModalID="addEventsModalID"
+              addEventsModalTarget="#addEventsModalID"
+              addEventAnnouncementModalID="addEventAnnouncementModalID"
+              addEventAnnouncementModalTarget="#addEventAnnouncementModalID"
+              eventViewModalID="eventViewModalID"
+              eventViewModalTarget="#eventViewModalID"
+            />
             {/* event content here */}
           </div>
           <div

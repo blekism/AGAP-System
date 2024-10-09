@@ -6,6 +6,7 @@ import LogIn from "./Login_Signup/LogIn.jsx";
 import VolunteerSignUp from "./Login_Signup/VolunteerSignUp.jsx";
 import DonateVolunteerPage from "./DonateVolunteerPage/DonateVolunteerPage";
 import Landing from './landing_page/landing'; 
+import ProfilePage from './Profile/ProfilePage';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/LogIn" element={<LogIn />} />
           <Route path="/Donate" element={<DonationPage />} />
           <Route path="/Home" element={<DonateVolunteerPage />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
           {/* <Route path="/Volunteer" element={<Volunteer />} /> */}
           {/* <Route path="/YourDonations" element={<YourDonations />} /> */}
           {/* <Route path="/Profile" element={<Profile />} /> */}

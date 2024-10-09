@@ -1,0 +1,86 @@
+.side {
+    height: 100vh; 
+    display: flex;
+}
+
+.side-box {
+    width: 454px;
+    height: 100%;
+    background-color: #354290;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: center; 
+    padding-top: 20px; 
+}
+
+.side-title {
+    color: var(--Gray-Background, #F8F8F8);
+    font-family: Poppins;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.36px;
+    margin-top: 20px;
+    margin-bottom: 20px; 
+}
+
+.profile-image {
+    width: 416px;
+    height: 524px;
+    background-color: aqua;
+    border-radius: 30px;
+    margin-left: 30%;
+    margin-right: auto; 
+    margin-top: 20px;
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+
+.change-photo {
+    margin-bottom: 20px; 
+    display: flex; 
+    justify-content: center; 
+    width: 100%; 
+}
+
+.change-photo-button {
+    padding: 10px 20px; 
+    background: rgba(255, 255, 255, 0.80);
+    color: #354290; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    font-size: 24px; 
+    margin-top: 100%;
+    width: 373px;
+    height: 82px;
+    border-radius: 170px;
+    letter-spacing: 0.24px;
+
+}
+
+.change-photo-button:hover {
+    background-color: #FCD125; 
+}
+
+.signout-button{
+    width: 233.675px;
+    height: 63.223px;
+    border-radius: 40px;
+    background: var(--Yellow, #FCD125);
+    color: var(--Blue, #354290);
+    text-align: center;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 85%;
+    margin-left: 10%;
+}
+
+.signout-button:hover {
+    background-color: red; 
+}

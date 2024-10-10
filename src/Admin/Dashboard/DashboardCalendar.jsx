@@ -12,7 +12,13 @@ export default function DashboardCalendar({ events }) {
   return (
     <div
       className="dashboard-calendar"
-      style={{ flexGrow: 1, backgroundColor: "white", padding: "20px", display: "flex", flexDirection: "column" }}
+      style={{
+        flexGrow: 1,
+        backgroundColor: "white",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <FullCalendar
         plugins={[dayGridPlugin]}
@@ -31,22 +37,20 @@ export default function DashboardCalendar({ events }) {
         //   { title: 'Event 3', date: '2024-10-25' }
         // ]}
       />
-      <div className="eventList" 
-      style={{backgroundColor: "#ededed", 
-              display: "flex", 
-              alignItems: "start", 
-              borderRadius: "10px",
-              marginTop: "10px", padding: "10px",
-              overflowY: "auto"}}>
-                <h5>Upcoming Events</h5>
-
-
-
-
+      <div
+        className="eventList"
+        style={{
+          backgroundColor: "#ededed",
+          display: "flex",
+          alignItems: "start",
+          borderRadius: "10px",
+          marginTop: "10px",
+          padding: "10px",
+          overflowY: "auto",
+        }}
+      >
+        <h5>Upcoming Events</h5>
       </div>
-
-
-
     </div>
   );
 }

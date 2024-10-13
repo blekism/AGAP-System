@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function InputTemplateAdmin({ onChange, value, name }) {
+export default function InputTemplateAdmin({ onChange, value, name, title }) {
   return (
     <div className="input-group mb-3">
       <span className="input-group-text" id="basic-addon1">
-        @
+        {title}
       </span>
       <input
         type="text"

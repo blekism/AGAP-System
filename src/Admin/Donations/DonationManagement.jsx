@@ -60,7 +60,13 @@ export default function DonationContent({
     >
       <table className="table table-striped">
         <thead>
-          <tr>
+          <tr
+            style={{
+              fontSize: "17px",
+              fontFamily: "Poppins",
+              fontWeight: "500",
+            }}
+          >
             <th scope="col">Donation ID</th>
             <th scope="col">Donor</th>
             <th scope="col">Status</th>
@@ -74,7 +80,14 @@ export default function DonationContent({
         <tbody>
           {/* mapping results from db goes here */}
           {donations.map((donation, key) => (
-            <tr key={key}>
+            <tr
+              key={key}
+              style={{
+                fontSize: "15px",
+                fontFamily: "Poppins",
+                fontWeight: 500,
+              }}
+            >
               <td>{donation.donation_id}</td>
               <td>{donation.donor_lastName}</td>
               <td>{donation.status_name}</td>

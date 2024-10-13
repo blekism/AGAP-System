@@ -82,7 +82,13 @@ export default function VolunteerContent({
         <p className="volunheader">{volunHeader}</p>
         <table className="table table-striped">
           <thead>
-            <tr>
+            <tr
+              style={{
+                fontSize: "17px",
+                fontFamily: "Poppins",
+                fontWeight: "500",
+              }}
+            >
               <th scope="col" style={{ width: "13%" }}>
                 Volunteer ID
               </th>
@@ -112,7 +118,14 @@ export default function VolunteerContent({
           <tbody>
             {/* mapping results from db goes here */}
             {volunteers.map((member, key) => (
-              <tr key={key}>
+              <tr
+                key={key}
+                style={{
+                  fontSize: "15px",
+                  fontFamily: "Poppins",
+                  fontWeight: 500,
+                }}
+              >
                 <td>{member.account_id}</td>
                 <td>{member.last_name + " " + member.first_name}</td>
                 <td>{member.designation_name}</td>
@@ -179,7 +192,7 @@ export default function VolunteerContent({
                       />
                     </div>
                     <select
-                      className="form-select"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                       name="is_volunteer"
                       value={volunteerItem.is_volunteer}
@@ -195,30 +208,30 @@ export default function VolunteerContent({
                       name="first_name"
                       value={volunteerItem.first_name}
                       onChange={handleChange}
+                      title={"First Name"}
                     />
                     <InputTemplate
                       name="last_name"
                       value={volunteerItem.last_name}
                       onChange={handleChange}
+                      title={"Last Name"}
                     />
                     <InputTemplate
                       name="middle_name"
                       value={volunteerItem.middle_name}
                       onChange={handleChange}
+                      title={"Middle Name"}
                     />
 
                     <InputTemplate
                       name="section"
                       value={volunteerItem.section}
                       onChange={handleChange}
+                      title={"Section"}
                     />
-                    {/* <InputTemplate
-                      name="dept_category_id"
-                      value={volunteerItem.category_name}
-                      onChange={handleChange}
-                    /> */}
+
                     <select
-                      className="form-select"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                       name="dept_category_id"
                       value={volunteerItem.dept_category_id}
@@ -231,13 +244,8 @@ export default function VolunteerContent({
                       <option value="5">OTHERS</option>
                     </select>
 
-                    {/* <InputTemplate
-                      name="designation_id"
-                      value={volunteerItem.designation_name}
-                      onChange={handleChange}
-                    /> */}
                     <select
-                      className="form-select"
+                      className="form-select mb-3"
                       aria-label="Default select example"
                       name="designation_id"
                       value={volunteerItem.designation_id}
@@ -251,16 +259,19 @@ export default function VolunteerContent({
                       name="email"
                       value={volunteerItem.email}
                       onChange={handleChange}
+                      title={"Email"}
                     />
                     <InputTemplate
                       name="contact_info"
                       value={volunteerItem.contact_info}
                       onChange={handleChange}
+                      title={"Contact Info"}
                     />
                     <InputTemplate
                       name="total_hours"
                       value={volunteerItem.total_hours ?? 0}
                       onChange={handleChange}
+                      title={"Total Hours"}
                     />
                   </div>
                 </div>

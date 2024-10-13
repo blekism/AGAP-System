@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./DonateContainer.css";
 import DonationItemTemplate from "./DonationItemTemplate.jsx";
+import { useCookies } from "react-cookie";
 
 export default function DonateContainer() {
   const [items, setItems] = useState([
     { qty: "", cost: "", category: "3", recipient: "3", item: "3" },
   ]);
+  const [DonorID, setDonorID] = useState({});
+  const [cookies] = useCookies(["donor_token"]);
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -14,6 +17,28 @@ export default function DonateContainer() {
     newItems[index][name] = value;
     setItems(newItems);
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readAccountID.php",
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.donor_token,
+          },
+          withCredentials: true,
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setDonorID(response.data.data);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log("Donor ID: ");
+    console.log(DonorID);
+  }, [DonorID]);
 
   const addElement = () => {
     if (items.length < 5) {
@@ -31,7 +56,7 @@ export default function DonateContainer() {
     console.log(items);
     const userInput = {
       recipient_id: items[0].recipient,
-      account_id: "DONOR - 2024-12d6fd4",
+      account_id: DonorID.account_id,
       items: items.map((item) => ({
         item: item.item,
         item_category_id: item.category,

@@ -147,21 +147,7 @@ export default function AdminPage() {
               Manage Events
             </button>
           </li>
-          <li className="nav-item" role="presentation">
-            <img src={Calendar} alt="Calendar Icon" />
-            <button
-              className="nav-link"
-              id="pills-calendar-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-calendar"
-              type="button"
-              role="tab"
-              aria-controls="pills-calendar"
-              aria-selected="false"
-            >
-              View Calendar
-            </button>
-          </li>
+
           <li className="nav-item" role="presentation">
             <img src={Donation} alt="Items Icon" />
             <button
@@ -281,24 +267,12 @@ export default function AdminPage() {
               addEventAnnouncementModalTarget="#addEventAnnouncementModalID"
               eventViewModalID="eventViewModalID"
               eventViewModalTarget="#eventViewModalID"
+              eventAnnouncementModalID="eventAnnouncementModalID"
+              eventAnnouncementModalTarget="#eventAnnouncementModalID"
             />
             {/* event content here */}
           </div>
-          <div
-            className="tab-pane fade"
-            id="pills-calendar"
-            role="tabpanel"
-            aria-labelledby="pills-calendar-tab"
-            tabIndex="0"
-          >
-            <div className="dashHeader">
-              <Header username="Admin" />
-            </div>
 
-            <DashboardCalendar events={event} />
-
-            {/* calendar content here */}
-          </div>
           <div
             className="tab-pane fade"
             id="pills-items"

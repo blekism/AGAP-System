@@ -1,8 +1,53 @@
 import React, { useState } from "react";
 import axios from "axios";
+import InputTemplate from "../InputTemplateAdmin.jsx";
 
 export default function DonorContent({ donors }) {
-  const [donorItem, setDonorItem] = useState([]);
+  const [donorItem, setDonorItem] = useState({
+    account_id: "",
+    is_volunteer: "",
+    last_name: "",
+    first_name: "",
+    middle_name: "",
+    section: "",
+    dept_category_id: "",
+    designation_id: "",
+    email: "",
+    contact_info: "",
+  });
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setDonorItem((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase_1/update/update_donors_acc.php",
+        donorItem,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === 200) {
+          console.log("Update successful!");
+        } else {
+          console.log("Update failed!");
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const handleItemClick = async (id) => {
     console.log("Item clicked: ", id);
@@ -26,7 +71,13 @@ export default function DonorContent({ donors }) {
     <div style={{ paddingRight: "10px", maxHeight: "750px" }}>
       <table className="table table-striped">
         <thead>
-          <tr>
+          <tr
+            style={{
+              fontSize: "17px",
+              fontFamily: "Poppins",
+              fontWeight: "500",
+            }}
+          >
             <th scope="col">Donor ID</th>
             <th scope="col">Level</th>
             <th scope="col">Name</th>
@@ -41,12 +92,18 @@ export default function DonorContent({ donors }) {
           </tr>
         </thead>
         <tbody>
-          {/* mapping results from db goes here */}
           {donors.map((donor, key) => (
-            <tr key={key}>
+            <tr
+              key={key}
+              style={{
+                fontSize: "15px",
+                fontFamily: "Poppins",
+                fontWeight: 500,
+              }}
+            >
               <td>{donor.account_id}</td>
               <td>{donor.is_volunteer}</td>
-              <td>{donor.last_name}</td>
+              <td>{donor.last_name + " " + donor.first_name}</td>
               <td>{donor.section}</td>
               <td>{donor.category_name}</td>
               <td>{donor.designation_name}</td>
@@ -91,29 +148,114 @@ export default function DonorContent({ donors }) {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
-              <p>{donorItem.account_id}</p>
-              <p>{donorItem.is_volunteer}</p>
-              <p>{donorItem.last_name}</p>
-              <p>{donorItem.first_name}</p>
-              <p>{donorItem.section}</p>
-              <p>{donorItem.category_name}</p>
-              <p>{donorItem.designation_name}</p>
-              <p>{donorItem.email}</p>
-              <p>{donorItem.contact_info}</p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
-              </button>
-            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon1">
+                    User ID
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    readOnly
+                    value={donorItem.account_id}
+                    name="account_id"
+                    onChange={handleChange}
+                  />
+                </div>
+                <select
+                  className="form-select mb-3"
+                  aria-label="Default select example"
+                  name="is_volunteer"
+                  value={donorItem.is_volunteer}
+                  onChange={handleChange}
+                >
+                  <option value="donor">Donor</option>
+                  <option value="volunteer_apply">Volunteer Applicant</option>
+                  <option value="volunteer">Volunteer</option>
+                </select>
+
+                <InputTemplate
+                  value={donorItem.last_name}
+                  name="last_name"
+                  onChange={handleChange}
+                  title={"Last Name"}
+                />
+                <InputTemplate
+                  value={donorItem.first_name}
+                  name="first_name"
+                  onChange={handleChange}
+                  title={"First Name"}
+                />
+                <InputTemplate
+                  value={donorItem.middle_name}
+                  name="middle_name"
+                  onChange={handleChange}
+                  title={"Middle Name"}
+                />
+                <InputTemplate
+                  value={donorItem.section}
+                  name="section"
+                  onChange={handleChange}
+                  title={"Section"}
+                />
+
+                <select
+                  className="form-select mb-3"
+                  aria-label="Default select example"
+                  name="dept_category_id"
+                  value={donorItem.dept_category_id}
+                  onChange={handleChange}
+                >
+                  <option value="1">SECA</option>
+                  <option value="2">SASE</option>
+                  <option value="3">SBMA</option>
+                  <option value="4">SHS</option>
+                  <option value="5">OTHERS</option>
+                </select>
+
+                <select
+                  className="form-select mb-3"
+                  aria-label="Default select example"
+                  name="designation_id"
+                  value={donorItem.designation_id}
+                  onChange={handleChange}
+                >
+                  <option value="2000">STUDENT</option>
+                  <option value="2001">STAFF</option>
+                  <option value="2002">FACULTY</option>
+                </select>
+
+                <InputTemplate
+                  value={donorItem.email}
+                  name="email"
+                  onChange={handleChange}
+                  title={"Email"}
+                />
+                <InputTemplate
+                  value={donorItem.contact_info}
+                  name="contact_info"
+                  onChange={handleChange}
+                  title={"Contact Info"}
+                />
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  Understood
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

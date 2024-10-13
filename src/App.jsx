@@ -12,6 +12,7 @@ import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/
 import VolunteerSignUpPage from "./VolunteerSignUpPage/VolunteerSignUp";
 import AdminPage from "./Admin/AdminPage.jsx";
 import VerifyAccount from "./VolunteerSignUpPage/VerifyAccount.jsx";
+import "./App.css";
 
 function App() {
   return (

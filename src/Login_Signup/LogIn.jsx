@@ -4,6 +4,7 @@ import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { useCookies } from "react-cookie";
 
 function LogIn() {
   const [credentials, setCredentials] = useState({
@@ -11,7 +12,7 @@ function LogIn() {
     password: "",
   });
   const navigate = useNavigate();
-  const cookies = new Cookies();
+  const [cookies, setCookie, removeCookie] = useCookies(["donor_token"]);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -43,7 +44,7 @@ function LogIn() {
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Login successful!");
-          cookies.set("donor_token", response.data.token, {
+          setCookie("donor_token", response.data.token, {
             path: "/",
             expires: getJwtExpiry(response.data.token),
             secure: true,

@@ -27,3 +27,13 @@
 .VolunteerAcceptedDonations-parentCont .VolunteerAcceptedDonations-rightCont .table tbody {
     text-align: center;
 }
+
+.VolunteerAcceptedDonations-parentCont .VolunteerAcceptedDonations-rightCont .ViewItemsModal-ParentCont .viewItemsBtn{
+    width: 100px;
+    border-radius: 10px;
+    background: #354290 !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
+    cursor: pointer;
+    color: white;
+    padding: 5px;
+}

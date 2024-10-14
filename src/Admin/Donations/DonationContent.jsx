@@ -119,6 +119,23 @@ export default function DonationContent() {
               Turnover
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <img src={Give} alt="Clothes Icon" />
+
+            <button
+              className="nav-link"
+              id="pills-decline-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-decline"
+              type="button"
+              role="tab"
+              aria-controls="pills-decline"
+              aria-selected="false"
+              onClick={() => handleCategory(3004)}
+            >
+              Declined
+            </button>
+          </li>
         </ul>
 
         {/* START OF MAIN CONTENT */}
@@ -192,6 +209,21 @@ export default function DonationContent() {
             />
 
             {/* item4 */}
+          </div>
+          <div
+            className="tab-pane fade"
+            id="pills-decline"
+            role="tabpanel"
+            aria-labelledby="pills-decline-tab"
+            tabIndex="0"
+          >
+            <DonationManagement
+              donations={items}
+              modalId="declineItems"
+              modalTarget="#declineItems"
+            />
+
+            {/* item5 */}
           </div>
         </div>
       </div>

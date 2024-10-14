@@ -34,6 +34,26 @@ NEED GAWIN
 - GAWING COOKIE BASED LAHAT NG FUNCTIONS FOR AMDIN AND USERS
 - GAWING NAKA PILLS NA DIN EVENTS//
 
+- UI TOUCH UPS
+
+- REJECT MGA ANEK//
+- DELETE MGA ANEK//
+
+- view ng phase 2 at 3 logs //
+- crud ng partners
+- add new admin
+- DAPAT PAG NAG KALTAS SA MANAGE ITEMS, MATIC NA MA AADD SA TOTAL CONTRIB AMOUNT
+
+- mga metrics para sa dashboard // 
+- EDIT ANNOUNCEMENTS
+
+
+- delete profile
+- your donations page layout and function
+- register account pati verification
+
+
+
 
 
 

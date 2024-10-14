@@ -76,9 +76,41 @@ export default function VolunteerContent({
     }
   };
 
+  const handleRejectVolunteer = () => {
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase_1/update/updateDeclineVolunteer.php",
+        { account_id: volunteerItem.account_id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+      });
+  };
+
+  const handleDeleteVolunteer = () => {
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase2&3/Delete/delete_volunteer_acc.php",
+        { account_id: volunteerItem.account_id },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+      });
+  };
+
   return (
     <div className="volunteertbl" style={{ paddingRight: "10px" }}>
-      <div className="volunteerMembers" style={{ maxHeight: "750px" }}>
+      <div className="volunteerMembers" style={{ maxHeight: "600px" }}>
         <p className="volunheader">{volunHeader}</p>
         <table className="table table-striped">
           <thead>
@@ -276,15 +308,26 @@ export default function VolunteerContent({
                   </div>
                 </div>
                 <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
+                  {modalId === "applicantItems" && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={handleRejectVolunteer}
+                    >
+                      Reject
+                    </button>
+                  )}
+                  {modalId === "memberItems" && (
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={handleDeleteVolunteer}
+                    >
+                      Delete
+                    </button>
+                  )}
                   <button type="submit" className="btn btn-primary">
-                    Understood
+                    Accept
                   </button>
                 </div>
               </form>

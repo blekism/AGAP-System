@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import VolunteersTables from "./Volunteers.jsx";
-// import "./VolunteersManagement.css";
 import Entered from "../../assets/images/entered.png";
 import Stocked from "../../assets/images/stocked.png";
 
@@ -88,6 +87,23 @@ export default function VolunteersManagement() {
               Applicants
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <img src={Stocked} alt="Clothes Icon" />
+
+            <button
+              className="nav-link"
+              id="pills-declined-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-declined"
+              type="button"
+              role="tab"
+              aria-controls="pills-declined"
+              aria-selected="false"
+              onClick={() => handleCategory("declined")}
+            >
+              Declined Applicants
+            </button>
+          </li>
         </ul>
 
         {/* START OF MAIN CONTENT */}
@@ -113,6 +129,7 @@ export default function VolunteersManagement() {
               modalId="memberItems"
               modalTarget="#memberItems"
               volunHeader="Members"
+              footerModal="memberItems"
             />
 
             {/* item1 */}
@@ -129,9 +146,27 @@ export default function VolunteersManagement() {
               modalId="applicantItems"
               modalTarget="#applicantItems"
               volunHeader="Applicants"
+              footerModal="applicantItems"
             />
 
             {/* item2 */}
+          </div>
+          <div
+            className="tab-pane fade"
+            id="pills-declined"
+            role="tabpanel"
+            aria-labelledby="pills-declined-tab"
+            tabIndex="0"
+          >
+            <VolunteersTables
+              volunteers={items}
+              modalId="declinedItems"
+              modalTarget="#declinedItems"
+              volunHeader="Declined Applicants"
+              footerModal="declinedItems"
+            />
+
+            {/* item3 */}
           </div>
         </div>
       </div>

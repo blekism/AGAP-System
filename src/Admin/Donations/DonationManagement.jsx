@@ -54,6 +54,24 @@ export default function DonationContent({
       });
   };
 
+  const handleDecline = () => {
+    console.log("decline button clicked");
+
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase_1/update/updateDeclineDonation.php",
+        itemClicked,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+      });
+  };
+
   return (
     <div
       style={{ paddingRight: "10px", overflowY: "auto", maxHeight: "750px" }}
@@ -161,7 +179,7 @@ export default function DonationContent({
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  data-bs-dismiss="modal"
+                  onClick={handleDecline}
                 >
                   Decline
                 </button>

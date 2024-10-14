@@ -5,7 +5,6 @@ import Header from "./Header/Header.jsx";
 import Statistics from "./Dashboard/Statistics.jsx";
 import DashboardCalendar from "./Dashboard/DashboardCalendar.jsx";
 import Logo from "../assets/images/agap_logo1.png";
-import Calendar from "../assets/images/calendar.png";
 import Dashboard from "../assets/images/Dashboard.png";
 import Donation from "../assets/images/Donation.png";
 import Event from "../assets/images/Event.png";
@@ -17,14 +16,9 @@ import DonorContent from "./Donors/Donors.jsx";
 import EventContent from "./Events/Events.jsx";
 import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
+import VolunteerLogs from "./VolunteerLogs/VolunteerLogs.jsx";
 
 export default function AdminPage() {
-  const donorValue = 100;
-  const volunteerValue = 50;
-  const costValue = 2000;
-  const donationValue = 1500;
-  const eventValue = 10;
-
   const donorPercentage = 10;
   const volunteerPercentage = 5;
   const costPercentage = 20;
@@ -39,6 +33,11 @@ export default function AdminPage() {
 
   const [event, setEvent] = useState([]);
   const [donors, setDonors] = useState([]);
+  const [donorValue, setDonorValue] = useState({});
+  const [volunteerValue, setVolunteerValue] = useState({});
+  const [costValue, setCostValue] = useState({});
+  const [donationValue, setDonationValue] = useState({});
+  const [eventValue, setEventValue] = useState({});
 
   useEffect(() => {
     axios
@@ -55,6 +54,51 @@ export default function AdminPage() {
       .then(function (response) {
         console.log(response.data); //read donors account
         setDonors(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalDonors.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setDonorValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalVolunteers.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setVolunteerValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalCost.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setCostValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalDonation.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setDonationValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalEvents.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setEventValue(response.data.data);
       });
   }, []);
 
@@ -163,11 +207,23 @@ export default function AdminPage() {
               Manage Items & Stock
             </button>
           </li>
-          <li
-            className="nav-item"
-            role="presentation"
-            style={{ marginTop: "55%" }}
-          >
+          <li className="nav-item" role="presentation">
+            <img src={Event} alt="Items Icon" />
+            <button
+              className="nav-link"
+              id="pills-volunteerlogs-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-volunteerlogs"
+              type="button"
+              role="tab"
+              aria-controls="pills-volunteerlogs"
+              aria-selected="false"
+            >
+              Volunteer Logs
+            </button>
+          </li>
+
+          <li className="nav-item" role="presentation">
             <img src={Logout} alt="Logout Icon" />
             <button className="logout-button">Logout</button>
           </li>
@@ -187,21 +243,21 @@ export default function AdminPage() {
             </div>
             <div className="dashContent">
               <Statistics
-                donorValue={donorValue}
-                volunteerValue={volunteerValue}
-                costValue={costValue}
-                donationValue={donationValue}
-                eventValue={eventValue}
-                donorPercentage={donorPercentage}
-                volunteerPercentage={volunteerPercentage}
-                costPercentage={costPercentage}
-                donationPercentage={donationPercentage}
-                eventPercentage={eventPercentage}
-                donorIncreased={donorIncreased}
-                volunteerIncreased={volunteerIncreased}
-                costIncreased={costIncreased}
-                donationIncreased={donationIncreased}
-                eventIncreased={eventIncreased}
+                donorValue={donorValue.total_donors}
+                volunteerValue={volunteerValue.total_volunteers}
+                costValue={costValue.total_cost}
+                donationValue={donationValue.total_donations}
+                eventValue={eventValue.total_events}
+                // donorPercentage={donorPercentage}
+                // volunteerPercentage={volunteerPercentage}
+                // costPercentage={costPercentage}
+                // donationPercentage={donationPercentage}
+                // eventPercentage={eventPercentage}
+                // donorIncreased={donorIncreased}
+                // volunteerIncreased={volunteerIncreased}
+                // costIncreased={costIncreased}
+                // donationIncreased={donationIncreased}
+                // eventIncreased={eventIncreased}
               />
 
               <DashboardCalendar events={event} />
@@ -286,6 +342,20 @@ export default function AdminPage() {
             <ItemManagement />
 
             {/* item content here */}
+          </div>
+
+          <div
+            className="tab-pane fade"
+            id="pills-volunteerlogs"
+            role="tabpanel"
+            aria-labelledby="pills-volunteerlogs-tab"
+            tabIndex="0"
+          >
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+            <VolunteerLogs />
+            {/* phase 2 and phase 3 log here */}
           </div>
         </div>
         {/* END OF MAIN CONTENT */}

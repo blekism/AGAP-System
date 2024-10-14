@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Events.css";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
+import EventCardTemplate from "./EventCardTemplate.jsx";
+import Left from "../../assets/images/left.png";
+import Right from "../../assets/images/right.png";
 
 export default function Events({
   events,
@@ -14,33 +17,9 @@ export default function Events({
   eventAnnouncementModalID,
   eventAnnouncementModalTarget,
 }) {
-  const [eventItem, setEventItem] = useState({
-    evenet_id: "",
-    event_name: "",
-    event_link: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    start_time: "",
-    end_time: "",
-    contrib_amount: "",
-  });
-  const [addEvent, setAddEvent] = useState({
-    event_name: "",
-    event_link: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    contrib_amount: "",
-  });
+  // filter for events start
   const [StatusFilter, setStatusFilter] = useState("none");
   const [filteredEvents, setFilteredEvents] = useState(events);
-  const [ViewEventAnnouncement, setViewEventAnnouncement] = useState([]);
-
-  const [eventAnnouncement, setEventAnnouncement] = useState({
-    title: "",
-    description: "",
-  });
 
   const filterEvents = (event) => {
     const status = event.target.value;
@@ -57,7 +36,17 @@ export default function Events({
   useEffect(() => {
     setFilteredEvents(events);
   }, [events]);
+  // filter for events end
 
+  // image upload start
+  const [ImageUrl, setImageUrl] = useState("");
+  const [SelectedFile, setSelectedFile] = useState(null);
+
+  const handleSelectImage = (event) => {
+    //for input ito
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
   const generateRandomString = (length) => {
     const characters =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -69,14 +58,6 @@ export default function Events({
     }
 
     return result;
-  };
-
-  const [ImageUrl, setImageUrl] = useState("");
-  const [SelectedFile, setSelectedFile] = useState(null);
-  const handleSelectImage = (event) => {
-    //for input ito
-    const file = event.target.files[0];
-    setSelectedFile(file);
   };
 
   const handleImageUpload = async () => {
@@ -103,6 +84,13 @@ export default function Events({
       console.error(error);
     }
   };
+  // image upload end
+
+  // add event announcement start
+  const [eventAnnouncement, setEventAnnouncement] = useState({
+    title: "",
+    description: "",
+  });
 
   const addEventAnnouncementChange = (event) => {
     const name = event.target.name;
@@ -142,13 +130,17 @@ export default function Events({
         console.log(error);
       });
   };
+  // add event announcement end
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-
-    setEventItem((values) => ({ ...values, [name]: value }));
-  };
+  //enter new event start
+  const [addEvent, setAddEvent] = useState({
+    event_name: "",
+    event_link: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    contrib_amount: "",
+  });
 
   const addEventChange = (event) => {
     const name = event.target.name;
@@ -182,6 +174,10 @@ export default function Events({
         console.log(error);
       });
   };
+  //enter new event end
+
+  // view event announcement start
+  const [ViewEventAnnouncement, setViewEventAnnouncement] = useState([]);
 
   const handleReadAnnouncement = async () => {
     const response = await axios.get(
@@ -190,6 +186,21 @@ export default function Events({
     console.log(response.data.data);
     setViewEventAnnouncement(response.data.data);
   };
+
+  // view event announcement end
+
+  //modal edited event start
+  const [eventItem, setEventItem] = useState({
+    evenet_id: "",
+    event_name: "",
+    event_link: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    start_time: "",
+    end_time: "",
+    contrib_amount: "",
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -216,6 +227,15 @@ export default function Events({
         console.log(error);
       });
   };
+  //modal edited event end
+
+  // modal item click start
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setEventItem((values) => ({ ...values, [name]: value }));
+  };
 
   const handleItemClick = async (id) => {
     console.log({ event_id: id });
@@ -236,9 +256,35 @@ export default function Events({
       console.error(error);
     }
   };
+  // modal item click end
+
+  //pagination for event announcement preview start
+  const [currentPage, setCurrentPage] = useState(0);
+  const CardPerPage = 2;
+  const totalPages = Math.ceil(ViewEventAnnouncement.length / CardPerPage);
+
+  const startIndex = currentPage * CardPerPage;
+  const selectedPages = ViewEventAnnouncement.slice(
+    startIndex,
+    startIndex + CardPerPage
+  );
+
+  const handleNext = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  //pagination for event announcement preview end
 
   return (
-    <div className="events" style={{ overflowY: "auto", maxHeight: "750px" }}>
+    <div className="events" style={{ overflowY: "auto", maxHeight: "600px" }}>
       <div className="EventActions">
         <button
           type="button"
@@ -296,6 +342,9 @@ export default function Events({
               Event Name
             </th>
             <th scope="col" style={{ width: "15%" }}>
+              Event Status
+            </th>
+            <th scope="col" style={{ width: "15%" }}>
               Event Link
             </th>
             {/* <th scope="col">Description</th> */}
@@ -321,6 +370,7 @@ export default function Events({
             >
               <td>{event.evenet_id}</td>
               <td>{event.event_name}</td>
+              <td>{event.event_status}</td>
               <td>{event.event_link}</td>
               {/* <td>{event.description}</td> */}
               <td>{event.start_date}</td>
@@ -397,16 +447,10 @@ export default function Events({
                   onChange={handleChange}
                   title="Event Link"
                 />
-                {/* <InputTemplate
-                  value={eventItem.description}
-                  name="description"
-                  onChange={handleChange}
-                  title="Description"
-                /> */}
-                <div class="input-group mb-3">
-                  <span class="input-group-text">Description</span>
+                <div className="input-group mb-3">
+                  <span className="input-group-text">Description</span>
                   <textarea
-                    class="form-control"
+                    className="form-control"
                     aria-label="With textarea"
                     value={eventItem.description}
                     name="description"
@@ -463,6 +507,7 @@ export default function Events({
       </div>
       {/* modal for editing events end*/}
 
+      {/* modal for viewing event announcement start */}
       <div
         className="modal fade"
         id={eventAnnouncementModalID}
@@ -472,11 +517,11 @@ export default function Events({
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                Event Announcement Preview
               </h1>
               <button
                 type="button"
@@ -486,18 +531,43 @@ export default function Events({
               ></button>
             </div>
             <div className="modal-body">
-              {ViewEventAnnouncement.map((eventAnn, key) => (
-                <div key={key}>
-                  <h5>{eventAnn.title}</h5>
-                  <img
-                    src={eventAnn.image}
-                    alt="AGAP Logo"
-                    style={{ width: "40%", height: "40%", margin: "auto" }}
-                    className="logo"
+              <div className="PreviewParent">
+                {selectedPages.map((eventAnn, key) => (
+                  <EventCardTemplate
+                    key={key}
+                    image={eventAnn.image}
+                    title={eventAnn.title}
+                    description={eventAnn.description}
                   />
-                  <p>{eventAnn.description}</p>
-                </div>
-              ))}
+                ))}
+              </div>
+              <div className="buttonFooterEventPreview">
+                <img
+                  src={Left}
+                  alt="left-arrow"
+                  onClick={handlePrevious}
+                  style={{
+                    cursor: currentPage === 0 ? "not-allowed" : "pointer",
+                    opacity: currentPage === 0 ? 0.5 : 1,
+                    height: "30px",
+                    marginTop: "-10px",
+                  }}
+                />
+                <img
+                  src={Right}
+                  alt="right-arrow"
+                  onClick={handleNext}
+                  style={{
+                    cursor:
+                      currentPage === totalPages - 1
+                        ? "not-allowed"
+                        : "pointer",
+                    opacity: currentPage === totalPages - 1 ? 0.5 : 1,
+                    height: "30px",
+                    marginTop: "-10px",
+                  }}
+                />
+              </div>
             </div>
             <div className="modal-footer">
               <button
@@ -514,6 +584,7 @@ export default function Events({
           </div>
         </div>
       </div>
+      {/* modal for viewing event announcement end */}
 
       {/* modal for adding event announcement start */}
       <div

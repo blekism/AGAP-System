@@ -1,0 +1,34 @@
+.EventCardTemplateParent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.EventCardTemplateParent .EventCardTemplateImage {
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.EventCardTemplateParent .EventCardTemplateTitle {
+  font-family: "Poppins", sans-serif;
+  color: var(--Blue, #354290);
+  text-align: justify;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 27px; /* 75% */
+  text-transform: uppercase;
+}
+
+.EventCardTemplateParent .EventCardTemplateDescription {
+  color: var(--Black, #242529);
+  text-align: justify;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 27px; /* 192.857% */
+}

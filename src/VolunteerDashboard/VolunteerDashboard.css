@@ -8,15 +8,16 @@ body {
 .VolunteerDashboard-parentCont .VolunteerDashboard-bodyCont{
  background-color: #f0f0f073;
     display: flex;
+    height: 79vh
 }
 
 .VolunteerDashboard-parentCont .VolunteerDashboard-bodyCont .VolunteerDashboard-leftCont{
-    width: 15%;
-    /* background-color: bisque; */
+    width: 18%;
+    z-index: 1;
 }
 
 .VolunteerDashboard-parentCont .VolunteerDashboard-rightCont{
-    width: 85%;
+    width: 82%;
     background-color: #F0F0F0;
 }
 

@@ -78,18 +78,65 @@
     border-radius: 10px;
 }
 
-.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent {
+.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont {
     width: 100%;
     height:fit-content;
     display: flex;
+    flex-direction: row;
     column-gap: 40px;
-    padding: 20px;
+    padding: 40px;
     padding-top: 5px;
     padding-bottom: 20px;
     align-items: center;
+    /* background: yellow; */
+} 
+
+.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-leftCont{
+    width: 50%;
+    height:fit-content;
+    display: grid;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+} 
+
+.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-leftCont .VolunteerDashboardContent-leftContHeader{
+    width: 100%;
+    height:fit-content;
+    display: flex;
+    column-gap: 30px;
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    align-items: center;
+} 
+
+.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-leftCont .VolunteerDashboardContent-leftCont-Statistics{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+    width: fit-content;
+    margin-right: 20px; 
+    align-items: center;
 }
 
-.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent .VolunteerDashboardContent-bottomContent1{
+
+.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-rightCont{
+    width: 50%;
+    height: fit-content;
+    display: grid;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: grey;
+}
+
+/* .VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent .VolunteerDashboardContent-bottomContent1{
     width: 50%;
     display: flex;
     background-color: white;
@@ -98,9 +145,9 @@
     border-radius: 10px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
     margin-left: 40px;
-}
+} */
 
-.VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent .VolunteerDashboardContent-bottomContent2{
+/* .VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent .VolunteerDashboardContent-bottomContent2{
     width: 50%;
     height:  49vh;
     display: flex;
@@ -143,4 +190,4 @@
     margin-top: 10px;
     font-size: 24px;
     /* background-color: #50598C; */
-}
+/* } */ 

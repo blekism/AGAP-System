@@ -10,9 +10,9 @@ import VolunteerPage from "./VolunteerPage/VolunteerPage";
 import VolunteerDashboard from "./VolunteerDashboard/VolunteerDashboard";
 import VolunteerPendingDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerPendingDonations";
 import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerAcceptedDonations";
-
+import VolunteerLogPhase2 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase2";
+import VolunteerLogPhase3 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase3";
 import AdminPage from "./Admin/AdminPage.jsx";
-
 
 function App() {
   return (
@@ -34,11 +34,9 @@ function App() {
             path="/VolunteerAcceptedDonations"
             element={<VolunteerAcceptedDonations />}
           />
+          <Route path="/VolunteerLogPhase2" element={<VolunteerLogPhase2 />} />
+          <Route path="/VolunteerLogPhase3" element={<VolunteerLogPhase3 />} />
 
-          
-          
-
-          
           {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />
           <Route path="/ManageVolunteers" element={<div>Manage Volunteers Component</div>} />

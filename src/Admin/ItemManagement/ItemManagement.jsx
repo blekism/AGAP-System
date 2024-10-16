@@ -12,14 +12,22 @@ import Toys from "../../assets/images/toys.png";
 import ItemTable from "./ItemManagementTable.jsx";
 import axios from "axios";
 
-export default function ItemManagement() {
+export default function ItemManagement({ events }) {
   const [category, setCategory] = useState({ category_id: 4000 });
   const [items, setItems] = useState([]);
   const [deductItems, setDeductItems] = useState([]);
+  const [eventItem, setEventItem] = useState("none");
 
   const handleChange = (event, itemName) => {
     const value = event.target.value;
     setDeductItems((prev) => ({ ...prev, [itemName]: value }));
+  };
+
+  const handleEventChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setEventItem((values) => ({ ...values, [name]: value }));
   };
 
   const handleSubmit = (event) => {
@@ -30,6 +38,7 @@ export default function ItemManagement() {
 
     const userInput = {
       items: itemsObject,
+      evenet_id: eventItem.evenet_id,
     };
 
     axios
@@ -89,6 +98,32 @@ export default function ItemManagement() {
         >
           Deduct From Stock
         </button>
+        <select
+          className="form-select mb-3"
+          aria-label="Default select example"
+          name="evenet_id"
+          value={eventItem.evenet_id}
+          onChange={handleEventChange}
+          style={{
+            width: "500px",
+            fontSize: "20px",
+            fontFamily: "Poppins",
+            fontWeight: 500,
+          }}
+        >
+          <option value="none">Select Event</option>
+          {events
+            .filter(
+              (event) =>
+                event.event_status !== "closed" &&
+                event.event_status !== "finished"
+            )
+            .map((event, key) => (
+              <option key={key} value={event.evenet_id}>
+                {event.event_name}
+              </option>
+            ))}
+        </select>
         <div className="ItemManagementParent">
           <ul
             className="nav nav-pills mb-3 custom"

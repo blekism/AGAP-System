@@ -8,12 +8,15 @@ export default function Statistics({
   costValue,
   donationValue,
   eventValue,
+  hoursValue,
   donorPercentage,
+  hoursPercentage,
   volunteerPercentage,
   costPercentage,
   donationPercentage,
   eventPercentage,
   donorIncreased,
+  hoursIncreased,
   volunteerIncreased,
   costIncreased,
   donationIncreased,
@@ -50,6 +53,12 @@ export default function Statistics({
         statsNumber={eventValue}
         statsPercentage={eventPercentage}
         statsIncreased={eventIncreased}
+      />
+      <Template
+        statsTitle="Volunteer Hours"
+        statsNumber={hoursValue}
+        statsPercentage={hoursPercentage}
+        statsIncreased={hoursIncreased}
       />
     </div>
   );

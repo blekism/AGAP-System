@@ -54,9 +54,15 @@ export default function DonateContainer() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(items);
+
+    const totalCost = items.reduce(
+      (acc, item) => acc + parseFloat(item.cost),
+      0
+    );
     const userInput = {
       recipient_id: items[0].recipient,
       account_id: DonorID.account_id,
+      total_cost: totalCost,
       items: items.map((item) => ({
         item: item.item,
         item_category_id: item.category,

@@ -17,6 +17,7 @@ import EventContent from "./Events/Events.jsx";
 import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
 import VolunteerLogs from "./VolunteerLogs/VolunteerLogs.jsx";
+import AdminManagement from "./AdminManagement/AdminManagement.jsx";
 
 export default function AdminPage() {
   const donorPercentage = 10;
@@ -38,6 +39,7 @@ export default function AdminPage() {
   const [costValue, setCostValue] = useState({});
   const [donationValue, setDonationValue] = useState({});
   const [eventValue, setEventValue] = useState({});
+  const [hoursValue, setHoursValue] = useState({});
 
   useEffect(() => {
     axios
@@ -99,6 +101,15 @@ export default function AdminPage() {
       .then(function (response) {
         console.log(response.data);
         setEventValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase2&3/read/readTotalHours.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setHoursValue(response.data.data);
       });
   }, []);
 
@@ -224,6 +235,22 @@ export default function AdminPage() {
           </li>
 
           <li className="nav-item" role="presentation">
+            <img src={Event} alt="Items Icon" />
+            <button
+              className="nav-link"
+              id="pills-adminManagement-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-adminManagement"
+              type="button"
+              role="tab"
+              aria-controls="pills-adminManagement"
+              aria-selected="false"
+            >
+              Admin Management
+            </button>
+          </li>
+
+          <li className="nav-item" role="presentation">
             <img src={Logout} alt="Logout Icon" />
             <button className="logout-button">Logout</button>
           </li>
@@ -248,6 +275,7 @@ export default function AdminPage() {
                 costValue={costValue.total_cost}
                 donationValue={donationValue.total_donations}
                 eventValue={eventValue.total_events}
+                hoursValue={hoursValue.total_hours}
                 // donorPercentage={donorPercentage}
                 // volunteerPercentage={volunteerPercentage}
                 // costPercentage={costPercentage}
@@ -339,7 +367,7 @@ export default function AdminPage() {
             <div className="dashHeader">
               <Header username="Admin" />
             </div>
-            <ItemManagement />
+            <ItemManagement events={event} />
 
             {/* item content here */}
           </div>
@@ -356,6 +384,20 @@ export default function AdminPage() {
             </div>
             <VolunteerLogs />
             {/* phase 2 and phase 3 log here */}
+          </div>
+
+          <div
+            className="tab-pane fade"
+            id="pills-adminManagement"
+            role="tabpanel"
+            aria-labelledby="pills-adminManagement-tab"
+            tabIndex="0"
+          >
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+            <AdminManagement />
+            {/* admin management here */}
           </div>
         </div>
         {/* END OF MAIN CONTENT */}

@@ -87,6 +87,7 @@ export default function DonationContent({
           >
             <th scope="col">Donation ID</th>
             <th scope="col">Donor</th>
+            <th scope="col">Total Cost</th>
             <th scope="col">Status</th>
             <th scope="col">Recipient</th>
             <th scope="col">Time</th>
@@ -108,6 +109,7 @@ export default function DonationContent({
             >
               <td>{donation.donation_id}</td>
               <td>{donation.donor_lastName}</td>
+              <td>{donation.total_cost}</td>
               <td>{donation.status_name}</td>
               <td>{donation.recipient_type}</td>
               <td>{donation.time}</td>

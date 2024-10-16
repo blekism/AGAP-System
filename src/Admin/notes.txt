@@ -30,8 +30,7 @@ NEED GAWIN
 - MANAGE ITEMS ADMIN FUNCTION //
 - UI TOUCH UPS
 - VIEW ANNOUNCEMENT MODAL//
-- DASHBOARD METRICS
-- GAWING COOKIE BASED LAHAT NG FUNCTIONS FOR AMDIN AND USERS
+- DASHBOARD METRICS//
 - GAWING NAKA PILLS NA DIN EVENTS//
 
 - UI TOUCH UPS
@@ -40,16 +39,17 @@ NEED GAWIN
 - DELETE MGA ANEK//
 
 - view ng phase 2 at 3 logs //
-- crud ng partners
-- add new admin
-- DAPAT PAG NAG KALTAS SA MANAGE ITEMS, MATIC NA MA AADD SA TOTAL CONTRIB AMOUNT
+- add new admin // 
+- DAPAT PAG NAG KALTAS SA MANAGE ITEMS, MATIC NA MA AADD SA TOTAL CONTRIB AMOUNT // 
 
 - mga metrics para sa dashboard // 
-- EDIT ANNOUNCEMENTS
+- EDIT ANNOUNCEMENTS - optional
+- GAWING COOKIE BASED LAHAT NG FUNCTIONS FOR AMDIN AND USERS
+
 
 
 - delete profile
-- your donations page layout and function
+- your donations page layout and function //
 - register account pati verification
 
 
@@ -57,7 +57,6 @@ NEED GAWIN
 
 
 
-use postimage.cc 
 gawan ng websocket connection yung system
 
 edit yung functions para naka levels of access na yung basehan ng read ng lists

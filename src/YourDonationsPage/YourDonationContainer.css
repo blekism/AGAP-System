@@ -1,0 +1,26 @@
+.YourDonationParentContainer{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: fit-content;
+    margin-top: 20px;
+    margin: auto;
+}
+
+.YourDonationParentContainer .YourDonationParentHeader h3{
+    color: #354290;
+    font-family: "Poppins";
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.YourDonationParentContainer .YourDonationInput {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 5px;
+    row-gap: 10px;
+    
+}

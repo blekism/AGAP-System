@@ -13,6 +13,7 @@ import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/
 import VolunteerLogPhase2 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase2";
 import VolunteerLogPhase3 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase3";
 import AdminPage from "./Admin/AdminPage.jsx";
+import YourDonationsPage from "./YourDonationsPage/YourDonationsPage.jsx";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           />
           <Route path="/VolunteerLogPhase2" element={<VolunteerLogPhase2 />} />
           <Route path="/VolunteerLogPhase3" element={<VolunteerLogPhase3 />} />
+          <Route path="/YourDonation" element={<YourDonationsPage />} />
 
           {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />

@@ -341,7 +341,7 @@ export default function Events({
             <th scope="col" style={{ width: "15%" }}>
               Event Name
             </th>
-            <th scope="col" style={{ width: "15%" }}>
+            <th scope="col" style={{ width: "10%" }}>
               Event Status
             </th>
             <th scope="col" style={{ width: "15%" }}>

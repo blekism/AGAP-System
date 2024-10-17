@@ -15,6 +15,7 @@ import YourDonationsPage from "./YourDonationsPage/YourDonationsPage.jsx";
 import VolunteerSignUpPage from "./VolunteerSignUpPage/VolunteerSignUp";
 import AdminPage from "./Admin/AdminPage.jsx";
 import VerifyAccount from "./VolunteerSignUpPage/VerifyAccount.jsx";
+import ProfilePage from "./Profile/ProfilePage";
 import "./App.css";
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           <Route path="/CreateAccount" element={<CreateAnAccount />} />
           <Route path="/VolunteerSignUp" element={<VolunteerSignUpPage />} />
           <Route path="/VerifyAccount" element={<VerifyAccount />} />
+          <Route path="/ProfilePage" element={<ProfilePage />} />
 
           {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />

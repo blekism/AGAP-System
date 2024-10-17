@@ -20,27 +20,95 @@
     margin-bottom: 10px;
 }
 
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop p{
+    margin-bottom: 10px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop img{
+    margin-right: 15px;
+    width: 35px;
+    height: 35px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContBottom img{
+    margin-right: 15px;
+    width: 35px;
+    height: 35px;
+}
+
 .VolunteerDashboard-sidebarCont div .VolunteerDashboard-sidebarLink{
     color: #000000;
     text-decoration: none;
     font-family: "Poppins", sans-serif;
     font-size: 20px;
     font-weight: 600;
+    padding: 10px;
+    border-radius: 10px;
 }
+
+.VolunteerDashboard-sidebarCont div .VolunteerDashboard-sidebarLink.active{
+    color: #36419e; /* Example: change background color */
+    background-color: #FCD125;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Header{
+    display: flex;
+} 
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations p{
     margin-bottom: 5px;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub .VolunteerDashboard-sidebarLink{
-    font-weight: 400;
+    color: #000000;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
     font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub .VolunteerDashboard-sidebarLink.active{
+    color: #36419e; /* Example: change background color */
+    background-color: #FCD125;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub{
     display: flex;
     flex-direction: column;
-    margin-left: 20px;
+    margin-left: 70px;
+}
+
+
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Header{
+    display: flex;
+} 
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog p{
+    margin-bottom: 5px;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub .VolunteerDashboard-sidebarLink{
+    color: #000000;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    font-size: 18px;
+    padding: 10px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub .VolunteerDashboard-sidebarLink.active{
+    color: #36419e; /* Example: change background color */
+    background-color: #FCD125;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub{
+    display: flex;
+    flex-direction: column;
+    margin-left: 70px;
 }
 
 

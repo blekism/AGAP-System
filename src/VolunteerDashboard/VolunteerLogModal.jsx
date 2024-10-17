@@ -2,10 +2,24 @@ import React from "react";
 import "./VolunteerLogModal.css";
 import { useState, useEffect } from "react";
 import BackArrow from "../assets/images/BackArrow.png";
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function VolunteerLogModal() {
   const [currentDate, setCurrentDate] = useState("");
   const [currentTime, setCurrentTime] = useState("");
+  const [phase2Log, setPhase2Log] = useState({});
+  const [formData, setFormData] = useState({
+    event_id: "",
+    account_id: "",
+    activity: "",
+    time_in: "",
+    time_out: "",
+  });
+  const [cookies] = useCookies(["donor_token"]);
+  const [events, setEvents] = useState([]);
+  // const [phase3Log, setPhase3Log] = useState({});
+  // const [filteredEvents, setFilteredEvents] = useState(events);
 
   useEffect(() => {
     const updateDate = () => {
@@ -41,26 +55,158 @@ export default function VolunteerLogModal() {
     return () => clearInterval(intervalId);
   }, []);
 
-  //   const [volunteerData, setVolunteerData] = useState({
-  //     eventName: "",
-  //     currentDate: "",
-  //     currentTime: "",
-  //     secDeptOrg: "",
-  //     fullName: "",
-  //     designation: "",
-  //     activity: "",
-  //   });
+  useEffect(() => {
+    try {
+      axios
+        .get(
+          "http://localhost/agap-backend/api/phase_1/read/readDonorAccount.php",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + cookies.donor_token,
+            },
+            withCredentials: true,
+          }
+        )
+        .then(function (response) {
+          console.log(response.data);
+          setPhase2Log(response.data.data);
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
 
-  //   useEffect(() => {
+  useEffect(() => {
+    // Fetch data from the API
+    axios
+      .get("http://localhost/agap-backend/api/phase_1/read/readEvents.php")
+      .then(function (response) {
+        console.log("this is the events ", response.data.data);
+        setEvents(response.data.data);
+      });
+  }, []);
+
+  const [selectedEvent, setSelectedEvent] = useState({
+    evenet_id: "",
+    start_time: "",
+    end_time: "",
+  });
+
+  // Handle dropdown change
+  const handleEventChange = (e) => {
+    const eventId = e.target.value;
+    const event = events.find((event) => event.evenet_id === eventId); // Find the event by id
+    setSelectedEvent(event); // Update the selected event
+  };
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setSelectedEvent((values) => ({ ...values, [name]: value }));
+  };
+
+  // const [filteredEvents, setFilteredEvents] = useState(events);
+  // const [filteredEventsStatus, setfilteredEventsStatus] = useState("none");
+
+  // const filterEvents = (event) => {
+  //   const status = event.target.value;
+  //   setfilteredEventsStatus(status);
+
+  //   if (status === "none") {
+  //     setFilteredEvents(events);
+  //   } else {
+  //     const filtered = events.filter((event) => event.event_status === status);
+  //     setFilteredEvents(filtered);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   setFilteredEvents(events);
+  // }, [events]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+      account_id: phase2Log.account_id,
+    }));
+  };
+
+  const handleSubmitPhase2 = (e) => {
+    e.preventDefault();
+    // Prevent the default form submission behavior
+    try {
+      axios
+        .post(
+          "http://localhost/agap-backend/api/phase2&3/insert/insertPhase2.php",
+          formData,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+    }
+  };
+
+  const handleSubmitPhase3 = (e) => {
+    e.preventDefault();
+    const formDataFinal = {
+      ...selectedEvent,
+      account_id: phase2Log.account_id,
+    };
+    // Prevent the default form submission behavior
+    try {
+      axios
+        .post(
+          "http://localhost/agap-backend/api/phase2&3/insert/insertPhase3.php",
+          formDataFinal,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then(function (response) {
+          console.log(response.data);
+        });
+    } catch (error) {
+      console.error("There was an error submitting the form!", error);
+    }
+  };
+
+  // useEffect(() => {
+  //   console.log("Form Data:", formData);
+  // }, [formData]);
+
+  // useEffect(() => {
+  //   try {
   //     axios
-  //       .get("/api/volunteer")
-  //       .then((response) => {
-  //         setVolunteerData(response.data);
-  //       })
-  //       .catch((error) => {
-  //         console.error("There was an error fetching the data!", error);
+  //       .get(
+  //         "http://localhost/agap-backend/api/phase2&3/read/readPhase3Log.php",
+  //         {
+  //           headers: {
+  //             Authorization: "Bearer " + cookies.donor_token,
+  //           },
+  //           withCredentials: true,
+  //         }
+  //       )
+  //       .then(function (response) {
+  //         console.log(response.data);
+  //         setPhase3Log(response.data.data);
   //       });
-  //   }, []);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }, []);
 
   return (
     <>
@@ -84,7 +230,7 @@ export default function VolunteerLogModal() {
           <div className="modal-dialog  modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">TIME IN</h5>
+                <h5 className="modal-title">LOG ACTIVITY</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -174,223 +320,7 @@ export default function VolunteerLogModal() {
               </div>
 
               <div className="modal-body">
-                <div
-                  className="VolunteerAttendance-Detail1"
-                  style={{
-                    display: "flex",
-                    marginBottom: "20px",
-                    columnGap: "20px",
-                  }}
-                >
-                  <div class="input-group">
-                    <label class="input-group-text" for="inputGroupSelect01">
-                      Event Name:
-                    </label>
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-
-                  <div
-                    class="input-group"
-                    style={{
-                      width: "30%",
-                    }}
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder={currentDate}
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                  <div
-                    class="input-group"
-                    style={{
-                      width: "19%",
-                    }}
-                  >
-                    <input
-                      type="text"
-                      class="form-control"
-                      placeholder={currentTime}
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                </div>
-
-                <div className="VolunteerAttendance-Detail2">
-                  <div
-                    class="input-group"
-                    style={{
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <span class="input-group-text">Sec/Dept/Org:</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      //   value={volunteerData.secDeptOrg}
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                  <div
-                    class="input-group"
-                    style={{
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <span class="input-group-text">Full Name:</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                  <div
-                    class="input-group"
-                    style={{
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <span class="input-group-text">Designation:</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                  <div
-                    class="input-group"
-                    style={{
-                      marginBottom: "20px",
-                    }}
-                  >
-                    <span class="input-group-text">Activity:</span>
-                    <input
-                      type="text"
-                      class="form-control"
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                      readOnly
-                    />
-                  </div>
-                </div>
-
-                <div
-                  className="VolunteerAttendance-Detail3"
-                  style={{
-                    display: "flex",
-                    marginBottom: "20px",
-                    columnGap: "20px",
-                  }}
-                >
-                  <div class="input-group">
-                    <span class="input-group-text">Time In:</span>
-                    <input
-                      type="time"
-                      class="form-control"
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                    />
-                  </div>
-                  <div class="input-group">
-                    <span class="input-group-text">Time Out:</span>
-                    <input
-                      type="time"
-                      class="form-control"
-                      aria-label="Username"
-                      aria-describedby="addon-wrapping"
-                    />
-                  </div>
-                </div>
-                <div
-                  className="VolunteerLogModal-buttonContainer"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
-                  <button
-                    className="VolunteerLogModal-button"
-                    // onClick={handleSignInClick}
-                    style={{
-                      width: "20%",
-                      borderRadius: "40px",
-                      background: "#354290",
-                      color: "white",
-                      fontSize: "18px",
-                    }}
-                  >
-                    SUBMIT
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="VolunteerLogModal-Phase3Cont">
-          <div
-            className="modal fade"
-            id="exampleModalToggle3"
-            aria-hidden="true"
-            aria-labelledby="exampleModalToggleLabel"
-            tabIndex="-1"
-          >
-            <div className="modal-dialog modal-lg modal-dialog-centered">
-              <div className="modal-content">
-                <div
-                  className="modal-header"
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    height: "10vh",
-                  }}
-                >
-                  <div
-                    className="VolunteerLogModal-Phase3Cont-textHeader"
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      marginBottom: "auto",
-                    }}
-                  >
-                    <h5 className="modal-title">
-                      VOLUNTEER ATTENDANCE MONITORING
-                    </h5>
-                    <p>TURNOVER OF DONATIONS</p>
-                  </div>
-
-                  <div className="VolunteerLogModal-Phase3Cont-btnHeader">
-                    <button
-                      type="button"
-                      style={{ background: "transparent", border: "none" }}
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModalToggle"
-                    >
-                      <img
-                        src={BackArrow}
-                        alt="Time In"
-                        style={{ width: "25px", height: "25px" }}
-                      />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="modal-body">
+                <form onSubmit={handleSubmitPhase2}>
                   <div
                     className="VolunteerAttendance-Detail1"
                     style={{
@@ -403,11 +333,25 @@ export default function VolunteerLogModal() {
                       <label class="input-group-text" for="inputGroupSelect01">
                         Event Name:
                       </label>
-                      <select class="form-select" id="inputGroupSelect01">
+                      <select
+                        class="form-select"
+                        name="event_id"
+                        value={formData.event_id}
+                        id="inputGroupSelect01"
+                        onChange={handleInputChange}
+                      >
                         <option selected>Choose...</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                        {events
+                          .filter(
+                            (event) =>
+                              event.event_status !== "closed" &&
+                              event.event_status !== "finished"
+                          )
+                          .map((event, key) => (
+                            <option key={key} value={event.evenet_id}>
+                              {event.event_name}
+                            </option>
+                          ))}
                       </select>
                     </div>
 
@@ -450,55 +394,59 @@ export default function VolunteerLogModal() {
                         marginBottom: "20px",
                       }}
                     >
-                      <span class="input-group-text">Sec/Dept/Org:</span>
+                      <span class="input-group-text">Activity:</span>
                       <input
                         type="text"
+                        name="activity"
                         class="form-control"
-                        //   value={volunteerData.secDeptOrg}
+                        value={formData.activity}
+                        onChange={handleInputChange}
                         aria-label="Username"
                         aria-describedby="addon-wrapping"
-                        readOnly
-                      />
-                    </div>
-                    <div
-                      class="input-group"
-                      style={{
-                        marginBottom: "20px",
-                      }}
-                    >
-                      <span class="input-group-text">Full Name:</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Username"
-                        aria-describedby="addon-wrapping"
-                        readOnly
-                      />
-                    </div>
-                    <div
-                      class="input-group"
-                      style={{
-                        marginBottom: "20px",
-                      }}
-                    >
-                      <span class="input-group-text">Designation:</span>
-                      <input
-                        type="text"
-                        class="form-control"
-                        aria-label="Username"
-                        aria-describedby="addon-wrapping"
-                        readOnly
                       />
                     </div>
                   </div>
 
+                  <div
+                    className="VolunteerAttendance-Detail3"
+                    style={{
+                      display: "flex",
+                      marginBottom: "20px",
+                      columnGap: "20px",
+                    }}
+                  >
+                    <div class="input-group">
+                      <span class="input-group-text">Time In:</span>
+                      <input
+                        type="time"
+                        name="time_in"
+                        class="form-control"
+                        value={formData.time_in}
+                        onChange={handleInputChange}
+                        aria-label="Username"
+                        aria-describedby="addon-wrapping"
+                      />
+                    </div>
+                    <div class="input-group">
+                      <span class="input-group-text">Time Out:</span>
+                      <input
+                        type="time"
+                        name="time_out"
+                        class="form-control"
+                        value={formData.time_out}
+                        onChange={handleInputChange}
+                        aria-label="Username"
+                        aria-describedby="addon-wrapping"
+                      />
+                    </div>
+                  </div>
                   <div
                     className="VolunteerLogModal-buttonContainer"
                     style={{ display: "flex", justifyContent: "center" }}
                   >
                     <button
                       className="VolunteerLogModal-button"
-                      // onClick={handleSignInClick}
+                      type="submit"
                       style={{
                         width: "20%",
                         borderRadius: "40px",
@@ -506,10 +454,224 @@ export default function VolunteerLogModal() {
                         color: "white",
                         fontSize: "18px",
                       }}
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalToggle"
                     >
-                      ENTER
+                      SUBMIT
                     </button>
                   </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="VolunteerLogModal-Phase3Cont">
+          <div
+            className="modal fade"
+            id="exampleModalToggle3"
+            aria-hidden="true"
+            aria-labelledby="exampleModalToggleLabel"
+            tabIndex="-1"
+          >
+            <div className="modal-dialog modal-lg modal-dialog-centered">
+              <div className="modal-content">
+                <div
+                  className="modal-header"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    height: "10vh",
+                  }}
+                >
+                  <div
+                    className="VolunteerLogModal-Phase3Cont-textHeader"
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      marginBottom: "auto",
+                    }}
+                  >
+                    <h5 className="modal-phase3-title">
+                      VOLUNTEER ATTENDANCE MONITORING
+                    </h5>
+                    <p>TURNOVER OF DONATIONS</p>
+                  </div>
+
+                  <div className="VolunteerLogModal-Phase3Cont-btnHeader">
+                    <button
+                      type="button"
+                      style={{ background: "transparent", border: "none" }}
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModalToggle"
+                    >
+                      <img
+                        src={BackArrow}
+                        alt="Time In"
+                        style={{ width: "25px", height: "25px" }}
+                      />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="modal-body">
+                  <form onSubmit={handleSubmitPhase3}>
+                    <div
+                      className="VolunteerAttendance-Detail1"
+                      style={{
+                        display: "flex",
+                        marginBottom: "20px",
+                        columnGap: "20px",
+                      }}
+                    >
+                      <div class="input-group">
+                        <label
+                          class="input-group-text"
+                          for="inputGroupSelect01"
+                        >
+                          Event Name:
+                        </label>
+                        <select
+                          class="form-select"
+                          name="event_id"
+                          // value={filteredEventsStatus}
+                          id="inputGroupSelect01"
+                          onChange={handleEventChange}
+                        >
+                          <option value="none">None</option>
+                          {events
+                            .filter(
+                              (event) => event.event_status === "finished"
+                            )
+                            .map((event, key) => (
+                              <option key={key} value={event.evenet_id}>
+                                {event.event_name}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+
+                      <div
+                        class="input-group"
+                        style={{
+                          width: "30%",
+                        }}
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder={currentDate}
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                          readOnly
+                        />
+                      </div>
+                      <div
+                        class="input-group"
+                        style={{
+                          width: "19%",
+                        }}
+                      >
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder={currentTime}
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                          readOnly
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      className="VolunteerAttendance-Detail2"
+                      style={{
+                        display: "flex",
+                        marginBottom: "20px",
+                        columnGap: "20px",
+                      }}
+                    >
+                      <div class="input-group">
+                        <span class="input-group-text">EVENT ID:</span>
+                        {/* {filteredEvents.map((event, key) => ( */}
+                        <input
+                          // key={key}
+                          type="text"
+                          name="evenet_id"
+                          class="form-control"
+                          value={selectedEvent ? selectedEvent.evenet_id : ""}
+                          onChange={handleChange}
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                          readOnly
+                        />
+                        {/* ))} */}
+                      </div>
+                    </div>
+
+                    <div
+                      className="VolunteerAttendance-Detail3"
+                      style={{
+                        display: "flex",
+                        marginBottom: "20px",
+                        columnGap: "20px",
+                      }}
+                    >
+                      <div class="input-group">
+                        <span class="input-group-text">START TIME:</span>
+                        {/* {filteredEvents.map((event, key) => ( */}
+                        <input
+                          // key={key}
+                          type="text"
+                          name="start_time"
+                          class="form-control"
+                          value={selectedEvent ? selectedEvent.start_time : ""}
+                          onChange={handleChange}
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                          readOnly
+                        />
+                        {/* ))} */}
+                      </div>
+                      <div class="input-group">
+                        <span class="input-group-text">END TIME:</span>
+                        {/* {events.map((event, key) => ( */}
+                        <input
+                          type="text"
+                          name="end_time"
+                          class="form-control"
+                          value={selectedEvent ? selectedEvent.end_time : ""}
+                          onChange={handleChange}
+                          aria-label="Username"
+                          aria-describedby="addon-wrapping"
+                          readOnly
+                        />
+                        {/* ))} */}
+                      </div>
+                    </div>
+
+                    <div
+                      className="VolunteerLogModal-buttonContainer"
+                      style={{ display: "flex", justifyContent: "center" }}
+                    >
+                      <button
+                        className="VolunteerLogModal-button"
+                        style={{
+                          width: "20%",
+                          borderRadius: "40px",
+                          background: "#354290",
+                          color: "white",
+                          fontSize: "18px",
+                        }}
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModalToggle"
+                      >
+                        SUBMIT
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>

@@ -9,6 +9,9 @@ import CreateAnAccount from "./CreateAnAccount/CreateAccount";
 import VolunteerDashboard from "./VolunteerDashboard/VolunteerDashboard";
 import VolunteerPendingDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerPendingDonations";
 import VolunteerAcceptedDonations from "./VolunteerDashboard/VolunteerDonations/VolunteerAcceptedDonations";
+import VolunteerLogPhase2 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase2";
+import VolunteerLogPhase3 from "./VolunteerDashboard/VolunteerLogPhase2&3/VolunteerLogPhase3";
+import YourDonationsPage from "./YourDonationsPage/YourDonationsPage.jsx";
 import VolunteerSignUpPage from "./VolunteerSignUpPage/VolunteerSignUp";
 import AdminPage from "./Admin/AdminPage.jsx";
 import VerifyAccount from "./VolunteerSignUpPage/VerifyAccount.jsx";
@@ -34,6 +37,10 @@ function App() {
             path="/VolunteerAcceptedDonations"
             element={<VolunteerAcceptedDonations />}
           />
+          <Route path="/VolunteerLogPhase2" element={<VolunteerLogPhase2 />} />
+          <Route path="/VolunteerLogPhase3" element={<VolunteerLogPhase3 />} />
+          <Route path="/YourDonation" element={<YourDonationsPage />} />
+
           <Route path="/CreateAccount" element={<CreateAnAccount />} />
           <Route path="/VolunteerSignUp" element={<VolunteerSignUpPage />} />
           <Route path="/VerifyAccount" element={<VerifyAccount />} />

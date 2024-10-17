@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
-import Cookies from "universal-cookie";
 import { useCookies } from "react-cookie";
 
 function LogIn() {
@@ -22,8 +21,8 @@ function LogIn() {
   };
 
   const getJwtExpiry = (token) => {
-    const payload = JSON.parse(atob(token.split(".")[1])); // Decode the payload
-    return payload.exp ? new Date(payload.exp * 1000) : null; // Convert seconds to milliseconds
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    return payload.exp ? new Date(payload.exp * 1000) : null;
   };
 
   const handleSubmit = (event) => {
@@ -50,7 +49,7 @@ function LogIn() {
             secure: true,
             sameSite: "strict",
           });
-          navigate("/"); // gagawin tong redirect to donor dashboard kasi yun ang pinaka basic level of access for a user
+          navigate("/LandingPage");
         } else {
           console.log("Login failed!");
         }
@@ -151,12 +150,21 @@ function LogIn() {
             <p>
               Register with your personal account <br /> to use this app
             </p>
-            <button
+            <Link
               className="btn2"
-              style={{ background: "#354290", border: "3.398px solid #FFF" }}
+              to="/CreateAccount"
+              style={{
+                background: "#354290",
+                border: "3.398px solid #FFF",
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textDecoration: "none",
+              }}
             >
               SIGN UP
-            </button>
+            </Link>
           </div>
         </div>
       </div>

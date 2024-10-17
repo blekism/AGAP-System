@@ -7,7 +7,7 @@ export default function ItemManagementTable({
   onChange,
 }) {
   return (
-    <div style={{ overflowY: "auto" }}>
+    <div style={{ overflowY: "auto", maxHeight: "750px" }}>
       <table className="table table-striped">
         <thead>
           <tr

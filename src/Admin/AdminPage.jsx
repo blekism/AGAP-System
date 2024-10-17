@@ -5,26 +5,21 @@ import Header from "./Header/Header.jsx";
 import Statistics from "./Dashboard/Statistics.jsx";
 import DashboardCalendar from "./Dashboard/DashboardCalendar.jsx";
 import Logo from "../assets/images/agap_logo1.png";
-import Calendar from "../assets/images/calendar.png";
 import Dashboard from "../assets/images/Dashboard.png";
 import Donation from "../assets/images/Donation.png";
 import Event from "../assets/images/Event.png";
 import Member from "../assets/images/Member.png";
 import Logout from "../assets/images/logout.png";
 import DonationContent from "./Donations/DonationContent.jsx";
-import VolunteerContent from "./Volunteers/Volunteers.jsx";
+import VolunteerContent from "./Volunteers/VolunteersManagement.jsx";
 import DonorContent from "./Donors/Donors.jsx";
 import EventContent from "./Events/Events.jsx";
 import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
+import VolunteerLogs from "./VolunteerLogs/VolunteerLogs.jsx";
+import AdminManagement from "./AdminManagement/AdminManagement.jsx";
 
 export default function AdminPage() {
-  const donorValue = 100;
-  const volunteerValue = 50;
-  const costValue = 2000;
-  const donationValue = 1500;
-  const eventValue = 10;
-
   const donorPercentage = 10;
   const volunteerPercentage = 5;
   const costPercentage = 20;
@@ -38,10 +33,13 @@ export default function AdminPage() {
   const eventIncreased = 45254;
 
   const [event, setEvent] = useState([]);
-  const [donations, setDonations] = useState([]);
   const [donors, setDonors] = useState([]);
-  const [volunteers, setVolunteers] = useState([]);
-  const [applicants, setApplicants] = useState([]);
+  const [donorValue, setDonorValue] = useState({});
+  const [volunteerValue, setVolunteerValue] = useState({});
+  const [costValue, setCostValue] = useState({});
+  const [donationValue, setDonationValue] = useState({});
+  const [eventValue, setEventValue] = useState({});
+  const [hoursValue, setHoursValue] = useState({});
 
   useEffect(() => {
     axios
@@ -49,15 +47,6 @@ export default function AdminPage() {
       .then(function (response) {
         console.log(response.data); //read events
         setEvent(response.data.data);
-      });
-
-    axios
-      .get(
-        "http://localhost/agap-backend-main/api/phase_1/read/readAllDonationsAdmin.php"
-      )
-      .then(function (response) {
-        console.log(response.data); //read donations
-        setDonations(response.data.data);
       });
 
     axios
@@ -71,20 +60,56 @@ export default function AdminPage() {
 
     axios
       .get(
-        "http://localhost/agap-backend-main/api/phase2&3/read/read_volunteer_acc.php"
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalDonors.php"
       )
       .then(function (response) {
-        console.log(response.data); //read volunteer account
-        setVolunteers(response.data.data);
+        console.log(response.data);
+        setDonorValue(response.data.data);
       });
 
     axios
       .get(
-        "http://localhost/agap-backend-main/api/phase2&3/read/read_applicant_volunteer.php"
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalVolunteers.php"
       )
       .then(function (response) {
-        console.log(response.data); //read volunteer applicant account
-        setApplicants(response.data.data);
+        console.log(response.data);
+        setVolunteerValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalCost.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setCostValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalDonation.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setDonationValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase_1/read/readTotalEvents.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setEventValue(response.data.data);
+      });
+
+    axios
+      .get(
+        "http://localhost/agap-backend-main/api/phase2&3/read/readTotalHours.php"
+      )
+      .then(function (response) {
+        console.log(response.data);
+        setHoursValue(response.data.data);
       });
   }, []);
 
@@ -177,21 +202,7 @@ export default function AdminPage() {
               Manage Events
             </button>
           </li>
-          <li className="nav-item" role="presentation">
-            <img src={Calendar} alt="Calendar Icon" />
-            <button
-              className="nav-link"
-              id="pills-calendar-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-calendar"
-              type="button"
-              role="tab"
-              aria-controls="pills-calendar"
-              aria-selected="false"
-            >
-              View Calendar
-            </button>
-          </li>
+
           <li className="nav-item" role="presentation">
             <img src={Donation} alt="Items Icon" />
             <button
@@ -207,6 +218,38 @@ export default function AdminPage() {
               Manage Items & Stock
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <img src={Event} alt="Items Icon" />
+            <button
+              className="nav-link"
+              id="pills-volunteerlogs-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-volunteerlogs"
+              type="button"
+              role="tab"
+              aria-controls="pills-volunteerlogs"
+              aria-selected="false"
+            >
+              Volunteer Logs
+            </button>
+          </li>
+
+          <li className="nav-item" role="presentation">
+            <img src={Event} alt="Items Icon" />
+            <button
+              className="nav-link"
+              id="pills-adminManagement-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-adminManagement"
+              type="button"
+              role="tab"
+              aria-controls="pills-adminManagement"
+              aria-selected="false"
+            >
+              Admin Management
+            </button>
+          </li>
+
           <li className="nav-item" role="presentation">
             <img src={Logout} alt="Logout Icon" />
             <button className="logout-button">Logout</button>
@@ -227,21 +270,22 @@ export default function AdminPage() {
             </div>
             <div className="dashContent">
               <Statistics
-                donorValue={donorValue}
-                volunteerValue={volunteerValue}
-                costValue={costValue}
-                donationValue={donationValue}
-                eventValue={eventValue}
-                donorPercentage={donorPercentage}
-                volunteerPercentage={volunteerPercentage}
-                costPercentage={costPercentage}
-                donationPercentage={donationPercentage}
-                eventPercentage={eventPercentage}
-                donorIncreased={donorIncreased}
-                volunteerIncreased={volunteerIncreased}
-                costIncreased={costIncreased}
-                donationIncreased={donationIncreased}
-                eventIncreased={eventIncreased}
+                donorValue={donorValue.total_donors}
+                volunteerValue={volunteerValue.total_volunteers}
+                costValue={costValue.total_cost}
+                donationValue={donationValue.total_donations}
+                eventValue={eventValue.total_events}
+                hoursValue={hoursValue.total_hours}
+                // donorPercentage={donorPercentage}
+                // volunteerPercentage={volunteerPercentage}
+                // costPercentage={costPercentage}
+                // donationPercentage={donationPercentage}
+                // eventPercentage={eventPercentage}
+                // donorIncreased={donorIncreased}
+                // volunteerIncreased={volunteerIncreased}
+                // costIncreased={costIncreased}
+                // donationIncreased={donationIncreased}
+                // eventIncreased={eventIncreased}
               />
 
               <DashboardCalendar events={event} />
@@ -258,7 +302,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
             {/* donation content here */}
-            <DonationContent donations={donations} />
+            <DonationContent />
           </div>
           <div
             className="tab-pane fade"
@@ -271,8 +315,7 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
             <VolunteerContent
-              volunteerMembers={volunteers}
-              volunteerApplicants={applicants}
+            // lagay dito volunteer management jsx
             />
             {/* volunteer content here */}
           </div>
@@ -300,24 +343,20 @@ export default function AdminPage() {
               <Header username="Admin" />
             </div>
 
-            <EventContent events={event} />
+            <EventContent
+              events={event}
+              addEventsModalID="addEventsModalID"
+              addEventsModalTarget="#addEventsModalID"
+              addEventAnnouncementModalID="addEventAnnouncementModalID"
+              addEventAnnouncementModalTarget="#addEventAnnouncementModalID"
+              eventViewModalID="eventViewModalID"
+              eventViewModalTarget="#eventViewModalID"
+              eventAnnouncementModalID="eventAnnouncementModalID"
+              eventAnnouncementModalTarget="#eventAnnouncementModalID"
+            />
             {/* event content here */}
           </div>
-          <div
-            className="tab-pane fade"
-            id="pills-calendar"
-            role="tabpanel"
-            aria-labelledby="pills-calendar-tab"
-            tabIndex="0"
-          >
-            <div className="dashHeader">
-              <Header username="Admin" />
-            </div>
 
-            <DashboardCalendar events={event} />
-
-            {/* calendar content here */}
-          </div>
           <div
             className="tab-pane fade"
             id="pills-items"
@@ -328,9 +367,37 @@ export default function AdminPage() {
             <div className="dashHeader">
               <Header username="Admin" />
             </div>
-            <ItemManagement />
+            <ItemManagement events={event} />
 
             {/* item content here */}
+          </div>
+
+          <div
+            className="tab-pane fade"
+            id="pills-volunteerlogs"
+            role="tabpanel"
+            aria-labelledby="pills-volunteerlogs-tab"
+            tabIndex="0"
+          >
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+            <VolunteerLogs />
+            {/* phase 2 and phase 3 log here */}
+          </div>
+
+          <div
+            className="tab-pane fade"
+            id="pills-adminManagement"
+            role="tabpanel"
+            aria-labelledby="pills-adminManagement-tab"
+            tabIndex="0"
+          >
+            <div className="dashHeader">
+              <Header username="Admin" />
+            </div>
+            <AdminManagement />
+            {/* admin management here */}
           </div>
         </div>
         {/* END OF MAIN CONTENT */}

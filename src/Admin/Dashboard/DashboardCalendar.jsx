@@ -1,22 +1,35 @@
 import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import "./DashboardCalendar.css";
 
 export default function DashboardCalendar({ events }) {
   return (
     <div
       className="dashboard-calendar"
-      style={{ flexGrow: 1, backgroundColor: "white", padding: "20px" }}
+      style={{
+        flexGrow: 1,
+        backgroundColor: "white",
+        padding: "20px",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
       <FullCalendar
-        plugins={[dayGridPlugin]}
+        plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        height={"70vh"}
+        height={"75vh"}
+        headerToolbar={{
+          left: "prev,next",
+          center: "title",
+          right: "today",
+        }}
         events={events.map((event) => {
           return {
             title: event.event_name,
-            date: event.start_date,
+            start: event.start_date,
+            end: event.end_date,
           };
         })}
       />

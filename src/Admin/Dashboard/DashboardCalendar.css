@@ -1,0 +1,36 @@
+.fc {
+  background-color: white;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.fc .fc-toolbar-title {
+  color: #35408e;
+  font-weight: 600;
+}
+
+.fc-toolbar-chunk button {
+  background-color: #35408e !important;
+  border: none !important;
+}
+
+.fc .fc-col-header a {
+  color: #35408e !important;
+  text-decoration: none !important;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #35408e;
+  text-decoration: none !important;
+}
+
+.fc-h-event .fc-event-main-frame {
+  border: none !important;
+}
+
+.fc-h-event .fc-event-title-container {
+  background-color: #ffd41c;
+  border: none !important;
+  color: #35408e;
+  font-weight: 600;
+}

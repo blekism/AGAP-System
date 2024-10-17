@@ -9,3 +9,23 @@
   flex-direction: row;
   column-gap: 20px;
 }
+
+/* .ahehe form .btn-primary {
+  animation: pulse 0.5s infinite;
+  transition: transform 0.2s;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(5);
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px 10px rgba(255, 71, 87, 0);
+  }
+  100% {
+    transform: scale(5);
+    box-shadow: 0 0 0 0 rgba(255, 71, 87, 0);
+  }
+} */

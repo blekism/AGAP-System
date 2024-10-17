@@ -1,5 +1,5 @@
 import "./landing.css";
-import NavBar from "../Page/LanNavBar.jsx";
+import NavBar from "../Page/NavBar.jsx";
 import Footer from "../Page/AgapFooter.jsx";
 import head from "../assets/images/head.png";
 import comExImg from "../assets/images/comex-img.jpg";

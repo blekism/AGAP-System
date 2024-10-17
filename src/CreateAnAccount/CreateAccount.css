@@ -1,0 +1,148 @@
+.CreateAccountParent {
+  background-color: #f7f7f7;
+  background-image: url("../assets/images/agap_login.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  height: auto;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
+  margin: auto;
+  box-sizing: border-box;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-header .header-title {
+  margin: 0;
+}
+
+.form-header a {
+  color: #233a94;
+  text-decoration: none;
+}
+
+.logo {
+  max-width: 120px;
+  float: right;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: #333;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #233a94;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-check-horizontal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-check-horizontal .inputCreateAccount[type="checkbox"] {
+  margin: 0;
+  width: auto;
+}
+
+.checkbox-label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.form-check-horizontal1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-check-horizontal1 input[type="checkbox"] {
+  margin: 0;
+  width: auto;
+}
+
+.checkbox-label1 {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.form-check label a {
+  color: #233a94;
+  text-decoration: none;
+}
+
+.form-container .btn {
+  background-color: #354290;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 32px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 50%;
+  display: block;
+  text-align: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 19px;
+}
+
+.btn:hover {
+  background-color: #1f2c7b;
+}
+
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.form-footer a {
+  color: #233a94;
+  text-decoration: none;
+}

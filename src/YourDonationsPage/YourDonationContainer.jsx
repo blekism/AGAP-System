@@ -12,7 +12,7 @@ export default function YourDonationConatiner() {
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend/api/phase_1/read/readDonationDonor.php",
+        "http://localhost/agap-backend-main/api/phase_1/read/readDonationDonor.php",
         {
           headers: {
             Authorization: "Bearer " + cookies.donor_token,

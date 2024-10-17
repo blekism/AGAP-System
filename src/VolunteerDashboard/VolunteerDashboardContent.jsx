@@ -18,7 +18,7 @@ export default function VolunteerDashboardContent({
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend/api/phase2&3/read/readTotalDonationsAcceptedByVolunteer.php",
+        "http://localhost/agap-backend-main/api/phase2&3/read/readTotalDonationsAcceptedByVolunteer.php",
         {
           headers: {
             Authorization: "Bearer " + cookies.donor_token,
@@ -38,7 +38,7 @@ export default function VolunteerDashboardContent({
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend/api/phase2&3/read/readTotalCompletedTasks.php",
+        "http://localhost/agap-backend-main/api/phase2&3/read/readTotalCompletedTasks.php",
         {
           headers: {
             Authorization: "Bearer " + cookies.donor_token,
@@ -55,7 +55,7 @@ export default function VolunteerDashboardContent({
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend/api/phase2&3/read/readYourTotalDonations.php",
+        "http://localhost/agap-backend-main/api/phase2&3/read/readYourTotalDonations.php",
         {
           headers: {
             Authorization: "Bearer " + cookies.donor_token,
@@ -72,7 +72,7 @@ export default function VolunteerDashboardContent({
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend/api/phase2&3/read/readVolunteerTotalHours.php",
+        "http://localhost/agap-backend-main/api/phase2&3/read/readVolunteerTotalHours.php",
         {
           headers: {
             Authorization: "Bearer " + cookies.donor_token,

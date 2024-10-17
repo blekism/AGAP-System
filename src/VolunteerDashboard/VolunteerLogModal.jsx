@@ -59,7 +59,7 @@ export default function VolunteerLogModal() {
     try {
       axios
         .get(
-          "http://localhost/agap-backend/api/phase_1/read/readDonorAccount.php",
+          "http://localhost/agap-backend-main/api/phase_1/read/readDonorAccount.php",
           {
             headers: {
               "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export default function VolunteerLogModal() {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .get("http://localhost/agap-backend/api/phase_1/read/readEvents.php")
+      .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
       .then(function (response) {
         console.log("this is the events ", response.data.data);
         setEvents(response.data.data);
@@ -141,7 +141,7 @@ export default function VolunteerLogModal() {
     try {
       axios
         .post(
-          "http://localhost/agap-backend/api/phase2&3/insert/insertPhase2.php",
+          "http://localhost/agap-backend-main/api/phase2&3/insert/insertPhase2.php",
           formData,
           {
             headers: {
@@ -167,7 +167,7 @@ export default function VolunteerLogModal() {
     try {
       axios
         .post(
-          "http://localhost/agap-backend/api/phase2&3/insert/insertPhase3.php",
+          "http://localhost/agap-backend-main/api/phase2&3/insert/insertPhase3.php",
           formDataFinal,
           {
             headers: {
@@ -191,7 +191,7 @@ export default function VolunteerLogModal() {
   //   try {
   //     axios
   //       .get(
-  //         "http://localhost/agap-backend/api/phase2&3/read/readPhase3Log.php",
+  //         "http://localhost/agap-backend-main/api/phase2&3/read/readPhase3Log.php",
   //         {
   //           headers: {
   //             Authorization: "Bearer " + cookies.donor_token,

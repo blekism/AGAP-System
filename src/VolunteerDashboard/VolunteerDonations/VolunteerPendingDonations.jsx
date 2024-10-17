@@ -24,7 +24,7 @@ export default function VolunteerPendingDonations() {
           donation_id: identifier,
         };
         const response = await axios.post(
-          "http://localhost/agap-backend/api/phase_1/read/readDonationItem.php",
+          "http://localhost/agap-backend-main/api/phase_1/read/readDonationItem.php",
           userInput, // Use the updated state
           {
             headers: {
@@ -52,7 +52,7 @@ export default function VolunteerPendingDonations() {
     // Fetch data from the API
     axios
       .get(
-        "http://localhost/agap-backend/api/phase2&3/read/readAllDonationsVolunteer.php"
+        "http://localhost/agap-backend-main/api/phase2&3/read/readAllDonationsVolunteer.php"
       )
       .then(function (response) {
         console.log(response.data);
@@ -69,7 +69,7 @@ export default function VolunteerPendingDonations() {
 
       try {
         const response = await axios.put(
-          "http://localhost/agap-backend/api/phase_1/update/updateReceiveDonation.php",
+          "http://localhost/agap-backend-main/api/phase_1/update/updateReceiveDonation.php",
           { donation_id: identifier },
           {
             headers: {

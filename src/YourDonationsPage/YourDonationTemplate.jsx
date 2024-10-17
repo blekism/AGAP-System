@@ -14,7 +14,7 @@ export default function YourDonationTemplate({
 
     axios
       .post(
-        "http://localhost/agap-backend/api/phase_1/read/readDonationItem.php",
+        "http://localhost/agap-backend-main/api/phase_1/read/readDonationItem.php",
         {
           donation_id: id,
         },

@@ -23,7 +23,7 @@ export default function VolunteerAcceptedDonations() {
           donation_id: identifier,
         };
         const response = await axios.post(
-          "http://localhost/agap-backend/api/phase_1/read/readDonationItem.php",
+          "http://localhost/agap-backend-main/api/phase_1/read/readDonationItem.php",
           userInput, // Use the updated state
           {
             headers: {
@@ -45,7 +45,7 @@ export default function VolunteerAcceptedDonations() {
     // Fetch data from the API
     axios
       .post(
-        "http://localhost/agap-backend/api/phase2&3/read/readDonationsVolunteer.php",
+        "http://localhost/agap-backend-main/api/phase2&3/read/readDonationsVolunteer.php",
         user,
         { headers: { "Content-Type": "application/json" } }
       )

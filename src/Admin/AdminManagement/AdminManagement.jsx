@@ -65,7 +65,7 @@ export default function AdminManagement() {
     try {
       const response = await axios.post(
         "http://localhost/agap-backend-main/api/phase2&3/read/readSingleAdmin.php",
-        { admin_id: id },
+        { account_id: id },
         {
           headers: {
             "Content-Type": "application/json",
@@ -155,14 +155,8 @@ export default function AdminManagement() {
                 fontWeight: 500,
               }}
             >
-              <td>{admin.admin_id}</td>
-              <td>
-                {admin.last_name +
-                  " " +
-                  admin.first_name +
-                  " " +
-                  admin.middle_name}
-              </td>
+              <td>{admin.account_id}</td>
+              <td>{admin.last_name + " " + admin.first_name}</td>
               <td>{admin.email}</td>
               <td>{admin.password}</td>
               <td>{admin.contact_info}</td>

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Header from "./Header/Header.jsx";
 import Statistics from "./Dashboard/Statistics.jsx";
 import DashboardCalendar from "./Dashboard/DashboardCalendar.jsx";
-import Logo from "../assets/images/agap_logo1.png";
+import Logo from "../assets/images/agapnew.png";
 import Dashboard from "../assets/images/Dashboard.png";
 import Donation from "../assets/images/Donation.png";
 import Event from "../assets/images/Event.png";
@@ -18,6 +17,8 @@ import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
 import VolunteerLogs from "./VolunteerLogs/VolunteerLogs.jsx";
 import AdminManagement from "./AdminManagement/AdminManagement.jsx";
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
 
 export default function AdminPage() {
   const donorPercentage = 10;
@@ -40,6 +41,8 @@ export default function AdminPage() {
   const [donationValue, setDonationValue] = useState({});
   const [eventValue, setEventValue] = useState({});
   const [hoursValue, setHoursValue] = useState({});
+  const [adminValue, setAdminValue] = useState({});
+  const [cookies, setCookie, removeCookie] = useCookies(["admin_token"]);
 
   useEffect(() => {
     axios
@@ -111,6 +114,30 @@ export default function AdminPage() {
         console.log(response.data);
         setHoursValue(response.data.data);
       });
+
+    if (cookies.admin_token) {
+      try {
+        const decoded = jwtDecode(cookies.admin_token);
+        axios
+          .post(
+            "http://localhost/agap-backend-main/api/phase2&3/read/readSingleAdmin.php",
+            { account_id: decoded.sub },
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+          .then(function (response) {
+            console.log(response.data);
+            setAdminValue(response.data.data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      window.location.href = "/LoginAdmin";
+    }
   }, []);
 
   return (
@@ -122,7 +149,7 @@ export default function AdminPage() {
               <img
                 src={Logo}
                 alt="AGAP Logo"
-                style={{ width: "40%", height: "40%", margin: "auto" }}
+                style={{ width: "100px", height: "100px" }}
                 className="logo"
               />
             </div>
@@ -266,7 +293,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <div className="dashContent">
               <Statistics
@@ -299,7 +328,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             {/* donation content here */}
             <DonationContent />
@@ -312,7 +343,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <VolunteerContent
             // lagay dito volunteer management jsx
@@ -327,7 +360,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <DonorContent donors={donors} />
             {/* donor content here */}
@@ -340,7 +375,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
 
             <EventContent
@@ -365,7 +402,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <ItemManagement events={event} />
 
@@ -380,7 +419,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <VolunteerLogs />
             {/* phase 2 and phase 3 log here */}
@@ -394,7 +435,9 @@ export default function AdminPage() {
             tabIndex="0"
           >
             <div className="dashHeader">
-              <Header username="Admin" />
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
             </div>
             <AdminManagement />
             {/* admin management here */}

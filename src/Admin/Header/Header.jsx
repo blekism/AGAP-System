@@ -13,7 +13,7 @@ export default function Header({ username }) {
 
       <div className="UserProfileContainer">
         <img src={Member} alt="Items Icon" />
-        <Link to="/Profile" className="Profile">
+        <Link to="/ProfilePage" className="Profile">
           {username}
         </Link>
       </div>

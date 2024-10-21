@@ -14,6 +14,10 @@
   border: none !important;
 }
 
+.fc-header-toolbar {
+  padding: 10px;
+}
+
 .fc .fc-col-header a {
   color: #35408e !important;
   text-decoration: none !important;

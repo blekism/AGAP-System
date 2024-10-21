@@ -3,6 +3,7 @@ import axios from "axios";
 import "./DonateContainer.css";
 import DonationItemTemplate from "./DonationItemTemplate.jsx";
 import { useCookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode";
 
 export default function DonateContainer() {
   const [items, setItems] = useState([
@@ -19,26 +20,16 @@ export default function DonateContainer() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "http://localhost/agap-backend-main/api/phase_1/read/readAccountID.php",
-        {
-          headers: {
-            Authorization: "Bearer " + cookies.donor_token,
-          },
-          withCredentials: true,
-        }
-      )
-      .then(function (response) {
-        console.log(response.data);
-        setDonorID(response.data.data);
-      });
+    if (cookies.donor_token) {
+      try {
+        const decode = jwtDecode(cookies.donor_token);
+        console.log("token is ", decode.sub);
+        setDonorID(decode.sub);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   }, []);
-
-  useEffect(() => {
-    console.log("Donor ID: ");
-    console.log(DonorID);
-  }, [DonorID]);
 
   const addElement = () => {
     if (items.length < 5) {
@@ -61,7 +52,7 @@ export default function DonateContainer() {
     );
     const userInput = {
       recipient_id: items[0].recipient,
-      account_id: DonorID.account_id,
+      account_id: DonorID,
       total_cost: totalCost,
       items: items.map((item) => ({
         item: item.item,
@@ -83,6 +74,10 @@ export default function DonateContainer() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 201) {
+          alert("Donation Submitted!");
+          window.location.reload();
+        }
       });
   };
 

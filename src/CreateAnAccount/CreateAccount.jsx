@@ -2,18 +2,73 @@ import React, { useState } from "react";
 import "./CreateAccount.css";
 import logo from "../assets/images/agap_logo1.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import VerifyAccount from "../VolunteerSignUpPage/VerifyAccount.jsx";
 
 function CreateAccount() {
+  const [isPopupVisible, setPopupVisible] = useState(false);
+
+  const handleClosePopup = () => {
+    setPopupVisible(false); // Close the popup
+  };
+
+  const handleSubmitPopup = () => {
+    alert("Account verified!"); // Perform your form submission logic here
+    setPopupVisible(false); // Close the popup after verification
+  };
+
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const [userInfo, setUserInfo] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    dob: "",
+    age: "",
+    phoneNumber: "",
+    currentAddress: "",
+  });
+  const handleChange = (e) => {
+    const name = e.target.name;
+    let value = e.target.value;
+
+    setUserInfo((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(userInfo);
+
+    axios
+      .post(
+        "http://localhost/agap-backend-main/api/phase_1/create/signupDonor.php",
+        userInfo,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === 201) {
+          console.log("Signup successful!");
+          setPopupVisible(true);
+        }
+      });
+  };
+
   return (
     <div className="CreateAccountParent">
       <div className="form-container">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-header">
             <div classname="headertitle">
               <h5
@@ -61,13 +116,23 @@ function CreateAccount() {
                 type="text"
                 id="firstName"
                 className="inputCreateAccount"
+                name="firstName"
+                value={userInfo.firstName}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
               <label htmlFor="lastName" style={{ color: "#354290" }}>
                 Last Name
               </label>
-              <input type="text" id="lastName" className="inputCreateAccount" />
+              <input
+                type="text"
+                id="lastName"
+                className="inputCreateAccount"
+                name="lastName"
+                value={userInfo.lastName}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
@@ -76,7 +141,14 @@ function CreateAccount() {
             <label htmlFor="email" style={{ color: "#354290" }}>
               Email Address
             </label>
-            <input type="email" id="email" className="inputCreateAccount" />
+            <input
+              type="email"
+              id="email"
+              className="inputCreateAccount"
+              name="email"
+              value={userInfo.email}
+              onChange={handleChange}
+            />
           </div>
 
           {/* Password and Confirm Password */}
@@ -89,6 +161,9 @@ function CreateAccount() {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 className="inputCreateAccount"
+                name="password"
+                value={userInfo.password}
+                onChange={handleChange}
               />
             </div>
             <div className="form-group">
@@ -99,6 +174,9 @@ function CreateAccount() {
                 type={showPassword ? "text" : "password"}
                 id="confirmPassword"
                 className="inputCreateAccount"
+                name="confirmPassword"
+                value={userInfo.confirmPassword}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -130,13 +208,25 @@ function CreateAccount() {
               <label htmlFor="dob" style={{ color: "#354290" }}>
                 Date of Birth
               </label>
-              <input type="date" id="dob" />
+              <input
+                type="date"
+                id="dob"
+                name="dob"
+                value={userInfo.dob}
+                onChange={handleChange}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="age" style={{ color: "#354290" }}>
                 Age
               </label>
-              <input type="number" id="age" />
+              <input
+                type="number"
+                id="age"
+                name="age"
+                value={userInfo.age}
+                onChange={handleChange}
+              />
             </div>
           </div>
 
@@ -150,56 +240,27 @@ function CreateAccount() {
                 type="tel"
                 id="phoneNumber"
                 className="inputCreateAccount"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="landlineNumber" style={{ color: "#354290" }}>
-                Landline Number
-              </label>
-              <input
-                type="tel"
-                id="landlineNumber"
-                className="inputCreateAccount"
+                name="phoneNumber"
+                value={userInfo.phoneNumber}
+                onChange={handleChange}
               />
             </div>
           </div>
 
           {/* Province and Street Address */}
+          <div className="form-group"></div>
           <div className="form-group">
-            <label htmlFor="province" style={{ color: "#354290" }}>
-              Province
-            </label>
-            <input type="text" id="province" className="inputCreateAccount" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="streetAddress" style={{ color: "#354290" }}>
-              Street Address
+            <label htmlFor="currentAddress" style={{ color: "#354290" }}>
+              Current Address
             </label>
             <input
               type="text"
-              id="streetAddress"
+              id="currentAddress"
               className="inputCreateAccount"
+              name="currentAddress"
+              value={userInfo.currentAddress}
+              onChange={handleChange}
             />
-          </div>
-
-          {/* City and Province */}
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="city" style={{ color: "#354290" }}>
-                City
-              </label>
-              <input type="text" id="city" className="inputCreateAccount" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="provinceInput" style={{ color: "#354290" }}>
-                Province
-              </label>
-              <input
-                type="text"
-                id="provinceInput"
-                className="inputCreateAccount"
-              />
-            </div>
           </div>
 
           <div className="form-check-horizontal1">
@@ -230,6 +291,13 @@ function CreateAccount() {
           </button>
         </form>
       </div>
+
+      {isPopupVisible && (
+        <VerifyAccount
+          onClose={handleClosePopup}
+          onSubmit={handleSubmitPopup}
+        />
+      )}
     </div>
   );
 }

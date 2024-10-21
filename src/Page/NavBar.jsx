@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-import AGAP from "../assets/images/AGAP.png";
+import AGAP from "../assets/images/agapnew.png";
+import { useCookies } from "react-cookie";
 
 export default function NavBar() {
+  const [cookies] = useCookies(["donor_token"]);
+
+  useEffect(() => {
+    if (!cookies.donor_token) {
+      window.location.href = "/";
+    } else {
+      console.log("cookieeeeeees is valid");
+    }
+  }, []);
+
   return (
     <>
       <nav
         className="navbar navbar-expand-lg navbar-light"
-        style={{ margin: "0px" }}
+        style={{ margin: "0px", height: "10vh" }}
       >
         <div className="container-fluid">
           <img
@@ -24,7 +35,7 @@ export default function NavBar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link to="/LandingPage" className="nav-link">
                   {/* change to logged in na home */}
                   Home
                 </Link>
@@ -34,18 +45,19 @@ export default function NavBar() {
                   Donate
                 </Link>
               </li>
+              {/* gawing conditial render yung part ng volunteers */}
               <li className="nav-item">
-                <Link to="/Volunteers" className="nav-link">
+                <Link to="/VolunteerConditionalRender" className="nav-link">
                   Volunteers
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/Profile" className="nav-link">
+                <Link to="/ProfilePage" className="nav-link">
                   Profile
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/YourDonations" className="nav-link">
+                <Link to="/YourDonation" className="nav-link">
                   Your Donations
                 </Link>
               </li>

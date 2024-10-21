@@ -10,12 +10,14 @@ export default function DonationContent({
 }) {
   const [donationItemsList, setDonationItemsList] = useState([]);
   const [itemClicked, setItemClicked] = useState({ donation_id: 0 });
-  const [cookies] = useCookies(["donor_token"]);
+  const [VolunCookies] = useCookies(["donor_token"]);
+  const [AdminCookies] = useCookies(["admin_token"]);
 
   const handleItemClick = async (id) => {
     setItemClicked({ donation_id: id });
     console.log("The donation item id is " + id);
-    console.log(cookies.donor_token);
+    console.log(VolunCookies.donor_token);
+    console.log(AdminCookies.donor_token);
 
     try {
       const response = await axios.post(
@@ -44,7 +46,9 @@ export default function DonationContent({
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + cookies.donor_token,
+            Authorization: VolunCookies.donor_token
+              ? "Bearer " + VolunCookies.donor_token
+              : "Bearer " + AdminCookies.admin_token,
           },
           withCredentials: true,
         }

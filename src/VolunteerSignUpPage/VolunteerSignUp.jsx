@@ -1,23 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./VolunteerSignUp.css";
 import bgImage from "../assets/images/agap_login.png";
-import VerifyAccount from "./VerifyAccount.jsx"; // Import the VerifyAccount component
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
 
 function VolunteerSignUp() {
-  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [volunteerInfo, setVolunteerInfo] = useState({
+    section: "",
+    department: "",
+    designation: "",
+  });
+  const [volunteerId, setVolunteerId] = useState({});
+  const [cookies, removeCookie] = useCookies(["donor_token"]);
+
+  useEffect(() => {
+    if (cookies.donor_token) {
+      try {
+        const decoded = jwtDecode(cookies.donor_token);
+        setVolunteerId(decoded.sub);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      window.location.href = "/";
+    }
+  }, []);
 
   const handleApplyClick = (e) => {
-    e.preventDefault(); // Prevent the default form submission
-    setPopupVisible(true); // Show the popup
+    e.preventDefault();
+
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase_1/create/ApplyAsVolunteer.php",
+        volunteerInfo,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+        if (response.data.status === 200) {
+          removeCookie("donor_token");
+          alert(
+            "Application Submitted Successfully! Please Log in again to continue."
+          );
+          window.location.href = "/";
+        }
+      });
   };
 
-  const handleClosePopup = () => {
-    setPopupVisible(false); // Close the popup
-  };
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
 
-  const handleSubmitPopup = () => {
-    alert("Account verified!"); // Perform your form submission logic here
-    setPopupVisible(false); // Close the popup after verification
+    setVolunteerInfo((values) => ({
+      ...values,
+      [name]: value,
+      account_id: volunteerId,
+    }));
   };
 
   return (
@@ -41,53 +84,51 @@ function VolunteerSignUp() {
         <div className="form-box">
           <h2 className="form-title">FORMS</h2>
           <form onSubmit={handleApplyClick}>
-            <div className="form-group">
-              <select id="event" name="event">
-                <option value="">Choose Event Name:</option>
-                <option value="event1">Event 1</option>
-                <option value="event2">Event 2</option>
-              </select>
-            </div>
-
-            <div className="form-group">
-              <select id="org" name="org">
-                <option value="">Select your Sect/Dept/Org:</option>
-                <option value="org1">Organization 1</option>
-                <option value="org2">Organization 2</option>
-              </select>
-            </div>
-
             <div className="form-group1">
               <input
                 type="text"
-                id="name"
-                name="name"
-                placeholder="Full Name:"
+                id="section"
+                name="section"
+                placeholder="Section:"
+                value={volunteerInfo.section}
+                onChange={handleChange}
               />
             </div>
 
-            <div className="form-group1">
-              <input
-                type="text"
+            <div className="form-group">
+              <select
+                id="department"
+                name="department"
+                onChange={handleChange}
+                value={volunteerInfo.department}
+              >
+                <option value="">Select your Department</option>
+                <option value="1">SECA</option>
+                <option value="2">SASE</option>
+                <option value="3">SBMA</option>
+                <option value="4">SHS</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <select
                 id="designation"
                 name="designation"
-                placeholder="Designation:"
-              />
+                onChange={handleChange}
+                value={volunteerInfo.designation}
+              >
+                <option value="">Select your Designation:</option>
+                <option value="2000">STUDENT</option>
+                <option value="2001">STAFF</option>
+                <option value="2002">FACULTY</option>
+              </select>
             </div>
-
             <button type="submit" className="apply-button">
               APPLY
             </button>
           </form>
         </div>
       </div>
-
-      {isPopupVisible && (
-        <VerifyAccount
-          onClose={handleClosePopup}
-          onSubmit={handleSubmitPopup}
-        />
-      )}
     </>
   );
 }

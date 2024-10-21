@@ -40,6 +40,8 @@ export default function YourDonationConatiner() {
             statusName={yourDonations.status_name}
             receivedBy={yourDonations.received_by}
             receivedDate={yourDonations.received_date}
+            modalId={yourDonations.donation_id}
+            modalTarget={"#" + yourDonations.donation_id}
           />
         ))}
       </div>

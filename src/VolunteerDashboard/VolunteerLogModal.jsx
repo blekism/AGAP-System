@@ -107,25 +107,6 @@ export default function VolunteerLogModal() {
     setSelectedEvent((values) => ({ ...values, [name]: value }));
   };
 
-  // const [filteredEvents, setFilteredEvents] = useState(events);
-  // const [filteredEventsStatus, setfilteredEventsStatus] = useState("none");
-
-  // const filterEvents = (event) => {
-  //   const status = event.target.value;
-  //   setfilteredEventsStatus(status);
-
-  //   if (status === "none") {
-  //     setFilteredEvents(events);
-  //   } else {
-  //     const filtered = events.filter((event) => event.event_status === status);
-  //     setFilteredEvents(filtered);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   setFilteredEvents(events);
-  // }, [events]);
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -182,31 +163,6 @@ export default function VolunteerLogModal() {
       console.error("There was an error submitting the form!", error);
     }
   };
-
-  // useEffect(() => {
-  //   console.log("Form Data:", formData);
-  // }, [formData]);
-
-  // useEffect(() => {
-  //   try {
-  //     axios
-  //       .get(
-  //         "http://localhost/agap-backend-main/api/phase2&3/read/readPhase3Log.php",
-  //         {
-  //           headers: {
-  //             Authorization: "Bearer " + cookies.donor_token,
-  //           },
-  //           withCredentials: true,
-  //         }
-  //       )
-  //       .then(function (response) {
-  //         console.log(response.data);
-  //         setPhase3Log(response.data.data);
-  //       });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }, []);
 
   return (
     <>

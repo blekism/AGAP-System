@@ -1,36 +1,36 @@
 .profile-details-container {
-    width: 100%;
-    max-width: 600px; 
-    margin-left: 70%;
+  width: 100%;
+  max-width: 600px;
+  margin-left: 70%;
 }
 
 .profile-detail {
-    display: flex; /* Use Flexbox for layout */
-    padding: 10px 0; 
-    justify-content: space-between; /* Space items evenly */
+  display: flex; /* Use Flexbox for layout */
+  padding: 10px 0;
+  justify-content: space-between;
 }
 
 .detail-label {
-    color: #354290; 
-    font-size: 16px; 
-    font-weight: 600; 
+  color: #354290;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .detail-value {
-    color: #666; 
-    font-family: Poppins, sans-serif; 
-    font-size: 16px; 
-    text-align: right; 
+  color: #666;
+  font-family: Poppins, sans-serif;
+  font-size: 16px;
+  text-align: right;
 }
 
 .horizontal-group {
-    display: flex; /* Flexbox for horizontal layout */
-    width: 100%; /* Take full width */
-    justify-content: space-between; /* Space between label and value */
+  display: flex; /* Flexbox for horizontal layout */
+  width: 100%; /* Take full width */
+  justify-content: space-between;
 }
 
 .value-container {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    margin-left: 10px; /* Add some space between label and value */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  margin-left: 10px; /* Add some space between label and value */
 }

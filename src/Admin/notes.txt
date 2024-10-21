@@ -43,14 +43,41 @@ NEED GAWIN
 - DAPAT PAG NAG KALTAS SA MANAGE ITEMS, MATIC NA MA AADD SA TOTAL CONTRIB AMOUNT // 
 
 - mga metrics para sa dashboard // 
-- EDIT ANNOUNCEMENTS - optional
+- EDIT ANNOUNCEMENTS - optional 
 - GAWING COOKIE BASED LAHAT NG FUNCTIONS FOR AMDIN AND USERS
 
 
 
-- delete profile
 - your donations page layout and function //
-- register account pati verification
+- register account pati verification // 
+
+idagdag 
+landline
+dob
+age
+
+high priority
+view profile 
+delete profile
+events and calendar read //
+update function for application of volunteer - cookie based //
+
+
+login register and verify //
+donate page - cookie based //
+conditional rendering of volunteer pages //
+admin - cookie based 
+- donation //
+-adjust db for 1 acc for admin and users //
+admin login //
+- application pending for volunteer_apply // 
+
+
+- gawan confirm dialog box ung mga function 
+- apply websockets
+- deploy online
+
+
 
 
 

@@ -7,6 +7,8 @@ export default function YourDonationTemplate({
   statusName,
   receivedBy,
   receivedDate,
+  modalId,
+  modalTarget,
 }) {
   const [yourDonationItems, setYourDonationItems] = useState([]);
   const handleButtonClick = (id) => {
@@ -25,7 +27,7 @@ export default function YourDonationTemplate({
         }
       )
       .then(function (response) {
-        console.log(response.data);
+        console.log(response.data.data);
         setYourDonationItems(response.data.data);
       })
       .catch(function (error) {
@@ -41,7 +43,7 @@ export default function YourDonationTemplate({
           <div className="YourDonationContainerButton">
             <button
               data-bs-toggle="modal"
-              data-bs-target="#viewItemsModalToggle"
+              data-bs-target={modalTarget}
               onClick={() => handleButtonClick(donationid)}
             >
               Items
@@ -50,7 +52,7 @@ export default function YourDonationTemplate({
 
           <div
             className="modal fade"
-            id="viewItemsModalToggle"
+            id={modalId}
             aria-hidden="true"
             aria-labelledby="viewItemsModalToggleLabel"
             tabIndex="-1"
@@ -71,18 +73,18 @@ export default function YourDonationTemplate({
                   <table className="table table-striped">
                     <thead style={{ fontSize: "18px" }}>
                       <tr>
+                        <th scope="col">ITEM</th>
                         <th scope="col">QUANTITY</th>
                         <th scope="col">COST</th>
-                        <th scope="col">ITEM</th>
                         <th scope="col">CATEGORY</th>
                       </tr>
                     </thead>
                     <tbody style={{ fontSize: "15px" }}>
                       {yourDonationItems.map((donationItem, key) => (
                         <tr key={key}>
+                          <td>{donationItem.item}</td>
                           <td>{donationItem.qty}</td>
                           <td>{donationItem.cost}</td>
-                          <td>{donationItem.item}</td>
                           <td>{donationItem.category_name}</td>
                         </tr>
                       ))}

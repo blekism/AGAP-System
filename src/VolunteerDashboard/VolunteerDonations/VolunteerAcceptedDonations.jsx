@@ -44,7 +44,7 @@ export default function VolunteerAcceptedDonations() {
   useEffect(() => {
     // Fetch data from the API
     axios
-      .post(
+      .get(
         "http://localhost/agap-backend-main/api/phase2&3/read/readDonationsVolunteer.php",
         user,
         { headers: { "Content-Type": "application/json" } }

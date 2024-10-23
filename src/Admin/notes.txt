@@ -57,8 +57,8 @@ dob
 age
 
 high priority
-view profile 
-delete profile
+view profile // 
+delete profile 
 events and calendar read //
 update function for application of volunteer - cookie based //
 
@@ -73,7 +73,20 @@ admin login //
 - application pending for volunteer_apply // 
 
 
-- gawan confirm dialog box ung mga function 
+- gawan confirm dialog box ung mga function //
+- admin management //
+- donations //
+- donors //
+- events //
+- itemManagement //
+- volunteers //
+
+- create an account //
+- donation page //
+- profile --
+- volunteer dashboard --  
+- volunteer signup // 
+
 - apply websockets
 - deploy online
 

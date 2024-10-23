@@ -67,6 +67,12 @@ export default function DonorContent({ donors }) {
       console.error(error);
     }
   };
+
+  const confirmAction = (event, action) => {
+    if (window.confirm(action)) {
+      handleSubmit(event);
+    }
+  };
   return (
     <div style={{ paddingRight: "10px", maxHeight: "750px" }}>
       <table className="table table-striped">
@@ -251,7 +257,16 @@ export default function DonorContent({ donors }) {
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(event) =>
+                    confirmAction(
+                      event,
+                      "Are you Sure you want to update this donor?"
+                    )
+                  }
+                >
                   Understood
                 </button>
               </div>

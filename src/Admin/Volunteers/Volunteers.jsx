@@ -14,7 +14,6 @@ export default function VolunteerContent({
     is_volunteer: "",
     last_name: "",
     first_name: "",
-    middle_name: "",
     section: "",
     dept_category_id: "",
     designation_id: "",
@@ -106,6 +105,27 @@ export default function VolunteerContent({
       .then(function (response) {
         console.log(response.data);
       });
+  };
+
+  const confirmAction = (event, action) => {
+    let confirmMessage = "";
+
+    if (action === "accept") {
+      confirmMessage = "Are you sure you want to accept this volunteer?";
+    } else if (action === "reject") {
+      confirmMessage = "Are you sure you want to reject this volunteer?";
+    } else if (action === "delete") {
+      confirmMessage = "Are you sure you want to delete this volunteer?";
+    }
+    if (window.confirm(confirmMessage)) {
+      if (action === "accept") {
+        handleSubmit(event);
+      } else if (action === "reject") {
+        handleRejectVolunteer();
+      } else if (action === "delete") {
+        handleDeleteVolunteer();
+      }
+    }
   };
 
   return (
@@ -248,12 +268,6 @@ export default function VolunteerContent({
                       onChange={handleChange}
                       title={"Last Name"}
                     />
-                    <InputTemplate
-                      name="middle_name"
-                      value={volunteerItem.middle_name}
-                      onChange={handleChange}
-                      title={"Middle Name"}
-                    />
 
                     <InputTemplate
                       name="section"
@@ -312,7 +326,7 @@ export default function VolunteerContent({
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={handleRejectVolunteer}
+                      onClick={(event) => confirmAction(event, "reject")}
                     >
                       Reject
                     </button>
@@ -321,12 +335,16 @@ export default function VolunteerContent({
                     <button
                       type="button"
                       className="btn btn-secondary"
-                      onClick={handleDeleteVolunteer}
+                      onClick={(event) => confirmAction(event, "delete")}
                     >
                       Delete
                     </button>
                   )}
-                  <button type="submit" className="btn btn-primary">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={(event) => confirmAction(event, "accept")}
+                  >
                     Accept
                   </button>
                 </div>

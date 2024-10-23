@@ -83,11 +83,17 @@ export default function ItemManagement({ events }) {
     fetchItems(); //fetch items when category changes
   }, [category]); //use effect will run everytime category changes
 
+  const confirmAction = (event, action) => {
+    if (window.confirm(action)) {
+      handleSubmit(event);
+    }
+  };
+
   return (
     <div className="ahehe">
       <form onSubmit={handleSubmit}>
         <button
-          type="submit"
+          type="button"
           className="btn btn-primary"
           style={{
             width: "fit-content",
@@ -95,6 +101,9 @@ export default function ItemManagement({ events }) {
             fontFamily: "Poppins",
             fontWeight: 500,
           }}
+          onClick={(event) =>
+            confirmAction(event, "Are you sure you want to deduct from stock?")
+          }
         >
           Deduct From Stock
         </button>

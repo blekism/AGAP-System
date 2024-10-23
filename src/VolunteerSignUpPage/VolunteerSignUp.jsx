@@ -126,6 +126,62 @@ function VolunteerSignUp() {
             <button type="submit" className="apply-button">
               APPLY
             </button>
+
+            <button
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmVolunteer"
+            >
+              Submit Application
+            </button>
+
+            {/* modaaaaal */}
+
+            <div
+              className="modal fade"
+              id="confirmVolunteer"
+              data-bs-backdrop="static"
+              data-bs-keyboard="false"
+              tabIndex="-1"
+              aria-labelledby="staticBackdropLabel"
+              aria-hidden="true"
+            >
+              <div className="modal-dialog modal-dialog-centered">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                      Confirm Volunteer Application
+                    </h1>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    Are you sure you want to register this account as a
+                    volunteer?
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-warning"
+                      data-bs-dismiss="modal"
+                    >
+                      No
+                    </button>
+                    <button
+                      type="submit"
+                      className="btn"
+                      data-bs-dismiss="modal"
+                    >
+                      Create an account
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </form>
         </div>
       </div>

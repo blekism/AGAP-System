@@ -74,10 +74,6 @@ export default function DonateContainer() {
       )
       .then(function (response) {
         console.log(response.data);
-        if (response.data.status === 201) {
-          alert("Donation Submitted!");
-          window.location.reload();
-        }
       });
   };
 
@@ -115,8 +111,59 @@ export default function DonateContainer() {
           ))}
         </div>
         <div className="SubmitDonationGroup">
-          <button type="submit">Submit Donation</button>
+          <button
+            type="button"
+            className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmSubmit"
+          >
+            Submit Donation
+          </button>
           <button>Cancel</button>
+        </div>
+
+        {/* modaaaal */}
+        <div
+          className="modal fade"
+          id="confirmSubmit"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                  Are you sure you want to submit this donation?
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">donation content here</div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-warning"
+                  data-bs-dismiss="modal"
+                >
+                  No
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>

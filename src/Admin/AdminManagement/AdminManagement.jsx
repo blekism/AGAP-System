@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
+import { Modal } from "bootstrap";
 
 export default function AdminManagement() {
   const [adminList, setAdminList] = useState([]);
   const [admin, setAdmin] = useState({
-    admin_id: "",
+    account_id: "",
     last_name: "",
     first_name: "",
     middle_name: "",
@@ -49,11 +50,6 @@ export default function AdminManagement() {
       )
       .then(function (response) {
         console.log(response.data);
-        if (response.data.status === 200) {
-          alert("Update successful!");
-        } else {
-          alert("Update failed!");
-        }
       })
       .catch(function (error) {
         console.log(error);
@@ -108,12 +104,21 @@ export default function AdminManagement() {
       )
       .then(function (response) {
         console.log(response.data);
-        if (response.data.status === 201) {
-          console.log("Insert successful!");
-        } else {
-          console.log("Insert failed!");
-        }
       });
+  };
+
+  const confirmAction = (event, action) => {
+    const confirmMessage =
+      action === "accept"
+        ? "Are you sure you want to update this admin?"
+        : "Are you sure you want to add this admin?";
+    if (window.confirm(confirmMessage)) {
+      if (action === "accept") {
+        handleSubmit(event);
+      } else if (action === "add") {
+        handleNewAdminSubmit(event);
+      }
+    }
   };
 
   return (
@@ -166,7 +171,7 @@ export default function AdminManagement() {
                   className="btn btn-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#AdminModal"
-                  onClick={() => handleItemClick(admin.admin_id)}
+                  onClick={() => handleItemClick(admin.account_id)}
                 >
                   Action
                 </button>
@@ -210,7 +215,7 @@ export default function AdminManagement() {
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     readOnly
-                    value={admin.admin_id}
+                    value={admin.account_id}
                     name="account_id"
                     onChange={handleChange}
                   />
@@ -227,12 +232,6 @@ export default function AdminManagement() {
                   name="first_name"
                   onChange={handleChange}
                   title={"First Name"}
-                />
-                <InputTemplate
-                  value={admin.middle_name}
-                  name="middle_name"
-                  onChange={handleChange}
-                  title={"Middle Name"}
                 />
 
                 <InputTemplate
@@ -252,12 +251,17 @@ export default function AdminManagement() {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-danger"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  // onClick={showConfirmDialog}
+                  onClick={(event) => confirmAction(event, "accept")}
+                >
                   Understood
                 </button>
               </div>
@@ -303,12 +307,6 @@ export default function AdminManagement() {
                   onChange={handleNewAdminChange}
                   title={"First Name"}
                 />
-                <InputTemplate
-                  value={newAdmin.middle_name}
-                  name="middle_name"
-                  onChange={handleNewAdminChange}
-                  title={"Middle Name"}
-                />
 
                 <InputTemplate
                   value={newAdmin.email}
@@ -335,15 +333,23 @@ export default function AdminManagement() {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn btn-danger"
                   data-bs-dismiss="modal"
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={(event) => confirmAction(event, "add")}
+                >
                   Understood
                 </button>
               </div>
+
+              {/* confirm new admin start */}
+
+              {/* confirm new admin end*/}
             </form>
           </div>
         </div>

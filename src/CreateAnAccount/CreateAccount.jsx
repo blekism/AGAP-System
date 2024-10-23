@@ -247,8 +247,6 @@ function CreateAccount() {
             </div>
           </div>
 
-          {/* Province and Street Address */}
-          <div className="form-group"></div>
           <div className="form-group">
             <label htmlFor="currentAddress" style={{ color: "#354290" }}>
               Current Address
@@ -286,9 +284,60 @@ function CreateAccount() {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn">
+          {/* <button type="submit" className="btn">
             Create an account
+          </button> */}
+
+          <button
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#confirmRegister"
+          >
+            Create an Account
           </button>
+
+          {/* modaaaal */}
+
+          <div
+            className="modal fade"
+            id="confirmRegister"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    Confirm Registration
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  Are you sure you want to register this account?
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    No
+                  </button>
+                  <button type="submit" className="btn" data-bs-dismiss="modal">
+                    Create an account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
       </div>
 

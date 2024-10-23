@@ -105,7 +105,6 @@ export default function VolunteerPendingDonations() {
                   <th scope="col">DONOR</th>
                   <th scope="col">RECEIPIENT</th>
                   <th scope="col">STATUS</th>
-                  {/* <th scope="col">ACTION</th> */}
                   <th scope="col">VIEW ITEMS</th>
                 </tr>
               </thead>
@@ -118,30 +117,6 @@ export default function VolunteerPendingDonations() {
                       <td>{donation.donor_lastName}</td>
                       <td>{donation.recipient_type}</td>
                       <td>{donation.status_name}</td>
-                      {/* <td>
-                        <button className="btn">
-                          <img
-                            src={Accept}
-                            alt="Time In"
-                            style={{
-                              width: "30px",
-                              height: "30px",
-                              padding: "none",
-                            }}
-                          />
-                        </button>
-                        <button className="btn">
-                          <img
-                            src={Reject}
-                            alt="Time In"
-                            style={{
-                              width: "30px",
-                              height: "30px",
-                              padding: "none",
-                            }}
-                          />
-                        </button>
-                      </td> */}
                       <td>
                         <div className="ViewItemsModal-ParentCont">
                           <button
@@ -207,12 +182,11 @@ export default function VolunteerPendingDonations() {
                                     type="button"
                                     className="btn btn-primary"
                                     data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalToggle2"
+                                    data-bs-target="#acceptDonationConfirmationModal"
                                     style={{
                                       background: "#354290",
                                       color: "white",
                                     }}
-                                    onClick={handleItemUpdate}
                                   >
                                     ACCEPT
                                   </button>
@@ -228,6 +202,61 @@ export default function VolunteerPendingDonations() {
                                   >
                                     REJECT
                                   </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="AcceptDonationConfirmationModal">
+                            <div
+                              className="modal fade"
+                              id="acceptDonationConfirmationModal"
+                              aria-hidden="true"
+                              aria-labelledby="acceptDonationConfirmationModalLabel"
+                              tabIndex="-1"
+                            >
+                              <div className="modal-dialog  modal-dialog-centered">
+                                <div className="modal-content">
+                                  <div className="modal-header">
+                                    <h5 className="modal-title">
+                                      Confirmation
+                                    </h5>
+                                  </div>
+
+                                  <div
+                                    className="body"
+                                    style={{
+                                      height: "5vh",
+                                      paddingLeft: "20px",
+                                      paddingTop: "10px",
+                                    }}
+                                  >
+                                    <h5
+                                      style={{
+                                        fontWeight: "400",
+                                      }}
+                                    >
+                                      Are you sure you want to accept this
+                                      Donation?
+                                    </h5>
+                                  </div>
+                                  <div className="modal-footer">
+                                    <button
+                                      className="btn btn-primary"
+                                      onClick={handleItemUpdate}
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#exampleModalToggle2"
+                                    >
+                                      Yes
+                                    </button>
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger"
+                                      data-bs-dismiss="modal"
+                                    >
+                                      No
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
                             </div>

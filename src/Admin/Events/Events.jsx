@@ -281,6 +281,27 @@ export default function Events({
     }
   };
 
+  const confirmAction = (event, action) => {
+    let confirmMessage = "";
+
+    if (action === "viewEvent") {
+      confirmMessage = "Are you sure you want to accept these changes?";
+    } else if (action === "addAnnouncement") {
+      confirmMessage = "Are you sure you want to add this anouncement?";
+    } else if (action === "AddEvents") {
+      confirmMessage = "Are you sure you want to add this event?";
+    }
+    if (window.confirm(confirmMessage)) {
+      if (action === "viewEvent") {
+        handleSubmit(event);
+      } else if (action === "addAnnouncement") {
+        handleAddEventAnnouncementSubmit(event);
+      } else if (action === "AddEvents") {
+        handleAddEventSubmit(event);
+      }
+    }
+  };
+
   //pagination for event announcement preview end
 
   return (
@@ -497,7 +518,11 @@ export default function Events({
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={(event) => confirmAction(event, "viewEvent")}
+                  className="btn btn-primary"
+                >
                   Understood
                 </button>
               </div>
@@ -645,7 +670,11 @@ export default function Events({
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={(event) => confirmAction(event, "addAnnouncement")}
+                  className="btn btn-primary"
+                >
                   Add Announcement
                 </button>
               </div>
@@ -725,7 +754,11 @@ export default function Events({
                 >
                   Close
                 </button>
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  onClick={(event) => confirmAction(event, "AddEvents")}
+                  className="btn btn-primary"
+                >
                   Understood
                 </button>
               </div>

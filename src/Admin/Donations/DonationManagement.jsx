@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import { Modal } from "bootstrap";
 
 export default function DonationContent({
   donations,
@@ -76,6 +77,20 @@ export default function DonationContent({
       });
   };
 
+  const confirmAction = (action) => {
+    const confirmMessage =
+      action === "accept"
+        ? "Are you sure you want to accept this donation?"
+        : "Are you sure you want to decline this donation?";
+    if (window.confirm(confirmMessage)) {
+      if (action === "accept") {
+        handleUpdate();
+      } else {
+        handleDecline();
+      }
+    }
+  };
+
   return (
     <div
       style={{ paddingRight: "10px", overflowY: "auto", maxHeight: "750px" }}
@@ -134,21 +149,18 @@ export default function DonationContent({
           ))}
         </tbody>
       </table>
+
       <div
         className="modal fade"
         id={modalId}
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
+        tabIndex="-1"
+        aria-labelledby={modalId + "Label"}
       >
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
-              </h1>
+              <h1 className="modal-title fs-5">Modal title</h1>
               <button
                 type="button"
                 className="btn-close"
@@ -185,14 +197,14 @@ export default function DonationContent({
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={handleDecline}
+                  onClick={() => confirmAction("decline")}
                 >
                   Decline
                 </button>
                 <button
                   type="button"
                   className="btn btn-primary"
-                  onClick={handleUpdate}
+                  onClick={() => confirmAction("accept")}
                 >
                   Accept
                 </button>

@@ -197,6 +197,7 @@ export default function DonationContent({
                 <button
                   type="button"
                   className="btn btn-secondary"
+                  data-bs-dismiss="modal"
                   onClick={() => confirmAction("decline")}
                 >
                   Decline
@@ -204,6 +205,7 @@ export default function DonationContent({
                 <button
                   type="button"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                   onClick={() => confirmAction("accept")}
                 >
                   Accept

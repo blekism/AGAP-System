@@ -326,6 +326,7 @@ export default function VolunteerContent({
                     <button
                       type="button"
                       className="btn btn-secondary"
+                      data-bs-dismiss="modal"
                       onClick={(event) => confirmAction(event, "reject")}
                     >
                       Reject
@@ -335,6 +336,7 @@ export default function VolunteerContent({
                     <button
                       type="button"
                       className="btn btn-secondary"
+                      data-bs-dismiss="modal"
                       onClick={(event) => confirmAction(event, "delete")}
                     >
                       Delete
@@ -343,6 +345,7 @@ export default function VolunteerContent({
                   <button
                     type="button"
                     className="btn btn-primary"
+                    data-bs-dismiss="modal"
                     onClick={(event) => confirmAction(event, "accept")}
                   >
                     Accept

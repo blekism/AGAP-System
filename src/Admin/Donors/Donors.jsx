@@ -260,6 +260,7 @@ export default function DonorContent({ donors }) {
                 <button
                   type="button"
                   className="btn btn-primary"
+                  data-bs-dismiss="modal"
                   onClick={(event) =>
                     confirmAction(
                       event,

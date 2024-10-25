@@ -520,6 +520,7 @@ export default function Events({
                 </button>
                 <button
                   type="button"
+                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "viewEvent")}
                   className="btn btn-primary"
                 >
@@ -672,6 +673,7 @@ export default function Events({
                 </button>
                 <button
                   type="button"
+                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "addAnnouncement")}
                   className="btn btn-primary"
                 >
@@ -756,6 +758,7 @@ export default function Events({
                 </button>
                 <button
                   type="submit"
+                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "AddEvents")}
                   className="btn btn-primary"
                 >

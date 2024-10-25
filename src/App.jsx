@@ -24,43 +24,42 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LogIn />} />
-          <Route path="/LandingPage" element={<Landing />} />
-          <Route path="/Donate" element={<DonationPage />} />
-          <Route path="/Home" element={<DonateVolunteerPage />} />
-          <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/Volunteers" element={<VolunteerPage />} />
-          <Route path="/VolunteerDashboard" element={<VolunteerDashboard />} />
-          <Route
-            path="/VolunteerPendingDonations"
-            element={<VolunteerPendingDonations />}
-          />
-          <Route
-            path="/VolunteerAcceptedDonations"
-            element={<VolunteerAcceptedDonations />}
-          />
-          <Route path="/VolunteerLogPhase2" element={<VolunteerLogPhase2 />} />
-          <Route path="/VolunteerLogPhase3" element={<VolunteerLogPhase3 />} />
-          <Route path="/YourDonation" element={<YourDonationsPage />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<LogIn />} />
+        <Route path="/LandingPage" element={<Landing />} />
+        <Route path="/Donate" element={<DonationPage />} />
+        <Route path="/Home" element={<DonateVolunteerPage />} />
+        <Route path="/AdminPage" element={<AdminPage />} />
+        <Route path="/Volunteers" element={<VolunteerPage />} />
+        <Route path="/VolunteerDashboard" element={<VolunteerDashboard />} />
+        <Route
+          path="/VolunteerPendingDonations"
+          element={<VolunteerPendingDonations />}
+        />
+        <Route
+          path="/VolunteerAcceptedDonations"
+          element={<VolunteerAcceptedDonations />}
+        />
+        <Route path="/VolunteerLogPhase2" element={<VolunteerLogPhase2 />} />
+        <Route path="/VolunteerLogPhase3" element={<VolunteerLogPhase3 />} />
+        <Route path="/YourDonation" element={<YourDonationsPage />} />
 
-          <Route path="/CreateAccount" element={<CreateAnAccount />} />
-          <Route path="/VolunteerSignUp" element={<VolunteerSignUpPage />} />
-          <Route path="/VerifyAccount" element={<VerifyAccount />} />
-          <Route path="/ProfilePage" element={<ProfilePage />} />
-          <Route
-            path="/VolunteerConditionalRender"
-            element={<VolunteerConditionalRender />}
-          />
-          <Route path="/LoginAdmin" element={<LoginAdmin />} />
-          <Route
-            path="/VolunteerPendingApply"
-            element={<VolunteerPendingApply />}
-          />
+        <Route path="/CreateAccount" element={<CreateAnAccount />} />
+        <Route path="/VolunteerSignUp" element={<VolunteerSignUpPage />} />
+        <Route path="/VerifyAccount" element={<VerifyAccount />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
+        <Route
+          path="/VolunteerConditionalRender"
+          element={<VolunteerConditionalRender />}
+        />
+        <Route path="/LoginAdmin" element={<LoginAdmin />} />
+        <Route
+          path="/VolunteerPendingApply"
+          element={<VolunteerPendingApply />}
+        />
 
-          {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
+        {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />
           <Route path="/ManageVolunteers" element={<div>Manage Volunteers Component</div>} />
           <Route path="/ManageDonors" element={<div>Manage Donors Component</div>} />
@@ -69,12 +68,11 @@ function App() {
           <Route path="/ManageItems" element={<div>Manage Items Component</div>} />
           <Route path="/Profile" element={<div>Manage Items Component</div>} /> */}
 
-          {/* <Route path="/Volunteer" element={<Volunteer />} /> */}
-          {/* <Route path="/YourDonations" element={<YourDonations />} /> */}
-          {/* <Route path="/Profile" element={<Profile />} /> */}
-        </Routes>
-      </Router>
-    </>
+        {/* <Route path="/Volunteer" element={<Volunteer />} /> */}
+        {/* <Route path="/YourDonations" element={<YourDonations />} /> */}
+        {/* <Route path="/Profile" element={<Profile />} /> */}
+      </Routes>
+    </Router>
   );
 }
 

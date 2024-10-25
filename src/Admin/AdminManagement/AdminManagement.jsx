@@ -259,7 +259,7 @@ export default function AdminManagement() {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  // onClick={showConfirmDialog}
+                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "accept")}
                 >
                   Understood
@@ -342,6 +342,7 @@ export default function AdminManagement() {
                   type="button"
                   className="btn btn-primary"
                   onClick={(event) => confirmAction(event, "add")}
+                  data-bs-dismiss="modal"
                 >
                   Understood
                 </button>

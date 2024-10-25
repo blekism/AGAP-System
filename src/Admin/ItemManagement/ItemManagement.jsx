@@ -101,6 +101,7 @@ export default function ItemManagement({ events }) {
             fontFamily: "Poppins",
             fontWeight: 500,
           }}
+          data-bs-dismiss="modal"
           onClick={(event) =>
             confirmAction(event, "Are you sure you want to deduct from stock?")
           }

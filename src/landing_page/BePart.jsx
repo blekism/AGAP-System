@@ -15,15 +15,11 @@ function BePart() {
           <div className="bePart-donate">
             <img src={Donate} className="donate"></img>
             <h1 className="donate-title">Donate</h1>
-            <h2 className="donate-text">Go to Donate Page</h2>
           </div>
 
           <div className="bePart-volunteer">
             <img src={Volunteer} className="volunteer"></img>
             <h1 className="volunteer-title">Volunteer</h1>
-            <h2 className="volunteer-text">
-              Register to be NUD ComEx Volunteer
-            </h2>
           </div>
         </div>
       </div>

@@ -139,6 +139,7 @@ export default function VolunteerContent({
                 fontSize: "17px",
                 fontFamily: "Poppins",
                 fontWeight: "500",
+                textAlign: "center",
               }}
             >
               <th scope="col" style={{ width: "13%" }}>
@@ -176,6 +177,7 @@ export default function VolunteerContent({
                   fontSize: "15px",
                   fontFamily: "Poppins",
                   fontWeight: 500,
+                  textAlign: "center",
                 }}
               >
                 <td>{member.account_id}</td>
@@ -194,6 +196,7 @@ export default function VolunteerContent({
                     onClick={() =>
                       handleItemClick(member.account_id, member.is_volunteer)
                     }
+                    style={{ backgroundColor: "#354290", color: "#ffffff" }}
                   >
                     View
                   </button>
@@ -211,11 +214,11 @@ export default function VolunteerContent({
           aria-labelledby="staticBackdropLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog">
+          <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
                 <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  Modal title
+                  VOLUNTEER INFORMATION
                 </h1>
                 <button
                   type="button"
@@ -325,21 +328,11 @@ export default function VolunteerContent({
                   {modalId === "applicantItems" && (
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn btn-danger"
                       data-bs-dismiss="modal"
                       onClick={(event) => confirmAction(event, "reject")}
                     >
                       Reject
-                    </button>
-                  )}
-                  {modalId === "memberItems" && (
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      data-bs-dismiss="modal"
-                      onClick={(event) => confirmAction(event, "delete")}
-                    >
-                      Delete
                     </button>
                   )}
                   <button
@@ -347,9 +340,23 @@ export default function VolunteerContent({
                     className="btn btn-primary"
                     data-bs-dismiss="modal"
                     onClick={(event) => confirmAction(event, "accept")}
+                    style={{
+                      background: "#354290",
+                      color: "white",
+                    }}
                   >
                     Accept
                   </button>
+                  {modalId === "memberItems" && (
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      data-bs-dismiss="modal"
+                      onClick={(event) => confirmAction(event, "delete")}
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </form>
             </div>

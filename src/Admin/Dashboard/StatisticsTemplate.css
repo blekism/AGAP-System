@@ -1,26 +1,31 @@
 .statistics-template {
   display: flex;
+  height: fit-content;
   flex-direction: column;
   padding: 20px;
   align-items: start;
   background-color: #ffffff;
   width: 100%;
   border-radius: 10px;
+  align-items: center;
+  justify-content: center;
 }
 
 .statistics-template .stats-title {
   font-family: "Poppins", sans-serif;
   font-size: 30px; /* Reduced by 10px */
   font-weight: 600;
-  color: black;
+  color: #354290;
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .statistics-template .stats-current {
   font-family: "Poppins", sans-serif;
-  font-size: 50px; /* Reduced by 10px */
-  font-weight: 600;
-  color: black;
+  font-size: 60px; /* Reduced by 10px */
+  font-weight: 650;
+  color: #354290;
+  text-align: center;
 }
 
 .statistics-template .stats-new {

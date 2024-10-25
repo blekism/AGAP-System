@@ -4,7 +4,7 @@ import "./VolunteerDashboardSidebar.css";
 import Logout from "../assets/images/logout.png";
 import Dashboard from "../assets/images/Dashboard.png";
 import Donation from "../assets/images/Donation.png";
-import Calendar from "../assets/images/calendar.png";
+import LogRecord from "../assets/images/LogRecord.png";
 
 export default function VolunteerDashboardSidebar() {
   const [activeLink, setActiveLink] = useState("");
@@ -77,7 +77,7 @@ export default function VolunteerDashboardSidebar() {
 
           <div className="VolunteerLog">
             <div className="VolunteerLog-Header">
-              <img src={Donation} alt="Donations Icon" />
+              <img src={LogRecord} alt="Donations Icon" />
               <p style={{ marginLeft: "10px" }}>Log Records</p>
             </div>
 
@@ -105,18 +105,6 @@ export default function VolunteerDashboardSidebar() {
         </div>
 
         <div className="VolunteerDashboard-sidebarContBottom">
-          <div className="VolunteerDashboardSettings">
-            <Link
-              to="/Home"
-              className={`VolunteerDashboard-sidebarLink ${
-                activeLink === "settings" ? "active" : ""
-              }`}
-              onClick={() => handleLinkClick("settings")}
-            >
-              Settings
-            </Link>
-          </div>
-
           <div className="VolunteerDashboardLogout-ButtonContainer">
             <img src={Logout} alt="Logout Icon" />
             <button className="VolunteerDashboardLogout-button">Logout</button>

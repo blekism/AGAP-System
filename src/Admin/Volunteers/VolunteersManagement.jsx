@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import VolunteersTables from "./Volunteers.jsx";
-import Entered from "../../assets/images/entered.png";
-import Stocked from "../../assets/images/stocked.png";
+import Member from "../../assets/images/Member.png";
+import Close from "../../assets/images/close.png";
+import Applicants from "../../assets/images/Applicants.png";
 
 export default function VolunteersManagement() {
   const [category, setCategory] = useState({ is_volunteer: "volunteer" });
@@ -54,7 +55,7 @@ export default function VolunteersManagement() {
           }}
         >
           <li className="nav-item" role="presentation">
-            <img src={Entered} alt="Clothes Icon" />
+            <img src={Member} alt="Clothes Icon" />
 
             <button
               className="nav-link active"
@@ -71,7 +72,7 @@ export default function VolunteersManagement() {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-            <img src={Stocked} alt="Clothes Icon" />
+            <img src={Applicants} alt="Clothes Icon" />
 
             <button
               className="nav-link"
@@ -88,7 +89,7 @@ export default function VolunteersManagement() {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-            <img src={Stocked} alt="Clothes Icon" />
+            <img src={Close} alt="Clothes Icon" />
 
             <button
               className="nav-link"

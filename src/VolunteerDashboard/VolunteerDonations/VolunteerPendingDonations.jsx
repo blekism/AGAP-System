@@ -153,14 +153,18 @@ export default function VolunteerPendingDonations() {
                         <div className="ViewItemsModal-ParentCont">
                           <button
                             type="button"
-                            className="viewItemsBtn"
+                            className="btn"
                             data-bs-toggle="modal"
                             data-bs-target="#viewItemsModalToggle"
                             onClick={() =>
                               handleButtonClick(donation.donation_id)
                             }
+                            style={{
+                              backgroundColor: "#354290",
+                              color: "#ffffff",
+                            }}
                           >
-                            ITEMS
+                            Items
                           </button>
 
                           <div
@@ -168,12 +172,22 @@ export default function VolunteerPendingDonations() {
                             id="viewItemsModalToggle"
                             aria-hidden="true"
                             aria-labelledby="viewItemsModalToggleLabel"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
                             tabIndex="-1"
                           >
-                            <div className="modal-dialog  modal-dialog-centered">
+                            <div className="modal-dialog modal-lg modal-dialog-centered">
                               <div className="modal-content">
                                 <div className="modal-header">
-                                  <h5 className="modal-title">ITEMS LIST</h5>
+                                  <h5
+                                    className="modal-title"
+                                    style={{
+                                      color: "black",
+                                      fontWeight: "600",
+                                    }}
+                                  >
+                                    DONATION ITEMS LIST
+                                  </h5>
                                   <button
                                     type="button"
                                     className="btn-close"
@@ -212,7 +226,7 @@ export default function VolunteerPendingDonations() {
                                 <div className="modal-footer">
                                   <button
                                     type="submit"
-                                    className="btn btn-primary"
+                                    className="btn"
                                     onClick={() => confirmAction("accept")}
                                     data-bs-dismiss="modal"
                                     style={{
@@ -224,13 +238,9 @@ export default function VolunteerPendingDonations() {
                                   </button>
                                   <button
                                     type="button"
-                                    className="btn btn-secondary"
+                                    className="btn btn-danger"
                                     onClick={() => confirmAction("decline")}
                                     data-bs-dismiss="modal"
-                                    // style={{
-                                    //   background: "#354290",
-                                    //   color: "white",
-                                    // }}
                                   >
                                     Decline
                                   </button>

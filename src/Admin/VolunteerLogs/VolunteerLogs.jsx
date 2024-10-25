@@ -3,8 +3,7 @@ import VolunteerLogsTable from "./VolunteerLogsTable.jsx";
 import "./VolunteerLogs.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Entered from "../../assets/images/entered.png";
-import Stocked from "../../assets/images/stocked.png";
+import LogRecord from "../../assets/images/LogRecord.png";
 
 export default function VolunteerLogs() {
   const [phase2LogData, setPhase2LogData] = useState([]);
@@ -49,7 +48,7 @@ export default function VolunteerLogs() {
           }}
         >
           <li className="nav-item" role="presentation">
-            <img src={Entered} alt="Clothes Icon" />
+            <img src={LogRecord} alt="Clothes Icon" />
 
             <button
               className="nav-link active"
@@ -65,7 +64,7 @@ export default function VolunteerLogs() {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-            <img src={Stocked} alt="Clothes Icon" />
+            <img src={LogRecord} alt="Clothes Icon" />
 
             <button
               className="nav-link"

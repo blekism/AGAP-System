@@ -82,6 +82,7 @@ export default function DonorContent({ donors }) {
               fontSize: "17px",
               fontFamily: "Poppins",
               fontWeight: "500",
+              textAlign: "center",
             }}
           >
             <th scope="col">Donor ID</th>
@@ -105,6 +106,7 @@ export default function DonorContent({ donors }) {
                 fontSize: "15px",
                 fontFamily: "Poppins",
                 fontWeight: 500,
+                textAlign: "center",
               }}
             >
               <td>{donor.account_id}</td>
@@ -124,6 +126,7 @@ export default function DonorContent({ donors }) {
                   data-bs-toggle="modal"
                   data-bs-target="#donorsModal"
                   onClick={() => handleItemClick(donor.account_id)}
+                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
                   Action
                 </button>
@@ -141,11 +144,11 @@ export default function DonorContent({ donors }) {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                DONOR INFORMATION
               </h1>
               <button
                 type="button"
@@ -252,13 +255,6 @@ export default function DonorContent({ donors }) {
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
                   className="btn btn-primary"
                   data-bs-dismiss="modal"
                   onClick={(event) =>
@@ -267,8 +263,16 @@ export default function DonorContent({ donors }) {
                       "Are you Sure you want to update this donor?"
                     )
                   }
+                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
                   Understood
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
                 </button>
               </div>
             </form>

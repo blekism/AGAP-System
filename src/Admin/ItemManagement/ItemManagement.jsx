@@ -100,6 +100,8 @@ export default function ItemManagement({ events }) {
             fontSize: "20px",
             fontFamily: "Poppins",
             fontWeight: 500,
+            backgroundColor: "#354290",
+            color: "#ffffff",
           }}
           data-bs-dismiss="modal"
           onClick={(event) =>

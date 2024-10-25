@@ -2,18 +2,25 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: start;
     justify-content: space-between;
-    padding: 25px;
-    height: 79.5vh;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50);
-    background-color: white;     
+    padding: 30px;
+    padding-right: 40px;
+    height: 84vh;
+    /* box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.50); */
+    background-color: white;
+    flex-grow: 0;  
 }
 
-.VolunteerDashboard-sidebarCont P{
-    font-family: "Poppins", sans-serif;
+.VolunteerDashboard-sidebarCont p{
+    font-family: "Poppins";
     font-size: 20px;
     font-weight: 600;
+}
+
+.VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboard{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop div{
@@ -22,6 +29,8 @@
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop p{
     margin-bottom: 10px;
+    font-family: "Poppins";
+
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop img{
@@ -43,12 +52,12 @@
     font-size: 20px;
     font-weight: 600;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
 }
 
 .VolunteerDashboard-sidebarCont div .VolunteerDashboard-sidebarLink.active{
-    color: #36419e; /* Example: change background color */
-    background-color: #FCD125;
+    color: white; /* Example: change background color */
+    background-color: #36419e;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Header{
@@ -57,6 +66,7 @@
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations p{
     margin-bottom: 5px;
+    font-family: "Poppins";
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub .VolunteerDashboard-sidebarLink{
@@ -65,13 +75,13 @@
     font-family: "Poppins", sans-serif;
     font-size: 18px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
     width: fit-content;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub .VolunteerDashboard-sidebarLink.active{
-    color: #36419e; /* Example: change background color */
-    background-color: #FCD125;
+    color: white; /* Example: change background color */
+    background-color: #36419e;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardDonations .VolunteerDashboardDonations-Sub{
@@ -88,6 +98,7 @@
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog p{
     margin-bottom: 5px;
+    font-family: "Poppins";
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub .VolunteerDashboard-sidebarLink{
@@ -96,13 +107,13 @@
     font-family: "Poppins", sans-serif;
     font-size: 18px;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 7px;
     width: fit-content;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub .VolunteerDashboard-sidebarLink.active{
-    color: #36419e; /* Example: change background color */
-    background-color: #FCD125;
+    color: white; /* Example: change background color */
+    background-color: #36419e;
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerLog .VolunteerLog-Sub{
@@ -114,6 +125,7 @@
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardYourRecords p{
     margin-bottom: 5px;
+    font-family: "Poppins";
 }
 
 .VolunteerDashboard-sidebarCont .VolunteerDashboard-sidebarContTop .VolunteerDashboardYourRecords .VolunteerDashboardYourRecords-Sub .VolunteerDashboard-sidebarLink{

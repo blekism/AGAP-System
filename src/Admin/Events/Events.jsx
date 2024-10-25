@@ -312,6 +312,7 @@ export default function Events({
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target={addEventsModalTarget}
+          style={{ backgroundColor: "#354290", color: "#ffffff" }}
         >
           Add Event
         </button>
@@ -320,6 +321,7 @@ export default function Events({
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target={addEventAnnouncementModalTarget}
+          style={{ backgroundColor: "#354290", color: "#ffffff" }}
         >
           Add Event Announcement
         </button>
@@ -329,6 +331,7 @@ export default function Events({
           data-bs-toggle="modal"
           data-bs-target={eventAnnouncementModalTarget}
           onClick={() => handleReadAnnouncement()}
+          style={{ backgroundColor: "#354290", color: "#ffffff" }}
         >
           View Event Announcement
         </button>
@@ -406,6 +409,7 @@ export default function Events({
                   data-bs-toggle="modal"
                   data-bs-target={eventViewModalTarget}
                   onClick={() => handleItemClick(event.evenet_id)}
+                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
                   Items
                 </button>
@@ -424,11 +428,11 @@ export default function Events({
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                EVENT DETAILS
               </h1>
               <button
                 type="button"
@@ -513,18 +517,22 @@ export default function Events({
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
                   data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "viewEvent")}
                   className="btn btn-primary"
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
                 >
                   Understood
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
                 </button>
               </div>
             </form>
@@ -543,11 +551,11 @@ export default function Events({
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-lg">
+        <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Event Announcement Preview
+                EVENT ANNOUNCEMENT PREVIEW
               </h1>
               <button
                 type="button"
@@ -598,13 +606,20 @@ export default function Events({
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-primary"
+                style={{
+                  background: "#354290",
+                  color: "white",
+                }}
+              >
+                Understood
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
                 data-bs-dismiss="modal"
               >
                 Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Understood
               </button>
             </div>
           </div>
@@ -622,11 +637,11 @@ export default function Events({
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Event Announcements
+                EVENT ANNOUNCEMENTS
               </h1>
               <button
                 type="button"
@@ -659,6 +674,10 @@ export default function Events({
                   type="button"
                   className="btn btn-primary"
                   onClick={handleImageUpload}
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
                 >
                   Add Image
                 </button>
@@ -666,18 +685,22 @@ export default function Events({
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
-                  type="button"
                   data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "addAnnouncement")}
                   className="btn btn-primary"
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
                 >
                   Add Announcement
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
                 </button>
               </div>
             </form>
@@ -696,11 +719,11 @@ export default function Events({
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                ADD EVENT
               </h1>
               <button
                 type="button"
@@ -750,19 +773,23 @@ export default function Events({
               </div>
               <div className="modal-footer">
                 <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button
                   type="submit"
                   data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "AddEvents")}
                   className="btn btn-primary"
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
                 >
                   Understood
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                >
+                  Close
                 </button>
               </div>
             </form>

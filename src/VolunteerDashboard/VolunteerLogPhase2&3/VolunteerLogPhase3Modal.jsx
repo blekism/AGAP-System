@@ -127,6 +127,8 @@ export default function VolunteerLogPhase3Modal() {
             id="volunteerLogPhase3Modal"
             aria-hidden="true"
             aria-labelledby="volunteerLogPhase3ModalLabel"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
             tabIndex="-1"
           >
             <div className="modal-dialog modal-lg modal-dialog-centered">

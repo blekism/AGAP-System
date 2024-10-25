@@ -6,16 +6,12 @@ export default function StatisticsTemplate({
   statsNumber,
   statsPercentage,
   statsIncreased,
+  styles,
 }) {
   return (
-    <div className="statistics-template">
+    <div className="statistics-template" style={{ height: styles || "25vh" }}>
       <p className="stats-title">{statsTitle}</p>
       <p className="stats-current">{statsNumber}</p>
-
-      <div className="stats-new">
-        <p className="stats-percent">{statsPercentage}</p>
-        <p className="stats-increased">{statsIncreased}</p>
-      </div>
     </div>
   );
 }

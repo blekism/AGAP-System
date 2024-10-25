@@ -49,6 +49,7 @@
   font-size: 30px;
   margin-top: 5%;
   font-weight: bold;
+  margin-bottom: 100px;
 }
 
 .donate-text,
@@ -59,10 +60,3 @@
   margin-bottom: 20%;
 }
 
-.donate-title:hover,
-.volunteer-title:hover,
-.donate-text:hover,
-.volunteer-text:hover {
-  text-decoration: underline;
-  cursor: pointer;
-}

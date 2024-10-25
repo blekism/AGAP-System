@@ -14,10 +14,16 @@
     padding: 40px;
 }
 
-.VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont p{
+.VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont .VolunteerLogPhase2-rightCont-header{
+    display: flex;
+    column-gap: 30px;
+    padding: 20px;
+}
+
+.VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont .VolunteerLogPhase2-rightCont-header p{
     font-weight: 600;
     font-size: 25px;
-
+    margin-top: 5px;
 }
 
 .VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont .table thead {

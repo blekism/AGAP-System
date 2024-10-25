@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import "./VolunteerLogPhase2.css";
 import VolunteerDashboardSidebar from "../VolunteerDashboardSidebar";
 import VolunteerNavHeader from "../VolunteerNavHeader";
+import VolunteerLogPhase2Modal from "./VolunteerLogPhase2Modal";
 
 export default function VolunteerLogPhase2() {
   const [volunteerPhase2Log, setVolunteerPhase2Log] = useState([]);
@@ -36,7 +37,12 @@ export default function VolunteerLogPhase2() {
             <VolunteerDashboardSidebar />
           </div>
           <div className="VolunteerLogPhase2-rightCont">
-            <p>PHASE 2 LOG</p>
+            <div className="VolunteerLogPhase2-rightCont-header">
+              <p>PHASE 2 LOG</p>
+              <div className="VolunteerLogPhase2-rightCont-logModal">
+                <VolunteerLogPhase2Modal />
+              </div>
+            </div>
             <table className="table table-striped">
               <thead>
                 <tr>

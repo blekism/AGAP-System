@@ -1,15 +1,16 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useCookies } from "react-cookie";
 import "./VolunteerAcceptedDonations.css";
 import VolunteerDashboardSidebar from "../VolunteerDashboardSidebar";
 import VolunteerNavHeader from "../VolunteerNavHeader";
 
 export default function VolunteerAcceptedDonations() {
-  const user = { account_id: "USER - 2024-12d6fd4" };
   const [donations, setDonations] = useState([]);
   const [identifier, setIdentifier] = useState([]);
   const [donationItems, setDonationItem] = useState([]);
+  const [cookies] = useCookies(["donor_token"]);
 
   const handleButtonClick = (id) => {
     setIdentifier(id);
@@ -46,8 +47,12 @@ export default function VolunteerAcceptedDonations() {
     axios
       .get(
         "http://localhost/agap-backend-main/api/phase2&3/read/readDonationsVolunteer.php",
-        user,
-        { headers: { "Content-Type": "application/json" } }
+        {
+          headers: {
+            Authorization: "Bearer " + cookies.donor_token,
+          },
+          withCredentials: true,
+        }
       )
       .then(function (response) {
         console.log(response.data);

@@ -18,9 +18,9 @@ export default function VolunteerDashboardSidebar() {
       setActiveLink("pending");
     } else if (path.includes("VolunteerAcceptedDonations")) {
       setActiveLink("accepted");
-    } else if (path.includes("VolunteerPhase2Log")) {
+    } else if (path.includes("VolunteerLogPhase2")) {
       setActiveLink("phase2");
-    } else if (path.includes("VolunteerPhase3Log")) {
+    } else if (path.includes("VolunteerLogPhase3")) {
       setActiveLink("phase3");
     } else if (path.includes("Home")) {
       setActiveLink("calendar");
@@ -101,19 +101,6 @@ export default function VolunteerDashboardSidebar() {
                 Phase 3
               </Link>
             </div>
-          </div>
-
-          <div className="VolunteerDashboardEventCalendar">
-            <img src={Calendar} alt="Calendar Icon" />
-            <Link
-              to="/Home"
-              className={`VolunteerDashboard-sidebarLink ${
-                activeLink === "calendar" ? "active" : ""
-              }`}
-              onClick={() => handleLinkClick("calendar")}
-            >
-              View Calendar
-            </Link>
           </div>
         </div>
 

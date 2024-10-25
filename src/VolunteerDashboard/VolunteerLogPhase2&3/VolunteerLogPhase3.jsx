@@ -2,9 +2,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
-import "./VolunteerLogPhase2.css";
+import "./VolunteerLogPhase3.css";
 import VolunteerDashboardSidebar from "../VolunteerDashboardSidebar";
 import VolunteerNavHeader from "../VolunteerNavHeader";
+import VolunteerLogPhase3Modal from "./VolunteerLogPhase3Modal";
 
 export default function VolunteerLogPhase2() {
   const [volunteerPhase3Log, setVolunteerPhase3Log] = useState([]);
@@ -29,14 +30,19 @@ export default function VolunteerLogPhase2() {
 
   return (
     <>
-      <div className="VolunteerLogPhase2-parentCont">
+      <div className="VolunteerLogPhase3-parentCont">
         <VolunteerNavHeader />
-        <div className="VolunteerLogPhase2-bodyCont">
-          <div className="VolunteerLogPhase2-leftCont">
+        <div className="VolunteerLogPhase3-bodyCont">
+          <div className="VolunteerLogPhase3-leftCont">
             <VolunteerDashboardSidebar />
           </div>
-          <div className="VolunteerLogPhase2-rightCont">
-            <p>PHASE 3 LOG</p>
+          <div className="VolunteerLogPhase3-rightCont">
+            <div className="VolunteerLogPhase3-rightCont-header">
+              <p>PHASE 3 LOG</p>
+              <div className="VolunteerLogPhase3-rightCont-logModal">
+                <VolunteerLogPhase3Modal />
+              </div>
+            </div>
             <table className="table table-striped">
               <thead>
                 <tr>

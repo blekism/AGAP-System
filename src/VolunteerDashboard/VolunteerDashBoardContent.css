@@ -85,14 +85,14 @@
     flex-direction: row;
     column-gap: 40px;
     padding: 40px;
-    padding-top: 5px;
+    padding-top: 0px;
     padding-bottom: 20px;
     align-items: center;
     /* background: yellow; */
 } 
 
 .VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-leftCont{
-    width: 50%;
+    width: 40%;
     height:fit-content;
     display: grid;
     flex-direction: column;
@@ -125,15 +125,14 @@
 
 
 .VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomCont .VolunteerDashboardContent-rightCont{
-    width: 50%;
-    height: fit-content;
+    width: 60%;
+    height: 70vh;
     display: grid;
     flex-direction: column;
     row-gap: 20px;
     padding: 20px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
     padding-bottom: 20px;
-    background-color: grey;
 }
 
 /* .VolunteerDashboardContent-parentCont .VolunteerDashboardContent-bottomContent .VolunteerDashboardContent-bottomContent1{

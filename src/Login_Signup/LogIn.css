@@ -59,14 +59,14 @@ html {
 }
 
 .text-asAdmin {
-  color: #354290;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  text-decoration: none;
-  margin-top: -25px;
-  display: block;
-  text-align: center;
+    color: #354290;
+    font-weight: 500;
+    font-size: 14px;          
+    line-height: 20px;
+    text-decoration: none;
+    margin-top: -25px;
+    display: block;
+    text-align: center;
 }
 
 .text-asAdmin:hover {

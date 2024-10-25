@@ -81,7 +81,11 @@ function LogIn() {
           <div className="login-form p-4 d-flex flex-column justify-content-between">
             <h1
               className="text-center mb-4"
-              style={{ fontSize: "36px", fontWeight: "600" }}
+              style={{
+                fontSize: "36px",
+                fontWeight: "600",
+                paddingBottom: "5%",
+              }}
             >
               Sign In
             </h1>
@@ -120,26 +124,14 @@ function LogIn() {
                   }}
                 />
               </div>
-              <div className="mb-3">
-                <a
-                  href="#"
-                  className="text-muted:hover"
-                  style={{
-                    lineHeight: "27.188px",
-                    fontFamily: "'Nunito Sans', sans-serif",
-                    color: "#6c757d",
-                  }}
-                >
-                  Forgot Your Password?
-                </a>
-              </div>
+
               <button type="submit" className="btn">
                 SIGN IN
               </button>
             </form>
 
             <div className="text-center mt-3">
-              <Link to="/LoginAdmin" className="text-asAdmin">
+              <Link className="text-asAdmin" to="/LoginAdmin">
                 Sign In as Admin.
               </Link>
             </div>

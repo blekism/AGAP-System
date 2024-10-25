@@ -1,0 +1,35 @@
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-bodyCont{
+    background-color: #f0f0f073;
+    display: flex;
+}
+   
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-bodyCont .VolunteerLogPhase3-leftCont{
+    width: 15%;
+    /* background-color: bisque; */
+}
+   
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-rightCont{
+    width: 85%;
+    background-color: #F0F0F0;
+    padding: 40px;
+}
+
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-rightCont .VolunteerLogPhase3-rightCont-header{
+    display: flex;
+    column-gap: 30px;
+    padding: 20px;
+}
+
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-rightCont .VolunteerLogPhase3-rightCont-header p{
+    font-weight: 600;
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-rightCont .table thead {
+    text-align: center;
+}
+
+.VolunteerLogPhase3-parentCont .VolunteerLogPhase3-rightCont .table tbody {
+    text-align: center;
+}

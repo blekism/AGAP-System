@@ -19,15 +19,15 @@ export default function NavBar() {
     <>
       <nav
         className="navbar navbar-expand-lg navbar-light"
-        style={{ margin: "0px", height: "10vh" }}
+        style={{ margin: "0px", height: "8vh" }}
       >
         <div className="container-fluid">
           <img
             src={AGAP}
             alt="agap logo"
             style={{
-              width: "100px",
-              height: "100px",
+              width: "70px",
+              height: "50px",
               marginLeft: "60px",
               marginTop: "0",
             }}

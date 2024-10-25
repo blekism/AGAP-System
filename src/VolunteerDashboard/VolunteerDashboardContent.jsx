@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import "./VolunteerDashboardContent.css";
-import VolunteerLogModal from "./VolunteerLogModal";
 import VolunteerStatistics from "../Admin/Dashboard/StatisticsTemplate.jsx";
+import Calendar from "../Admin/Dashboard/DashboardCalendar";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
-export default function VolunteerDashboardContent({
-  donationPercentage,
-  donationIncreased,
-}) {
+export default function VolunteerDashboardContent() {
   const [TotalDonationsAccepted, setTotalDonationsAccepted] = useState([]);
   const [TotalCompletedTask, setTotalCompletedTask] = useState([]);
   const [YourTotalDonations, setYourTotalDonations] = useState([]);
-  const [TotalHours, setTotalHours] = useState([]);
+  const [TotalHours, setTotalHours] = useState({});
   const [cookies] = useCookies(["donor_token"]);
+  const [event, setEvent] = useState([]);
 
   useEffect(() => {
     axios
@@ -84,6 +82,13 @@ export default function VolunteerDashboardContent({
         console.log("this is your total donations ", response.data.data);
         setTotalHours(response.data.data);
       });
+
+    axios
+      .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
+      .then(function (response) {
+        console.log(response.data); //read events
+        setEvent(response.data.data);
+      });
   }, []);
 
   return (
@@ -101,15 +106,12 @@ export default function VolunteerDashboardContent({
               >
                 INFORMATION
               </p>
-              <div className="VolunteerDashboardContent-leftCont-logModal">
-                <VolunteerLogModal />
-              </div>
             </div>
 
             <div className="VolunteerDashboardContent-leftCont-Statistics">
               <VolunteerStatistics
                 statsTitle="Total Hours"
-                statsNumber={TotalHours.your_total_hours}
+                statsNumber={TotalHours.your_total_hours ?? 0}
               />
               <VolunteerStatistics
                 statsTitle="Completed Task"
@@ -126,7 +128,7 @@ export default function VolunteerDashboardContent({
             </div>
           </div>
           <div className="VolunteerDashboardContent-rightCont">
-            <h1>right</h1>
+            <Calendar events={event} />
           </div>
         </div>
       </div>

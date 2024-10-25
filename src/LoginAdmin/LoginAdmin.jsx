@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import "./LogIn.css";
 import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 
-function LogIn() {
+export default function LoginAdmin() {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -68,7 +67,7 @@ function LogIn() {
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: "100vh",
-          width: "100vw",
+          width: "100%",
           position: "absolute",
           top: 0,
           left: 0,
@@ -77,17 +76,21 @@ function LogIn() {
           alignItems: "center",
         }}
       >
-        <div className="login-box d-flex">
-          <div className="login-form p-4 d-flex flex-column justify-content-between">
+        <div
+          className="login-box d-flex"
+          style={{ width: "33%", height: "50vh" }}
+        >
+          <div className="login-form p-4 d-flex flex-column ">
             <h1
               className="text-center mb-4"
               style={{
                 fontSize: "36px",
                 fontWeight: "600",
+                paddingTop: "10%",
                 paddingBottom: "5%",
               }}
             >
-              Sign In
+              Sign In As Admin
             </h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
@@ -130,38 +133,14 @@ function LogIn() {
               </button>
             </form>
 
-            <div className="text-center mt-3">
-              <Link className="text-asAdmin" to="/LoginAdmin">
-                Sign In as Admin.
+            <div className="text-center" style={{ paddingTop: "15%" }}>
+              <Link className="text-asAdmin" to="/">
+                Sign In as User.
               </Link>
             </div>
-          </div>
-
-          <div className="register-box p-4">
-            <h2>Hello!</h2>
-            <p>
-              Register with your personal account <br /> to use this app
-            </p>
-            <Link
-              className="btn2"
-              to="/CreateAccount"
-              style={{
-                background: "#354290",
-                border: "3.398px solid #FFF",
-                textAlign: "center",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                textDecoration: "none",
-              }}
-            >
-              SIGN UP
-            </Link>
           </div>
         </div>
       </div>
     </>
   );
 }
-
-export default LogIn;

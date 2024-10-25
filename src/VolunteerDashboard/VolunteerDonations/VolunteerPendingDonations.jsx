@@ -63,7 +63,7 @@ export default function VolunteerPendingDonations() {
       });
   }, []);
 
-  const handleItemUpdate = async () => {
+  const handleUpdate = async () => {
     if (identifier !== null) {
       console.log("Update button clicked");
 
@@ -85,6 +85,38 @@ export default function VolunteerPendingDonations() {
       }
     } else {
       console.log("No donation selected for update.");
+    }
+  };
+
+  const handleDecline = () => {
+    console.log("decline button clicked");
+
+    axios
+      .put(
+        "http://localhost/agap-backend-main/api/phase_1/update/updateDeclineDonation.php",
+        { donation_id: identifier },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then(function (response) {
+        console.log(response.data);
+      });
+  };
+
+  const confirmAction = (action) => {
+    const confirmMessage =
+      action === "accept"
+        ? "Are you sure you want to accept this donation?"
+        : "Are you sure you want to decline this donation?";
+    if (window.confirm(confirmMessage)) {
+      if (action === "accept") {
+        handleUpdate();
+      } else {
+        handleDecline();
+      }
     }
   };
 
@@ -179,84 +211,29 @@ export default function VolunteerPendingDonations() {
 
                                 <div className="modal-footer">
                                   <button
-                                    type="button"
+                                    type="submit"
                                     className="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#acceptDonationConfirmationModal"
+                                    onClick={() => confirmAction("accept")}
+                                    data-bs-dismiss="modal"
                                     style={{
                                       background: "#354290",
                                       color: "white",
                                     }}
                                   >
-                                    ACCEPT
+                                    Accept
                                   </button>
                                   <button
                                     type="button"
-                                    className="btn"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalToggle3"
-                                    style={{
-                                      background: "#354290",
-                                      color: "white",
-                                    }}
+                                    className="btn btn-secondary"
+                                    onClick={() => confirmAction("decline")}
+                                    data-bs-dismiss="modal"
+                                    // style={{
+                                    //   background: "#354290",
+                                    //   color: "white",
+                                    // }}
                                   >
-                                    REJECT
+                                    Decline
                                   </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="AcceptDonationConfirmationModal">
-                            <div
-                              className="modal fade"
-                              id="acceptDonationConfirmationModal"
-                              aria-hidden="true"
-                              aria-labelledby="acceptDonationConfirmationModalLabel"
-                              tabIndex="-1"
-                            >
-                              <div className="modal-dialog  modal-dialog-centered">
-                                <div className="modal-content">
-                                  <div className="modal-header">
-                                    <h5 className="modal-title">
-                                      Confirmation
-                                    </h5>
-                                  </div>
-
-                                  <div
-                                    className="body"
-                                    style={{
-                                      height: "5vh",
-                                      paddingLeft: "20px",
-                                      paddingTop: "10px",
-                                    }}
-                                  >
-                                    <h5
-                                      style={{
-                                        fontWeight: "400",
-                                      }}
-                                    >
-                                      Are you sure you want to accept this
-                                      Donation?
-                                    </h5>
-                                  </div>
-                                  <div className="modal-footer">
-                                    <button
-                                      className="btn btn-primary"
-                                      onClick={handleItemUpdate}
-                                      data-bs-toggle="modal"
-                                      data-bs-target="#exampleModalToggle2"
-                                    >
-                                      Yes
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="btn btn-danger"
-                                      data-bs-dismiss="modal"
-                                    >
-                                      No
-                                    </button>
-                                  </div>
                                 </div>
                               </div>
                             </div>

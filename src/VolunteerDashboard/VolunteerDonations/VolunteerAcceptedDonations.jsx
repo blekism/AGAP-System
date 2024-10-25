@@ -93,14 +93,18 @@ export default function VolunteerAcceptedDonations() {
                       <div className="ViewItemsModal-ParentCont">
                         <button
                           type="button"
-                          className="viewItemsBtn"
+                          className="btn"
                           data-bs-toggle="modal"
                           data-bs-target="#viewItemsModalToggle"
                           onClick={() =>
                             handleButtonClick(donation.donation_id)
                           }
+                          style={{
+                            backgroundColor: "#354290",
+                            color: "#ffffff",
+                          }}
                         >
-                          ITEMS
+                          Items
                         </button>
 
                         <div
@@ -108,12 +112,22 @@ export default function VolunteerAcceptedDonations() {
                           id="viewItemsModalToggle"
                           aria-hidden="true"
                           aria-labelledby="viewItemsModalToggleLabel"
+                          data-bs-backdrop="static"
+                          data-bs-keyboard="false"
                           tabIndex="-1"
                         >
-                          <div className="modal-dialog  modal-dialog-centered">
+                          <div className="modal-dialog modal-lg  modal-dialog-centered">
                             <div className="modal-content">
                               <div className="modal-header">
-                                <h5 className="modal-title">ITEMS LIST</h5>
+                                <h5
+                                  className="modal-title"
+                                  style={{
+                                    color: "black",
+                                    fontWeight: "600",
+                                  }}
+                                >
+                                  DONATION ITEMS LIST
+                                </h5>
                                 <button
                                   type="button"
                                   className="btn-close"

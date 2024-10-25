@@ -129,6 +129,7 @@ export default function AdminManagement() {
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#newAdminModal"
+          style={{ backgroundColor: "#354290", color: "#ffffff" }}
         >
           Add new Admin
         </button>
@@ -172,6 +173,7 @@ export default function AdminManagement() {
                   data-bs-toggle="modal"
                   data-bs-target="#AdminModal"
                   onClick={() => handleItemClick(admin.account_id)}
+                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
                   Action
                 </button>
@@ -189,11 +191,11 @@ export default function AdminManagement() {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                ADMIN INFORMATION
               </h1>
               <button
                 type="button"
@@ -251,18 +253,22 @@ export default function AdminManagement() {
               <div className="modal-footer">
                 <button
                   type="button"
+                  className="btn btn-primary"
+                  data-bs-dismiss="modal"
+                  onClick={(event) => confirmAction(event, "accept")}
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
+                >
+                  Understood
+                </button>
+                <button
+                  type="button"
                   className="btn btn-danger"
                   data-bs-dismiss="modal"
                 >
                   Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  onClick={(event) => confirmAction(event, "accept")}
-                >
-                  Understood
                 </button>
               </div>
             </form>
@@ -280,11 +286,11 @@ export default function AdminManagement() {
         aria-labelledby="staticBackdropLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                Modal title
+                ADD NEW ADMIN
               </h1>
               <button
                 type="button"
@@ -333,18 +339,22 @@ export default function AdminManagement() {
               <div className="modal-footer">
                 <button
                   type="button"
+                  className="btn btn-primary"
+                  onClick={(event) => confirmAction(event, "add")}
+                  data-bs-dismiss="modal"
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
+                >
+                  Understood
+                </button>
+                <button
+                  type="button"
                   className="btn btn-danger"
                   data-bs-dismiss="modal"
                 >
                   Close
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(event) => confirmAction(event, "add")}
-                  data-bs-dismiss="modal"
-                >
-                  Understood
                 </button>
               </div>
 

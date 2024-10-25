@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
-import AGAP from "../assets/images/agapnew.png";
+import AGAP from "../assets/images/agap_logo1.png";
 import { useCookies } from "react-cookie";
 
 export default function NavBar() {

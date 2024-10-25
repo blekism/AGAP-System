@@ -26,7 +26,8 @@
 }
 
 .AdminPageParentContainer .nav-pills .nav-item .nav-link.active {
-  color: #606060;
+  color: #ffffff;
+  background-color: #354290;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
@@ -34,7 +35,7 @@
 }
 
 .AdminPageParentContainer .nav-pills .nav-item .nav-link {
-  color: #606060;
+  color: black;
   text-decoration: none;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
@@ -60,13 +61,13 @@
   text-decoration: none;
 }
 
-.AdminPageParentContainer .nav-pills .nav-item .nav-link:focus {
+/* .AdminPageParentContainer .nav-pills .nav-item .nav-link:focus {
   color: #ffffff;
 }
 
 .AdminPageParentContainer .nav-pills .nav-item .nav-link:not(:focus) {
-  color: #000000; /* Example color for out-of-focus items */
-}
+  color: #000000; 
+} */
 
 .tab-content {
   flex-grow: 1;

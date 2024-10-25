@@ -102,6 +102,8 @@ export default function DonationContent({
               fontSize: "17px",
               fontFamily: "Poppins",
               fontWeight: "500",
+              margin: "auto",
+              textAlign: "center",
             }}
           >
             <th scope="col">Donation ID</th>
@@ -124,6 +126,7 @@ export default function DonationContent({
                 fontSize: "15px",
                 fontFamily: "Poppins",
                 fontWeight: 500,
+                textAlign: "center",
               }}
             >
               <td>{donation.donation_id}</td>
@@ -137,10 +140,11 @@ export default function DonationContent({
               <td>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn"
                   data-bs-toggle="modal"
                   data-bs-target={modalTarget}
                   onClick={() => handleItemClick(donation.donation_id)}
+                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
                   Items
                 </button>
@@ -156,11 +160,20 @@ export default function DonationContent({
         aria-hidden="true"
         tabIndex="-1"
         aria-labelledby={modalId + "Label"}
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-lg modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5">Modal title</h1>
+              <h1
+                className="modal-title fs-5"
+                style={{
+                  fontWeight: "650",
+                }}
+              >
+                DONATION ITEMS LIST
+              </h1>
               <button
                 type="button"
                 className="btn-close"
@@ -170,7 +183,7 @@ export default function DonationContent({
             </div>
             <div className="modal-body">
               <table className="table table-striped">
-                <thead>
+                <thead style={{ textAlign: "center" }}>
                   <tr>
                     <th scope="col">Item</th>
                     <th scope="col">Cost</th>
@@ -178,7 +191,7 @@ export default function DonationContent({
                     <th scope="col">Category</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody style={{ textAlign: "center" }}>
                   {/* mapping results from db goes here */}
                   {donationItemsList.map((item, key) => (
                     <tr key={key}>
@@ -196,19 +209,23 @@ export default function DonationContent({
               <div className="modal-footer">
                 <button
                   type="button"
-                  className="btn btn-secondary"
+                  className="btn"
+                  data-bs-dismiss="modal"
+                  onClick={() => confirmAction("accept")}
+                  style={{
+                    background: "#354290",
+                    color: "white",
+                  }}
+                >
+                  Accept
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-danger"
                   data-bs-dismiss="modal"
                   onClick={() => confirmAction("decline")}
                 >
                   Decline
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  onClick={() => confirmAction("accept")}
-                >
-                  Accept
                 </button>
               </div>
             )}

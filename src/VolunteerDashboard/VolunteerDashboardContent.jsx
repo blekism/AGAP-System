@@ -110,20 +110,23 @@ export default function VolunteerDashboardContent() {
 
             <div className="VolunteerDashboardContent-leftCont-Statistics">
               <VolunteerStatistics
-                statsTitle="Total Hours"
+                statsTitle="Your Total Hours"
                 statsNumber={TotalHours.your_total_hours ?? 0}
               />
               <VolunteerStatistics
                 statsTitle="Completed Task"
                 statsNumber={TotalCompletedTask.total_completed_task}
+                style={{ height: "30vh" }}
               />
               <VolunteerStatistics
                 statsTitle="Your Donations"
                 statsNumber={YourTotalDonations.your_total_donations}
+                style={{ height: "30vh" }}
               />
               <VolunteerStatistics
                 statsTitle="Accepted Donations"
                 statsNumber={TotalDonationsAccepted.total_donations}
+                style={{ height: "30vh" }}
               />
             </div>
           </div>

@@ -6,6 +6,7 @@ import Entered from "../../assets/images/entered.png";
 import Stocked from "../../assets/images/stocked.png";
 import Processed from "../../assets/images/process.png";
 import Give from "../../assets/images/give.png";
+import Close from "../../assets/images/close.png";
 
 export default function DonationContent() {
   const [category, setCategory] = useState({ status_id: 3000 });
@@ -120,7 +121,7 @@ export default function DonationContent() {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-            <img src={Give} alt="Clothes Icon" />
+            <img src={Close} alt="Clothes Icon" />
 
             <button
               className="nav-link"

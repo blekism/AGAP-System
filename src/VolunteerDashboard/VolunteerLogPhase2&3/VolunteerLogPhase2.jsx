@@ -48,8 +48,7 @@ export default function VolunteerLogPhase2() {
                 <tr>
                   <th scope="col">LOG ID</th>
                   <th scope="col">EVENT NAME</th>
-                  <th scope="col">LAST NAME</th>
-                  <th scope="col">FIRST NAME</th>
+                  <th scope="col">NAME</th>
                   <th scope="col">ACTIVITY</th>
                   <th scope="col">TIME IN</th>
                   <th scope="col">TIME OUT</th>
@@ -61,8 +60,7 @@ export default function VolunteerLogPhase2() {
                   <tr key={key}>
                     <td>{phase2Log.log_id}</td>
                     <td>{phase2Log.event_name}</td>
-                    <td>{phase2Log.last_name}</td>
-                    <td>{phase2Log.first_name}</td>
+                    <td>{phase2Log.last_name + ", " + phase2Log.first_name}</td>
                     <td>{phase2Log.activity}</td>
                     <td>{phase2Log.time_in}</td>
                     <td>{phase2Log.time_out}</td>

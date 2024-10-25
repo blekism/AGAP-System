@@ -4,12 +4,12 @@
 }
    
 .VolunteerLogPhase2-parentCont .VolunteerLogPhase2-bodyCont .VolunteerLogPhase2-leftCont{
-    width: 15%;
+    width: fit-content;
     /* background-color: bisque; */
 }
    
 .VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont{
-    width: 85%;
+    width: 90%;
     background-color: #F0F0F0;
     padding: 40px;
 }
@@ -24,12 +24,16 @@
     font-weight: 600;
     font-size: 25px;
     margin-top: 5px;
+    font-family: "Poppins";
 }
 
 .VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont .table thead {
     text-align: center;
+    font-family: "Poppins";
 }
 
 .VolunteerLogPhase2-parentCont .VolunteerLogPhase2-rightCont .table tbody {
     text-align: center;
+    font-family: "Poppins";
+    font-weight: 500;
 }

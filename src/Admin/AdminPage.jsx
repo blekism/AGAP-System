@@ -9,6 +9,8 @@ import Donation from "../assets/images/Donation.png";
 import Event from "../assets/images/Event.png";
 import Member from "../assets/images/Member.png";
 import Logout from "../assets/images/logout.png";
+import LogRecord from "../assets/images/LogRecord.png";
+import Admin from "../assets/images/admin.png";
 import DonationContent from "./Donations/DonationContent.jsx";
 import VolunteerContent from "./Volunteers/VolunteersManagement.jsx";
 import DonorContent from "./Donors/Donors.jsx";
@@ -246,7 +248,7 @@ export default function AdminPage() {
             </button>
           </li>
           <li className="nav-item" role="presentation">
-            <img src={Event} alt="Items Icon" />
+            <img src={LogRecord} alt="Items Icon" />
             <button
               className="nav-link"
               id="pills-volunteerlogs-tab"
@@ -262,7 +264,7 @@ export default function AdminPage() {
           </li>
 
           <li className="nav-item" role="presentation">
-            <img src={Event} alt="Items Icon" />
+            <img src={Admin} alt="Items Icon" />
             <button
               className="nav-link"
               id="pills-adminManagement-tab"

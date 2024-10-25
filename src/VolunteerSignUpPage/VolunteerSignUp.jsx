@@ -123,12 +123,13 @@ function VolunteerSignUp() {
                 <option value="2002">FACULTY</option>
               </select>
             </div>
-            <button type="submit" className="apply-button">
+            {/* <button type="submit" className="apply-button">
               APPLY
-            </button>
+            </button> */}
 
             <button
               type="button"
+              className="apply-button"
               data-bs-toggle="modal"
               data-bs-target="#confirmVolunteer"
             >

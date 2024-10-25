@@ -1,5 +1,4 @@
 import React from "react";
-import "./VolunteerLogModal.css";
 import { useState, useEffect } from "react";
 import BackArrow from "../assets/images/BackArrow.png";
 import axios from "axios";

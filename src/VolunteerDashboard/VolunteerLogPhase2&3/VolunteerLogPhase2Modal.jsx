@@ -144,6 +144,8 @@ export default function VolunteerLogPhase2Modal() {
             id="volunteerLogPhase2Modal"
             aria-hidden="true"
             aria-labelledby="volunteerLogPhase2ModalLabel"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
             tabIndex="-1"
           >
             <div className="modal-dialog modal-lg modal-dialog-centered">
@@ -236,6 +238,7 @@ export default function VolunteerLogPhase2Modal() {
                           aria-label="Username"
                           aria-describedby="addon-wrapping"
                           readOnly
+                          style={{ height: "40px" }}
                         />
                       </div>
                     </div>

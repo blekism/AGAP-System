@@ -140,6 +140,11 @@ export default function AdminPage() {
     }
   }, []);
 
+  const handleLogout = () => {
+    removeCookie("admin_token");
+    window.location.href = "/LoginAdmin";
+  };
+
   return (
     <>
       <div className="AdminPageParentContainer">
@@ -242,7 +247,7 @@ export default function AdminPage() {
               aria-controls="pills-items"
               aria-selected="false"
             >
-              Manage Items & Stock
+              Manage Items
             </button>
           </li>
           <li className="nav-item" role="presentation">
@@ -279,7 +284,9 @@ export default function AdminPage() {
 
           <li className="nav-item" role="presentation">
             <img src={Logout} alt="Logout Icon" />
-            <button className="logout-button">Logout</button>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
           </li>
         </ul>
 

@@ -39,6 +39,11 @@ export default function ProfilePage() {
     }
   }, []);
 
+  const handleLogout = () => {
+    removeCookie("donor_token");
+    window.location.href = "/";
+  };
+
   useEffect(() => {
     axios
       .get(
@@ -118,7 +123,9 @@ export default function ProfilePage() {
               </div>
 
               <div className="signout-btn">
-                <button type="button">LOG OUT</button>
+                <button type="button" onClick={handleLogout}>
+                  LOG OUT
+                </button>
               </div>
             </div>
 

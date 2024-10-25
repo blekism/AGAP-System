@@ -292,6 +292,7 @@ function CreateAccount() {
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#confirmRegister"
+            className="btn"
           >
             Create an Account
           </button>

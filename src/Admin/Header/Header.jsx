@@ -10,13 +10,6 @@ export default function Header({ username }) {
         <h1>Welcome Back, {username}!</h1>
         <p>Lorem ipsum dolor sit amet constectur adipscing</p>
       </div>
-
-      <div className="UserProfileContainer">
-        <img src={Member} alt="Items Icon" />
-        <Link to="/ProfilePage" className="Profile">
-          {username}
-        </Link>
-      </div>
     </div>
   );
 }

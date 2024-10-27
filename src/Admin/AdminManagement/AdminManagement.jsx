@@ -204,6 +204,7 @@ export default function AdminManagement() {
                   fontSize: "15px",
                   fontFamily: "Poppins",
                   fontWeight: 500,
+                  textAlign: "center",
                 }}
               >
                 <td>{admin.account_id}</td>

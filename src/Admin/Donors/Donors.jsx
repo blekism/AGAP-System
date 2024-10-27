@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
 
@@ -40,16 +40,20 @@ export default function DonorContent({ donors }) {
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Update successful!");
+          setInsertStatus(2);
         } else {
           console.log("Update failed!");
+          setInsertStatus(3);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
       });
   };
 
   const handleItemClick = async (id) => {
+    resetInsertStatus();
     console.log("Item clicked: ", id);
     try {
       const response = await axios.post(
@@ -68,10 +72,22 @@ export default function DonorContent({ donors }) {
     }
   };
 
+  const donorInfoRef = useRef(null);
   const confirmAction = (event, action) => {
-    if (window.confirm(action)) {
-      handleSubmit(event);
+    const form = donorInfoRef.current;
+
+    if (form.checkValidity()) {
+      if (window.confirm(action)) {
+        handleSubmit(event);
+      }
+    } else {
+      form.reportValidity();
     }
+  };
+  const [inserStatus, setInsertStatus] = useState(1);
+
+  const resetInsertStatus = () => {
+    setInsertStatus(1);
   };
   return (
     <div style={{ paddingRight: "10px", maxHeight: "750px" }}>
@@ -157,7 +173,7 @@ export default function DonorContent({ donors }) {
                 aria-label="Close"
               ></button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={donorInfoRef}>
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span className="input-group-text" id="basic-addon1">
@@ -170,6 +186,7 @@ export default function DonorContent({ donors }) {
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     readOnly
+                    required
                     value={donorItem.account_id}
                     name="account_id"
                     onChange={handleChange}
@@ -198,12 +215,6 @@ export default function DonorContent({ donors }) {
                   name="first_name"
                   onChange={handleChange}
                   title={"First Name"}
-                />
-                <InputTemplate
-                  value={donorItem.middle_name}
-                  name="middle_name"
-                  onChange={handleChange}
-                  title={"Middle Name"}
                 />
                 <InputTemplate
                   value={donorItem.section}
@@ -252,11 +263,22 @@ export default function DonorContent({ donors }) {
                 />
               </div>
 
+              {inserStatus === 2 ? (
+                <div className="alert alert-success" role="alert">
+                  Donor Updated Successfully!
+                </div>
+              ) : inserStatus === 3 ? (
+                <div className="alert alert-danger" role="alert">
+                  Error Updating Donor!
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div className="modal-footer">
                 <button
                   type="button"
                   className="btn btn-primary"
-                  data-bs-dismiss="modal"
                   onClick={(event) =>
                     confirmAction(
                       event,
@@ -265,7 +287,7 @@ export default function DonorContent({ donors }) {
                   }
                   style={{ backgroundColor: "#354290", color: "#ffffff" }}
                 >
-                  Understood
+                  Update
                 </button>
                 <button
                   type="button"

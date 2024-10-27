@@ -17,6 +17,7 @@ export default function ItemManagement({ events }) {
   const [items, setItems] = useState([]);
   const [deductItems, setDeductItems] = useState([]);
   const [eventItem, setEventItem] = useState("none");
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (event, itemName) => {
     const value = event.target.value;
@@ -53,6 +54,27 @@ export default function ItemManagement({ events }) {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 200) {
+          console.log("Update successful!");
+          setInsertStatus(2);
+          setDeductItems([]);
+          setEventItem("none");
+        } else {
+          console.log("Update failed!");
+          setInsertStatus(3);
+          setDeductItems([]);
+          setEventItem("none");
+        }
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setInsertStatus(3);
+        setDeductItems([]);
+        setEventItem("none");
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -61,6 +83,7 @@ export default function ItemManagement({ events }) {
   };
 
   useEffect(() => {
+    setInsertStatus(1);
     console.log(category);
     const fetchItems = async () => {
       try {
@@ -83,6 +106,8 @@ export default function ItemManagement({ events }) {
     fetchItems(); //fetch items when category changes
   }, [category]); //use effect will run everytime category changes
 
+  const [inserStatus, setInsertStatus] = useState(1);
+
   const confirmAction = (event, action) => {
     if (window.confirm(action)) {
       handleSubmit(event);
@@ -91,51 +116,75 @@ export default function ItemManagement({ events }) {
 
   return (
     <div className="ahehe">
+      {showAlert &&
+        (inserStatus === 2 ? (
+          <div className="alert alert-success" role="alert">
+            Item deducted from Stock Successfully!
+          </div>
+        ) : inserStatus === 3 ? (
+          <div className="alert alert-danger" role="alert">
+            Error Deducting Items from Stock!
+          </div>
+        ) : (
+          <></>
+        ))}
       <form onSubmit={handleSubmit}>
-        <button
-          type="button"
-          className="btn btn-primary"
+        <div
+          className="operationContainer"
           style={{
-            width: "fit-content",
-            fontSize: "20px",
-            fontFamily: "Poppins",
-            fontWeight: 500,
-            backgroundColor: "#354290",
-            color: "#ffffff",
-          }}
-          data-bs-dismiss="modal"
-          onClick={(event) =>
-            confirmAction(event, "Are you sure you want to deduct from stock?")
-          }
-        >
-          Deduct From Stock
-        </button>
-        <select
-          className="form-select mb-3"
-          aria-label="Default select example"
-          name="evenet_id"
-          value={eventItem.evenet_id}
-          onChange={handleEventChange}
-          style={{
-            width: "500px",
-            fontSize: "20px",
-            fontFamily: "Poppins",
-            fontWeight: 500,
+            display: "flex",
+            flexDirection: "row",
+            height: "7vh",
+            columnGap: "20px",
           }}
         >
-          <option value="none">Select Event</option>
-          {events
-            .filter(
-              (event) =>
-                event.event_status !== "closed" &&
-                event.event_status !== "finished"
-            )
-            .map((event, key) => (
-              <option key={key} value={event.evenet_id}>
-                {event.event_name}
-              </option>
-            ))}
-        </select>
+          <button
+            type="button"
+            className="btn btn-primary"
+            style={{
+              width: "fit-content",
+              fontSize: "20px",
+              fontFamily: "Poppins",
+              fontWeight: 500,
+              backgroundColor: "#354290",
+              color: "#ffffff",
+            }}
+            onClick={(event) =>
+              confirmAction(
+                event,
+                "Are you sure you want to deduct from stock?"
+              )
+            }
+          >
+            Deduct From Stock
+          </button>
+          <select
+            className="form-select mb-3"
+            aria-label="Default select example"
+            name="evenet_id"
+            value={eventItem.evenet_id}
+            onChange={handleEventChange}
+            style={{
+              width: "500px",
+              fontSize: "20px",
+              fontFamily: "Poppins",
+              fontWeight: 500,
+            }}
+          >
+            <option value="none">Select Event</option>
+            {events
+              .filter(
+                (event) =>
+                  event.event_status !== "closed" &&
+                  event.event_status !== "finished"
+              )
+              .map((event, key) => (
+                <option key={key} value={event.evenet_id}>
+                  {event.event_name}
+                </option>
+              ))}
+          </select>
+        </div>
         <div className="ItemManagementParent">
           <ul
             className="nav nav-pills mb-3 custom"

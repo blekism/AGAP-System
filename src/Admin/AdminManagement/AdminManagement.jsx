@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
-import { Modal } from "bootstrap";
 
 export default function AdminManagement() {
   const [adminList, setAdminList] = useState([]);
@@ -23,6 +22,8 @@ export default function AdminManagement() {
     email: "",
     contact_info: "",
   });
+  const newAdminFormRef = useRef(null);
+  const updateAdminFormRef = useRef(null);
 
   useEffect(() => {
     axios
@@ -50,13 +51,20 @@ export default function AdminManagement() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 200) {
+          setInsertStatus(2);
+        } else {
+          setInsertStatus(3);
+        }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
       });
   };
 
   const handleItemClick = async (id) => {
+    resetInsertStatus();
     console.log("Item clicked: ", id);
     try {
       const response = await axios.post(
@@ -89,6 +97,7 @@ export default function AdminManagement() {
     setNewAdmin((values) => ({ ...values, [name]: value }));
   };
 
+  const [inserStatus, setInsertStatus] = useState(1);
   const handleNewAdminSubmit = (event) => {
     event.preventDefault();
 
@@ -104,264 +113,323 @@ export default function AdminManagement() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 201) {
+          setInsertStatus(2);
+          setNewAdmin({
+            last_name: "",
+            first_name: "",
+            password: "",
+            email: "",
+            contact_info: "",
+          });
+        } else {
+          setInsertStatus(3);
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+        setInsertStatus(3);
       });
   };
 
   const confirmAction = (event, action) => {
-    const confirmMessage =
+    event.preventDefault();
+
+    const form =
       action === "accept"
-        ? "Are you sure you want to update this admin?"
-        : "Are you sure you want to add this admin?";
-    if (window.confirm(confirmMessage)) {
-      if (action === "accept") {
-        handleSubmit(event);
-      } else if (action === "add") {
-        handleNewAdminSubmit(event);
+        ? updateAdminFormRef.current
+        : newAdminFormRef.current;
+
+    if (form.checkValidity()) {
+      const confirmMessage =
+        action === "accept"
+          ? "Are you sure you want to update this admin?"
+          : "Are you sure you want to add this admin?";
+      if (window.confirm(confirmMessage)) {
+        if (action === "accept") {
+          handleSubmit(event);
+        } else if (action === "add") {
+          handleNewAdminSubmit(event);
+        }
       }
+    } else {
+      form.reportValidity();
     }
   };
 
+  const resetInsertStatus = () => {
+    setInsertStatus(1);
+  };
+
   return (
-    <div style={{ paddingRight: "10px", maxHeight: "750px" }}>
+    <div className="ahi">
       <div className="AdminButtonHeader" style={{ marginBottom: "10px" }}>
         <button
           type="button"
           className="btn btn-primary"
           data-bs-toggle="modal"
           data-bs-target="#newAdminModal"
+          onClick={resetInsertStatus}
           style={{ backgroundColor: "#354290", color: "#ffffff" }}
         >
           Add new Admin
         </button>
       </div>
-      <table className="table table-striped">
-        <thead>
-          <tr
-            style={{
-              fontSize: "17px",
-              fontFamily: "Poppins",
-              fontWeight: "500",
-            }}
-          >
-            <th scope="col">Admin ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Contact Info</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {adminList.map((admin, key) => (
+      <div
+        style={{ paddingRight: "10px", maxHeight: "700px", overflowY: "auto" }}
+      >
+        <table className="table table-striped">
+          <thead>
             <tr
-              key={key}
               style={{
-                fontSize: "15px",
+                fontSize: "17px",
                 fontFamily: "Poppins",
-                fontWeight: 500,
+                fontWeight: "500",
               }}
             >
-              <td>{admin.account_id}</td>
-              <td>{admin.last_name + " " + admin.first_name}</td>
-              <td>{admin.email}</td>
-              <td>{admin.password}</td>
-              <td>{admin.contact_info}</td>
-              <td>
+              <th scope="col">Admin ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">Contact Info</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {adminList.map((admin, key) => (
+              <tr
+                key={key}
+                style={{
+                  fontSize: "15px",
+                  fontFamily: "Poppins",
+                  fontWeight: 500,
+                }}
+              >
+                <td>{admin.account_id}</td>
+                <td>{admin.last_name + " " + admin.first_name}</td>
+                <td>{admin.email}</td>
+                <td>{admin.password}</td>
+                <td>{admin.contact_info}</td>
+                <td>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#AdminModal"
+                    onClick={() => handleItemClick(admin.account_id)}
+                    style={{ backgroundColor: "#354290", color: "#ffffff" }}
+                  >
+                    Action
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div
+          className="modal fade"
+          id="AdminModal"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                  ADMIN INFORMATION
+                </h1>
                 <button
                   type="button"
-                  className="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#AdminModal"
-                  onClick={() => handleItemClick(admin.account_id)}
-                  style={{ backgroundColor: "#354290", color: "#ffffff" }}
-                >
-                  Action
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div
-        className="modal fade"
-        id="AdminModal"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                ADMIN INFORMATION
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="modal-body">
-                <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">
-                    User ID
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Username"
-                    aria-label="Username"
-                    aria-describedby="basic-addon1"
-                    readOnly
-                    value={admin.account_id}
-                    name="account_id"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form onSubmit={handleSubmit} ref={updateAdminFormRef}>
+                <div className="modal-body">
+                  <div className="input-group mb-3">
+                    <span className="input-group-text" id="basic-addon1">
+                      User ID
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Username"
+                      aria-label="Username"
+                      aria-describedby="basic-addon1"
+                      readOnly
+                      value={admin.account_id}
+                      name="account_id"
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <InputTemplate
+                    value={admin.last_name}
+                    name="last_name"
                     onChange={handleChange}
+                    title={"Last Name"}
+                  />
+                  <InputTemplate
+                    value={admin.first_name}
+                    name="first_name"
+                    onChange={handleChange}
+                    title={"First Name"}
+                  />
+
+                  <InputTemplate
+                    value={admin.email}
+                    name="email"
+                    onChange={handleChange}
+                    title={"Email"}
+                  />
+                  <InputTemplate
+                    value={admin.contact_info}
+                    name="contact_info"
+                    onChange={handleChange}
+                    title={"Contact Info"}
                   />
                 </div>
 
-                <InputTemplate
-                  value={admin.last_name}
-                  name="last_name"
-                  onChange={handleChange}
-                  title={"Last Name"}
-                />
-                <InputTemplate
-                  value={admin.first_name}
-                  name="first_name"
-                  onChange={handleChange}
-                  title={"First Name"}
-                />
+                {inserStatus === 2 ? (
+                  <div className="alert alert-success" role="alert">
+                    New admin added successfully!
+                  </div>
+                ) : inserStatus === 3 ? (
+                  <div className="alert alert-danger" role="alert">
+                    Error adding new admin!
+                  </div>
+                ) : (
+                  <></>
+                )}
 
-                <InputTemplate
-                  value={admin.email}
-                  name="email"
-                  onChange={handleChange}
-                  title={"Email"}
-                />
-                <InputTemplate
-                  value={admin.contact_info}
-                  name="contact_info"
-                  onChange={handleChange}
-                  title={"Contact Info"}
-                />
-              </div>
-
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-bs-dismiss="modal"
-                  onClick={(event) => confirmAction(event, "accept")}
-                  style={{
-                    background: "#354290",
-                    color: "white",
-                  }}
-                >
-                  Understood
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-            </form>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={(event) => confirmAction(event, "accept")}
+                    style={{
+                      background: "#354290",
+                      color: "white",
+                    }}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-      {/* adding new admin modal start */}
+        {/* adding new admin modal start */}
 
-      <div
-        className="modal fade"
-        id="newAdminModal"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex="-1"
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                ADD NEW ADMIN
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+        <div
+          className="modal fade"
+          id="newAdminModal"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                  ADD NEW ADMIN
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <form onSubmit={handleNewAdminSubmit} ref={newAdminFormRef}>
+                <div className="modal-body">
+                  <InputTemplate
+                    value={newAdmin.last_name}
+                    name="last_name"
+                    onChange={handleNewAdminChange}
+                    title={"Last Name"}
+                  />
+                  <InputTemplate
+                    value={newAdmin.first_name}
+                    name="first_name"
+                    onChange={handleNewAdminChange}
+                    title={"First Name"}
+                  />
+
+                  <InputTemplate
+                    value={newAdmin.email}
+                    name="email"
+                    onChange={handleNewAdminChange}
+                    title={"Email"}
+                    pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"}
+                  />
+
+                  <InputTemplate
+                    value={newAdmin.password}
+                    name="password"
+                    onChange={handleNewAdminChange}
+                    title={"Password"}
+                  />
+
+                  <InputTemplate
+                    value={newAdmin.contact_info}
+                    name="contact_info"
+                    onChange={handleNewAdminChange}
+                    title={"Contact Info"}
+                  />
+                </div>
+
+                {inserStatus === 2 ? (
+                  <div className="alert alert-success" role="alert">
+                    New admin added successfully!
+                  </div>
+                ) : inserStatus === 3 ? (
+                  <div className="alert alert-danger" role="alert">
+                    Error adding new admin!
+                  </div>
+                ) : (
+                  <></>
+                )}
+
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={(event) => confirmAction(event, "add")}
+                    style={{
+                      background: "#354290",
+                      color: "white",
+                    }}
+                  >
+                    Accept
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+
+                {/* confirm new admin start */}
+
+                {/* confirm new admin end*/}
+              </form>
             </div>
-            <form onSubmit={handleNewAdminSubmit}>
-              <div className="modal-body">
-                <InputTemplate
-                  value={newAdmin.last_name}
-                  name="last_name"
-                  onChange={handleNewAdminChange}
-                  title={"Last Name"}
-                />
-                <InputTemplate
-                  value={newAdmin.first_name}
-                  name="first_name"
-                  onChange={handleNewAdminChange}
-                  title={"First Name"}
-                />
-
-                <InputTemplate
-                  value={newAdmin.email}
-                  name="email"
-                  onChange={handleNewAdminChange}
-                  title={"Email"}
-                />
-
-                <InputTemplate
-                  value={newAdmin.password}
-                  name="password"
-                  onChange={handleNewAdminChange}
-                  title={"Password"}
-                />
-
-                <InputTemplate
-                  value={newAdmin.contact_info}
-                  name="contact_info"
-                  onChange={handleNewAdminChange}
-                  title={"Contact Info"}
-                />
-              </div>
-
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  onClick={(event) => confirmAction(event, "add")}
-                  data-bs-dismiss="modal"
-                  style={{
-                    background: "#354290",
-                    color: "white",
-                  }}
-                >
-                  Understood
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-              </div>
-
-              {/* confirm new admin start */}
-
-              {/* confirm new admin end*/}
-            </form>
           </div>
         </div>
       </div>

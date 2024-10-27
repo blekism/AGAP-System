@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function InputTemplateAdmin({ onChange, value, name, title }) {
+export default function InputTemplateAdmin({
+  onChange,
+  value,
+  name,
+  title,
+  pattern,
+  validationMessage,
+}) {
   return (
     <div className="input-group mb-3">
       <span className="input-group-text" id="basic-addon1">
@@ -14,7 +21,10 @@ export default function InputTemplateAdmin({ onChange, value, name, title }) {
         aria-describedby="basic-addon1"
         onChange={onChange}
         value={value}
+        required
         name={name}
+        pattern={pattern}
+        title={validationMessage}
       />
     </div>
   );

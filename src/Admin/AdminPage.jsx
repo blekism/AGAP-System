@@ -289,6 +289,7 @@ export default function AdminPage() {
             <button className="logout-button" onClick={handleLogout}>
               Logout
             </button>
+            {/* gawing modal for confirming logout */}
           </li>
         </ul>
 

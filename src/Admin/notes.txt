@@ -87,6 +87,18 @@ admin login //
 - volunteer dashboard --  
 - volunteer signup // 
 
+- input validation //
+- time sa donation
+- time gawing unix
+- total hours function 
+- sa lahat ng viewable items dapat update and delete na yung buttons
+- create account
+- donation page
+- login 
+- volunteer sign up 
+- item management
+
+
 - apply websockets
 - deploy online
 

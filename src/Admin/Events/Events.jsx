@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Events.css";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
@@ -122,12 +122,27 @@ export default function Events({
         console.log(response.data);
         if (response.data.status === 201) {
           console.log("Insert successful!");
+          setInsertStatus(2);
+          setEventAnnouncement({
+            title: "",
+            description: "",
+          });
         } else {
           console.log("Insert failed!");
+          setInsertStatus(3);
+          setEventAnnouncement({
+            title: "",
+            description: "",
+          });
         }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
+        setEventAnnouncement({
+          title: "",
+          description: "",
+        });
       });
   };
   // add event announcement end
@@ -166,12 +181,39 @@ export default function Events({
         console.log(response.data);
         if (response.data.status === 201) {
           console.log("Insert successful!");
+          setInsertStatus(2);
+          setAddEvent({
+            event_name: "",
+            event_link: "",
+            description: "",
+            start_date: "",
+            end_date: "",
+            contrib_amount: "",
+          });
         } else {
           console.log("Insert failed!");
+          setInsertStatus(3);
+          setAddEvent({
+            event_name: "",
+            event_link: "",
+            description: "",
+            start_date: "",
+            end_date: "",
+            contrib_amount: "",
+          });
         }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
+        setAddEvent({
+          event_name: "",
+          event_link: "",
+          description: "",
+          start_date: "",
+          end_date: "",
+          contrib_amount: "",
+        });
       });
   };
   //enter new event end
@@ -219,12 +261,26 @@ export default function Events({
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Update successful!");
+          setInsertStatus(2);
+          setEventItem({
+            evenet_id: "",
+            event_name: "",
+            event_link: "",
+            description: "",
+            start_date: "",
+            end_date: "",
+            start_time: "",
+            end_time: "",
+            contrib_amount: "",
+          });
         } else {
           console.log("Update failed!");
+          setInsertStatus(3);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
       });
   };
   //modal edited event end
@@ -239,6 +295,7 @@ export default function Events({
 
   const handleItemClick = async (id) => {
     console.log({ event_id: id });
+    resetInsertStatus();
 
     try {
       const response = await axios.post(
@@ -281,28 +338,46 @@ export default function Events({
     }
   };
 
+  const addEventAnnouncementRef = useRef(null);
+  const addEventRef = useRef(null);
+  const updateEventRef = useRef(null);
+
   const confirmAction = (event, action) => {
     let confirmMessage = "";
+    let form = null;
 
     if (action === "viewEvent") {
       confirmMessage = "Are you sure you want to accept these changes?";
+      form = updateEventRef.current;
     } else if (action === "addAnnouncement") {
       confirmMessage = "Are you sure you want to add this anouncement?";
+      form = addEventAnnouncementRef.current;
     } else if (action === "AddEvents") {
       confirmMessage = "Are you sure you want to add this event?";
+      form = addEventRef.current;
     }
-    if (window.confirm(confirmMessage)) {
-      if (action === "viewEvent") {
-        handleSubmit(event);
-      } else if (action === "addAnnouncement") {
-        handleAddEventAnnouncementSubmit(event);
-      } else if (action === "AddEvents") {
-        handleAddEventSubmit(event);
+
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action === "viewEvent") {
+          handleSubmit(event);
+        } else if (action === "addAnnouncement") {
+          handleAddEventAnnouncementSubmit(event);
+        } else if (action === "AddEvents") {
+          handleAddEventSubmit(event);
+        }
       }
+    } else {
+      form.reportValidity();
     }
   };
 
   //pagination for event announcement preview end
+
+  const [inserStatus, setInsertStatus] = useState(1);
+  const resetInsertStatus = () => {
+    setInsertStatus(1);
+  };
 
   return (
     <div className="events" style={{ overflowY: "auto", maxHeight: "600px" }}>
@@ -313,6 +388,7 @@ export default function Events({
           data-bs-toggle="modal"
           data-bs-target={addEventsModalTarget}
           style={{ backgroundColor: "#354290", color: "#ffffff" }}
+          onClick={resetInsertStatus}
         >
           Add Event
         </button>
@@ -322,6 +398,7 @@ export default function Events({
           data-bs-toggle="modal"
           data-bs-target={addEventAnnouncementModalTarget}
           style={{ backgroundColor: "#354290", color: "#ffffff" }}
+          onClick={resetInsertStatus}
         >
           Add Event Announcement
         </button>
@@ -443,7 +520,7 @@ export default function Events({
                 aria-label="Close"
               ></button>
             </div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} ref={updateEventRef}>
               <div className="modal-body">
                 <div className="input-group mb-3">
                   <span
@@ -533,10 +610,22 @@ export default function Events({
                   placeholder="Contribution Amount"
                 />
               </div>
+
+              {inserStatus === 2 ? (
+                <div className="alert alert-success" role="alert">
+                  Event Updated Successfully!
+                </div>
+              ) : inserStatus === 3 ? (
+                <div className="alert alert-danger" role="alert">
+                  Error Updating Event!
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div className="modal-footer">
                 <button
                   type="button"
-                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "viewEvent")}
                   className="btn btn-primary"
                   style={{
@@ -622,6 +711,7 @@ export default function Events({
                 />
               </div>
             </div>
+
             <div className="modal-footer">
               <button
                 type="button"
@@ -669,7 +759,10 @@ export default function Events({
                 aria-label="Close"
               ></button>
             </div>
-            <form onSubmit={handleAddEventAnnouncementSubmit}>
+            <form
+              onSubmit={handleAddEventAnnouncementSubmit}
+              ref={addEventAnnouncementRef}
+            >
               <div className="modal-body">
                 <InputTemplate
                   value={eventAnnouncement.title}
@@ -703,10 +796,22 @@ export default function Events({
                   Add Image
                 </button>
               </div>
+
+              {inserStatus === 2 ? (
+                <div className="alert alert-success" role="alert">
+                  Event Announcement Added Successfully!
+                </div>
+              ) : inserStatus === 3 ? (
+                <div className="alert alert-danger" role="alert">
+                  Error Inserting Event Announcement!
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div className="modal-footer">
                 <button
                   type="button"
-                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "addAnnouncement")}
                   className="btn btn-primary"
                   style={{
@@ -753,7 +858,7 @@ export default function Events({
                 aria-label="Close"
               ></button>
             </div>
-            <form onSubmit={handleAddEventSubmit}>
+            <form onSubmit={handleAddEventSubmit} ref={addEventRef}>
               <div className="modal-body">
                 <InputTemplate
                   value={addEvent.event_name}
@@ -798,10 +903,22 @@ export default function Events({
                   placeholder="Contribution Amount"
                 />
               </div>
+
+              {inserStatus === 2 ? (
+                <div className="alert alert-success" role="alert">
+                  Event Inserted Successfully!
+                </div>
+              ) : inserStatus === 3 ? (
+                <div className="alert alert-danger" role="alert">
+                  Error Inserting Event!
+                </div>
+              ) : (
+                <></>
+              )}
+
               <div className="modal-footer">
                 <button
                   type="submit"
-                  data-bs-dismiss="modal"
                   onClick={(event) => confirmAction(event, "AddEvents")}
                   className="btn btn-primary"
                   style={{

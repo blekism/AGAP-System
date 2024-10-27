@@ -6,6 +6,9 @@ export default function InputTemplateAdmin({
   value,
   name,
   title,
+  pattern,
+  validationMessage,
+
 }) {
   return (
     <div className="input-group mb-3">
@@ -24,7 +27,10 @@ export default function InputTemplateAdmin({
         aria-describedby="basic-addon1"
         onChange={onChange}
         value={value}
+        required
         name={name}
+        pattern={pattern}
+        title={validationMessage}
       />
     </div>
   );

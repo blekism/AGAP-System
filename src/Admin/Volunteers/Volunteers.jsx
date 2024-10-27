@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import "./Volunteers.css";
 import axios from "axios";
 import InputTemplate from "../InputTemplateAdmin.jsx";
@@ -46,16 +46,20 @@ export default function VolunteerContent({
         console.log(response.data);
         if (response.data.status === 200) {
           console.log("Update successful!");
+          setInsertStatus(2);
         } else {
           console.log("Update failed!");
+          setInsertStatus(3);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setInsertStatus(3);
       });
   };
 
   const handleItemClick = async (id, level) => {
+    resetInsertStatus();
     console.log("Item clicked: ", id);
 
     try {
@@ -106,28 +110,39 @@ export default function VolunteerContent({
         console.log(response.data);
       });
   };
+  const updateVolunteerRef = useRef(null);
 
   const confirmAction = (event, action) => {
     let confirmMessage = "";
-
+    let form = updateVolunteerRef.current;
     if (action === "accept") {
-      confirmMessage = "Are you sure you want to accept this volunteer?";
+      confirmMessage =
+        "Are you sure you want to confirm these/this change(s) to this volunteer?";
     } else if (action === "reject") {
       confirmMessage = "Are you sure you want to reject this volunteer?";
     } else if (action === "delete") {
       confirmMessage = "Are you sure you want to delete this volunteer?";
     }
-    if (window.confirm(confirmMessage)) {
-      if (action === "accept") {
-        handleSubmit(event);
-      } else if (action === "reject") {
-        handleRejectVolunteer();
-      } else if (action === "delete") {
-        handleDeleteVolunteer();
+
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action === "accept") {
+          handleSubmit(event);
+        } else if (action === "reject") {
+          handleRejectVolunteer();
+        } else if (action === "delete") {
+          handleDeleteVolunteer();
+        }
       }
+    } else {
+      form.reportValidity();
     }
   };
 
+  const [insertStatus, setInsertStatus] = useState(1);
+  const resetInsertStatus = () => {
+    setInsertStatus(1);
+  };
   return (
     <div className="volunteertbl" style={{ paddingRight: "10px" }}>
       <div className="volunteerMembers" style={{ maxHeight: "600px" }}>
@@ -227,7 +242,7 @@ export default function VolunteerContent({
                   aria-label="Close"
                 ></button>
               </div>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} ref={updateVolunteerRef}>
                 <div className="modal-body">
                   <div className="volunteersInputBody">
                     <div className="input-group mb-3">
@@ -328,12 +343,24 @@ export default function VolunteerContent({
                     />
                   </div>
                 </div>
+
+                {insertStatus === 2 ? (
+                  <div className="alert alert-success" role="alert">
+                    Volunteer Updated Successfully!
+                  </div>
+                ) : insertStatus === 3 ? (
+                  <div className="alert alert-danger" role="alert">
+                    Error Updating Volunteer!
+                  </div>
+                ) : (
+                  <></>
+                )}
+
                 <div className="modal-footer">
                   {modalId === "applicantItems" && (
                     <button
                       type="button"
                       className="btn btn-danger"
-                      data-bs-dismiss="modal"
                       onClick={(event) => confirmAction(event, "reject")}
                     >
                       Reject
@@ -342,7 +369,6 @@ export default function VolunteerContent({
                   <button
                     type="button"
                     className="btn btn-primary"
-                    data-bs-dismiss="modal"
                     onClick={(event) => confirmAction(event, "accept")}
                     style={{
                       background: "#354290",
@@ -355,7 +381,6 @@ export default function VolunteerContent({
                     <button
                       type="button"
                       className="btn btn-danger"
-                      data-bs-dismiss="modal"
                       onClick={(event) => confirmAction(event, "delete")}
                     >
                       Delete

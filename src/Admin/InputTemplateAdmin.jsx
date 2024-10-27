@@ -1,15 +1,25 @@
 import React from "react";
 
-export default function InputTemplateAdmin({ onChange, value, name, title }) {
+export default function InputTemplateAdmin({
+  placeholder,
+  onChange,
+  value,
+  name,
+  title,
+}) {
   return (
     <div className="input-group mb-3">
-      <span className="input-group-text" id="basic-addon1">
+      <span
+        className="input-group-text"
+        id="basic-addon1"
+        style={{ fontWeight: "bold" }}
+      >
         {title}
       </span>
       <input
         type="text"
         className="form-control"
-        placeholder="Username"
+        placeholder={placeholder}
         aria-label="Username"
         aria-describedby="basic-addon1"
         onChange={onChange}

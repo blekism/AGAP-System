@@ -357,6 +357,7 @@ export default function Events({
               fontSize: "15px",
               fontFamily: "Poppins",
               fontWeight: "500",
+              textAlign: "center",
             }}
           >
             <th scope="col" style={{ width: "20%" }}>
@@ -390,6 +391,7 @@ export default function Events({
                 fontSize: "14px",
                 fontFamily: "Poppins",
                 fontWeight: 500,
+                textAlign: "center",
               }}
             >
               <td>{event.evenet_id}</td>
@@ -444,13 +446,17 @@ export default function Events({
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">
-                    Event ID
+                  <span
+                    className="input-group-text"
+                    id="basic-addon1"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    EVENT ID
                   </span>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Username"
+                    placeholder="Event Id"
                     aria-label="Username"
                     aria-describedby="basic-addon1"
                     readOnly
@@ -465,53 +471,66 @@ export default function Events({
                   name="event_name"
                   onChange={handleChange}
                   title="Event Name"
+                  placeholder="EVENT NAME"
                 />
                 <InputTemplate
                   value={eventItem.event_link}
                   name="event_link"
                   onChange={handleChange}
                   title="Event Link"
+                  placeholder="EVENT LINK"
                 />
                 <div className="input-group mb-3">
-                  <span className="input-group-text">Description</span>
+                  <span
+                    className="input-group-text"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    DESCRIPTION
+                  </span>
                   <textarea
                     className="form-control"
                     aria-label="With textarea"
                     value={eventItem.description}
                     name="description"
                     onChange={handleChange}
+                    placeholder="Description"
                   />
                 </div>
                 <InputTemplate
                   value={eventItem.start_date}
                   name="start_date"
                   onChange={handleChange}
-                  title="Start Date"
+                  title="START DATE"
+                  placeholder="YYYY-MM-DD"
                 />
                 <InputTemplate
                   value={eventItem.end_date}
                   name="end_date"
                   onChange={handleChange}
-                  title="End Date"
+                  title="END DATE"
+                  placeholder="YYYY-MM-DD"
                 />
                 <InputTemplate
                   value={eventItem.start_time}
                   name="start_time"
                   onChange={handleChange}
-                  title="Start Time"
+                  title="START TIME"
+                  placeholder="Start Time"
                 />
                 <InputTemplate
                   value={eventItem.end_time}
                   name="end_time"
                   onChange={handleChange}
-                  title="End Time"
+                  title="END TIME"
+                  placeholder="End Time"
                 />
 
                 <InputTemplate
                   value={eventItem.contrib_amount}
                   name="contrib_amount"
                   onChange={handleChange}
-                  title="Contribution Amount"
+                  title="CONTRIBUTION AMOUNT"
+                  placeholder="Contribution Amount"
                 />
               </div>
               <div className="modal-footer">
@@ -656,13 +675,15 @@ export default function Events({
                   value={eventAnnouncement.title}
                   name="title"
                   onChange={addEventAnnouncementChange}
-                  title="Event Title"
+                  title="EVENT TITLE"
+                  placeholder="Event Title"
                 />
                 <InputTemplate
                   value={eventAnnouncement.description}
                   name="description"
                   onChange={addEventAnnouncementChange}
-                  title="Description"
+                  title="DESCRIPTION"
+                  placeholder="Description"
                 />
                 <input
                   type="file"
@@ -738,37 +759,43 @@ export default function Events({
                   value={addEvent.event_name}
                   name="event_name"
                   onChange={addEventChange}
-                  title="Event Name"
+                  title="EVENT NAME"
+                  placeholder="Event Name"
                 />
                 <InputTemplate
                   value={addEvent.event_link}
                   name="event_link"
                   onChange={addEventChange}
-                  title="Event Link"
+                  title="EVENT LINK"
+                  placeholder="Event Link"
                 />
                 <InputTemplate
                   value={addEvent.description}
                   name="description"
                   onChange={addEventChange}
-                  title="Description"
+                  title="DESCRIPTION"
+                  placeholder="Description"
                 />
                 <InputTemplate
                   value={addEvent.start_date}
                   name="start_date"
                   onChange={addEventChange}
-                  title="Start Date"
+                  title="START DATE"
+                  placeholder="YYYY-MM-DD"
                 />
                 <InputTemplate
                   value={addEvent.end_date}
                   name="end_date"
                   onChange={addEventChange}
-                  title="End Date"
+                  title="END DATE"
+                  placeholder="YYYY-MM-DD"
                 />
                 <InputTemplate
                   value={addEvent.contrib_amount}
                   name="contrib_amount"
                   onChange={addEventChange}
-                  title="Contribution Amount"
+                  title="CONTRIBUTION AMOUNT"
+                  placeholder="Contribution Amount"
                 />
               </div>
               <div className="modal-footer">

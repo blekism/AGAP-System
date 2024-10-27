@@ -12,7 +12,14 @@
     width: 90%;
     background-color: #F0F0F0;
     padding: 40px;
+    height: 84vh;
 }
+
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .VolunteerPendingDonations-rightCont-table{
+    overflow: auto;
+    height: 70vh;
+}
+
 
 .VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont p{
     font-weight: 600;
@@ -20,12 +27,12 @@
     font-family: "Poppins";
 }
 
-.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .table thead {
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .VolunteerPendingDonations-rightCont-table .table thead {
     text-align: center;
     font-family: "Poppins";
 }
 
-.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .table tbody {
+.VolunteerPendingDonations-parentCont .VolunteerPendingDonations-rightCont .VolunteerPendingDonations-rightCont-table .table tbody {
     text-align: center;
     font-family: "Poppins";
     font-weight: 500;

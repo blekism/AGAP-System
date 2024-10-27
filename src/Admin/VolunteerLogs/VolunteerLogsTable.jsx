@@ -35,6 +35,7 @@ export default function VolunteerLogsTable({
                 fontSize: "17px",
                 fontFamily: "Poppins",
                 fontWeight: "500",
+                textAlign: "center",
               }}
             >
               <th scope="col" style={{ width: "11%" }}>
@@ -71,6 +72,7 @@ export default function VolunteerLogsTable({
                   fontSize: "15px",
                   fontFamily: "Poppins",
                   fontWeight: 500,
+                  textAlign: "center",
                 }}
               >
                 <td>{log.log_id}</td>

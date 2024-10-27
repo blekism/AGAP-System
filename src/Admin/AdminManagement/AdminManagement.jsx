@@ -141,6 +141,7 @@ export default function AdminManagement() {
               fontSize: "17px",
               fontFamily: "Poppins",
               fontWeight: "500",
+              textAlign: "center",
             }}
           >
             <th scope="col">Admin ID</th>
@@ -159,6 +160,7 @@ export default function AdminManagement() {
                 fontSize: "15px",
                 fontFamily: "Poppins",
                 fontWeight: 500,
+                textAlign: "center",
               }}
             >
               <td>{admin.account_id}</td>
@@ -207,8 +209,12 @@ export default function AdminManagement() {
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">
-                    User ID
+                  <span
+                    className="input-group-text"
+                    id="basic-addon1"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    USER ID
                   </span>
                   <input
                     type="text"
@@ -227,26 +233,26 @@ export default function AdminManagement() {
                   value={admin.last_name}
                   name="last_name"
                   onChange={handleChange}
-                  title={"Last Name"}
+                  title={"LAST NAME"}
                 />
                 <InputTemplate
                   value={admin.first_name}
                   name="first_name"
                   onChange={handleChange}
-                  title={"First Name"}
+                  title={"FIRST NAME"}
                 />
 
                 <InputTemplate
                   value={admin.email}
                   name="email"
                   onChange={handleChange}
-                  title={"Email"}
+                  title={"EMAIL"}
                 />
                 <InputTemplate
                   value={admin.contact_info}
                   name="contact_info"
                   onChange={handleChange}
-                  title={"Contact Info"}
+                  title={"CONTACT INFO"}
                 />
               </div>
 
@@ -305,34 +311,39 @@ export default function AdminManagement() {
                   value={newAdmin.last_name}
                   name="last_name"
                   onChange={handleNewAdminChange}
-                  title={"Last Name"}
+                  title={"LAST NAME"}
+                  placeholder="Last Name"
                 />
                 <InputTemplate
                   value={newAdmin.first_name}
                   name="first_name"
                   onChange={handleNewAdminChange}
-                  title={"First Name"}
+                  title={"FIRST NAME"}
+                  placeholder="First Name"
                 />
 
                 <InputTemplate
                   value={newAdmin.email}
                   name="email"
                   onChange={handleNewAdminChange}
-                  title={"Email"}
+                  title={"EMAIL"}
+                  placeholder="Email"
                 />
 
                 <InputTemplate
                   value={newAdmin.password}
                   name="password"
                   onChange={handleNewAdminChange}
-                  title={"Password"}
+                  title={"PASSWORD"}
+                  placeholder="Password"
                 />
 
                 <InputTemplate
                   value={newAdmin.contact_info}
                   name="contact_info"
                   onChange={handleNewAdminChange}
-                  title={"Contact Info"}
+                  title={"CONTACT INFO"}
+                  placeholder="Contact Info"
                 />
               </div>
 

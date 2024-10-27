@@ -50,7 +50,7 @@ export default function YourDonationTemplate({
             </button>
           </div>
 
-          <div
+          {/* <div
             className="modal fade"
             id={modalId}
             aria-hidden="true"
@@ -93,7 +93,7 @@ export default function YourDonationTemplate({
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="YourDonationContainerBody">
           <p>Status: {statusName} </p>

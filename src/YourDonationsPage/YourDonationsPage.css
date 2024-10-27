@@ -1,0 +1,9 @@
+.DonationPageParent {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.DonationPageParent .DonationPageParent-FooterCont {
+    margin-top: auto;
+}

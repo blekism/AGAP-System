@@ -246,8 +246,12 @@ export default function VolunteerContent({
                 <div className="modal-body">
                   <div className="volunteersInputBody">
                     <div className="input-group mb-3">
-                      <span className="input-group-text" id="basic-addon1">
-                        User ID
+                      <span
+                        className="input-group-text"
+                        id="basic-addon1"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        USER ID
                       </span>
                       <input
                         type="text"
@@ -278,20 +282,20 @@ export default function VolunteerContent({
                       name="first_name"
                       value={volunteerItem.first_name}
                       onChange={handleChange}
-                      title={"First Name"}
+                      title={"FIRST NAME"}
                     />
                     <InputTemplate
                       name="last_name"
                       value={volunteerItem.last_name}
                       onChange={handleChange}
-                      title={"Last Name"}
+                      title={"LAST NAME"}
                     />
 
                     <InputTemplate
                       name="section"
                       value={volunteerItem.section}
                       onChange={handleChange}
-                      title={"Section"}
+                      title={"SECTION"}
                     />
 
                     <select
@@ -323,19 +327,19 @@ export default function VolunteerContent({
                       name="email"
                       value={volunteerItem.email}
                       onChange={handleChange}
-                      title={"Email"}
+                      title={"EMAIL"}
                     />
                     <InputTemplate
                       name="contact_info"
                       value={volunteerItem.contact_info}
                       onChange={handleChange}
-                      title={"Contact Info"}
+                      title={"CONTACT INFO"}
                     />
                     <InputTemplate
                       name="total_hours"
                       value={volunteerItem.total_hours ?? 0}
                       onChange={handleChange}
-                      title={"Total Hours"}
+                      title={"TOTAL HOURS"}
                     />
                   </div>
                 </div>

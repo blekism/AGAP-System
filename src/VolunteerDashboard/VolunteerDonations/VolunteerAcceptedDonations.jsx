@@ -70,103 +70,109 @@ export default function VolunteerAcceptedDonations() {
           </div>
           <div className="VolunteerAcceptedDonations-rightCont">
             <p>ACCEPTED DONATIONS LIST</p>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">DONATION ID</th>
-                  <th scope="col">DONOR</th>
-                  <th scope="col">STATUS</th>
-                  <th scope="col">RECEIPIENT</th>
-                  <th scope="col">RECEIVED DATE</th>
-                  <th scope="col">VIEW ITEMS</th>
-                </tr>
-              </thead>
-              <tbody>
-                {donations.map((donation, key) => (
-                  <tr key={key}>
-                    <td>{donation.donation_id}</td>
-                    <td>{donation.donor_lastName}</td>
-                    <td>{donation.status_name}</td>
-                    <td>{donation.recipient_type}</td>
-                    <td>{donation.received_date}</td>
-                    <td>
-                      <div className="ViewItemsModal-ParentCont">
-                        <button
-                          type="button"
-                          className="btn"
-                          data-bs-toggle="modal"
-                          data-bs-target="#viewItemsModalToggle"
-                          onClick={() =>
-                            handleButtonClick(donation.donation_id)
-                          }
-                          style={{
-                            backgroundColor: "#354290",
-                            color: "#ffffff",
-                          }}
-                        >
-                          Items
-                        </button>
+            <div className="VolunteerAcceptedDonations-rightCont-table">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">DONATION ID</th>
+                    <th scope="col">DONOR</th>
+                    <th scope="col">STATUS</th>
+                    <th scope="col">RECEIPIENT</th>
+                    <th scope="col">RECEIVED DATE</th>
+                    <th scope="col">VIEW ITEMS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {donations.map((donation, key) => (
+                    <tr key={key}>
+                      <td>{donation.donation_id}</td>
+                      <td>{donation.donor_lastName}</td>
+                      <td>{donation.status_name}</td>
+                      <td>{donation.recipient_type}</td>
+                      <td>{donation.received_date}</td>
+                      <td>
+                        <div className="ViewItemsModal-ParentCont">
+                          <button
+                            type="button"
+                            className="btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#viewItemsModalToggle"
+                            onClick={() =>
+                              handleButtonClick(donation.donation_id)
+                            }
+                            style={{
+                              backgroundColor: "#354290",
+                              color: "#ffffff",
+                            }}
+                          >
+                            Items
+                          </button>
 
-                        <div
-                          className="modal fade"
-                          id="viewItemsModalToggle"
-                          aria-hidden="true"
-                          aria-labelledby="viewItemsModalToggleLabel"
-                          data-bs-backdrop="static"
-                          data-bs-keyboard="false"
-                          tabIndex="-1"
-                        >
-                          <div className="modal-dialog modal-lg  modal-dialog-centered">
-                            <div className="modal-content">
-                              <div className="modal-header">
-                                <h5
-                                  className="modal-title"
-                                  style={{
-                                    color: "black",
-                                    fontWeight: "600",
-                                  }}
-                                >
-                                  DONATION ITEMS LIST
-                                </h5>
-                                <button
-                                  type="button"
-                                  className="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
+                          <div
+                            className="modal fade"
+                            id="viewItemsModalToggle"
+                            aria-hidden="true"
+                            aria-labelledby="viewItemsModalToggleLabel"
+                            data-bs-backdrop="static"
+                            data-bs-keyboard="false"
+                            tabIndex="-1"
+                          >
+                            <div className="modal-dialog modal-lg  modal-dialog-centered">
+                              <div className="modal-content">
+                                <div className="modal-header">
+                                  <h5
+                                    className="modal-title"
+                                    style={{
+                                      color: "black",
+                                      fontWeight: "600",
+                                    }}
+                                  >
+                                    DONATION ITEMS LIST
+                                  </h5>
+                                  <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                  ></button>
+                                </div>
 
-                              <div className="modal-body">
-                                <table className="table table-striped">
-                                  <thead>
-                                    <tr>
-                                      <th scope="col">QUANTITY</th>
-                                      <th scope="col">COST</th>
-                                      <th scope="col">ITEM</th>
-                                      <th scope="col">CATEGORY</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    {donationItems.map((donationItem, key) => (
-                                      <tr key={key}>
-                                        <td>{donationItem.qty}</td>
-                                        <td>{donationItem.cost}</td>
-                                        <td>{donationItem.item}</td>
-                                        <td>{donationItem.category_name}</td>
+                                <div className="modal-body">
+                                  <table className="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">QUANTITY</th>
+                                        <th scope="col">COST</th>
+                                        <th scope="col">ITEM</th>
+                                        <th scope="col">CATEGORY</th>
                                       </tr>
-                                    ))}
-                                  </tbody>
-                                </table>
+                                    </thead>
+                                    <tbody>
+                                      {donationItems.map(
+                                        (donationItem, key) => (
+                                          <tr key={key}>
+                                            <td>{donationItem.qty}</td>
+                                            <td>{donationItem.cost}</td>
+                                            <td>{donationItem.item}</td>
+                                            <td>
+                                              {donationItem.category_name}
+                                            </td>
+                                          </tr>
+                                        )
+                                      )}
+                                    </tbody>
+                                  </table>
+                                </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

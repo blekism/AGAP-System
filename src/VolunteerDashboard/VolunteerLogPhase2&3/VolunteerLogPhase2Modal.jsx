@@ -1,6 +1,6 @@
 import React from "react";
 import "./VolunteerLogPhase2Modal.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
@@ -17,6 +17,8 @@ export default function VolunteerLogPhase2Modal() {
   });
   const [cookies] = useCookies(["donor_token"]);
   const [events, setEvents] = useState([]);
+  const phase2LogRef = useRef(null);
+  const [insertState, setInsertState] = useState(1);
 
   useEffect(() => {
     const updateDate = () => {
@@ -97,6 +99,18 @@ export default function VolunteerLogPhase2Modal() {
         )
         .then(function (response) {
           console.log(response.data);
+          if (response.data.status === 201) {
+            setInsertState(2);
+            setFormData({
+              event_id: "",
+              account_id: "",
+              activity: "",
+              time_in: "",
+              time_out: "",
+            });
+          } else {
+            setInsertState(3);
+          }
         });
     } catch (error) {
       console.error("There was an error submitting the form!", error);
@@ -114,16 +128,26 @@ export default function VolunteerLogPhase2Modal() {
   }, []);
 
   const confirmAction = (action) => {
+    let form = null;
     let confirmMessage = "";
 
     if (action == "submitPhase2Log") {
       confirmMessage = "Are you sure you want to submit your Log?";
+      form = phase2LogRef.current;
     }
-    if (window.confirm(confirmMessage)) {
-      if (action == "submitPhase2Log") {
-        handleSubmitPhase2();
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action == "submitPhase2Log") {
+          handleSubmitPhase2();
+        }
       }
+    } else {
+      form.reportValidity();
     }
+  };
+
+  const resetInsertState = () => {
+    setInsertState(1);
   };
 
   return (
@@ -134,6 +158,7 @@ export default function VolunteerLogPhase2Modal() {
           className="btnLogActivity"
           data-bs-toggle="modal"
           data-bs-target="#volunteerLogPhase2Modal"
+          onClick={resetInsertState}
         >
           LOG ACTIVITY
         </button>
@@ -169,7 +194,7 @@ export default function VolunteerLogPhase2Modal() {
                 </div>
 
                 <div className="modal-body">
-                  <form onSubmit={handleSubmitPhase2}>
+                  <form onSubmit={handleSubmitPhase2} ref={phase2LogRef}>
                     <div
                       className="VolunteerAttendance-Detail1"
                       style={{
@@ -182,9 +207,9 @@ export default function VolunteerLogPhase2Modal() {
                         <label
                           class="input-group-text"
                           for="inputGroupSelect01"
-                          style={{ height: "40px" }}
+                          style={{ height: "40px", fontWeight: "bold" }}
                         >
-                          Event Name:
+                          EVENT NAME:
                         </label>
                         <select
                           class="form-select"
@@ -193,6 +218,7 @@ export default function VolunteerLogPhase2Modal() {
                           id="inputGroupSelect01"
                           onChange={handleInputChange}
                           style={{ height: "40px" }}
+                          required
                         >
                           <option selected>Choose...</option>
                           {events
@@ -250,7 +276,12 @@ export default function VolunteerLogPhase2Modal() {
                           marginBottom: "20px",
                         }}
                       >
-                        <span class="input-group-text">Activity:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          ACTIVITY:
+                        </span>
                         <input
                           type="text"
                           name="activity"
@@ -259,6 +290,7 @@ export default function VolunteerLogPhase2Modal() {
                           onChange={handleInputChange}
                           aria-label="Username"
                           aria-describedby="addon-wrapping"
+                          required
                         />
                       </div>
                     </div>
@@ -272,7 +304,12 @@ export default function VolunteerLogPhase2Modal() {
                       }}
                     >
                       <div class="input-group">
-                        <span class="input-group-text">Time In:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          TIME IN:
+                        </span>
                         <input
                           type="time"
                           name="time_in"
@@ -281,10 +318,16 @@ export default function VolunteerLogPhase2Modal() {
                           onChange={handleInputChange}
                           aria-label="Username"
                           aria-describedby="addon-wrapping"
+                          required
                         />
                       </div>
                       <div class="input-group">
-                        <span class="input-group-text">Time Out:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          TIME OUT:
+                        </span>
                         <input
                           type="time"
                           name="time_out"
@@ -293,9 +336,23 @@ export default function VolunteerLogPhase2Modal() {
                           onChange={handleInputChange}
                           aria-label="Username"
                           aria-describedby="addon-wrapping"
+                          required
                         />
                       </div>
                     </div>
+
+                    {insertState === 2 ? (
+                      <div className="alert alert-success" role="alert">
+                        Phase 2 Log Successfully Submitted!
+                      </div>
+                    ) : insertState === 3 ? (
+                      <div className="alert alert-danger" role="alert">
+                        Error submitting Phase 2 Log!
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
                     <div
                       className="VolunteerLogModal-buttonContainer"
                       style={{ display: "flex", justifyContent: "center" }}
@@ -303,11 +360,10 @@ export default function VolunteerLogPhase2Modal() {
                       <button
                         className="VolunteerLogModal-button"
                         type="button"
-                        data-bs-dismiss="modal"
                         onClick={() => confirmAction("submitPhase2Log")}
                         style={{
                           width: "20%",
-                          borderRadius: "40px",
+                          borderRadius: "10px",
                           background: "#354290",
                           color: "white",
                           fontSize: "18px",

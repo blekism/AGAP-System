@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./ProfilePage.css";
 import axios from "axios";
 import { useCookies } from "react-cookie";
@@ -22,6 +22,9 @@ export default function ProfilePage() {
   const [cookies, removeCookie] = useCookies(["donor_token"]);
   const [decodedToken, setDecodedToken] = useState(null);
   const [isVolunteer, setIsVolunteer] = useState(false);
+  const profileDetailsRef = useRef(null);
+  const [insertState, setInsertState] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
     if (cookies.donor_token) {
@@ -87,6 +90,21 @@ export default function ProfilePage() {
         )
         .then(function (response) {
           console.log(response.data);
+          if (response.data.status === 200) {
+            setInsertState(2);
+          } else {
+            setInsertState(3);
+          }
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
+        })
+        .catch(function (error) {
+          setShowAlert(true);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 3000);
         });
     } catch (error) {
       console.error("There was an error submitting the form!", error);
@@ -94,15 +112,21 @@ export default function ProfilePage() {
   };
 
   const confirmAction = (action) => {
+    let form = null;
     let confirmMessage = "";
 
     if (action == "saveChanges") {
       confirmMessage = "Are you sure you want to submit these changes?";
+      form = profileDetailsRef.current;
     }
-    if (window.confirm(confirmMessage)) {
-      if (action == "saveChanges") {
-        handleSubmitProfileDetails();
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action == "saveChanges") {
+          handleSubmitProfileDetails();
+        }
       }
+    } else {
+      form.reportValidity();
     }
   };
 
@@ -112,7 +136,7 @@ export default function ProfilePage() {
         <div className="ProfilePageHeaderCont">
           <Navbar />
         </div>
-        <form onSubmit={handleSubmitProfileDetails}>
+        <form onSubmit={handleSubmitProfileDetails} ref={profileDetailsRef}>
           <div className="ProfilePageBodyCont">
             <div className="ProfilePageBodyCont-Left">
               <p>Your Profile</p>
@@ -141,7 +165,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">First Name:</span>
+                    <span class="input-group-text">FIRST NAME:</span>
                     <input
                       type="text"
                       name="first_name"
@@ -150,6 +174,7 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                   <div
@@ -158,7 +183,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">Last Name:</span>
+                    <span class="input-group-text">LAST NAME:</span>
                     <input
                       type="text"
                       name="last_name"
@@ -167,6 +192,7 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                 </div>
@@ -178,7 +204,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">Date of Birth:</span>
+                    <span class="input-group-text">DATE OF BIRTH:</span>
                     <input
                       type="text"
                       name="dob"
@@ -187,6 +213,7 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                 </div>
@@ -198,7 +225,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">Address:</span>
+                    <span class="input-group-text">ADDRESS:</span>
                     <input
                       type="text"
                       name="address"
@@ -207,6 +234,7 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                   <div
@@ -215,7 +243,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">Contact Information:</span>
+                    <span class="input-group-text">CONTACT INFORMATION:</span>
                     <input
                       type="text"
                       name="contact_info"
@@ -224,6 +252,7 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                 </div>
@@ -236,7 +265,7 @@ export default function ProfilePage() {
                         marginBottom: "20px",
                       }}
                     >
-                      <span class="input-group-text">Section:</span>
+                      <span class="input-group-text">SECTION:</span>
                       <input
                         type="text"
                         name="section"
@@ -245,6 +274,7 @@ export default function ProfilePage() {
                         onChange={handleInputChange}
                         aria-label="Username"
                         aria-describedby="addon-wrapping"
+                        required
                       />
                     </div>
                     <div class="input-group">
@@ -253,7 +283,7 @@ export default function ProfilePage() {
                         for="inputGroupSelect01"
                         style={{ height: "45px" }}
                       >
-                        Dept:
+                        DEPARTMENT:
                       </label>
                       <select
                         class="form-select"
@@ -276,7 +306,7 @@ export default function ProfilePage() {
                         for="inputGroupSelect01"
                         style={{ height: "45px" }}
                       >
-                        Designation:
+                        DESIGNATION:
                       </label>
                       <select
                         class="form-select"
@@ -301,7 +331,7 @@ export default function ProfilePage() {
                       marginBottom: "20px",
                     }}
                   >
-                    <span class="input-group-text">Email:</span>
+                    <span class="input-group-text">EMAIL:</span>
                     <input
                       type="text"
                       name="email"
@@ -310,9 +340,23 @@ export default function ProfilePage() {
                       onChange={handleInputChange}
                       aria-label="Username"
                       aria-describedby="addon-wrapping"
+                      required
                     />
                   </div>
                 </div>
+
+                {showAlert &&
+                  (insertState === 2 ? (
+                    <div className="alert alert-success" role="alert">
+                      Profile Details Changes Saved Successfully!
+                    </div>
+                  ) : insertState === 3 ? (
+                    <div className="alert alert-danger" role="alert">
+                      Error saving Profile Details Changes!
+                    </div>
+                  ) : (
+                    <></>
+                  ))}
 
                 <div
                   className="EditProfileDetails-buttonContainer"
@@ -324,7 +368,7 @@ export default function ProfilePage() {
                     onClick={() => confirmAction("saveChanges")}
                     style={{
                       width: "20%",
-                      borderRadius: "40px",
+                      borderRadius: "10px",
                       background: "#354290",
                       color: "white",
                       fontSize: "18px",

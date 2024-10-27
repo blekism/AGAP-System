@@ -9,6 +9,8 @@ export default function VolunteerLogPhase3Modal() {
   const [currentTime, setCurrentTime] = useState("");
   const [events, setEvents] = useState([]);
   const [cookies] = useCookies(["donor_token"]);
+  const [dropdownValue, setDropdownValue] = useState("none");
+  const [insertState, setInsertState] = useState(1);
 
   useEffect(() => {
     const updateDate = () => {
@@ -64,7 +66,8 @@ export default function VolunteerLogPhase3Modal() {
   const handleEventChange = (e) => {
     const eventId = e.target.value;
     const event = events.find((event) => event.evenet_id === eventId); // Find the event by id
-    setSelectedEvent(event); // Update the selected event
+    setSelectedEvent(event);
+    setDropdownValue(eventId);
   };
 
   const handleChange = (event) => {
@@ -90,6 +93,17 @@ export default function VolunteerLogPhase3Modal() {
         )
         .then(function (response) {
           console.log(response.data);
+          if (response.data.status === 201) {
+            setInsertState(2);
+            setSelectedEvent({
+              evenet_id: "",
+              start_time: "",
+              end_time: "",
+            });
+            setDropdownValue("none");
+          } else {
+            setInsertState(3);
+          }
         });
     } catch (error) {
       console.error("There was an error submitting the form!", error);
@@ -109,6 +123,10 @@ export default function VolunteerLogPhase3Modal() {
     }
   };
 
+  const resetInsertState = () => {
+    setInsertState(1);
+  };
+
   return (
     <>
       <div className="VolunteerLogPhase3Modal-Parent">
@@ -117,6 +135,7 @@ export default function VolunteerLogPhase3Modal() {
           className="btnLogActivity"
           data-bs-toggle="modal"
           data-bs-target="#volunteerLogPhase3Modal"
+          onClick={resetInsertState}
         >
           LOG ACTIVITY
         </button>
@@ -151,7 +170,7 @@ export default function VolunteerLogPhase3Modal() {
                       marginBottom: "auto",
                     }}
                   >
-                    <h5 className="modal-phase3-title">
+                    <h5 className="modal-title">
                       VOLUNTEER ATTENDANCE MONITORING
                     </h5>
                     <p style={{ fontSize: "16px", fontWeight: "normal" }}>
@@ -181,19 +200,24 @@ export default function VolunteerLogPhase3Modal() {
                         <label
                           class="input-group-text"
                           for="inputGroupSelect01"
-                          style={{ height: "40px" }}
+                          style={{
+                            height: "40px",
+                            fontWeight: "bold",
+                          }}
                         >
-                          Event Name:
+                          EVENT NAME:
                         </label>
                         <select
                           class="form-select"
                           name="event_id"
-                          // value={filteredEventsStatus}
+                          value={dropdownValue}
                           id="inputGroupSelect01"
                           onChange={handleEventChange}
                           style={{ height: "40px" }}
                         >
-                          <option value="none">None</option>
+                          <option value="none">
+                            Choose the event you participated in
+                          </option>
                           {events
                             .filter(
                               (event) => event.event_status === "finished"
@@ -249,7 +273,12 @@ export default function VolunteerLogPhase3Modal() {
                       }}
                     >
                       <div class="input-group">
-                        <span class="input-group-text">EVENT ID:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          EVENT ID:
+                        </span>
                         {/* {filteredEvents.map((event, key) => ( */}
                         <input
                           // key={key}
@@ -275,7 +304,12 @@ export default function VolunteerLogPhase3Modal() {
                       }}
                     >
                       <div class="input-group">
-                        <span class="input-group-text">START TIME:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          START TIME:
+                        </span>
                         {/* {filteredEvents.map((event, key) => ( */}
                         <input
                           // key={key}
@@ -291,7 +325,12 @@ export default function VolunteerLogPhase3Modal() {
                         {/* ))} */}
                       </div>
                       <div class="input-group">
-                        <span class="input-group-text">END TIME:</span>
+                        <span
+                          class="input-group-text"
+                          style={{ fontWeight: "bold" }}
+                        >
+                          END TIME:
+                        </span>
                         {/* {events.map((event, key) => ( */}
                         <input
                           type="text"
@@ -307,6 +346,18 @@ export default function VolunteerLogPhase3Modal() {
                       </div>
                     </div>
 
+                    {insertState === 2 ? (
+                      <div className="alert alert-success" role="alert">
+                        Phase 2 Log Successfully Submitted!
+                      </div>
+                    ) : insertState === 3 ? (
+                      <div className="alert alert-danger" role="alert">
+                        Error Submitting Phase 3 Log!
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+
                     <div
                       className="VolunteerLogModal-buttonContainer"
                       style={{ display: "flex", justifyContent: "center" }}
@@ -315,10 +366,9 @@ export default function VolunteerLogPhase3Modal() {
                         type="button"
                         onClick={() => confirmAction("submitPhase3Log")}
                         className="VolunteerLogModal-button"
-                        data-bs-dismiss="modal"
                         style={{
                           width: "20%",
-                          borderRadius: "40px",
+                          borderRadius: "10px",
                           background: "#354290",
                           color: "white",
                           fontSize: "18px",

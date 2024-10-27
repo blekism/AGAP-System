@@ -176,8 +176,12 @@ export default function DonorContent({ donors }) {
             <form onSubmit={handleSubmit} ref={donorInfoRef}>
               <div className="modal-body">
                 <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">
-                    User ID
+                  <span
+                    className="input-group-text"
+                    id="basic-addon1"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    USER ID
                   </span>
                   <input
                     type="text"
@@ -208,19 +212,20 @@ export default function DonorContent({ donors }) {
                   value={donorItem.last_name}
                   name="last_name"
                   onChange={handleChange}
-                  title={"Last Name"}
+                  title={"LAST NAME"}
                 />
                 <InputTemplate
                   value={donorItem.first_name}
                   name="first_name"
                   onChange={handleChange}
-                  title={"First Name"}
+                  title={"FIRST NAME"}
+
                 />
                 <InputTemplate
                   value={donorItem.section}
                   name="section"
                   onChange={handleChange}
-                  title={"Section"}
+                  title={"SECTION"}
                 />
 
                 <select
@@ -253,13 +258,13 @@ export default function DonorContent({ donors }) {
                   value={donorItem.email}
                   name="email"
                   onChange={handleChange}
-                  title={"Email"}
+                  title={"EMAIL"}
                 />
                 <InputTemplate
                   value={donorItem.contact_info}
                   name="contact_info"
                   onChange={handleChange}
-                  title={"Contact Info"}
+                  title={"CONTACT INFO"}
                 />
               </div>
 

@@ -43,32 +43,36 @@ export default function VolunteerLogPhase2() {
                 <VolunteerLogPhase2Modal />
               </div>
             </div>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">LOG ID</th>
-                  <th scope="col">EVENT NAME</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">ACTIVITY</th>
-                  <th scope="col">TIME IN</th>
-                  <th scope="col">TIME OUT</th>
-                  <th scope="col">DATE</th>
-                </tr>
-              </thead>
-              <tbody>
-                {volunteerPhase2Log.map((phase2Log, key) => (
-                  <tr key={key}>
-                    <td>{phase2Log.log_id}</td>
-                    <td>{phase2Log.event_name}</td>
-                    <td>{phase2Log.last_name + ", " + phase2Log.first_name}</td>
-                    <td>{phase2Log.activity}</td>
-                    <td>{phase2Log.time_in}</td>
-                    <td>{phase2Log.time_out}</td>
-                    <td>{phase2Log.date}</td>
+            <div className="VolunteerLogPhase2-rightCont-table">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">LOG ID</th>
+                    <th scope="col">EVENT NAME</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">ACTIVITY</th>
+                    <th scope="col">TIME IN</th>
+                    <th scope="col">TIME OUT</th>
+                    <th scope="col">DATE</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {volunteerPhase2Log.map((phase2Log, key) => (
+                    <tr key={key}>
+                      <td>{phase2Log.log_id}</td>
+                      <td>{phase2Log.event_name}</td>
+                      <td>
+                        {phase2Log.last_name + ", " + phase2Log.first_name}
+                      </td>
+                      <td>{phase2Log.activity}</td>
+                      <td>{phase2Log.time_in}</td>
+                      <td>{phase2Log.time_out}</td>
+                      <td>{phase2Log.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

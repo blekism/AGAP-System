@@ -43,30 +43,34 @@ export default function VolunteerLogPhase2() {
                 <VolunteerLogPhase3Modal />
               </div>
             </div>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">LOG ID</th>
-                  <th scope="col">EVENT NAME</th>
-                  <th scope="col">NAME</th>
-                  <th scope="col">TIME IN</th>
-                  <th scope="col">TIME OUT</th>
-                  <th scope="col">DATE</th>
-                </tr>
-              </thead>
-              <tbody>
-                {volunteerPhase3Log.map((phase3Log, key) => (
-                  <tr key={key}>
-                    <td>{phase3Log.log_id}</td>
-                    <td>{phase3Log.event_name}</td>
-                    <td>{phase3Log.last_name + ", " + phase3Log.first_name}</td>
-                    <td>{phase3Log.time_in}</td>
-                    <td>{phase3Log.time_out}</td>
-                    <td>{phase3Log.date}</td>
+            <div className="VolunteerLogPhase3-rightCont-table">
+              <table className="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">LOG ID</th>
+                    <th scope="col">EVENT NAME</th>
+                    <th scope="col">NAME</th>
+                    <th scope="col">TIME IN</th>
+                    <th scope="col">TIME OUT</th>
+                    <th scope="col">DATE</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {volunteerPhase3Log.map((phase3Log, key) => (
+                    <tr key={key}>
+                      <td>{phase3Log.log_id}</td>
+                      <td>{phase3Log.event_name}</td>
+                      <td>
+                        {phase3Log.last_name + ", " + phase3Log.first_name}
+                      </td>
+                      <td>{phase3Log.time_in}</td>
+                      <td>{phase3Log.time_out}</td>
+                      <td>{phase3Log.date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

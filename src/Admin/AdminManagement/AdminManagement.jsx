@@ -175,16 +175,19 @@ export default function AdminManagement() {
           Add new Admin
         </button>
       </div>
-      <div
+ <div
         style={{ paddingRight: "10px", maxHeight: "700px", overflowY: "auto" }}
       >
-        <table className="table table-striped">
-          <thead>
+
+      <table className="table table-striped">
+        
+        <thead>
             <tr
               style={{
                 fontSize: "17px",
                 fontFamily: "Poppins",
-                fontWeight: "500",
+                fontWeight: 500,
+                textAlign: "center",
               }}
             >
               <th scope="col">Admin ID</th>
@@ -226,73 +229,81 @@ export default function AdminManagement() {
             ))}
           </tbody>
         </table>
-        <div
-          className="modal fade"
-          id="AdminModal"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  ADMIN INFORMATION
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+        
+                
+                  
+      <div
+        className="modal fade"
+        id="AdminModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                ADMIN INFORMATION
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+             <form onSubmit={handleSubmit} ref={updateAdminFormRef}>
+              <div className="modal-body">
+                <div className="input-group mb-3">
+                  <span
+                    className="input-group-text"
+                    id="basic-addon1"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    USER ID
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                    readOnly
+                    value={admin.account_id}
+                    name="account_id"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+
+                <InputTemplate
+                  value={admin.last_name}
+                  name="last_name"
+                  onChange={handleChange}
+                  title={"LAST NAME"}
+                />
+                <InputTemplate
+                  value={admin.first_name}
+                  name="first_name"
+                  onChange={handleChange}
+                  title={"FIRST NAME"}
+                />
+
+                <InputTemplate
+                  value={admin.email}
+                  name="email"
+                  onChange={handleChange}
+                  title={"EMAIL"}
+                />
+                <InputTemplate
+                  value={admin.contact_info}
+                  name="contact_info"
+                  onChange={handleChange}
+                  title={"CONTACT INFO"}
+                />
               </div>
-              <form onSubmit={handleSubmit} ref={updateAdminFormRef}>
-                <div className="modal-body">
-                  <div className="input-group mb-3">
-                    <span className="input-group-text" id="basic-addon1">
-                      User ID
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Username"
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                      readOnly
-                      value={admin.account_id}
-                      name="account_id"
-                      onChange={handleChange}
-                    />
-                  </div>
-
-                  <InputTemplate
-                    value={admin.last_name}
-                    name="last_name"
-                    onChange={handleChange}
-                    title={"Last Name"}
-                  />
-                  <InputTemplate
-                    value={admin.first_name}
-                    name="first_name"
-                    onChange={handleChange}
-                    title={"First Name"}
-                  />
-
-                  <InputTemplate
-                    value={admin.email}
-                    name="email"
-                    onChange={handleChange}
-                    title={"Email"}
-                  />
-                  <InputTemplate
-                    value={admin.contact_info}
-                    name="contact_info"
-                    onChange={handleChange}
-                    title={"Contact Info"}
-                  />
-                </div>
 
                 {inserStatus === 2 ? (
                   <div className="alert alert-success" role="alert">
@@ -332,65 +343,70 @@ export default function AdminManagement() {
         </div>
         {/* adding new admin modal start */}
 
-        <div
-          className="modal fade"
-          id="newAdminModal"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabIndex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                  ADD NEW ADMIN
-                </h1>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
+      <div
+        className="modal fade"
+        id="newAdminModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                ADD NEW ADMIN
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <form onSubmit={handleNewAdminSubmit}>
+              <div className="modal-body">
+                <InputTemplate
+                  value={newAdmin.last_name}
+                  name="last_name"
+                  onChange={handleNewAdminChange}
+                  title={"LAST NAME"}
+                  placeholder="Last Name"
+                />
+                <InputTemplate
+                  value={newAdmin.first_name}
+                  name="first_name"
+                  onChange={handleNewAdminChange}
+                  title={"FIRST NAME"}
+                  placeholder="First Name"
+                />
+
+                <InputTemplate
+                  value={newAdmin.email}
+                  name="email"
+                  onChange={handleNewAdminChange}
+                  title={"EMAIL"}
+                  placeholder="Email"
+                />
+
+                <InputTemplate
+                  value={newAdmin.password}
+                  name="password"
+                  onChange={handleNewAdminChange}
+                  title={"PASSWORD"}
+                  placeholder="Password"
+                />
+
+                <InputTemplate
+                  value={newAdmin.contact_info}
+                  name="contact_info"
+                  onChange={handleNewAdminChange}
+                  title={"CONTACT INFO"}
+                  placeholder="Contact Info"
+                />
               </div>
-              <form onSubmit={handleNewAdminSubmit} ref={newAdminFormRef}>
-                <div className="modal-body">
-                  <InputTemplate
-                    value={newAdmin.last_name}
-                    name="last_name"
-                    onChange={handleNewAdminChange}
-                    title={"Last Name"}
-                  />
-                  <InputTemplate
-                    value={newAdmin.first_name}
-                    name="first_name"
-                    onChange={handleNewAdminChange}
-                    title={"First Name"}
-                  />
-
-                  <InputTemplate
-                    value={newAdmin.email}
-                    name="email"
-                    onChange={handleNewAdminChange}
-                    title={"Email"}
-                    pattern={"[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"}
-                  />
-
-                  <InputTemplate
-                    value={newAdmin.password}
-                    name="password"
-                    onChange={handleNewAdminChange}
-                    title={"Password"}
-                  />
-
-                  <InputTemplate
-                    value={newAdmin.contact_info}
-                    name="contact_info"
-                    onChange={handleNewAdminChange}
-                    title={"Contact Info"}
-                  />
-                </div>
+                 
 
                 {inserStatus === 2 ? (
                   <div className="alert alert-success" role="alert">

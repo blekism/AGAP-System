@@ -20,6 +20,8 @@ import VolunteerConditionalRender from "./Page/VolunteerConditionalRender.jsx";
 import LoginAdmin from "./Login_Signup/LoginAdmin.jsx";
 import VolunteerPendingApply from "./VolunteerSignUpPage/VolunteerPendingApply.jsx";
 
+import EventPage from "./Event/EventPage.jsx";
+
 import "./App.css";
 
 function App() {
@@ -30,6 +32,9 @@ function App() {
         <Route path="/LandingPage" element={<Landing />} />
         <Route path="/Donate" element={<DonationPage />} />
         <Route path="/Home" element={<DonateVolunteerPage />} />
+
+        <Route path="/Event" element={<EventPage />} />
+
         <Route path="/AdminPage" element={<AdminPage />} />
         <Route path="/Volunteers" element={<VolunteerPage />} />
         <Route path="/VolunteerDashboard" element={<VolunteerDashboard />} />

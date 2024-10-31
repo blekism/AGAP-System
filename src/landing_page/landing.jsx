@@ -47,10 +47,13 @@ function Landing() {
         </div>
       </div>
 
-      <BePart />
+      <EventList />
       <LandingCalendar />
+      <BePart />
+      <hr className="divider-last" />
 
       <div className="paragraph">
+        <h1 className="parat">Latest Project</h1>
         <div className="paragraph-data">
           <div className="first">
             <div className="first-box">
@@ -96,8 +99,6 @@ function Landing() {
           </div>
         </div>
       </div>
-
-      <EventList />
 
       <hr className="divider-last" />
 

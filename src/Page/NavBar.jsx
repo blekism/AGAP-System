@@ -7,13 +7,13 @@ import { useCookies } from "react-cookie";
 export default function NavBar() {
   const [cookies] = useCookies(["donor_token"]);
 
-  useEffect(() => {
-    if (!cookies.donor_token) {
-      window.location.href = "/";
-    } else {
-      console.log("cookieeeeeees is valid");
-    }
-  }, []);
+  // useEffect(() => {
+    // if (!cookies.donor_token) {
+     //  window.location.href = "/";
+   // } else {
+    //  console.log("cookieeeeeees is valid");
+   // }
+  // }, []);
 
   return (
     <>

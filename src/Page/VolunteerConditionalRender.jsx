@@ -21,6 +21,8 @@ function VolunteerConditionalRender() {
           navigate("/VolunteerDashboard");
         } else if (decoded.acclvl === "volunteer_apply") {
           navigate("/VolunteerPendingApply");
+        } else if (decoded.acclvl === "volunteer_officer") {
+          navigate("/VolunteerDashboard");
         }
       } catch (error) {
         console.log(error);

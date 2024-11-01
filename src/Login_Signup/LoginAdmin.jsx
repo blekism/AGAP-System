@@ -11,6 +11,8 @@ export default function LoginAdmin() {
   });
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["donor_token"]);
+  const [wrongUser, setWrongUser] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -51,10 +53,16 @@ export default function LoginAdmin() {
           navigate("/AdminPage");
         } else {
           console.log("Login failed!");
+          setWrongUser(true);
+          setShowAlert(true);
+          setTimeout(() => setShowAlert(false), 3000);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setWrongUser(true);
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -131,6 +139,21 @@ export default function LoginAdmin() {
               <button type="submit" className="btn">
                 SIGN IN
               </button>
+
+              {showAlert && wrongUser === true && (
+                <div
+                  className="alert alert-danger"
+                  role="alert"
+                  style={{
+                    position: "absolute",
+                    zIndex: "1",
+                    marginTop: "10px",
+                    top: "63%",
+                  }}
+                >
+                  Invalid email or password!
+                </div>
+              )}
             </form>
 
             <div className="text-center" style={{ paddingTop: "15%" }}>

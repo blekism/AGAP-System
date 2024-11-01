@@ -5,10 +5,14 @@ import Logout from "../assets/images/logout.png";
 import Dashboard from "../assets/images/Dashboard.png";
 import Donation from "../assets/images/Donation.png";
 import LogRecord from "../assets/images/LogRecord.png";
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
 
 export default function VolunteerDashboardSidebar() {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
+  const [cookies] = useCookies(["donor_token"]);
+  const [volunteerLevel, setVolunteerLevel] = useState("");
 
   useEffect(() => {
     const path = location.pathname;
@@ -29,6 +33,19 @@ export default function VolunteerDashboardSidebar() {
     }
   }, [location]);
 
+  useEffect(() => {
+    if (cookies.donor_token) {
+      try {
+        const decoded = jwtDecode(cookies.donor_token);
+        setVolunteerLevel(decoded.acclvl);
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      window.location.href = "/";
+    }
+  }, []);
+
   return (
     <>
       <div className="VolunteerDashboard-sidebarCont">
@@ -47,33 +64,35 @@ export default function VolunteerDashboardSidebar() {
             </Link>
           </div>
 
-          <div className="VolunteerDashboardDonations">
-            <div className="VolunteerDashboardDonations-Header">
-              <img src={Donation} alt="Donations Icon" />
-              <p style={{ marginLeft: "10px" }}>Donations</p>
-            </div>
+          {volunteerLevel === "volunteer_officer" && (
+            <div className="VolunteerDashboardDonations">
+              <div className="VolunteerDashboardDonations-Header">
+                <img src={Donation} alt="Donations Icon" />
+                <p style={{ marginLeft: "10px" }}>Donations</p>
+              </div>
 
-            <div className="VolunteerDashboardDonations-Sub">
-              <Link
-                to="/VolunteerPendingDonations"
-                className={`VolunteerDashboard-sidebarLink ${
-                  activeLink === "pending" ? "active" : ""
-                }`}
-                onClick={() => handleLinkClick("pending")}
-              >
-                Pending
-              </Link>
-              <Link
-                to="/VolunteerAcceptedDonations"
-                className={`VolunteerDashboard-sidebarLink ${
-                  activeLink === "accepted" ? "active" : ""
-                }`}
-                onClick={() => handleLinkClick("accepted")}
-              >
-                Accepted
-              </Link>
+              <div className="VolunteerDashboardDonations-Sub">
+                <Link
+                  to="/VolunteerPendingDonations"
+                  className={`VolunteerDashboard-sidebarLink ${
+                    activeLink === "pending" ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick("pending")}
+                >
+                  Pending
+                </Link>
+                <Link
+                  to="/VolunteerAcceptedDonations"
+                  className={`VolunteerDashboard-sidebarLink ${
+                    activeLink === "accepted" ? "active" : ""
+                  }`}
+                  onClick={() => handleLinkClick("accepted")}
+                >
+                  Accepted
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
 
           <div className="VolunteerLog">
             <div className="VolunteerLog-Header">

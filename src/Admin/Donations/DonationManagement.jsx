@@ -109,9 +109,8 @@ export default function DonationContent({
             <th scope="col">Donation ID</th>
             <th scope="col">Donor</th>
             <th scope="col">Total Cost</th>
-            <th scope="col">Status</th>
             <th scope="col">Recipient</th>
-            <th scope="col">Time</th>
+            <th scope="col">Time & Date</th>
             <th scope="col">Recieved By</th>
             <th scope="col">Recieved Date</th>
             <th scope="col">Action</th>
@@ -132,9 +131,8 @@ export default function DonationContent({
               <td>{donation.donation_id}</td>
               <td>{donation.donor_lastName}</td>
               <td>{donation.total_cost}</td>
-              <td>{donation.status_name}</td>
               <td>{donation.recipient_type}</td>
-              <td>{donation.time}</td>
+              <td>{donation.dateTime_entered}</td>
               <td>{donation.receiver_lastName}</td>
               <td>{donation.received_date}</td>
               <td>
@@ -186,8 +184,9 @@ export default function DonationContent({
                 <thead style={{ textAlign: "center" }}>
                   <tr>
                     <th scope="col">Item</th>
-                    <th scope="col">Cost</th>
+                    <th scope="col">Unit Cost</th>
                     <th scope="col">Quantity</th>
+                    <th scope="col">Total Cost</th>
                     <th scope="col">Category</th>
                   </tr>
                 </thead>
@@ -196,8 +195,9 @@ export default function DonationContent({
                   {donationItemsList.map((item, key) => (
                     <tr key={key}>
                       <td>{item.item}</td>
-                      <td>{item.cost}</td>
+                      <td>{item.unit_cost}</td>
                       <td>{item.qty}</td>
+                      <td>{item.total_cost}</td>
                       <td>{item.category_name}</td>
                     </tr>
                   ))}

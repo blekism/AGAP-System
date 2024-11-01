@@ -10,9 +10,9 @@ export default function NavBar() {
   useEffect(() => {
     if (!cookies.donor_token) {
       window.location.href = "/";
-   } else {
-     console.log("cookieeeeeees is valid");
-   }
+    } else {
+      console.log("cookieeeeeees is valid");
+    }
   }, []);
 
   return (
@@ -59,6 +59,11 @@ export default function NavBar() {
               <li className="nav-item">
                 <Link to="/YourDonation" className="nav-link">
                   Your Donations
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/TurnoverPage" className="nav-link">
+                  Turnover Documentation
                 </Link>
               </li>
             </ul>

@@ -41,7 +41,7 @@ function EventList() {
               <img
                 src={event.image}
                 alt={event.title}
-                className="event-image"
+                className="event-images"
               />
             </div>
             <h2 className="event-box-title">{event.title}</h2>

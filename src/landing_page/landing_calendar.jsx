@@ -11,7 +11,7 @@ export default function LandingCalendar() {
 
   // Get the current month and year
   const currentDate = new Date();
-  const currentMonth = currentDate.toLocaleString('default', { month: 'long' });
+  const currentMonth = currentDate.toLocaleString("default", { month: "long" });
   const currentYear = currentDate.getFullYear();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function LandingCalendar() {
       .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
       .then(function (response) {
         console.log(response.data); // Read events
-        setEvents(response.data.data); // Set events
+        setEvent(response.data.data); // Set events
       })
       .catch((error) => console.error("Error fetching events:", error)); // Added error handling
   }, []);
@@ -52,7 +52,7 @@ export default function LandingCalendar() {
             }}
             fixedWeekCount={false}
             showNonCurrentDates={true}
-            events={event.map((event) => { 
+            events={event.map((event) => {
               return {
                 title: event.event_name,
                 start: event.start_date,

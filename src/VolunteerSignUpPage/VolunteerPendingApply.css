@@ -1,0 +1,46 @@
+.VolunteerPendingApplyParentCont .VolunteerPendingApplyChildCont {
+    background-color: var(--Gray-Background, #ffffff);
+    border-radius: 20px;
+    border: 2px solid var(--Blue, #354290);
+    padding: 30px;
+    padding-top: 0;
+    padding-bottom: 30px;
+    width: 600px;
+    height: fit-content;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin: 50px auto;
+  }
+
+  .VolunteerPendingApplyParentCont .VolunteerPendingApplyChildCont .VolunteerPendingApplyHeaderCont {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+
+    .VolunteerPendingApplyParentCont .VolunteerPendingApplyChildCont .VolunteerPendingApplyContentCont {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .VolunteerPendingApplyParentCont .VolunteerPendingApplyChildCont .VolunteerPendingApplyContentCont button {
+        width: 50%;
+        padding: 12px;
+        background-color: #354290;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: auto;
+        margin-top: 15px;
+    }
+
+    .VolunteerPendingApplyParentCont .VolunteerPendingApplyChildCont .VolunteerPendingApplyContentCont button:hover {
+        background-color: #f8f8f8;
+        color: #354290;
+      }

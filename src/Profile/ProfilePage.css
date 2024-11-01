@@ -82,7 +82,7 @@
 
 .ProfilePageParentCont .ProfilePageBodyCont .ProfilePageBodyCont-Left .signout-btn button {
     width: 100%;
-    border-radius: 20px;
+    border-radius: 10px;
     background: var(--Yellow, #FCD125);
     color: var(--Blue, #354290);
     text-align: center;

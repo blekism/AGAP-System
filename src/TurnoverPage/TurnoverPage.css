@@ -1,0 +1,37 @@
+.TurnoverParentCont{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    background: linear-gradient(to top, #354290 20%, #ffffff);
+}
+
+.TurnoverParentCont .TurnoverHeaderCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 100px 20px 40px;
+    color: #ffffff;
+    border-top: 1px solid #354290;
+    background-color: #354290;
+
+}
+
+.TurnoverParentCont .TurnoverContentCont{
+    width: 95%;
+    /* margin: 20px; */
+    columns: 4;
+    column-gap: 40px;
+    padding: 30px;
+    background-color: #f0f0f057;
+    margin: auto;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border-radius: 15px;
+    justify-content: center;
+}
+
+.TurnoverParentCont .TurnoverFooterCont{
+    margin-top: auto;
+}

@@ -19,6 +19,7 @@ export default function ItemManagementTable({
           >
             <th scope="col">Item</th>
             <th scope="col">Total Stock</th>
+            <th scope="col">Current Stock</th>
             <th scope="col">Amount Deduction</th>
           </tr>
         </thead>
@@ -34,6 +35,7 @@ export default function ItemManagementTable({
               key={key}
             >
               <td>{item.item}</td>
+              <td>{item.total_qty}</td>
               <td>{item.total_Stock}</td>
               <td>
                 <div className="input-group mb-3" style={{ width: "70%" }}>

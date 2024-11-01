@@ -19,9 +19,43 @@ export default function DonationItemTemplate({
   value5,
   onChange5,
   name5,
+  value6,
+  onChange6,
+  name6,
 }) {
   return (
     <div className="ItemContainerParent">
+      <div className="CategoryDropDown">
+        <select
+          className="form-select mt-4"
+          aria-label="Default select example"
+          value={value4}
+          onChange={onChange4}
+          name={name4}
+          style={{ width: "100%" }}
+        >
+          <option value="3">Choose Category</option>
+          <option value="4000">School Supplies</option>
+          <option value="4004">Food</option>
+        </select>
+      </div>
+
+      {/* item start */}
+      <select
+        className="form-select mt-4"
+        aria-label="Default select example"
+        value={value3}
+        onChange={onChange3}
+        name={name3}
+        style={{ width: "12%", marginBottom: "30px" }}
+      >
+        <option value="3">Choose Item</option>
+        <option value="pen">item 1</option>
+        <option value="bag">item 2</option>
+        <option value="food">item 3</option>
+      </select>
+      {/* item end */}
+
       {/* quantity start*/}
       <div
         className="input-group input-group-sm"
@@ -48,7 +82,7 @@ export default function DonationItemTemplate({
         <input
           type="text"
           className="form-control"
-          placeholder="Cost"
+          placeholder="Cost per Unit"
           aria-label="Sizing example input"
           aria-describedby="inputGroup-sizing-sm"
           value={value2}
@@ -58,43 +92,33 @@ export default function DonationItemTemplate({
       </div>
       {/* cost end */}
 
-      {/* item start */}
-      <select
-        className="form-select mt-4"
-        aria-label="Default select example"
-        value={value3}
-        onChange={onChange3}
-        name={name3}
-        style={{ width: "12%", marginBottom: "30px" }}
+      {/* total cost start */}
+      <div
+        className="input-group input-group-sm"
+        style={{ width: "12%", marginBottom: "5px" }}
       >
-        <option value="3">Choose Item</option>
-        <option value="pen">item 1</option>
-        <option value="bag">item 2</option>
-        <option value="food">item 3</option>
-      </select>
-      {/* item end */}
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Total Cost"
+          aria-label="Sizing example input"
+          aria-describedby="inputGroup-sizing-sm"
+          readOnly
+          value={value6}
+          onChange={onChange6}
+          name={name6}
+        />
+      </div>
+      {/* total cost end */}
 
       <div className="CategoryDropDown">
-        <select
-          className="form-select mt-4"
-          aria-label="Default select example"
-          value={value4}
-          onChange={onChange4}
-          name={name4}
-          style={{ width: "60%" }}
-        >
-          <option value="3">Choose Category</option>
-          <option value="4000">School Supplies</option>
-          <option value="4004">Food</option>
-        </select>
-
         <select
           className="form-select mt-4"
           aria-label="Default select example"
           value={value5}
           onChange={onChange5}
           name={name5}
-          style={{ width: "60%" }}
+          style={{ width: "100%" }}
         >
           <option value="3">Choose Recipient</option>
           <option value="6000">Volunteer</option>
@@ -103,7 +127,6 @@ export default function DonationItemTemplate({
       </div>
 
       <div className="EditButtons">
-        <img src={Pen} className="icon" />
         <img src={Trash} className="icon" />
       </div>
     </div>

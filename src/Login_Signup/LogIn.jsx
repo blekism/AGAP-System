@@ -12,6 +12,8 @@ function LogIn() {
   });
   const navigate = useNavigate();
   const [cookies, setCookie, removeCookie] = useCookies(["donor_token"]);
+  const [wrongUser, setWrongUser] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -52,10 +54,16 @@ function LogIn() {
           navigate("/LandingPage");
         } else {
           console.log("Login failed!");
+          setWrongUser(true);
+          setShowAlert(true);
+          setTimeout(() => setShowAlert(false), 3000);
         }
       })
       .catch(function (error) {
         console.log(error);
+        setShowAlert(true);
+        setWrongUser(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -128,6 +136,21 @@ function LogIn() {
               <button type="submit" className="btn">
                 SIGN IN
               </button>
+
+              {showAlert && wrongUser === true && (
+                <div
+                  className="alert alert-danger"
+                  role="alert"
+                  style={{
+                    position: "absolute",
+                    zIndex: "1",
+                    marginTop: "10px",
+                    top: "63%",
+                  }}
+                >
+                  Invalid email or password!
+                </div>
+              )}
             </form>
 
             <div className="text-center mt-3">

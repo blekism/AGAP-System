@@ -10,6 +10,8 @@ import School from "../../assets/images/school.png";
 import SelfCare from "../../assets/images/selfcare.png";
 import Toys from "../../assets/images/toys.png";
 import ItemTable from "./ItemManagementTable.jsx";
+import { jwtDecode } from "jwt-decode";
+import { useCookies } from "react-cookie";
 import axios from "axios";
 
 export default function ItemManagement({ events }) {
@@ -18,6 +20,21 @@ export default function ItemManagement({ events }) {
   const [deductItems, setDeductItems] = useState([]);
   const [eventItem, setEventItem] = useState("none");
   const [showAlert, setShowAlert] = useState(false);
+  const [cookies] = useCookies(["admin_token"]);
+  const [adminID, setAdminID] = useState("");
+
+  useEffect(() => {
+    if (!cookies.admin_token) {
+      window.location.href = "/";
+    } else {
+      try {
+        const decoded = jwtDecode(cookies.admin_token);
+        setAdminID(decoded.sub);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }, []);
 
   const handleChange = (event, itemName) => {
     const value = event.target.value;
@@ -40,6 +57,7 @@ export default function ItemManagement({ events }) {
     const userInput = {
       items: itemsObject,
       evenet_id: eventItem.evenet_id,
+      account_id: adminID,
     };
 
     axios
@@ -164,6 +182,7 @@ export default function ItemManagement({ events }) {
             name="evenet_id"
             value={eventItem.evenet_id}
             onChange={handleEventChange}
+            required
             style={{
               width: "500px",
               fontSize: "20px",

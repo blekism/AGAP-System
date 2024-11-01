@@ -39,7 +39,7 @@ export default function Events({
   // filter for events end
 
   // image upload start
-  const [ImageUrl, setImageUrl] = useState("");
+  const [ImageUrl, setImageUrl] = useState([]);
   const [SelectedFile, setSelectedFile] = useState(null);
 
   const handleSelectImage = (event) => {
@@ -64,9 +64,12 @@ export default function Events({
     //for button add image ito
     const formData = new FormData();
 
-    formData.append("file", SelectedFile);
-    formData.append("fileName", generateRandomString(10));
+    formData.append("files[]", SelectedFile);
     formData.append("bucketName", "comex-images-bucket");
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}:`, value);
+    }
 
     try {
       const response = await axios.post(
@@ -104,7 +107,7 @@ export default function Events({
 
     const eventAnnouncementFinal = {
       ...eventAnnouncement,
-      image: ImageUrl,
+      image: ImageUrl[0],
     };
     console.log(eventAnnouncementFinal);
 

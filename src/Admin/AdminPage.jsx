@@ -19,6 +19,7 @@ import ItemManagement from "./ItemManagement/ItemManagement.jsx";
 import "./AdminPage.css";
 import VolunteerLogs from "./VolunteerLogs/VolunteerLogs.jsx";
 import AdminManagement from "./AdminManagement/AdminManagement.jsx";
+import DeductionLogs from "./DeductionLogs/DeductionLogs.jsx";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 
@@ -252,6 +253,23 @@ export default function AdminPage() {
               Manage Items
             </button>
           </li>
+
+          <li className="nav-item" role="presentation">
+            <img src={Donation} alt="Items Icon" />
+            <button
+              className="nav-link"
+              id="pills-deduction-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-deduction"
+              type="button"
+              role="tab"
+              aria-controls="pills-deduction"
+              aria-selected="false"
+            >
+              Deduction Logs
+            </button>
+          </li>
+
           <li className="nav-item" role="presentation">
             <img src={LogRecord} alt="Items Icon" />
             <button
@@ -315,16 +333,6 @@ export default function AdminPage() {
                 donationValue={donationValue.total_donations}
                 eventValue={eventValue.total_events}
                 hoursValue={hoursValue.total_hours}
-                // donorPercentage={donorPercentage}
-                // volunteerPercentage={volunteerPercentage}
-                // costPercentage={costPercentage}
-                // donationPercentage={donationPercentage}
-                // eventPercentage={eventPercentage}
-                // donorIncreased={donorIncreased}
-                // volunteerIncreased={volunteerIncreased}
-                // costIncreased={costIncreased}
-                // donationIncreased={donationIncreased}
-                // eventIncreased={eventIncreased}
               />
 
               <DashboardCalendar events={event} />
@@ -420,6 +428,23 @@ export default function AdminPage() {
 
             {/* item content here */}
           </div>
+
+          {/* deduction logs here */}
+          <div
+            className="tab-pane fade"
+            id="pills-deduction"
+            role="tabpanel"
+            aria-labelledby="pills-deduction-tab"
+            tabIndex="0"
+          >
+            <div className="dashHeader">
+              <Header
+                username={adminValue.first_name + " " + adminValue.last_name}
+              />
+            </div>
+            <DeductionLogs />
+          </div>
+          {/* deduction logs here */}
 
           <div
             className="tab-pane fade"

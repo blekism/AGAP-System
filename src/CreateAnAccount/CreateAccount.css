@@ -54,6 +54,7 @@ label {
   margin-bottom: 5px;
   font-size: 14px;
   color: #333;
+  font-weight: 500;
 }
 
 input {
@@ -62,6 +63,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 14px;
+  background-color: #f5f5f5;
 }
 
 input:focus {
@@ -125,12 +127,13 @@ input:focus {
   border-radius: 32px;
   font-size: 16px;
   cursor: pointer;
-  width: 50%;
+  width: 45%;
   display: block;
   text-align: center;
   align-items: center;
   margin: auto;
   margin-top: 19px;
+  font-weight: bold;
 }
 
 .btn:hover {

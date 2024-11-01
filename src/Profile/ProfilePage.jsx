@@ -25,6 +25,9 @@ export default function ProfilePage() {
   const profileDetailsRef = useRef(null);
   const [insertState, setInsertState] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [initialProfileDetails, setInitialProfileDetails] = useState(null);
 
   useEffect(() => {
     if (cookies.donor_token) {
@@ -42,11 +45,6 @@ export default function ProfilePage() {
     }
   }, []);
 
-  const handleLogout = () => {
-    removeCookie("donor_token");
-    window.location.href = "/";
-  };
-
   useEffect(() => {
     axios
       .get(
@@ -62,16 +60,38 @@ export default function ProfilePage() {
       .then(function (response) {
         console.log(response.data);
         setProfileDetails(response.data.data);
+        setInitialProfileDetails(response.data.data);
       });
   }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProfileDetails((prevDetails) => ({
-      ...prevDetails,
-      [name]: value,
-      account_id: profileDetails.account_id,
-    }));
+    setProfileDetails((prevDetails) => {
+      const updatedDetails = {
+        ...prevDetails,
+        [name]: value,
+        account_id: profileDetails.account_id,
+      };
+
+      const hasChanges = Object.keys(updatedDetails).some(
+        (key) => updatedDetails[key] !== initialProfileDetails[key]
+      );
+
+      setModalVisible(hasChanges);
+
+      return updatedDetails;
+    });
+  };
+
+  const handleLogout = () => {
+    removeCookie("donor_token");
+    window.location.href = "/";
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+    }
   };
 
   const handleSubmitProfileDetails = (e) => {
@@ -96,6 +116,7 @@ export default function ProfilePage() {
             setInsertState(3);
           }
           setShowAlert(true);
+          setModalVisible(false);
           setTimeout(() => {
             setShowAlert(false);
           }, 3000);
@@ -111,23 +132,15 @@ export default function ProfilePage() {
     }
   };
 
-  const confirmAction = (action) => {
-    let form = null;
-    let confirmMessage = "";
-
-    if (action == "saveChanges") {
-      confirmMessage = "Are you sure you want to submit these changes?";
-      form = profileDetailsRef.current;
-    }
-    if (form.checkValidity()) {
-      if (window.confirm(confirmMessage)) {
-        if (action == "saveChanges") {
-          handleSubmitProfileDetails();
-        }
+  const validateForm = () => {
+    for (let key in profileDetails) {
+      if (profileDetails[key] === "") {
+        setErrorMessage("Please fill out all fields.");
+        return false;
       }
-    } else {
-      form.reportValidity();
     }
+    setErrorMessage("");
+    return true;
   };
 
   return (
@@ -136,7 +149,7 @@ export default function ProfilePage() {
         <div className="ProfilePageHeaderCont">
           <Navbar />
         </div>
-        <form onSubmit={handleSubmitProfileDetails} ref={profileDetailsRef}>
+        <form onSubmit={handleClick} ref={profileDetailsRef}>
           <div className="ProfilePageBodyCont">
             <div className="ProfilePageBodyCont-Left">
               <p>Your Profile</p>
@@ -146,10 +159,8 @@ export default function ProfilePage() {
                 <button>Change Photo</button>
               </div>
 
-              <div className="signout-btn">
-                <button type="button" onClick={handleLogout}>
-                  LOG OUT
-                </button>
+              <div className="signout-btn" onClick={handleLogout}>
+                <button type="button">LOG OUT</button>
               </div>
             </div>
 
@@ -358,20 +369,71 @@ export default function ProfilePage() {
                     <></>
                   ))}
 
-                <div
-                  className="EditProfileDetails-buttonContainer"
-                  style={{ display: "flex", justifyContent: "center" }}
-                >
+                {isModalVisible && (
+                  <div
+                    className="EditProfileDetails-buttonContainer"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <button
+                      className="EditProfileDetails-button"
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#confirmVolunteer"
+                      style={{
+                        width: "20%",
+                        borderRadius: "10px",
+                        background: "#354290",
+                        color: "white",
+                        fontSize: "18px",
+                      }}
+                    >
+                      Save Changes
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </form>
+
+        {isModalVisible && (
+          <div
+            className="modal fade"
+            id="confirmVolunteer"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="staticBackdropLabel"
+            aria-hidden="true"
+            // style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    Confirm Edit Profile Details
+                  </h1>
+                </div>
+                <div className="modal-body">
+                  Are you sure you want to save these changes?
+                </div>
+                <div className="modal-footer">
                   <button
-                    className="EditProfileDetails-button"
                     type="button"
-                    onClick={() => confirmAction("saveChanges")}
+                    className="btn btn-danger"
+                    data-bs-dismiss="modal"
+                    onClick={() => setModalVisible(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn"
+                    data-bs-dismiss="modal"
+                    onClick={handleSubmitProfileDetails}
                     style={{
-                      width: "20%",
-                      borderRadius: "10px",
-                      background: "#354290",
+                      backgroundColor: "#354290",
                       color: "white",
-                      fontSize: "18px",
                     }}
                   >
                     Save Changes
@@ -380,7 +442,7 @@ export default function ProfilePage() {
               </div>
             </div>
           </div>
-        </form>
+        )}
       </div>
     </>
   );

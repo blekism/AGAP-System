@@ -8,6 +8,8 @@ import VerifyAccount from "../VolunteerSignUpPage/VerifyAccount.jsx";
 
 function CreateAccount() {
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const handleClosePopup = () => {
     setPopupVisible(false); // Close the popup
@@ -35,6 +37,7 @@ function CreateAccount() {
     phoneNumber: "",
     currentAddress: "",
   });
+
   const handleChange = (e) => {
     const name = e.target.name;
     let value = e.target.value;
@@ -42,10 +45,29 @@ function CreateAccount() {
     setUserInfo((values) => ({ ...values, [name]: value }));
   };
 
+  const validateForm = () => {
+    for (let key in userInfo) {
+      if (userInfo[key] === "") {
+        setErrorMessage("Please fill out all fields.");
+        return false;
+      }
+    }
+    if (userInfo.password !== userInfo.confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      return false;
+    }
+    setErrorMessage("");
+    return true;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(userInfo);
+    if (validateForm()) {
+      setModalVisible(true);
+    }
+  };
 
+  const handleConfirmRegistration = () => {
     axios
       .post(
         "http://localhost/agap-backend-main/api/phase_1/create/signupDonor.php",
@@ -61,6 +83,7 @@ function CreateAccount() {
         if (response.data.status === 201) {
           console.log("Signup successful!");
           setPopupVisible(true);
+          setModalVisible(false);
         }
       });
   };
@@ -74,10 +97,10 @@ function CreateAccount() {
               <h5
                 className="header-title"
                 style={{
-                  fontSize: "14px",
+                  fontSize: "20px",
                   fontStyle: "normal",
-                  color: "#354290",
-                  fontWeight: "400",
+                  color: "#000000",
+                  fontWeight: "bold",
                   lineHeight: "normal",
                 }}
               >
@@ -85,17 +108,17 @@ function CreateAccount() {
               </h5>
               <h5
                 style={{
-                  fontSize: "14px",
+                  fontSize: "16px",
                   fontStyle: "normal",
                   color: "#354290",
-                  fontWeight: "400",
+                  fontWeight: "bold",
                   lineHeight: "normal",
                 }}
               >
-                Already have an account?
+                Already have an account? &nbsp;
                 <Link
                   to={"/"}
-                  style={{ color: "#111", textDecorationLine: "none" }}
+                  style={{ color: "#354290", textDecorationLine: "underline" }}
                 >
                   Log in
                 </Link>
@@ -119,6 +142,7 @@ function CreateAccount() {
                 name="firstName"
                 value={userInfo.firstName}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -132,6 +156,7 @@ function CreateAccount() {
                 name="lastName"
                 value={userInfo.lastName}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -148,6 +173,7 @@ function CreateAccount() {
               name="email"
               value={userInfo.email}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -164,6 +190,7 @@ function CreateAccount() {
                 name="password"
                 value={userInfo.password}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -177,12 +204,16 @@ function CreateAccount() {
                 name="confirmPassword"
                 value={userInfo.confirmPassword}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
-          <p style={{ fontSize: "14px", color: "#354290" }}>
+          <p style={{ fontSize: "14px", color: "grey" }}>
             Use 8 or more characters with a mix of letters, numbers & symbols
           </p>
+          {errorMessage && (
+            <p style={{ color: "red", fontSize: "14px" }}>{errorMessage}</p>
+          )}
 
           {/* Show Password Checkbox */}
           <div className="form-check-horizontal">
@@ -214,6 +245,7 @@ function CreateAccount() {
                 name="dob"
                 value={userInfo.dob}
                 onChange={handleChange}
+                required
               />
             </div>
             <div className="form-group">
@@ -226,6 +258,7 @@ function CreateAccount() {
                 name="age"
                 value={userInfo.age}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -243,6 +276,7 @@ function CreateAccount() {
                 name="phoneNumber"
                 value={userInfo.phoneNumber}
                 onChange={handleChange}
+                required
               />
             </div>
           </div>
@@ -258,29 +292,8 @@ function CreateAccount() {
               name="currentAddress"
               value={userInfo.currentAddress}
               onChange={handleChange}
+              required
             />
-          </div>
-
-          <div className="form-check-horizontal1">
-            <input
-              type="checkbox"
-              id="terms"
-              onChange={togglePasswordVisibility}
-              checked={showPassword}
-              className="inputCreateAccount"
-            />
-            <label
-              htmlFor="terms"
-              className="checkbox-label1"
-              style={{ color: "#354290" }}
-            >
-              {" "}
-              Do you accept our
-              <a href="#" style={{ color: "#00DBEB" }}>
-                {" "}
-                terms and condition
-              </a>{" "}
-            </label>
           </div>
 
           {/* Submit Button */}
@@ -288,59 +301,60 @@ function CreateAccount() {
             Create an account
           </button> */}
 
-          <button
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#confirmRegister"
-            className="btn"
-          >
+          <button type="submit" className="btn">
             Create an Account
           </button>
+        </form>
+      </div>
 
-          {/* modaaaal */}
+      {/* modaaaal */}
 
-          <div
-            className="modal fade"
-            id="confirmRegister"
-            data-bs-backdrop="static"
-            data-bs-keyboard="false"
-            tabIndex="-1"
-            aria-labelledby="staticBackdropLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                    Confirm Registration
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  Are you sure you want to register this account?
-                </div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    data-bs-dismiss="modal"
-                  >
-                    No
-                  </button>
-                  <button type="submit" className="btn" data-bs-dismiss="modal">
-                    Create an account
-                  </button>
-                </div>
+      {isModalVisible && (
+        <div
+          className="modal fade show"
+          id="confirmRegister"
+          data-bs-backdrop="static"
+          data-bs-keyboard="false"
+          tabIndex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+          style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                  Confirm Registration
+                </h1>
+              </div>
+              <div className="modal-body">
+                Are you sure you want to register this account?
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onClick={() => setModalVisible(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={handleConfirmRegistration}
+                  style={{
+                    backgroundColor: "#354290",
+                    color: "white",
+                  }}
+                >
+                  Create an account
+                </button>
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      )}
 
       {isPopupVisible && (
         <VerifyAccount

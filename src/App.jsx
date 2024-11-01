@@ -19,6 +19,7 @@ import ProfilePage from "./Profile/ProfilePage";
 import VolunteerConditionalRender from "./Page/VolunteerConditionalRender.jsx";
 import LoginAdmin from "./Login_Signup/LoginAdmin.jsx";
 import VolunteerPendingApply from "./VolunteerSignUpPage/VolunteerPendingApply.jsx";
+import TurnoverPage from "./TurnoverPage/TurnoverPage.jsx";
 
 import "./App.css";
 
@@ -58,6 +59,7 @@ function App() {
           path="/VolunteerPendingApply"
           element={<VolunteerPendingApply />}
         />
+        <Route path="/TurnoverPage" element={<TurnoverPage />} />
 
         {/* <Route path="/AdminDashboard" element={<div>Admin Dashboard Component</div>} />
           <Route path="/ManageDonations" element={<div>Manage Donations Component</div>} />

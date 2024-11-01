@@ -1,0 +1,15 @@
+.TurnoverTemplateParentCont {
+    width: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 15px; 
+    background-color: transparent;
+}
+
+.TurnoverTemplateParentCont img {
+    max-width: 100%; 
+    border-radius: inherit; 
+
+
+}
+

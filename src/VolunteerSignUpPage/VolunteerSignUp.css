@@ -1,35 +1,35 @@
 .login-container .form-box {
-  background-color: var(--Gray-Background, #f8f8f8);
+  background-color: var(--Gray-Background, #ffffff);
   border-radius: 20px;
   border: 2px solid var(--Blue, #354290);
-  padding: 20px;
+  padding: 30px;
+  padding-top: 0;
+  padding-bottom: 30px;
   width: 500px;
   height: fit-content;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  text-align: center;
-  margin: 50px auto; /* Center the form horizontally */
+  margin: 50px auto;
 }
 
 .login-container .form-box .form-title {
-  padding: 20px;
   height: 5vh;
   width: 30%;
   color: #000;
-  text-align: center;
   font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 50px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  
 }
 
 /* Form group positioning and layout */
-.login-container .form-box form .form-group {
+/* .login-container .form-box form .form-group {
   margin: auto;
   width: 90%;
   margin-bottom: 40px;
   margin-top: 50px;
   text-align: left;
-  position: relative; /* Added for absolute positioning of the icon */
-}
+  position: relative; 
+} */
 
 /* Select styles, with space for the icon */
 .login-container .form-box form .form-group select {
@@ -41,7 +41,7 @@
   padding-right: 30px; /* Space for the custom icon */
   width: 100%;
   height: 6vh;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 1px solid #ddd;
   font-size: 14px;
   position: relative;
@@ -101,8 +101,10 @@
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: auto;
 }
 
-.apply-button:hover {
+.login-container .form-box form  .apply-button:hover {
   background-color: #f8f8f8;
+  color: #354290;
 }

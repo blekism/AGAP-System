@@ -276,22 +276,28 @@ export default function VolunteerLogPhase2Modal() {
                           marginBottom: "20px",
                         }}
                       >
-                        <span
+                        <label
                           class="input-group-text"
-                          style={{ fontWeight: "bold" }}
+                          for="inputGroupSelect01"
+                          style={{ fontWeight: "bold", height: "40px" }}
                         >
                           ACTIVITY:
-                        </span>
-                        <input
-                          type="text"
+                        </label>
+                        <select
+                          class="form-select"
                           name="activity"
-                          class="form-control"
                           value={formData.activity}
                           onChange={handleInputChange}
-                          aria-label="Username"
-                          aria-describedby="addon-wrapping"
+                          id="inputGroupSelect01"
                           required
-                        />
+                          style={{ height: "40px" }}
+                        >
+                          <option value="none">Choose Activity</option>
+                          <option value="Counting">Counting</option>
+                          <option value="Sorting">Sorting</option>
+                          <option value="Repacking">Repacking</option>
+                          <option value="Others">Others</option>
+                        </select>
                       </div>
                     </div>
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import "./VolunteerDashboardSidebar.css";
 import Logout from "../assets/images/logout.png";
 import Dashboard from "../assets/images/Dashboard.png";
@@ -9,6 +10,7 @@ import LogRecord from "../assets/images/LogRecord.png";
 export default function VolunteerDashboardSidebar() {
   const [activeLink, setActiveLink] = useState("");
   const location = useLocation();
+  const [cookies, removeCookie] = useCookies(["donor_token"]);
 
   useEffect(() => {
     const path = location.pathname;
@@ -28,6 +30,11 @@ export default function VolunteerDashboardSidebar() {
       setActiveLink("settings");
     }
   }, [location]);
+
+  const handleLogout = () => {
+    removeCookie("donor_token");
+    window.location.href = "/";
+  };
 
   return (
     <>
@@ -107,7 +114,9 @@ export default function VolunteerDashboardSidebar() {
         <div className="VolunteerDashboard-sidebarContBottom">
           <div className="VolunteerDashboardLogout-ButtonContainer">
             <img src={Logout} alt="Logout Icon" />
-            <button className="VolunteerDashboardLogout-button">Logout</button>
+            <button className="btn" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         </div>
       </div>

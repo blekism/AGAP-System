@@ -10,9 +10,9 @@ export default function NavBar() {
   useEffect(() => {
     if (!cookies.donor_token) {
       window.location.href = "/";
-    } else {
-      console.log("cookieeeeeees is valid");
-    }
+   } else {
+     console.log("cookieeeeeees is valid");
+   }
   }, []);
 
   return (

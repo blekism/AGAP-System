@@ -1,29 +1,80 @@
-.lan-cal {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* CALENDAR  */
+.lancalendar {
   width: 100%;
-  height: 970px;
-  background-color: #354290;
+  height: fit-content;
+  background: #35408E;
+  padding: 40px;
 }
 
-.lan-cal-area {
-  justify-items: center;
-}
-
-.lan-cal-title {
-  color: #fcd125;
-  font-weight: bold;
+.lancalendar .lancalendar-content .col-12 h4 {
+  color: var(--Color-12, #F5C400);
+  font-size: 30px;
+  font-family: Poppins;
   text-align: center;
-  padding: 2%;
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 700;
+  margin-bottom: 3%;
 }
 
-.fullCalendar {
-  width: 1000px;
-  height: 500px;
-  margin: auto;
+.lancalendar .lancalendar-content .col-2 {
+  margin-top: -50px;
+}
+
+.lancalendar .lancalendar-content .col-md-4 p {
+
+  color: #FFF;
+  text-align: end;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-left: 45%;
+}
+
+.lancalendar .lancalendar-content .row p.sub-title {
+  color: #F5C400;
+  text-align: center;
+  font-size: 15px;
+}
+
+.lancalendar .lancalendar-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fc {
+  background-color: white;
+  padding: 30px;
+  height: 560px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.fc .fc-toolbar-title {
+  color: #35408E;
+}
+
+.fc-toolbar-chunk button{
+  background-color: #35408E !important;
+  border: none !important;
+}
+
+.fc .fc-col-header a{
+  color: #35408E !important;
+  text-decoration: none !important;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #35408E;
+  text-decoration: none !important;
+}
+
+.fc-h-event .fc-event-main-frame {
+  border: none !important;
+}
+
+.fc-h-event .fc-event-title-container {
+  background-color: #FFD41C;
+  border: none !important;
+  color: #35408E;
 }

@@ -10,6 +10,19 @@
   height: auto;
 }
 
+.parat{
+  color: var(--Blue, #354290);
+  font-family: "Poppins", sans-serif;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 150%;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 20px;
+
+}
+
 .landing-parent .headerContent .comEx-info {
   height: 600px;
   width: 100%;
@@ -21,7 +34,7 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  background: linear-gradient(to bottom, #354290, #ffffff);
+  background: #354290;
 }
 
 .landing-parent .headerContent .comEx-info .com-ex-header .comex-img {
@@ -42,7 +55,7 @@
 }
 
 .comex-title {
-  color: #354290;
+  color: #fff;
   font-size: 2rem;
   margin-left: 5%;
 }
@@ -50,7 +63,7 @@
 .comex-data {
   width: 600px;
   height: 249.332px;
-  color: #000;
+  color: #fff;
   text-align: justify;
   font-family: "Nunito Sans";
   font-size: 14px;

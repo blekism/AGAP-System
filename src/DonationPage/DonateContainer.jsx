@@ -7,8 +7,17 @@ import { jwtDecode } from "jwt-decode";
 
 export default function DonateContainer() {
   const [items, setItems] = useState([
-    { qty: "", cost: "", category: "3", recipient: "3", item: "3" },
+    {
+      qty: "",
+      unit_cost: "",
+      total_item_cost: "",
+      category: "3",
+      recipient: "3",
+      item: "3",
+    },
   ]);
+  const [validEvents, setValidEvents] = useState([]);
+  const [dropDownValue, setDropDownValue] = useState("");
   const [DonorID, setDonorID] = useState({});
   const [cookies] = useCookies(["donor_token"]);
 
@@ -16,6 +25,13 @@ export default function DonateContainer() {
     const { name, value } = event.target;
     const newItems = [...items];
     newItems[index][name] = value;
+
+    if (name === "qty" || name === "unit_cost") {
+      const qty = parseInt(newItems[index].qty) || 0;
+      const cost = parseInt(newItems[index].unit_cost) || 0;
+      newItems[index].total_item_cost = qty * cost;
+    }
+
     setItems(newItems);
   };
 
@@ -29,13 +45,38 @@ export default function DonateContainer() {
         console.log(error);
       }
     }
+
+    axios
+      .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
+      .then(function (response) {
+        console.log(response.data); //read events
+        const filteredEvents = response.data.data.filter(
+          (event) =>
+            event.event_status !== "closed" && event.event_status !== "finished"
+        );
+        setValidEvents(filteredEvents);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
+
+  const handleEventChange = (event) => {
+    setDropDownValue(event.target.value);
+  };
 
   const addElement = () => {
     if (items.length < 5) {
       setItems([
         ...items,
-        { qty: "", cost: "", category: "3", recipient: "3", item: "3" },
+        {
+          qty: "",
+          unit_cost: "",
+          total_item_cost: "",
+          category: "3",
+          recipient: "3",
+          item: "3",
+        },
       ]);
     } else {
       alert("You can only add up to 4 items.");
@@ -47,7 +88,7 @@ export default function DonateContainer() {
     console.log(items);
 
     const totalCost = items.reduce(
-      (acc, item) => acc + parseFloat(item.cost),
+      (acc, item) => acc + parseFloat(item.total_item_cost),
       0
     );
     const userInput = {
@@ -58,9 +99,15 @@ export default function DonateContainer() {
         item: item.item,
         item_category_id: item.category,
         qty: item.qty,
-        cost: item.cost, // Replace with actual signature if available
+        unit_cost: item.unit_cost,
+        total_item_cost: item.total_item_cost,
       })),
     };
+
+    if (dropDownValue !== "") {
+      userInput.event_id = dropDownValue;
+    }
+
     console.log(userInput);
     axios
       .post(
@@ -85,8 +132,23 @@ export default function DonateContainer() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="EventType">
-          <p>Event Name: </p>
-          <p>Organization/Department: </p>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            onChange={handleEventChange}
+            name="event_id"
+            value={dropDownValue}
+            style={{ width: "40%" }}
+          >
+            <option value="">
+              Choose an event (you can choose to leave this blank)
+            </option>
+            {validEvents.map((event, key) => (
+              <option key={key} value={event.evenet_id}>
+                {event.event_name}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="ItemInput">
           {items.map((item, index) => (
@@ -95,9 +157,9 @@ export default function DonateContainer() {
               value1={item.qty}
               onChange1={(e) => handleInputChange(index, e)}
               name1="qty"
-              value2={item.cost}
+              value2={item.unit_cost}
               onChange2={(e) => handleInputChange(index, e)}
-              name2="cost"
+              name2="unit_cost"
               value3={item.item}
               onChange3={(e) => handleInputChange(index, e)}
               name3="item"
@@ -107,6 +169,9 @@ export default function DonateContainer() {
               value5={item.recipient}
               onChange5={(e) => handleInputChange(index, e)}
               name5="recipient"
+              value6={item.total_item_cost}
+              onChange6={(e) => handleInputChange(index, e)}
+              name6="total_item_cost"
             />
           ))}
         </div>

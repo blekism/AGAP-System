@@ -1,6 +1,6 @@
 import React from "react";
-import "./Partners.css"; 
-import logo1 from "../assets/images/logo_1.png"; 
+import "./Partners.css";
+import logo1 from "../assets/images/logo_1.png";
 import logo2 from "../assets/images/logo_2.png";
 import logo3 from "../assets/images/logo_3.png";
 import logo4 from "../assets/images/logo_4.png";
@@ -26,17 +26,38 @@ function Partners() {
     logo10,
   ];
 
+  const partnerLinks = [
+    "https://www.facebook.com/iskolar.reading.center",
+    "https://www.facebook.com/profile.php?id=61557033263548",
+    "https://www.facebook.com/DepEdTayoDasmarinasCity/",
+    "https://www.facebook.com/BrgySampaloc1",
+    "https://www.facebook.com/BrgySampaloc2DasmarCityCavite",
+    "https://www.facebook.com/PNVSCA",
+    "https://www.facebook.com/DepEdTayoVPVMS107913",
+    "https://www.facebook.com/DepEdTayoESLIHS305791",
+    "https://www.facebook.com/fits.alfonso/",
+    "https://www.facebook.com/kidmovement",
+  ];
+
   return (
     <>
       <div className="partners-page">
-        <h1 className="partners-title">
-          NUD Community Extension Partners
-        </h1>
+        <h1 className="partners-title">NUD Community Extension Partners</h1>
 
         <div className="partners-row">
           {partnerImages.map((image, index) => (
             <div className="partner-image" key={index}>
-              <img src={image} alt={`Partner ${index + 1}`} className="partner-img" />
+              <a
+                href={partnerLinks[index]}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img
+                  src={image}
+                  alt={`Partner ${index + 1}`}
+                  className="partner-img"
+                />
+              </a>
             </div>
           ))}
         </div>

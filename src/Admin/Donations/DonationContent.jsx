@@ -7,6 +7,7 @@ import Stocked from "../../assets/images/stocked.png";
 import Processed from "../../assets/images/process.png";
 import Give from "../../assets/images/give.png";
 import Close from "../../assets/images/close.png";
+import TurnoverDocumentation from "./TurnoverDocumentation.jsx";
 
 export default function DonationContent() {
   const [category, setCategory] = useState({ status_id: 3000 });
@@ -84,23 +85,6 @@ export default function DonationContent() {
               onClick={() => handleCategory(3001)}
             >
               Received
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <img src={Processed} alt="Clothes Icon" />
-
-            <button
-              className="nav-link"
-              id="pills-processed-tab"
-              data-bs-toggle="pill"
-              data-bs-target="#pills-processed"
-              type="button"
-              role="tab"
-              aria-controls="pills-processed"
-              aria-selected="false"
-              onClick={() => handleCategory(3002)}
-            >
-              Processed
             </button>
           </li>
           <li className="nav-item" role="presentation">
@@ -183,31 +167,12 @@ export default function DonationContent() {
           </div>
           <div
             className="tab-pane fade"
-            id="pills-processed"
-            role="tabpanel"
-            aria-labelledby="pills-processed-tab"
-            tabIndex="0"
-          >
-            <DonationManagement
-              donations={items}
-              modalId="processedItems"
-              modalTarget="#processedItems"
-            />
-
-            {/* item3 */}
-          </div>
-          <div
-            className="tab-pane fade"
             id="pills-turnover"
             role="tabpanel"
             aria-labelledby="pills-turnover-tab"
             tabIndex="0"
           >
-            <DonationManagement
-              donations={items}
-              modalId="turnoverItems"
-              modalTarget="#turnoverItems"
-            />
+            <TurnoverDocumentation />
 
             {/* item4 */}
           </div>

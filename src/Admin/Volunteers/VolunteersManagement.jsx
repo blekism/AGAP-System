@@ -6,7 +6,9 @@ import Close from "../../assets/images/close.png";
 import Applicants from "../../assets/images/Applicants.png";
 
 export default function VolunteersManagement() {
-  const [category, setCategory] = useState({ is_volunteer: "volunteer" });
+  const [category, setCategory] = useState({
+    is_volunteer: "volunteer",
+  });
   const [items, setItems] = useState([]);
 
   const handleCategory = (id) => {
@@ -71,6 +73,25 @@ export default function VolunteersManagement() {
               Members
             </button>
           </li>
+
+          <li className="nav-item" role="presentation">
+            <img src={Member} alt="Clothes Icon" />
+
+            <button
+              className="nav-link"
+              id="pills-members-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-members"
+              type="button"
+              role="tab"
+              aria-controls="pills-members"
+              aria-selected="true"
+              onClick={() => handleCategory("volunteer_officer")}
+            >
+              Officers
+            </button>
+          </li>
+
           <li className="nav-item" role="presentation">
             <img src={Applicants} alt="Clothes Icon" />
 

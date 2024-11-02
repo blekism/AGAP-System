@@ -86,6 +86,7 @@ export default function VolunteerLogPhase2Modal() {
   };
 
   const handleSubmitPhase2 = (e) => {
+    e.preventDefault();
     try {
       axios
         .post(
@@ -127,7 +128,7 @@ export default function VolunteerLogPhase2Modal() {
       });
   }, []);
 
-  const confirmAction = (action) => {
+  const confirmAction = (event, action) => {
     let form = null;
     let confirmMessage = "";
 
@@ -138,7 +139,7 @@ export default function VolunteerLogPhase2Modal() {
     if (form.checkValidity()) {
       if (window.confirm(confirmMessage)) {
         if (action == "submitPhase2Log") {
-          handleSubmitPhase2();
+          handleSubmitPhase2(event);
         }
       }
     } else {
@@ -220,7 +221,7 @@ export default function VolunteerLogPhase2Modal() {
                           style={{ height: "40px" }}
                           required
                         >
-                          <option selected>Choose...</option>
+                          <option value="">Choose...</option>
                           {events
                             .filter(
                               (event) =>
@@ -292,7 +293,7 @@ export default function VolunteerLogPhase2Modal() {
                           required
                           style={{ height: "40px" }}
                         >
-                          <option value="none">Choose Activity</option>
+                          <option value="">Choose Activity</option>
                           <option value="Counting">Counting</option>
                           <option value="Sorting">Sorting</option>
                           <option value="Repacking">Repacking</option>
@@ -366,7 +367,9 @@ export default function VolunteerLogPhase2Modal() {
                       <button
                         className="VolunteerLogModal-button"
                         type="button"
-                        onClick={() => confirmAction("submitPhase2Log")}
+                        onClick={(event) =>
+                          confirmAction(event, "submitPhase2Log")
+                        }
                         style={{
                           width: "20%",
                           borderRadius: "10px",

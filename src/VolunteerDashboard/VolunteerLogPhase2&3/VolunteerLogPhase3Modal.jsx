@@ -1,6 +1,6 @@
 import React from "react";
 import "./VolunteerLogPhase3Modal.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 
@@ -9,8 +9,9 @@ export default function VolunteerLogPhase3Modal() {
   const [currentTime, setCurrentTime] = useState("");
   const [events, setEvents] = useState([]);
   const [cookies] = useCookies(["donor_token"]);
-  const [dropdownValue, setDropdownValue] = useState("none");
+  const [dropdownValue, setDropdownValue] = useState("");
   const [insertState, setInsertState] = useState(1);
+  const phase3LogRef = useRef(null);
 
   useEffect(() => {
     const updateDate = () => {
@@ -78,6 +79,7 @@ export default function VolunteerLogPhase3Modal() {
   };
 
   const handleSubmitPhase3 = (e) => {
+    e.preventDefault();
     try {
       axios
         .post(
@@ -110,16 +112,22 @@ export default function VolunteerLogPhase3Modal() {
     }
   };
 
-  const confirmAction = (action) => {
+  const confirmAction = (event, action) => {
+    let form = null;
     let confirmMessage = "";
 
     if (action == "submitPhase3Log") {
       confirmMessage = "Are you sure you want to submit your Log?";
+      form = phase3LogRef.current;
     }
-    if (window.confirm(confirmMessage)) {
-      if (action == "submitPhase3Log") {
-        handleSubmitPhase3();
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action == "submitPhase3Log") {
+          handleSubmitPhase3(event);
+        }
       }
+    } else {
+      form.reportValidity();
     }
   };
 
@@ -187,7 +195,7 @@ export default function VolunteerLogPhase3Modal() {
                 </div>
 
                 <div className="modal-body">
-                  <form onSubmit={handleSubmitPhase3}>
+                  <form onSubmit={handleSubmitPhase3} ref={phase3LogRef}>
                     <div
                       className="VolunteerAttendance-Detail1"
                       style={{
@@ -214,8 +222,9 @@ export default function VolunteerLogPhase3Modal() {
                           id="inputGroupSelect01"
                           onChange={handleEventChange}
                           style={{ height: "40px" }}
+                          required
                         >
-                          <option value="none">
+                          <option value="">
                             Choose the event you participated in
                           </option>
                           {events
@@ -364,7 +373,9 @@ export default function VolunteerLogPhase3Modal() {
                     >
                       <button
                         type="button"
-                        onClick={() => confirmAction("submitPhase3Log")}
+                        onClick={(event) =>
+                          confirmAction(event, "submitPhase3Log")
+                        }
                         className="VolunteerLogModal-button"
                         style={{
                           width: "20%",

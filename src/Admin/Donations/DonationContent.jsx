@@ -4,7 +4,6 @@ import DonationManagement from "./DonationManagement.jsx";
 import "./DonationContent.css";
 import Entered from "../../assets/images/entered.png";
 import Stocked from "../../assets/images/stocked.png";
-import Processed from "../../assets/images/process.png";
 import Give from "../../assets/images/give.png";
 import Close from "../../assets/images/close.png";
 import TurnoverDocumentation from "./TurnoverDocumentation.jsx";
@@ -12,9 +11,11 @@ import TurnoverDocumentation from "./TurnoverDocumentation.jsx";
 export default function DonationContent() {
   const [category, setCategory] = useState({ status_id: 3000 });
   const [items, setItems] = useState([]);
+  const [activeTab, setActiveTab] = useState("submitted");
 
-  const handleCategory = (id) => {
+  const handleCategory = (id, tab) => {
     setCategory({ status_id: id });
+    setActiveTab(tab);
   };
 
   useEffect(() => {
@@ -50,7 +51,9 @@ export default function DonationContent() {
           style={{
             backgroundColor: "#ededed",
             width: "fit-content",
-            overflowY: "auto",
+            // overflowY: "auto",
+            display: "flex",
+            flexDirection: "row",
           }}
         >
           <li className="nav-item" role="presentation">
@@ -65,7 +68,7 @@ export default function DonationContent() {
               role="tab"
               aria-controls="pills-submitted"
               aria-selected="true"
-              onClick={() => handleCategory(3000)}
+              onClick={() => handleCategory(3000, "submitted")}
             >
               Submitted
             </button>
@@ -82,7 +85,7 @@ export default function DonationContent() {
               role="tab"
               aria-controls="pills-received"
               aria-selected="false"
-              onClick={() => handleCategory(3001)}
+              onClick={() => handleCategory(3001, "received")}
             >
               Received
             </button>
@@ -99,7 +102,7 @@ export default function DonationContent() {
               role="tab"
               aria-controls="pills-turnover"
               aria-selected="false"
-              onClick={() => handleCategory(3003)}
+              onClick={() => handleCategory(3003, "turnover")}
             >
               Turnover
             </button>
@@ -116,7 +119,7 @@ export default function DonationContent() {
               role="tab"
               aria-controls="pills-decline"
               aria-selected="false"
-              onClick={() => handleCategory(3004)}
+              onClick={() => handleCategory(3004, "decline")}
             >
               Declined
             </button>
@@ -132,10 +135,13 @@ export default function DonationContent() {
             padding: "20px",
             margin: "0px",
             overflowY: "auto",
+            width: activeTab === "turnover" ? "1400px" : "100%",
           }}
         >
           <div
-            className="tab-pane fade show active"
+            className={`tab-pane fade ${
+              activeTab === "submitted" ? "show active" : ""
+            }`}
             id="pills-submitted"
             role="tabpanel"
             aria-labelledby="pills-submitted-tab"
@@ -171,6 +177,7 @@ export default function DonationContent() {
             role="tabpanel"
             aria-labelledby="pills-turnover-tab"
             tabIndex="0"
+            style={{ height: "60vh" }}
           >
             <TurnoverDocumentation />
 

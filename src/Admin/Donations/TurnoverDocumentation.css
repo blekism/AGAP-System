@@ -1,0 +1,84 @@
+.TurnoverDocumentationParent {
+    height: 100vh;
+    width: 100%;
+
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter{
+    /* background-color: yellow; */
+    width: 100%;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .TurnoverDocumentationFilter-header{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    column-gap: 30px;
+    width: 100%;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .TurnoverDocumentationFilter-header button{
+    background-color: #354290;
+    border: none;
+    font-weight: 600;
+    font-family: "Poppins";
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .TurnoverDocumentationFilter-header button:hover{
+    color: #354290;
+    background-color: #F0F0F0;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .ImageUploadBody {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 40%;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .ImageUploadBody input{
+    width: 50%;
+    background-color: #f0f0f0;
+    border: none;
+    font-weight: 400;
+    font-family: "Poppins";
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .ImageUploadBody button{
+    background-color: #354290;
+    border: none;
+    font-weight: 600;
+    font-family: "Poppins";
+    height: 50px;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationFilter .ImageUploadBody button:hover{
+    color: #354290;
+    background-color: #F0F0F0;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationBody {
+    width: 100%;
+    height: fit-content;
+    columns:  3;
+    column-gap: 40px;
+    padding: 30px;
+    background-color: #f0f0f0;
+    border-radius: 15px;
+    justify-content: center;
+    margin-bottom: auto;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationBody .TurnoverDocumentationCard {
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 15px; 
+    background-color: transparent;
+}
+
+.TurnoverDocumentationParent .TurnoverDocumentationBody .TurnoverDocumentationCard img {
+    max-width: 100%; 
+    border-radius: inherit; 
+}

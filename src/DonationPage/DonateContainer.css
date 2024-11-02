@@ -14,7 +14,7 @@
 }
 
 .DonationParentContainer .DonationParentHeader button{
-    border-radius: 4px;
+    border-radius: 5px;
     background: var(--Blue, #354290);
     color: var(--Yellow, #FCD125);
     text-align: center;
@@ -37,12 +37,12 @@
 
 .DonationParentContainer form .EventType{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border-radius: 10px;
     background: #354290;
     padding: 15px;
     margin-top: 10px;
-    
+    column-gap: 20px;
 
 }
 
@@ -54,6 +54,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    padding-top: 3px;
+    
 }
 
 .DonationParentContainer form .SubmitDonationGroup {

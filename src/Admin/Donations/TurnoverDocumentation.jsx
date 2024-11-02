@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import "./TurnoverDocumentation.css";
 import { useCookies } from "react-cookie";
@@ -14,6 +14,32 @@ export default function TurnoverDocumentation() {
   const [imageUrl, setImageUrl] = useState([]);
   const [cookies] = useCookies(["admin_token"]);
   const [adminID, setAdminID] = useState("");
+  const [insertState, setInsertState] = useState(1);
+  const [confirmMessage, setConfirmMessage] = useState("");
+  const uploadImagesRef = useRef(null);
+
+  function updateColumns() {
+    const width = window.innerWidth;
+    let columns;
+
+    // Calculate columns based on width
+    if (width > 1300) {
+      columns = 4;
+    } else if (width > 768) {
+      columns = 3;
+    } else {
+      columns = 2;
+    }
+
+    // Set the CSS variable
+    document.documentElement.style.setProperty("--columns", columns);
+  }
+
+  // Run on load
+  updateColumns();
+
+  // Update columns on resize
+  window.addEventListener("resize", updateColumns);
 
   useEffect(() => {
     axios
@@ -106,6 +132,13 @@ export default function TurnoverDocumentation() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 201) {
+          setInsertState(2);
+          document.getElementById("imageUpload").value = null;
+          document.getElementById("imagePreview").innerHTML = "";
+        } else {
+          setInsertState(3);
+        }
       })
       .catch(function (error) {
         console.log(error);
@@ -154,72 +187,169 @@ export default function TurnoverDocumentation() {
     return result;
   };
 
+  const confirmAction = (event, action) => {
+    let form = uploadImagesRef.current;
+    let confirmMessage = "";
+    if (action === "uploadImages") {
+      confirmMessage = "Are you sure you want to upload this images?";
+    }
+    if (form.checkValidity()) {
+      if (window.confirm(confirmMessage)) {
+        if (action === "uploadImages") {
+          handleSubmit(event);
+        }
+      }
+    } else {
+      form.reportValidity();
+    }
+  };
+
+  const resetInsertState = () => {
+    setInsertState(1);
+  };
+
   return (
     <div className="TurnoverDocumentationParent">
       <div className="TurnoverDocumentationFilter">
-        <form onSubmit={handleSubmit}>
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            onChange={filterEvents}
-            name="event_id"
-            value={TurnoverFilter}
-            style={{ width: "40%" }}
-          >
-            <option value="none">Choose an event</option>
-            {events.map((event, key) => (
-              <option key={key} value={event.evenet_id}>
-                {event.event_name}
-              </option>
-            ))}
-          </select>
-          <button className="btn btn-primary" type="submit">
-            upload to event
-          </button>
-        </form>
-        {/* add image input here */}
-        {addImage === true && (
-          <div className="ImageUploadBody">
-            <input
-              type="file"
-              accept="image/*"
-              multiple // Allows selecting multiple images
-              onChange={handleFileChange}
-            />
-
-            <div className="ImagePreview">
-              {selectedFiles.map((file, index) => (
-                <img
-                  key={index}
-                  src={URL.createObjectURL(file)}
-                  alt="Selected"
-                  style={{ width: "100px", height: "100px", margin: "5px" }}
-                />
-              ))}
-            </div>
-            <button
-              className="btn btn-primary"
-              type="button"
-              onClick={handleImageUpload}
+        <form onSubmit={handleSubmit} ref={uploadImagesRef}>
+          <div className="TurnoverDocumentationFilter-header">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              onChange={filterEvents}
+              name="event_id"
+              value={TurnoverFilter}
+              style={{ width: "40%" }}
             >
-              Upload
-            </button>
+              <option value="none">Choose an event</option>
+              {events.map((event, key) => (
+                <option key={key} value={event.evenet_id}>
+                  {event.event_name}
+                </option>
+              ))}
+            </select>
+            {addImage === true && (
+              <button
+                className="btn btn-primary"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#turnoverDocumentationModal"
+                onClick={resetInsertState}
+              >
+                Upload to event
+              </button>
+            )}
+            {/* </form> */}
           </div>
-        )}
+          {/* modal for adding event announcement start */}
+          <div
+            className="modal fade"
+            id="turnoverDocumentationModal"
+            data-bs-backdrop="static"
+            data-bs-keyboard="false"
+            tabIndex="-1"
+            aria-labelledby="turnoverDocumentationModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="staticBackdropLabel">
+                    TURNOVER DOCUMENTATION
+                  </h1>
+                </div>
+                {/* <form
+                // onSubmit={handleSubmit}
+                // ref={addEventAnnouncementRef}
+              > */}
+                <div className="modal-body">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    accept="image/*"
+                    multiple
+                    onChange={handleFileChange}
+                    style={{ marginBottom: "10px" }}
+                    required
+                  />
+                  <div className="ImagePreview" id="imagePreview">
+                    {selectedFiles.map((file, index) => (
+                      <img
+                        key={index}
+                        src={URL.createObjectURL(file)}
+                        alt="Selected"
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          margin: "5px",
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={handleImageUpload}
+                    style={{
+                      background: "#354290",
+                      color: "white",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Add Images
+                  </button>
 
-        <div className="TurnoverDocumentationBody">
-          {TurnoverDocumentation.map((photo, key) => {
-            const imageUrls = [photo.image].filter((image) => image !== null);
+                  {insertState === 2 ? (
+                    <div className="alert alert-success" role="alert">
+                      Images Uploaded Successfully!
+                    </div>
+                  ) : insertState === 3 ? (
+                    <div className="alert alert-danger" role="alert">
+                      Error uploading Images!
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
 
-            return (
-              <div key={key} className="TurnoverDocumentationCard">
-                {imageUrls.map((url, key) => (
-                  <img key={key} src={url} alt="Turnover Documentation" />
-                ))}
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    onClick={(event) => confirmAction(event, "uploadImages")}
+                    className="btn btn-primary"
+                    style={{
+                      background: "#354290",
+                      color: "white",
+                    }}
+                  >
+                    Upload Images
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          </div>
+
+          <div className="TurnoverDocumentationBody">
+            {TurnoverDocumentation.map((photo, key) => {
+              const imageUrls = [photo.image].filter((image) => image !== null);
+
+              return (
+                <div key={key} className="TurnoverDocumentationCard">
+                  {imageUrls.map((url, key) => (
+                    <img key={key} src={url} alt="Turnover Documentation" />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+        </form>
       </div>
     </div>
   );

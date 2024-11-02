@@ -5,9 +5,9 @@
   box-sizing: border-box;
 }
 
-.landing-parent .head-img {
+.landing-parent  .head-img {
   width: 100%;
-  height: auto;
+  height: fit-content;
 }
 
 .parat{

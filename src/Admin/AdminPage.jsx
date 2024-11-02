@@ -24,18 +24,6 @@ import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
 
 export default function AdminPage() {
-  const donorPercentage = 10;
-  const volunteerPercentage = 5;
-  const costPercentage = 20;
-  const donationPercentage = 15;
-  const eventPercentage = 2;
-
-  const donorIncreased = 100;
-  const volunteerIncreased = 200;
-  const costIncreased = 300;
-  const donationIncreased = 4121254;
-  const eventIncreased = 45254;
-
   const [event, setEvent] = useState([]);
   const [donors, setDonors] = useState([]);
   const [donorValue, setDonorValue] = useState({});

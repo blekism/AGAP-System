@@ -15,6 +15,8 @@ export default function TurnoverDocumentation() {
   const [cookies] = useCookies(["admin_token"]);
   const [adminID, setAdminID] = useState("");
 
+  //add another function for limiting uploads to a total of 10 images only
+
   useEffect(() => {
     axios
       .get("http://localhost/agap-backend-main/api/phase_1/read/readEvents.php")
@@ -139,19 +141,6 @@ export default function TurnoverDocumentation() {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const generateRandomString = (length) => {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
-
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
-
-    return result;
   };
 
   return (

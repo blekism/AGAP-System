@@ -89,8 +89,8 @@ admin login //
 
 - input validation //
 - time sa donation //
-- time gawing unix
-- total hours function 
+- time gawing unix //
+- total hours function //
 - sa lahat ng viewable items dapat update and delete na yung buttons 
 - create account //
 - donation page 
@@ -100,8 +100,8 @@ admin login //
 
 - minor changes sa donation where need ung unit cost and unit quantity then matic magtotal yung total cost // 
 - volunteer level 2 //
-- activity ng volun logging gawing drop down
-- sorting counting repacking
+- activity ng volun logging gawing drop down //
+- sorting counting repacking //
 - gawing working yung mga link sa homepage 
 - function for partners -- for future
 - table ng logs //
@@ -113,28 +113,13 @@ admin login //
 - ayusin yung sa view ng items lagyan ng unit cost at total cost per item sa donation manage admin //
 - add event selection to donation //
 
-- turnover isshow ung documentation ng events for donors na nagdonate with a certain event sa kanilang donation 
-- your donations event filter 
+- turnover isshow ung documentation ng events for donors na nagdonate with a certain event sa kanilang donation //
+- your donations event filter //
 
 
 
 - deduction ng items dapat may logs/history ng gumalaw na items//
 - kita ang before deduction, deductino amt, and after //
-
-
-- pag pinindot action dun sa row
-item id 
-donation id 
-item
-
-- initial row
-log id
-date of deduction 
-who deducted 
-for what event 
-how much was deducted
-
-
 
 - apply websockets
 - deploy online

@@ -132,6 +132,7 @@ export default function DonateContainer() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="EventType">
+          <p>Event Name: </p>
           <select
             className="form-select"
             aria-label="Default select example"

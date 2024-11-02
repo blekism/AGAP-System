@@ -7,6 +7,12 @@
     margin: auto;
 }
 
+.YourDonationParentContainer .YourDonationParentHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
 .YourDonationParentContainer .YourDonationParentHeader h3{
     color: #354290;
     font-family: "Poppins";
@@ -25,7 +31,8 @@
     background: #F0F0F0;
     border-radius: 10px;
     padding: 20px;
-    
+    height: 60vh;
+    overflow-y: auto;
 }
 
 .YourDonationParentContainer .YourDonationInput .table thead {

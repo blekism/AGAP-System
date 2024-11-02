@@ -1,6 +1,6 @@
 .ahuhu .DonationManagementParent {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   column-gap: 20px;
   padding: 20px;
 }

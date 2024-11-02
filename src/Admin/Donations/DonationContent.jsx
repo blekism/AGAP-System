@@ -4,7 +4,6 @@ import DonationManagement from "./DonationManagement.jsx";
 import "./DonationContent.css";
 import Entered from "../../assets/images/entered.png";
 import Stocked from "../../assets/images/stocked.png";
-import Processed from "../../assets/images/process.png";
 import Give from "../../assets/images/give.png";
 import Close from "../../assets/images/close.png";
 import TurnoverDocumentation from "./TurnoverDocumentation.jsx";
@@ -52,7 +51,9 @@ export default function DonationContent() {
           style={{
             backgroundColor: "#ededed",
             width: "fit-content",
-            overflowY: "auto",
+            // overflowY: "auto",
+            display: "flex",
+            flexDirection: "row",
           }}
         >
           <li className="nav-item" role="presentation">
@@ -118,7 +119,8 @@ export default function DonationContent() {
               role="tab"
               aria-controls="pills-decline"
               aria-selected="false"
-              onClick={() => handleCategory(3004, "declined")}
+              onClick={() => handleCategory(3004, "decline")}
+
             >
               Declined
             </button>
@@ -134,7 +136,8 @@ export default function DonationContent() {
             padding: "20px",
             margin: "0px",
             overflowY: "auto",
-            width: activeTab === "turnover" ? "800px" : "fit-content",
+            width: activeTab === "turnover" ? "1400px" : "100%",
+
           }}
         >
           <div
@@ -176,6 +179,7 @@ export default function DonationContent() {
             role="tabpanel"
             aria-labelledby="pills-turnover-tab"
             tabIndex="0"
+            style={{ height: "60vh" }}
           >
             <TurnoverDocumentation />
 

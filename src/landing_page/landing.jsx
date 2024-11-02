@@ -9,6 +9,7 @@ import Partners from "./Partners.jsx";
 import EventList from "./EventList.jsx";
 import brigada from "../assets/images/brigada_eskwela.jpg";
 import need from "../assets/images/need_project.jpg";
+import comex1 from "../assets/images/comex1.jpg";
 
 function Landing() {
   return (
@@ -16,7 +17,7 @@ function Landing() {
       <NavBar />
 
       <div className="headerImg">
-        <img src={head} alt="Landing Head" className="head-img" />
+        <img src={comex1} alt="Landing Head" className="head-img" />
       </div>
 
       <div className="headerContent">

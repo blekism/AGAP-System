@@ -61,11 +61,6 @@ export default function NavBar() {
                   Your Donations
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/TurnoverPage" className="nav-link">
-                  Turnover Documentation
-                </Link>
-              </li>
             </ul>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./YourDonationContainer.css";
 
@@ -54,6 +55,22 @@ export default function YourDonationConatiner() {
     <div className="YourDonationParentContainer">
       <div className="YourDonationParentHeader">
         <h3>Your Donations</h3>
+        <Link
+          to="/TurnoverPage"
+          style={{
+            borderRadius: "5px",
+            background: "#354290",
+            color: "#FCD125",
+            padding: "20px 10px 20px",
+            textDecoration: "none",
+            fontSize: "20px",
+            fontWeight: "600",
+            fontFamily: "Poppins",
+            lineHeight: "normal",
+          }}
+        >
+          Turnover Documentation
+        </Link>
       </div>
 
       <div className="YourDonationInput">
@@ -75,7 +92,7 @@ export default function YourDonationConatiner() {
                 <td>{yourDonations.donor_lastName}</td>
                 <td>{yourDonations.recipient_type}</td>
                 <td>{yourDonations.total_cost}</td>
-                <td></td>
+                <td>{yourDonations.dateTime_entered}</td>
                 <td>
                   <div className="YourDonationContainerButton">
                     <button

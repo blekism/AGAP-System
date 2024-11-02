@@ -93,7 +93,11 @@ export default function DonationContent({
 
   return (
     <div
-      style={{ paddingRight: "10px", overflowY: "auto", maxHeight: "750px" }}
+      style={{
+        paddingRight: "10px",
+        overflowY: "auto",
+        height: "60vh",
+      }}
     >
       <table className="table table-striped">
         <thead>

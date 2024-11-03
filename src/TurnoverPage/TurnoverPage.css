@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: fit-content;
+    min-height: 100vh;
     background: linear-gradient(to top, #354290 20%, #ffffff);
 }
 
@@ -20,8 +20,7 @@
 
 .TurnoverParentCont .TurnoverContentCont{
     width: 95%;
-    /* margin: 20px; */
-    columns: 4;
+    columns: 5;
     column-gap: 40px;
     padding: 30px;
     background-color: #f0f0f057;
@@ -30,6 +29,7 @@
     margin-bottom: 40px;
     border-radius: 15px;
     justify-content: center;
+    flex-grow: 1;
 }
 
 .TurnoverParentCont .TurnoverFooterCont{

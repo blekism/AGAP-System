@@ -4,7 +4,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../Page/NavBar.jsx";
-import SampleProfilePic from "../assets/Images/SampleProfilePic.jpg";
+import profilePlaceholder from "../assets/Images/profilePlaceholder.png";
 
 export default function ProfilePage() {
   const [profileDetails, setProfileDetails] = useState({
@@ -76,8 +76,9 @@ export default function ProfilePage() {
       const hasChanges = Object.keys(updatedDetails).some(
         (key) => updatedDetails[key] !== initialProfileDetails[key]
       );
+      const isValid = validateForm(updatedDetails);
 
-      setModalVisible(hasChanges);
+      setModalVisible(hasChanges && isValid);
 
       return updatedDetails;
     });
@@ -112,6 +113,10 @@ export default function ProfilePage() {
           console.log(response.data);
           if (response.data.status === 200) {
             setInsertState(2);
+            setShowAlert(true);
+            setTimeout(() => {
+              setShowAlert(false);
+            }, 3000);
           } else {
             setInsertState(3);
             setShowAlert(true);
@@ -122,6 +127,7 @@ export default function ProfilePage() {
           }
         })
         .catch(function (error) {
+          setInsertState(3);
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
@@ -132,9 +138,9 @@ export default function ProfilePage() {
     }
   };
 
-  const validateForm = () => {
-    for (let key in profileDetails) {
-      if (profileDetails[key] === "") {
+  const validateForm = (details = profileDetails) => {
+    for (let key in details) {
+      if (details[key] === "") {
         setErrorMessage("Please fill out all fields.");
         return false;
       }
@@ -155,7 +161,7 @@ export default function ProfilePage() {
               <p>Your Profile</p>
 
               <div className="ProfilePicture">
-                <img src={SampleProfilePic} />
+                <img src={profilePlaceholder} />
                 <button>Change Photo</button>
               </div>
 

@@ -265,17 +265,6 @@ export default function Events({
         if (response.data.status === 200) {
           console.log("Update successful!");
           setInsertStatus(2);
-          setEventItem({
-            evenet_id: "",
-            event_name: "",
-            event_link: "",
-            description: "",
-            start_date: "",
-            end_date: "",
-            start_time: "",
-            end_time: "",
-            contrib_amount: "",
-          });
         } else {
           console.log("Update failed!");
           setInsertStatus(3);
@@ -877,13 +866,22 @@ export default function Events({
                   title="EVENT LINK"
                   placeholder="Event Link"
                 />
-                <InputTemplate
-                  value={addEvent.description}
-                  name="description"
-                  onChange={addEventChange}
-                  title="DESCRIPTION"
-                  placeholder="Description"
-                />
+                <div className="input-group mb-3">
+                  <span
+                    className="input-group-text"
+                    style={{ fontWeight: "bold" }}
+                  >
+                    DESCRIPTION
+                  </span>
+                  <textarea
+                    className="form-control"
+                    aria-label="With textarea"
+                    value={addEvent.description}
+                    name="description"
+                    onChange={addEventChange}
+                    placeholder="Description"
+                  />
+                </div>
                 <InputTemplate
                   value={addEvent.start_date}
                   name="start_date"

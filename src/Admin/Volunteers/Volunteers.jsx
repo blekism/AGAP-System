@@ -277,6 +277,9 @@ export default function VolunteerContent({
                         Volunteer Applicant
                       </option>
                       <option value="volunteer">Volunteer</option>
+                      <option value="volunteer_officer">
+                        Volunteer Officer
+                      </option>
                     </select>
                     <InputTemplate
                       name="first_name"

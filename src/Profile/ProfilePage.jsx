@@ -114,12 +114,12 @@ export default function ProfilePage() {
             setInsertState(2);
           } else {
             setInsertState(3);
+            setShowAlert(true);
+            setModalVisible(false);
+            setTimeout(() => {
+              setShowAlert(false);
+            }, 3000);
           }
-          setShowAlert(true);
-          setModalVisible(false);
-          setTimeout(() => {
-            setShowAlert(false);
-          }, 3000);
         })
         .catch(function (error) {
           setShowAlert(true);

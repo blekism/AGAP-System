@@ -206,6 +206,7 @@ export default function DonorContent({ donors }) {
                   <option value="donor">Donor</option>
                   <option value="volunteer_apply">Volunteer Applicant</option>
                   <option value="volunteer">Volunteer</option>
+                  <option value="volunteer_officer">Volunteer Officer</option>
                 </select>
 
                 <InputTemplate
@@ -219,7 +220,6 @@ export default function DonorContent({ donors }) {
                   name="first_name"
                   onChange={handleChange}
                   title={"FIRST NAME"}
-
                 />
                 <InputTemplate
                   value={donorItem.section}

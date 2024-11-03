@@ -1,14 +1,11 @@
 import React from "react";
 import "./Header.css";
-import { Link } from "react-router-dom";
-import Member from "../../assets/images/Member.png";
 
 export default function Header({ username }) {
   return (
     <div className="HeaderParentContainer">
       <div className="WelcomeContainer">
-        <h1>Welcome Back, {username}!</h1>
-        <p>Lorem ipsum dolor sit amet constectur adipscing</p>
+        <h1>Welcome, {username}!</h1>
       </div>
     </div>
   );

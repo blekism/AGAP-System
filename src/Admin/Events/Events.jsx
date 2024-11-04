@@ -47,20 +47,10 @@ export default function Events({
     const file = event.target.files[0];
     setSelectedFile(file);
   };
-  const generateRandomString = (length) => {
-    const characters =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    let result = "";
 
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-      result += characters.charAt(randomIndex);
-    }
-
-    return result;
-  };
-
+  const [loadingStatus, setLoadingStatus] = useState(false);
   const handleImageUpload = async () => {
+    setLoadingStatus(true);
     //for button add image ito
     const formData = new FormData();
 
@@ -83,8 +73,14 @@ export default function Events({
       );
       console.log("signed url is", response.data);
       setImageUrl(response.data);
+      if (!response.data) {
+        alert("Image upload failed!");
+      } else {
+        setLoadingStatus(false);
+      }
     } catch (error) {
       console.error(error);
+      setLoadingStatus(false);
     }
   };
   // image upload end
@@ -124,7 +120,9 @@ export default function Events({
       .then(function (response) {
         console.log(response.data);
         if (response.data.status === 201) {
-          console.log("Insert successful!");
+          console.log("Insert successfulaaaa!");
+          document.getElementById("imageUpload").value = null;
+          document.getElementById("imagePreview").innerHTML = "";
           setInsertStatus(2);
           setEventAnnouncement({
             title: "",
@@ -137,6 +135,7 @@ export default function Events({
             title: "",
             description: "",
           });
+          document.getElementById("imageUpload").value = null;
         }
       })
       .catch(function (error) {
@@ -146,6 +145,7 @@ export default function Events({
           title: "",
           description: "",
         });
+        document.getElementById("imageUpload").value = null;
       });
   };
   // add event announcement end
@@ -238,6 +238,7 @@ export default function Events({
   const [eventItem, setEventItem] = useState({
     evenet_id: "",
     event_name: "",
+    event_status: "",
     event_link: "",
     description: "",
     start_date: "",
@@ -249,6 +250,7 @@ export default function Events({
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(eventItem);
 
     axios
       .put(
@@ -372,7 +374,7 @@ export default function Events({
   };
 
   return (
-    <div className="events" style={{ overflowY: "auto", maxHeight: "600px" }}>
+    <div className="events" style={{ overflowY: "auto", maxHeight: "700px" }}>
       <div className="EventActions">
         <button
           type="button"
@@ -549,6 +551,19 @@ export default function Events({
                   title="Event Link"
                   placeholder="EVENT LINK"
                 />
+                <select
+                  className="form-select mb-3"
+                  aria-label="Default select example"
+                  name="event_status"
+                  value={eventItem.event_status}
+                  onChange={handleChange}
+                >
+                  <option value="upcoming">UPCOMING</option>
+                  <option value="ongoing">ONGOING</option>
+                  <option value="finished">FINISHED</option>
+                  <option value="closed">CLOSED</option>
+                </select>
+
                 <div className="input-group mb-3">
                   <span
                     className="input-group-text"
@@ -742,8 +757,13 @@ export default function Events({
           <div className="modal-content">
             <div className="modal-header">
               <h1 className="modal-title fs-5" id="staticBackdropLabel">
-                EVENT ANNOUNCEMENTS
+                ADD EVENT ANNOUNCEMENTS
               </h1>
+              {loadingStatus === true && (
+                <div className="alert alert-info" role="alert">
+                  Image is uploading, please wait...
+                </div>
+              )}
               <button
                 type="button"
                 className="btn-close"
@@ -772,6 +792,7 @@ export default function Events({
                 />
                 <input
                   type="file"
+                  id="imageUpload"
                   name="imageUpload"
                   onChange={handleSelectImage}
                   style={{ marginBottom: "10px" }}
@@ -895,13 +916,6 @@ export default function Events({
                   onChange={addEventChange}
                   title="END DATE"
                   placeholder="YYYY-MM-DD"
-                />
-                <InputTemplate
-                  value={addEvent.contrib_amount}
-                  name="contrib_amount"
-                  onChange={addEventChange}
-                  title="CONTRIBUTION AMOUNT"
-                  placeholder="Contribution Amount"
                 />
               </div>
 

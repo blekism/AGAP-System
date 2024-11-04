@@ -10,6 +10,10 @@ function CreateAccount() {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalVisible, setModalVisible] = useState(false);
+  const [insertStatus, setInsertStatus] = useState(1);
+  const [showAlert, setShowAlert] = useState(false);
+  const [emailTaken, setEmailTaken] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   const handleClosePopup = () => {
     setPopupVisible(false); // Close the popup
@@ -68,6 +72,7 @@ function CreateAccount() {
   };
 
   const handleConfirmRegistration = () => {
+    setLoadingStatus(true);
     axios
       .post(
         "http://localhost/agap-backend-main/api/phase_1/create/signupDonor.php",
@@ -84,7 +89,25 @@ function CreateAccount() {
           console.log("Signup successful!");
           setPopupVisible(true);
           setModalVisible(false);
+          setInsertStatus(2);
+          setShowAlert(true);
+          setLoadingStatus(false);
+          setEmailTaken(false);
+          setTimeout(() => setShowAlert(false), 3000);
+        } else {
+          console.log("Signup failed.");
+          setInsertStatus(3);
+          setShowAlert(true);
+          setModalVisible(false);
+          setEmailTaken(true);
+          setTimeout(() => setShowAlert(false), 3000);
         }
+      })
+      .catch(function (error) {
+        console.log(error);
+        setInsertStatus(3);
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -166,6 +189,7 @@ function CreateAccount() {
             <label htmlFor="email" style={{ color: "#354290" }}>
               Email Address
             </label>
+            {}
             <input
               type="email"
               id="email"
@@ -175,6 +199,20 @@ function CreateAccount() {
               onChange={handleChange}
               required
             />
+            {showAlert && emailTaken && (
+              <div
+                className="alert alert-danger"
+                role="alert"
+                style={{
+                  position: "absolute",
+                  zIndex: "1",
+                  marginTop: "10px",
+                  top: "63%",
+                }}
+              >
+                Email is already taken!
+              </div>
+            )}
           </div>
 
           {/* Password and Confirm Password */}
@@ -326,10 +364,17 @@ function CreateAccount() {
                 <h1 className="modal-title fs-5" id="staticBackdropLabel">
                   Confirm Registration
                 </h1>
+                {loadingStatus && (
+                  <div className="alert alert-info" role="alert">
+                    Sending the verification code, please wait...
+                  </div>
+                )}
               </div>
+
               <div className="modal-body">
                 Are you sure you want to register this account?
               </div>
+
               <div className="modal-footer">
                 <button
                   type="button"

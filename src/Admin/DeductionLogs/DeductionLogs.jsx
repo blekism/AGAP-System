@@ -19,7 +19,9 @@ export default function DeductionLogs() {
   }, []);
 
   return (
-    <div style={{ paddingRight: "10px", maxHeight: "700px" }}>
+    <div
+      style={{ paddingRight: "10px", maxHeight: "700px", overflowY: "auto" }}
+    >
       <table className="table table-striped">
         <thead>
           <tr
@@ -32,7 +34,6 @@ export default function DeductionLogs() {
           >
             <th scope="col">Log ID</th>
             <th scope="col">Date and Time</th>
-            <th scope="col">Account ID</th>
             <th scope="col">Name</th>
             <th scope="col">Event Name</th>
             <th scope="col">Item</th>
@@ -55,7 +56,6 @@ export default function DeductionLogs() {
             >
               <td>{deduction.log_id}</td>
               <td>{deduction.date_of_deduction}</td>
-              <td>{deduction.account_id}</td>
               <td>{deduction.last_name + " " + deduction.first_name}</td>
               <td>{deduction.event_name}</td>
               <td>{deduction.item}</td>

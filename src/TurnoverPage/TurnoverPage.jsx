@@ -131,7 +131,9 @@ export default function TurnoverPage() {
 
           {NotContainsImages === true && (
             <div>
-              <h1>No images found</h1>
+              <p>
+                The event is still ongoing, and no images have been uploaded yet
+              </p>
             </div>
           )}
         </div>

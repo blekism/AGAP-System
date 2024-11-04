@@ -76,8 +76,9 @@ export default function ProfilePage() {
       const hasChanges = Object.keys(updatedDetails).some(
         (key) => updatedDetails[key] !== initialProfileDetails[key]
       );
+      const isValid = validateForm(updatedDetails);
 
-      setModalVisible(hasChanges);
+      setModalVisible(hasChanges && isValid);
 
       return updatedDetails;
     });
@@ -112,6 +113,10 @@ export default function ProfilePage() {
           console.log(response.data);
           if (response.data.status === 200) {
             setInsertState(2);
+            setShowAlert(true);
+            setTimeout(() => {
+              setShowAlert(false);
+            }, 3000);
           } else {
             setInsertState(3);
             setShowAlert(true);
@@ -122,6 +127,7 @@ export default function ProfilePage() {
           }
         })
         .catch(function (error) {
+          setInsertState(3);
           setShowAlert(true);
           setTimeout(() => {
             setShowAlert(false);
@@ -132,14 +138,12 @@ export default function ProfilePage() {
     }
   };
 
-  const validateForm = () => {
-    for (let key in profileDetails) {
-      if (profileDetails[key] === "") {
-        setErrorMessage("Please fill out all fields.");
+  const validateForm = (details = profileDetails) => {
+    for (let key in details) {
+      if (details[key] === "") {
         return false;
       }
     }
-    setErrorMessage("");
     return true;
   };
 

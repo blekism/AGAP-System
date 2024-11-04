@@ -58,6 +58,7 @@ export default function ItemManagement({ events }) {
       items: itemsObject,
       evenet_id: eventItem.evenet_id,
       account_id: adminID,
+      category_id: category.category_id,
     };
 
     axios
@@ -73,7 +74,7 @@ export default function ItemManagement({ events }) {
       .then(function (response) {
         console.log(response.data);
         if (response.data.status === 200) {
-          console.log("Update successful!");
+          console.log(response.data.data);
           setInsertStatus(2);
           setDeductItems([]);
           setEventItem("none");

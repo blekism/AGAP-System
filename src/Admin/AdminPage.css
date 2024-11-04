@@ -13,6 +13,20 @@
   background-color: #ffffff;
 }
 
+.tab-content {
+  flex-grow: 1;
+  background-color: #f0f0f073;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 10px;
+  padding-left: 25px;
+}
+
+.AdminPageParentContainer .tab-content .tab-pane .dashContent {
+  display: flex;
+  flex-direction: row;
+}
+
 .nav-item .LogoContainer .logo {
   display: flex;
 }
@@ -68,17 +82,3 @@
 .AdminPageParentContainer .nav-pills .nav-item .nav-link:not(:focus) {
   color: #000000; 
 } */
-
-.tab-content {
-  flex-grow: 1;
-  background-color: #f0f0f073;
-  border-radius: 10px;
-  margin: 15px;
-  padding: 10px;
-  padding-left: 25px;
-}
-
-.AdminPageParentContainer .tab-content .tab-pane .dashContent {
-  display: flex;
-  flex-direction: row;
-}

@@ -141,11 +141,9 @@ export default function ProfilePage() {
   const validateForm = (details = profileDetails) => {
     for (let key in details) {
       if (details[key] === "") {
-        setErrorMessage("Please fill out all fields.");
         return false;
       }
     }
-    setErrorMessage("");
     return true;
   };
 

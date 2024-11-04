@@ -136,7 +136,7 @@ export default function TurnoverDocumentation() {
         console.log(response.data);
         if (response.data.status === 201) {
           setInsertState(2);
-          document.getElementById("imageUpload").value = null;
+          document.getElementById("ImageUpload").value = null;
           document.getElementById("imagePreview").innerHTML = "";
         } else {
           setInsertState(3);
@@ -147,7 +147,9 @@ export default function TurnoverDocumentation() {
       });
   };
 
+  const [loadingStatus, setLoadingStatus] = useState(false);
   const handleImageUpload = async () => {
+    setLoadingStatus(true);
     const formData = new FormData();
 
     selectedFiles.forEach((file) => {
@@ -171,12 +173,16 @@ export default function TurnoverDocumentation() {
       );
       console.log("signed url is", response.data);
       setImageUrl(response.data);
+      if (!response.data) {
+        alert("Error uploading images");
+      } else {
+        setLoadingStatus(false);
+      }
     } catch (error) {
       console.error(error);
+      setLoadingStatus(false);
     }
   };
-
-
 
   const confirmAction = (event, action) => {
     let form = uploadImagesRef.current;
@@ -198,7 +204,6 @@ export default function TurnoverDocumentation() {
   const resetInsertState = () => {
     setInsertState(1);
   };
-
 
   return (
     <div className="TurnoverDocumentationParent">
@@ -249,15 +254,16 @@ export default function TurnoverDocumentation() {
                   <h1 className="modal-title fs-5" id="staticBackdropLabel">
                     TURNOVER DOCUMENTATION
                   </h1>
+                  {loadingStatus === true && (
+                    <div className="alert alert-info" role="alert">
+                      Image is uploading, please wait...
+                    </div>
+                  )}
                 </div>
-                {/* <form
-                // onSubmit={handleSubmit}
-                // ref={addEventAnnouncementRef}
-              > */}
                 <div className="modal-body">
                   <input
                     type="file"
-                    id="imageUpload"
+                    id="ImageUpload"
                     accept="image/*"
                     multiple
                     onChange={handleFileChange}

@@ -24,9 +24,9 @@ export default function VolunteerPage() {
       {/*parent cont start*/}
       <div className="VolunteerPage-parentCont">
         {/*header cont start*/}
-        <div className="VolunteerPage-headerCont">
-          {/*container palang to para dun sa header na wala pa mahanap*/}
-        </div>
+        {/* <div className="VolunteerPage-headerCont"> */}
+        {/*container palang to para dun sa header na wala pa mahanap*/}
+        {/* </div> */}
 
         {/*body cont start*/}
         <div className="VolunteerPage-bodyCont">

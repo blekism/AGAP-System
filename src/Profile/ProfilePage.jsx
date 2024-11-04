@@ -4,7 +4,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
 import Navbar from "../Page/NavBar.jsx";
-import SampleProfilePic from "../assets/Images/SampleProfilePic.jpg";
+import profilePlaceholder from "../assets/Images/profilePlaceholder.png";
 
 export default function ProfilePage() {
   const [profileDetails, setProfileDetails] = useState({
@@ -159,7 +159,7 @@ export default function ProfilePage() {
               <p>Your Profile</p>
 
               <div className="ProfilePicture">
-                <img src={SampleProfilePic} />
+                <img src={profilePlaceholder} />
                 <button>Change Photo</button>
               </div>
 

@@ -4,6 +4,7 @@ import bgImage from "../assets/images/agap_login.png";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import logo from "../assets/images/agap_logo1.png";
 
 function VolunteerSignUp() {
@@ -35,6 +36,11 @@ function VolunteerSignUp() {
     if (validateForm()) {
       setModalVisible(true);
     }
+  };
+
+  const navigate = useNavigate();
+  const goToVolunteerApplyPage = () => {
+    navigate("/Volunteers");
   };
 
   const handleConfirmApplication = () => {
@@ -141,6 +147,7 @@ function VolunteerSignUp() {
                   <option value="2">SASE</option>
                   <option value="3">SBMA</option>
                   <option value="4">SHS</option>
+                  <option value="5">OFFICE</option>
                 </select>
               </div>
 
@@ -167,12 +174,23 @@ function VolunteerSignUp() {
                 className="submitButtonCont"
                 style={{
                   display: "flex",
-                  justifyContent: "center",
                   marginTop: "40px",
+                  columnGap: "20px",
+                  justifyContent: "center",
                 }}
               >
                 <button type="submit" className="apply-button">
                   Submit Application
+                </button>
+                <button
+                  onClick={goToVolunteerApplyPage}
+                  className="btn btn-danger"
+                  style={{
+                    borderRadius: "40px",
+                    padding: "10px 20px",
+                  }}
+                >
+                  Cancel
                 </button>
               </div>
             </form>

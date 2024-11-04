@@ -41,8 +41,19 @@ export default function NavBar() {
                 </Link>
               </li>
               <li className="nav-item">
+                <Link to="/Event" className="nav-link">
+                  {/* change to logged in na home */}
+                  Event
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link to="/Donate" className="nav-link">
                   Donate
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/YourDonation" className="nav-link">
+                  Your Donations
                 </Link>
               </li>
               {/* gawing conditial render yung part ng volunteers */}
@@ -54,11 +65,6 @@ export default function NavBar() {
               <li className="nav-item">
                 <Link to="/ProfilePage" className="nav-link">
                   Profile
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/YourDonation" className="nav-link">
-                  Your Donations
                 </Link>
               </li>
             </ul>

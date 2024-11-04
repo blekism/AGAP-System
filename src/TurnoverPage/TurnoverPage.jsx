@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./TurnoverPage.css";
-import Navbar from "../Page/Navbar";
+import Navbar from "../Page/NavBar";
 import Footer from "../Page/AgapFooter";
 import TurnoverTemplate from "./TurnoverTemplate";
 import donate_blood from "../assets/images/donate_blood.png";

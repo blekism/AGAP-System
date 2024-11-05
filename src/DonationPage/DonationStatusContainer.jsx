@@ -21,10 +21,6 @@ export default function DonationStatusContainer() {
             <img src={Recieved} alt="Recieved" />
             <p>Recieved</p>
           </div>
-          <div className="Processed">
-            <img src={Processed} alt="Processed" />
-            <p>Processed</p>
-          </div>
           <div className="Turnover">
             <img src={Turnover} alt="Turnover" />
             <p>Turnover</p>

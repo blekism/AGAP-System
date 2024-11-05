@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import "./EventList.css";
-import bloodimage from "../assets/images/blood.jpg";
+import grrr from "../assets/images/grrr.png";
 
 export default function EventList() {
   const [eventList, setEventList] = useState([]);
@@ -13,7 +13,7 @@ export default function EventList() {
   useEffect(() => {
     axios
       .get(
-        "http://localhost/agap-backend-main/api/phase_1/read/readEvents.php",
+        "http://localhost/agap-backend-main/api/phase_1/read/readEventsWithImage.php",
         {
           headers: {
             "Content-Type": "application/json",
@@ -106,7 +106,14 @@ export default function EventList() {
         {currentEvents.length > 0 ? (
           currentEvents.map((event, key) => (
             <div key={key} className="event-container">
-              <img src={bloodimage} className="event-image" />
+              {/* <img src={event.image} className="event-image" alt={"hmppy"} /> */}
+
+              {event.image === null ? (
+                <img src={grrr} className="event-image" alt={"hmppy"} />
+              ) : (
+                <img src={event.image} className="event-image" alt={"hmppy"} />
+              )}
+
               <div className="event-content">
                 <h2 className="headerEventList">{event.event_name}</h2>
                 <p className="description">{event.description}</p>

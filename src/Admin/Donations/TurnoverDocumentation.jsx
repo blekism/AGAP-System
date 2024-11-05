@@ -15,7 +15,6 @@ export default function TurnoverDocumentation() {
   const [cookies] = useCookies(["admin_token"]);
   const [adminID, setAdminID] = useState("");
   const [insertState, setInsertState] = useState(1);
-  const [confirmMessage, setConfirmMessage] = useState("");
   const uploadImagesRef = useRef(null);
 
   function updateColumns() {

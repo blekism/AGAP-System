@@ -13,6 +13,7 @@ export default function DonationPage() {
       <DonationStatus />
       <DonateContainer />
 
+      <div className="footerdonationpage"></div>
       <Footer />
     </div>
   );

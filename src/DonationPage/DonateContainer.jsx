@@ -13,13 +13,30 @@ export default function DonateContainer() {
       total_item_cost: "",
       category: "3",
       recipient: "3",
-      item: "3",
+      item: "",
     },
   ]);
   const [validEvents, setValidEvents] = useState([]);
   const [dropDownValue, setDropDownValue] = useState("");
   const [DonorID, setDonorID] = useState({});
   const [cookies] = useCookies(["donor_token"]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [inserStatus, setInsertStatus] = useState(1);
+  const [validationError, setValidationError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [donationSummary, setDonationSummary] = useState({});
+
+  const categoryName = {
+    4000: "Food and Groceries",
+    4001: "Clothes and Apparel",
+    4002: "Household Items",
+    4003: "Hygiene and Personal Care",
+    4004: "Medical Supplies",
+    4005: "School Supplies",
+    4006: "Toys and Children's Items",
+    4007: "Furniture",
+    4008: "Electronics",
+  };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -32,7 +49,38 @@ export default function DonateContainer() {
       newItems[index].total_item_cost = qty * cost;
     }
 
+    const summaryItems = {
+      recipient_id: items[0].recipient,
+      account_id: DonorID,
+      total_cost: newItems.reduce(
+        (acc, item) => acc + parseFloat(item.total_item_cost),
+        0
+      ),
+      items: newItems.map((item) => ({
+        item: item.item,
+        item_category_id: categoryName[item.category],
+        qty: item.qty,
+        unit_cost: item.unit_cost,
+        total_item_cost: item.total_item_cost,
+      })),
+    };
+
     setItems(newItems);
+    validateForm(newItems);
+    setDonationSummary(summaryItems);
+  };
+
+  const validateForm = (items) => {
+    const allFieldsFilled = items.every(
+      (item) =>
+        item.qty &&
+        item.unit_cost &&
+        item.category &&
+        item.recipient &&
+        item.item &&
+        item.total_item_cost
+    );
+    setIsFormValid(allFieldsFilled);
   };
 
   useEffect(() => {
@@ -66,7 +114,8 @@ export default function DonateContainer() {
   };
 
   const addElement = () => {
-    if (items.length < 5) {
+    setIsFormValid(false);
+    if (items.length < 99) {
       setItems([
         ...items,
         {
@@ -75,17 +124,31 @@ export default function DonateContainer() {
           total_item_cost: "",
           category: "3",
           recipient: "3",
-          item: "3",
+          item: "",
         },
       ]);
     } else {
-      alert("You can only add up to 4 items.");
+      alert("You can only add up to 100 items.");
     }
+  };
+
+  const removeItem = (index) => {
+    if (items.length <= 1) {
+      alert("You must have at least one item.");
+      return;
+    }
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(items);
+
+    if (!isFormValid) {
+      setValidationError("Please fill out all fields.");
+      return;
+    }
 
     const totalCost = items.reduce(
       (acc, item) => acc + parseFloat(item.total_item_cost),
@@ -121,6 +184,31 @@ export default function DonateContainer() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 201) {
+          setInsertStatus(2);
+          setItems([
+            {
+              qty: "",
+              unit_cost: "",
+              total_item_cost: "",
+              category: "3",
+              recipient: "3",
+              item: "",
+            },
+          ]);
+          setDropDownValue("");
+          setIsFormValid(false);
+        } else {
+          setInsertStatus(3);
+        }
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setInsertStatus(3);
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -130,6 +218,26 @@ export default function DonateContainer() {
         <h3>Donate</h3>
         <button onClick={addElement}>Add New Item</button>
       </div>
+      {showAlert &&
+        (inserStatus === 2 ? (
+          <div
+            className="alert alert-success"
+            role="alert"
+            style={{ width: "fit-content" }}
+          >
+            Item(s) donated Successfully!
+          </div>
+        ) : inserStatus === 3 ? (
+          <div
+            className="alert alert-danger"
+            role="alert"
+            style={{ width: "fit-content" }}
+          >
+            Error donating items! Please try again.
+          </div>
+        ) : (
+          <></>
+        ))}
       <form onSubmit={handleSubmit}>
         <div className="EventType">
           <p>Event Name: </p>
@@ -151,7 +259,7 @@ export default function DonateContainer() {
             ))}
           </select>
         </div>
-        <div className="ItemInput">
+        <div className="ItemInput" style={{ marginBottom: "20px" }}>
           {items.map((item, index) => (
             <DonationItemTemplate
               key={index}
@@ -173,22 +281,28 @@ export default function DonateContainer() {
               value6={item.total_item_cost}
               onChange6={(e) => handleInputChange(index, e)}
               name6="total_item_cost"
+              removeItem={() => removeItem(index)}
             />
           ))}
         </div>
-        <div className="SubmitDonationGroup">
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#confirmSubmit"
-          >
-            Submit Donation
-          </button>
-          <button>Cancel</button>
-        </div>
+
+        {validationError && <p className="error-text">{validationError}</p>}
+
+        {isFormValid && (
+          <div className="SubmitDonationGroup">
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmSubmit"
+            >
+              Submit Donation
+            </button>
+          </div>
+        )}
 
         {/* modaaaal */}
+
         <div
           className="modal fade"
           id="confirmSubmit"
@@ -211,7 +325,36 @@ export default function DonateContainer() {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">donation content here</div>
+              <div className="modal-body">
+                <p className="summaryModal">
+                  Recipient: {donationSummary.recipient_id}
+                </p>
+                <p className="summaryModal">
+                  Account ID: {donationSummary.account_id}
+                </p>
+                <p className="summaryModal">
+                  Total Cost: {donationSummary.total_cost}
+                </p>
+                <p className="summaryModal">Items:</p>
+                <ul>
+                  {donationSummary.items &&
+                    donationSummary.items.map((item, index) => (
+                      <li key={index}>
+                        <p className="summaryModal">Item: {item.item}</p>
+                        <p className="summaryModal">
+                          Category: {item.item_category_id}
+                        </p>
+                        <p className="summaryModal">Quantity: {item.qty}</p>
+                        <p className="summaryModal">
+                          Unit Cost: {item.unit_cost}
+                        </p>
+                        <p className="summaryModal">
+                          Total Item Cost: {item.total_item_cost}
+                        </p>
+                      </li>
+                    ))}
+                </ul>
+              </div>
               <div className="modal-footer">
                 <button
                   type="button"
@@ -222,8 +365,8 @@ export default function DonateContainer() {
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-primary"
                   data-bs-dismiss="modal"
+                  className="btn btn-primary"
                 >
                   Yes
                 </button>

@@ -162,8 +162,8 @@ function LogIn() {
 
           <div className="register-box p-4">
             <h2>Hello!</h2>
-            <p>
-              Register with your personal account <br /> to use this app
+            <p style={{ textAlign: "center" }}>
+              Register with your personal account <br /> to get started.
             </p>
             <Link
               className="btn2"

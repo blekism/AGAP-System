@@ -70,7 +70,7 @@ function LandingCar() {
                 alt={`Slide ${index + 1}`}
                 className="fade-out"
               />
-              <div className="slide-info">
+              {/* <div className="slide-info">
                 <div className="non">Latest News</div>
                 <p className="date">
                   <MdDateRange style={{ marginRight: "5px" }} /> {image.date}
@@ -79,7 +79,7 @@ function LandingCar() {
                 <p className="place">
                   <MdLocationOn style={{ marginRight: "5px" }} /> {image.place}
                 </p>
-              </div>
+              </div> */}
             </div>
           ))}
         </Carousel>

@@ -1,0 +1,7 @@
+.DonationPageParent {
+  min-height: 100vh;
+}
+
+.DonationPageParent .footerdonationpage {
+  margin-top: auto;
+}

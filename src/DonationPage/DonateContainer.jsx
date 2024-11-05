@@ -13,7 +13,7 @@ export default function DonateContainer() {
       total_item_cost: "",
       category: "3",
       recipient: "3",
-      item: "3",
+      item: "",
     },
   ]);
   const [validEvents, setValidEvents] = useState([]);
@@ -24,6 +24,19 @@ export default function DonateContainer() {
   const [inserStatus, setInsertStatus] = useState(1);
   const [validationError, setValidationError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
+  const [donationSummary, setDonationSummary] = useState({});
+
+  const categoryName = {
+    4000: "Food and Groceries",
+    4001: "Clothes and Apparel",
+    4002: "Household Items",
+    4003: "Hygiene and Personal Care",
+    4004: "Medical Supplies",
+    4005: "School Supplies",
+    4006: "Toys and Children's Items",
+    4007: "Furniture",
+    4008: "Electronics",
+  };
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -36,8 +49,25 @@ export default function DonateContainer() {
       newItems[index].total_item_cost = qty * cost;
     }
 
+    const summaryItems = {
+      recipient_id: items[0].recipient,
+      account_id: DonorID,
+      total_cost: newItems.reduce(
+        (acc, item) => acc + parseFloat(item.total_item_cost),
+        0
+      ),
+      items: newItems.map((item) => ({
+        item: item.item,
+        item_category_id: categoryName[item.category],
+        qty: item.qty,
+        unit_cost: item.unit_cost,
+        total_item_cost: item.total_item_cost,
+      })),
+    };
+
     setItems(newItems);
     validateForm(newItems);
+    setDonationSummary(summaryItems);
   };
 
   const validateForm = (items) => {
@@ -94,7 +124,7 @@ export default function DonateContainer() {
           total_item_cost: "",
           category: "3",
           recipient: "3",
-          item: "3",
+          item: "",
         },
       ]);
     } else {
@@ -163,7 +193,7 @@ export default function DonateContainer() {
               total_item_cost: "",
               category: "3",
               recipient: "3",
-              item: "3",
+              item: "",
             },
           ]);
           setDropDownValue("");
@@ -272,6 +302,7 @@ export default function DonateContainer() {
         )}
 
         {/* modaaaal */}
+
         <div
           className="modal fade"
           id="confirmSubmit"
@@ -294,7 +325,36 @@ export default function DonateContainer() {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">donation content here</div>
+              <div className="modal-body">
+                <p className="summaryModal">
+                  Recipient: {donationSummary.recipient_id}
+                </p>
+                <p className="summaryModal">
+                  Account ID: {donationSummary.account_id}
+                </p>
+                <p className="summaryModal">
+                  Total Cost: {donationSummary.total_cost}
+                </p>
+                <p className="summaryModal">Items:</p>
+                <ul>
+                  {donationSummary.items &&
+                    donationSummary.items.map((item, index) => (
+                      <li key={index}>
+                        <p className="summaryModal">Item: {item.item}</p>
+                        <p className="summaryModal">
+                          Category: {item.item_category_id}
+                        </p>
+                        <p className="summaryModal">Quantity: {item.qty}</p>
+                        <p className="summaryModal">
+                          Unit Cost: {item.unit_cost}
+                        </p>
+                        <p className="summaryModal">
+                          Total Item Cost: {item.total_item_cost}
+                        </p>
+                      </li>
+                    ))}
+                </ul>
+              </div>
               <div className="modal-footer">
                 <button
                   type="button"

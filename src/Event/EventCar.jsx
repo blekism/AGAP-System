@@ -4,36 +4,34 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./EventCar.css";
 import { MdDateRange, MdLocationOn } from "react-icons/md";
 
-import blood from "../assets/images/need.jpg";
+import need from "../assets/images/need.jpg";
+import brigada_eskwela from "../assets/images/brigada_eskwela.jpg";
+// import volunteers_comex from "../assets/images/volunteers_comex.png";
+import comex1 from "../assets/images/comex1.jpg";
+// import brigada_eskwela from "../assets/images/brigada_eskwela.jpg";
 
 function LandingCar() {
   const images = [
     {
-      src: blood,
+      src: need,
       title: "Blood Donation Drive",
       date: "November 5, 2024",
       place: "National University - Dasmarinas",
     },
     {
-      src: blood,
+      src: brigada_eskwela,
       title: "Health Awareness Program",
       date: "November 12, 2024",
       place: "National University - Dasmarinas",
     },
     {
-      src: blood,
+      src: comex1,
       title: "Community Service Day",
       date: "November 19, 2024",
       place: "National University - Dasmarinas",
     },
     {
-      src: blood,
-      title: "Charity Fundraiser",
-      date: "November 26, 2024",
-      place: "National University - Dasmarinas",
-    },
-    {
-      src: blood,
+      src: need,
       title: "Volunteer Recruitment Fair",
       date: "December 3, 2024",
       place: "National University - Dasmarinas",

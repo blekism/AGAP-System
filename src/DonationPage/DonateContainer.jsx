@@ -20,6 +20,10 @@ export default function DonateContainer() {
   const [dropDownValue, setDropDownValue] = useState("");
   const [DonorID, setDonorID] = useState({});
   const [cookies] = useCookies(["donor_token"]);
+  const [showAlert, setShowAlert] = useState(false);
+  const [inserStatus, setInsertStatus] = useState(1);
+  const [validationError, setValidationError] = useState("");
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleInputChange = (index, event) => {
     const { name, value } = event.target;
@@ -33,6 +37,20 @@ export default function DonateContainer() {
     }
 
     setItems(newItems);
+    validateForm(newItems);
+  };
+
+  const validateForm = (items) => {
+    const allFieldsFilled = items.every(
+      (item) =>
+        item.qty &&
+        item.unit_cost &&
+        item.category &&
+        item.recipient &&
+        item.item &&
+        item.total_item_cost
+    );
+    setIsFormValid(allFieldsFilled);
   };
 
   useEffect(() => {
@@ -66,7 +84,8 @@ export default function DonateContainer() {
   };
 
   const addElement = () => {
-    if (items.length < 5) {
+    setIsFormValid(false);
+    if (items.length < 99) {
       setItems([
         ...items,
         {
@@ -79,13 +98,27 @@ export default function DonateContainer() {
         },
       ]);
     } else {
-      alert("You can only add up to 4 items.");
+      alert("You can only add up to 100 items.");
     }
+  };
+
+  const removeItem = (index) => {
+    if (items.length <= 1) {
+      alert("You must have at least one item.");
+      return;
+    }
+    const newItems = items.filter((_, i) => i !== index);
+    setItems(newItems);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(items);
+
+    if (!isFormValid) {
+      setValidationError("Please fill out all fields.");
+      return;
+    }
 
     const totalCost = items.reduce(
       (acc, item) => acc + parseFloat(item.total_item_cost),
@@ -121,6 +154,31 @@ export default function DonateContainer() {
       )
       .then(function (response) {
         console.log(response.data);
+        if (response.data.status === 201) {
+          setInsertStatus(2);
+          setItems([
+            {
+              qty: "",
+              unit_cost: "",
+              total_item_cost: "",
+              category: "3",
+              recipient: "3",
+              item: "3",
+            },
+          ]);
+          setDropDownValue("");
+          setIsFormValid(false);
+        } else {
+          setInsertStatus(3);
+        }
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
+      })
+      .catch(function (error) {
+        console.log(error);
+        setInsertStatus(3);
+        setShowAlert(true);
+        setTimeout(() => setShowAlert(false), 3000);
       });
   };
 
@@ -130,6 +188,26 @@ export default function DonateContainer() {
         <h3>Donate</h3>
         <button onClick={addElement}>Add New Item</button>
       </div>
+      {showAlert &&
+        (inserStatus === 2 ? (
+          <div
+            className="alert alert-success"
+            role="alert"
+            style={{ width: "fit-content" }}
+          >
+            Item(s) donated Successfully!
+          </div>
+        ) : inserStatus === 3 ? (
+          <div
+            className="alert alert-danger"
+            role="alert"
+            style={{ width: "fit-content" }}
+          >
+            Error donating items! Please try again.
+          </div>
+        ) : (
+          <></>
+        ))}
       <form onSubmit={handleSubmit}>
         <div className="EventType">
           <p>Event Name: </p>
@@ -151,7 +229,7 @@ export default function DonateContainer() {
             ))}
           </select>
         </div>
-        <div className="ItemInput">
+        <div className="ItemInput" style={{ marginBottom: "20px" }}>
           {items.map((item, index) => (
             <DonationItemTemplate
               key={index}
@@ -173,20 +251,25 @@ export default function DonateContainer() {
               value6={item.total_item_cost}
               onChange6={(e) => handleInputChange(index, e)}
               name6="total_item_cost"
+              removeItem={() => removeItem(index)}
             />
           ))}
         </div>
-        <div className="SubmitDonationGroup">
-          <button
-            type="button"
-            className="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#confirmSubmit"
-          >
-            Submit Donation
-          </button>
-          <button>Cancel</button>
-        </div>
+
+        {validationError && <p className="error-text">{validationError}</p>}
+
+        {isFormValid && (
+          <div className="SubmitDonationGroup">
+            <button
+              type="button"
+              className="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#confirmSubmit"
+            >
+              Submit Donation
+            </button>
+          </div>
+        )}
 
         {/* modaaaal */}
         <div
@@ -222,8 +305,8 @@ export default function DonateContainer() {
                 </button>
                 <button
                   type="submit"
-                  className="btn btn-primary"
                   data-bs-dismiss="modal"
+                  className="btn btn-primary"
                 >
                   Yes
                 </button>

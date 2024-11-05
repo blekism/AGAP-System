@@ -22,6 +22,7 @@ export default function DonationItemTemplate({
   value6,
   onChange6,
   name6,
+  removeItem,
 }) {
   return (
     <div className="ItemContainerParent">
@@ -33,6 +34,7 @@ export default function DonationItemTemplate({
           onChange={onChange4}
           name={name4}
           style={{ width: "100%" }}
+          required
         >
           <option value="3">Choose Category</option>
           <option value="4000">School Supplies</option>
@@ -48,6 +50,7 @@ export default function DonationItemTemplate({
         onChange={onChange3}
         name={name3}
         style={{ width: "12%", marginBottom: "30px" }}
+        required
       >
         <option value="3">Choose Item</option>
         <option value="pen">item 1</option>
@@ -70,6 +73,7 @@ export default function DonationItemTemplate({
           value={value1}
           onChange={onChange1}
           name={name1}
+          required
         />
       </div>
       {/* quantity end*/}
@@ -88,6 +92,7 @@ export default function DonationItemTemplate({
           value={value2}
           onChange={onChange2}
           name={name2}
+          required
         />
       </div>
       {/* cost end */}
@@ -107,6 +112,7 @@ export default function DonationItemTemplate({
           value={value6}
           onChange={onChange6}
           name={name6}
+          required
         />
       </div>
       {/* total cost end */}
@@ -119,6 +125,7 @@ export default function DonationItemTemplate({
           onChange={onChange5}
           name={name5}
           style={{ width: "100%" }}
+          required
         >
           <option value="3">Choose Recipient</option>
           <option value="6000">Volunteer</option>
@@ -127,7 +134,7 @@ export default function DonationItemTemplate({
       </div>
 
       <div className="EditButtons">
-        <img src={Trash} className="icon" />
+        <img src={Trash} className="icon" onClick={removeItem} />
       </div>
     </div>
   );

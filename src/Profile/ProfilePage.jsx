@@ -96,6 +96,7 @@ export default function ProfilePage() {
   };
 
   const handleSubmitProfileDetails = (e) => {
+    console.log(profileDetails);
     try {
       axios
         .put(
@@ -127,6 +128,7 @@ export default function ProfilePage() {
           }
         })
         .catch(function (error) {
+          console.log(error);
           setInsertState(3);
           setShowAlert(true);
           setTimeout(() => {
@@ -409,7 +411,6 @@ export default function ProfilePage() {
             tabIndex="-1"
             aria-labelledby="staticBackdropLabel"
             aria-hidden="true"
-            // style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}
           >
             <div className="modal-dialog modal-dialog-centered">
               <div className="modal-content">

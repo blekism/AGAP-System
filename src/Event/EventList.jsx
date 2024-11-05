@@ -93,7 +93,10 @@ export default function EventList() {
                 <Link className="donate-button" to={"/Donate"}>
                   Donate
                 </Link>
-                <Link className="volunteer-button" to={"/VolunteerDashboard"}>
+                <Link
+                  className="volunteer-button"
+                  to={"/VolunteerConditionalRender"}
+                >
                   Volunteer
                 </Link>
               </div>

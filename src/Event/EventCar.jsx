@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; 
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./EventCar.css";
-import { MdDateRange, MdLocationOn } from "react-icons/md"; 
+import { MdDateRange, MdLocationOn } from "react-icons/md";
 
 import blood from "../assets/images/need.jpg";
 
@@ -65,11 +65,13 @@ function LandingCar() {
         >
           {images.map((image, index) => (
             <div key={index} className="slide-container">
-              <img src={image.src} alt={`Slide ${index + 1}`} className="fade-out" />
-              <div className="slide-info">
-                <div className="non">
-                  Latest News
-                </div>
+              <img
+                src={image.src}
+                alt={`Slide ${index + 1}`}
+                className="fade-out"
+              />
+              {/* <div className="slide-info">
+                <div className="non">Latest News</div>
                 <p className="date">
                   <MdDateRange style={{ marginRight: "5px" }} /> {image.date}
                 </p>
@@ -77,7 +79,7 @@ function LandingCar() {
                 <p className="place">
                   <MdLocationOn style={{ marginRight: "5px" }} /> {image.place}
                 </p>
-              </div>
+              </div> */}
             </div>
           ))}
         </Carousel>

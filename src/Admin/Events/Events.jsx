@@ -20,6 +20,40 @@ export default function Events({
   // filter for events start
   const [StatusFilter, setStatusFilter] = useState("none");
   const [filteredEvents, setFilteredEvents] = useState(events);
+  const [ImageUrl, setImageUrl] = useState([]);
+  const [SelectedFile, setSelectedFile] = useState(null);
+  const [loadingStatus, setLoadingStatus] = useState(false);
+  const [eventAnnouncement, setEventAnnouncement] = useState({
+    title: "",
+    description: "",
+    evenet_id: "none",
+  });
+  const [addEvent, setAddEvent] = useState({
+    event_name: "",
+    event_link: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    contrib_amount: "",
+  });
+  const [ViewEventAnnouncement, setViewEventAnnouncement] = useState([]);
+  const [eventItem, setEventItem] = useState({
+    evenet_id: "",
+    event_name: "",
+    event_status: "",
+    event_link: "",
+    description: "",
+    start_date: "",
+    end_date: "",
+    start_time: "",
+    end_time: "",
+    contrib_amount: "",
+  });
+  const [inserStatus, setInsertStatus] = useState(1);
+  const addEventAnnouncementRef = useRef(null);
+  const addEventRef = useRef(null);
+  const updateEventRef = useRef(null);
+  const [currentPage, setCurrentPage] = useState(0);
 
   const filterEvents = (event) => {
     const status = event.target.value;
@@ -39,8 +73,6 @@ export default function Events({
   // filter for events end
 
   // image upload start
-  const [ImageUrl, setImageUrl] = useState([]);
-  const [SelectedFile, setSelectedFile] = useState(null);
 
   const handleSelectImage = (event) => {
     //for input ito
@@ -48,7 +80,6 @@ export default function Events({
     setSelectedFile(file);
   };
 
-  const [loadingStatus, setLoadingStatus] = useState(false);
   const handleImageUpload = async () => {
     setLoadingStatus(true);
     //for button add image ito
@@ -86,10 +117,6 @@ export default function Events({
   // image upload end
 
   // add event announcement start
-  const [eventAnnouncement, setEventAnnouncement] = useState({
-    title: "",
-    description: "",
-  });
 
   const addEventAnnouncementChange = (event) => {
     const name = event.target.name;
@@ -127,6 +154,7 @@ export default function Events({
           setEventAnnouncement({
             title: "",
             description: "",
+            evenet_id: "",
           });
         } else {
           console.log("Insert failed!");
@@ -134,6 +162,7 @@ export default function Events({
           setEventAnnouncement({
             title: "",
             description: "",
+            evenet_id,
           });
           document.getElementById("imageUpload").value = null;
         }
@@ -144,6 +173,7 @@ export default function Events({
         setEventAnnouncement({
           title: "",
           description: "",
+          evenet_id: "",
         });
         document.getElementById("imageUpload").value = null;
       });
@@ -151,14 +181,6 @@ export default function Events({
   // add event announcement end
 
   //enter new event start
-  const [addEvent, setAddEvent] = useState({
-    event_name: "",
-    event_link: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    contrib_amount: "",
-  });
 
   const addEventChange = (event) => {
     const name = event.target.name;
@@ -222,7 +244,6 @@ export default function Events({
   //enter new event end
 
   // view event announcement start
-  const [ViewEventAnnouncement, setViewEventAnnouncement] = useState([]);
 
   const handleReadAnnouncement = async () => {
     const response = await axios.get(
@@ -235,18 +256,6 @@ export default function Events({
   // view event announcement end
 
   //modal edited event start
-  const [eventItem, setEventItem] = useState({
-    evenet_id: "",
-    event_name: "",
-    event_status: "",
-    event_link: "",
-    description: "",
-    start_date: "",
-    end_date: "",
-    start_time: "",
-    end_time: "",
-    contrib_amount: "",
-  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -310,7 +319,6 @@ export default function Events({
   // modal item click end
 
   //pagination for event announcement preview start
-  const [currentPage, setCurrentPage] = useState(0);
   const CardPerPage = 2;
   const totalPages = Math.ceil(ViewEventAnnouncement.length / CardPerPage);
 
@@ -331,10 +339,6 @@ export default function Events({
       setCurrentPage(currentPage - 1);
     }
   };
-
-  const addEventAnnouncementRef = useRef(null);
-  const addEventRef = useRef(null);
-  const updateEventRef = useRef(null);
 
   const confirmAction = (event, action) => {
     let confirmMessage = "";
@@ -366,9 +370,6 @@ export default function Events({
     }
   };
 
-  //pagination for event announcement preview end
-
-  const [inserStatus, setInsertStatus] = useState(1);
   const resetInsertStatus = () => {
     setInsertStatus(1);
   };
@@ -790,6 +791,33 @@ export default function Events({
                   title="DESCRIPTION"
                   placeholder="Description"
                 />
+                <select
+                  className="form-select mb-3 mt-2"
+                  aria-label="Default select example"
+                  name="evenet_id"
+                  value={eventAnnouncement.evenet_id}
+                  onChange={addEventAnnouncementChange}
+                  required
+                  style={{
+                    width: "auto",
+                    fontSize: "20px",
+                    fontFamily: "Poppins",
+                    fontWeight: 500,
+                  }}
+                >
+                  <option value="none">Select Event</option>
+                  {events
+                    .filter(
+                      (ddevent) =>
+                        ddevent.event_status !== "closed" &&
+                        ddevent.event_status !== "finished"
+                    )
+                    .map((ddevent, key) => (
+                      <option key={key} value={ddevent.evenet_id}>
+                        {ddevent.event_name}
+                      </option>
+                    ))}
+                </select>
                 <input
                   type="file"
                   id="imageUpload"
@@ -797,6 +825,7 @@ export default function Events({
                   onChange={handleSelectImage}
                   style={{ marginBottom: "10px" }}
                 />
+
                 <button
                   type="button"
                   className="btn btn-primary"

@@ -4,6 +4,7 @@ import "./DonateContainer.css";
 import DonationItemTemplate from "./DonationItemTemplate.jsx";
 import { useCookies } from "react-cookie";
 import { jwtDecode } from "jwt-decode";
+import { useLocation } from "react-router-dom";
 
 export default function DonateContainer() {
   const [items, setItems] = useState([
@@ -25,6 +26,8 @@ export default function DonateContainer() {
   const [validationError, setValidationError] = useState("");
   const [isFormValid, setIsFormValid] = useState(false);
   const [donationSummary, setDonationSummary] = useState({});
+  const location = useLocation();
+  const { id, name } = location.state || {};
 
   const categoryName = {
     4000: "Food and Groceries",
@@ -84,6 +87,10 @@ export default function DonateContainer() {
   };
 
   useEffect(() => {
+    if (id) {
+      setDropDownValue(id); // Set initial dropdown value from useLocation state
+    }
+
     if (cookies.donor_token) {
       try {
         const decode = jwtDecode(cookies.donor_token);
@@ -249,6 +256,11 @@ export default function DonateContainer() {
             value={dropDownValue}
             style={{ width: "40%" }}
           >
+            <option value="">
+              Choose an event (you can choose to leave this blank)
+            </option>
+            //ternary for if event has an id from event page
+            {id && <option value={id}>{name || "Selected Event"}</option>}
             <option value="">
               Choose an event (you can choose to leave this blank)
             </option>

@@ -3,10 +3,6 @@ import "./TurnoverPage.css";
 import Navbar from "../Page/NavBar";
 import Footer from "../Page/AgapFooter";
 import TurnoverTemplate from "./TurnoverTemplate";
-import donate_blood from "../assets/images/donate_blood.png";
-import SampleProfilePic from "../assets/images/SampleProfilePic.jpg";
-import brigada from "../assets/images/brigada_eskwela.jpg";
-import need from "../assets/images/need_project.jpg";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useCookies } from "react-cookie";
@@ -98,7 +94,7 @@ export default function TurnoverPage() {
           <select
             className="form-select"
             aria-label="Default select example"
-            style={{ width: "150px" }}
+            style={{ width: "fit-content" }}
             name="eventfilter"
             value={TurnoverFilter}
             onChange={filterEvents}

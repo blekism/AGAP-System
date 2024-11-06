@@ -120,7 +120,6 @@ export default function DonationContent() {
               aria-controls="pills-decline"
               aria-selected="false"
               onClick={() => handleCategory(3004, "decline")}
-
             >
               Declined
             </button>
@@ -137,7 +136,6 @@ export default function DonationContent() {
             margin: "0px",
             overflowY: "auto",
             width: activeTab === "turnover" ? "1400px" : "100%",
-
           }}
         >
           <div

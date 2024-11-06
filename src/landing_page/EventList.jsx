@@ -30,45 +30,53 @@ function EventList() {
 
   return (
     <div className="event-part">
-      <div className="event-title">
-        <h1 className="etitle">WHATS NEW!</h1>
-      </div>
-
-      <div className="event-list">
-        {selectedEvents.map((event, key) => (
-          <div key={key} className="event-box">
-            <div className="image-container">
-              <img
-                src={event.image}
-                alt={event.title}
-                className="event-images"
-              />
-            </div>
-            <h2 className="event-box-title">{event.title}</h2>
-            <p className="event-description">{event.description}</p>
+      {events.length > 0 ? (
+        <>
+          <div className="event-title">
+            <h1 className="etitle">WHATS NEW!</h1>
           </div>
-        ))}
-      </div>
 
-      <div className="pagination">
-        <button
-          className="page-button"
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-        >
-          &lt; {/* Left arrow */}
-        </button>
-        <span className="page-number">
-          {currentPage} of {totalPages}
-        </span>
-        <button
-          className="page-button"
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-        >
-          &gt; {/* Right arrow */}
-        </button>
-      </div>
+          <div className="event-list">
+            {selectedEvents.map((event, key) => (
+              <div key={key} className="event-box">
+                <div className="image-container">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="event-images"
+                  />
+                </div>
+                <h2 className="event-box-title">{event.title}</h2>
+                <p className="event-description">{event.description}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="pagination">
+            <button
+              className="page-button"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              &lt; {/* Left arrow */}
+            </button>
+            <span className="page-number">
+              {currentPage} of {totalPages}
+            </span>
+            <button
+              className="page-button"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              &gt; {/* Right arrow */}
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="event-title">
+          <h1 className="etitle">NO NEW ANNOUNCEMENTS!</h1>
+        </div>
+      )}
     </div>
   );
 }

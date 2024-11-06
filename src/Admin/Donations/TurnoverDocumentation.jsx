@@ -48,7 +48,8 @@ export default function TurnoverDocumentation() {
       .then(function (response) {
         console.log(response.data); //read events
         const filteredEvents = response.data.data.filter(
-          (event) => event.event_status === "finished"
+          (event) =>
+            event.event_status === "finished" || event.event_status === "closed"
         );
         setEvent(filteredEvents);
       })
@@ -93,7 +94,10 @@ export default function TurnoverDocumentation() {
         (item) => item.event_id === id
       );
       setTurnoverDocumentation(filtered);
-      setAddImage(true);
+
+      const selectedEvent = events.find((e) => e.evenet_id === id);
+
+      setAddImage(selectedEvent && selectedEvent.event_status === "finished");
     }
   };
 

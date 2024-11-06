@@ -4,11 +4,13 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import "./EventList.css";
 import grrr from "../assets/images/grrr.png";
+import { useNavigate } from "react-router-dom";
 
 export default function EventList() {
   const [eventList, setEventList] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -70,6 +72,12 @@ export default function EventList() {
     setCurrentPage(0);
   };
 
+  const handleDonate = (id, name) => {
+    navigate("/Donate", {
+      state: { id, name },
+    });
+  };
+
   return (
     <>
       <div className="eSearch">
@@ -121,9 +129,14 @@ export default function EventList() {
                 <p className="event_link">🔗 {event.event_link}</p>
                 <hr className="divider" />
                 <div className="action-buttons">
-                  <Link className="donate-button" to={"/Donate"}>
+                  <button
+                    className="donate-button"
+                    onClick={() =>
+                      handleDonate(event.evenet_id, event.event_name)
+                    }
+                  >
                     Donate
-                  </Link>
+                  </button>
                   <Link
                     className="volunteer-button"
                     to={"/VolunteerConditionalRender"}
